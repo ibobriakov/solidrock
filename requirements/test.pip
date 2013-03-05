@@ -1,2 +1,1 @@
-Django
-South
+Django==1.5

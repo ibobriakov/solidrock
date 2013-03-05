@@ -19,16 +19,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-        }
-}
+DATABASES = {}
 
 TIME_ZONE = 'Asia/Krasnoyarsk'
 LANGUAGE_CODE = 'RU-ru'
