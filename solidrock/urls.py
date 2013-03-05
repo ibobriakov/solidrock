@@ -7,9 +7,11 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
+    url(r'^cover_letter/', include('cover_letter.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('main.urls')),
+    url(r'^', include('main.urls'))
 )
 
 if settings.DEBUG:
