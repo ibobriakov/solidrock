@@ -22,7 +22,7 @@ MANAGERS = ADMINS
 DATABASES = {}
 
 TIME_ZONE = 'Asia/Krasnoyarsk'
-LANGUAGE_CODE = 'RU-ru'
+LANGUAGE_CODE = 'EN-en'
 USE_I18N = True
 USE_L10N = True
 
@@ -81,10 +81,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'south',
+    'mptt',
 )
 
 LOCAL_APPS = (
     'main',
+    'dynamic_paper',
 )
 
 # A sample logging configuration. The only tangible logging
