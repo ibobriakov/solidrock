@@ -9,5 +9,5 @@ class CoverLetter(models.Model):
 
 
 class  CoverLetterItem(PaperItem):
-    cover_letter = models.ForeignKey('cover_letter.CoverLetter', verbose_name=_('Resume'))
+    cover_letter = models.ForeignKey('cover_letter.CoverLetter', verbose_name=_('Cover Letter'))
 
