@@ -1,29 +1,20 @@
 {% extends 'cover_letter/base.html' %}
+
 {% block templates %}
-    <script type="text/template" id="tab-item-template">
-        <% for ( var i = 0; i < paper_items.length; i++ ) { %>
-            <div data-id="<%=paper_items[i].id%>"><%=paper_items[i].value%></div>
+    <script type="text/template" id="papers_template">
+        <% for ( var i = 0; i < papers.length; i++ ) { %>
+            <div data-id="<%=papers[i].id%>"><%=papers[i].value%></div>
         <% } %>
     </script>
 {% endblock %}
-{% block javascript-init %}
+
+{% load staticfiles %}
+{% block javascript %}
     {{ block.super }}
-    <script>
-        paper_view.collection.reset([
-            {'id':1,'type':'text','value':'First Name'},
-            {'id':2,'type':'text','value':'Second Name'},
-            {'id':3,'type':'text','value':'Work',
-                'children': new PaperCollection().reset([
-                {'id':4,'type':'text','value':'Work name'},
-                {'id':5,'type':'text','value':'Work about'},
-                {'id':6,'type':'text','value':'Work phone', 'children':new PaperCollection().reset([
-                    {'id':7,'type':'phone','value':'+0 000 000 00 00'},
-                    {'id':8,'type':'phone','value':'+0 000 000 00 00'}
-                ])}
-            ])}
-        ]);
-    </script>
+    <script src="{% static 'cover_letter/js/src/backbone/main.js' %}" type="text/javascript"></script>
 {% endblock %}
+
 {% block content %}
     <h1>Cover Letter</h1>
+    <div id="paper"></div>
 {% endblock %}
