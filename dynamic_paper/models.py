@@ -17,3 +17,6 @@ class PaperItem(MPTTModel):
 
     def __unicode__(self):
         return "{value} [{type}]".format(value=self.value,type=self.type.__unicode__())
+
+    class Meta:
+        abstract = True

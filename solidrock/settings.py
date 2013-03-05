@@ -82,11 +82,14 @@ INSTALLED_APPS = (
 
     'south',
     'mptt',
+    'tastypie',
 )
 
 LOCAL_APPS = (
     'main',
     'dynamic_paper',
+    'resume',
+    'cover_letter',
 )
 
 # A sample logging configuration. The only tangible logging
