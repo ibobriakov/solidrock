@@ -3,7 +3,7 @@
 {% block templates %}
     <script type="text/template" id="papers_template">
         <% for ( var i = 0; i < papers.length; i++ ) { %>
-            <div data-id="<%=papers[i].id%>"><%=papers[i].value%></div>
+            <div class="paper" id="<%=papers[i].id%>"><%=papers[i].value%></div>
         <% } %>
     </script>
 {% endblock %}
