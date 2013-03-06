@@ -19,7 +19,7 @@ def paper_item_factory(*args, **kwargs):
         parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
         def __unicode__(self):
-            return "{value} [{type}]".format(value=self.value,type=self.type.__unicode__())
+            return "{value} [{type}]".format(value=self.value, type=self.type.__unicode__())
 
         def as_json(self):
             return json.dumps({
