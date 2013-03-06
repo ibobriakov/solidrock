@@ -15,4 +15,4 @@ def url_resolver(request):
         'cover_letter': reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'cover_letter'}),
         'resume': reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'resume'})
     }) + ";"
-    return HttpResponse(javascript_code,mimetype='text/javascript')
+    return HttpResponse(javascript_code, mimetype='text/javascript')

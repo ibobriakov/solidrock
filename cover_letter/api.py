@@ -10,6 +10,7 @@ class CoverLetterItemResource(PaperItemResource):
     class Meta:
         queryset = CoverLetterItem.objects.all()
         resource_name = 'cover_letter'
+        always_return_data = True
         excludes = ['level', 'lft', 'rght', 'tree_id']
         authentication = SessionAuthentication()
         authorization = DjangoAuthorization()
