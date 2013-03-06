@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from dynamic_paper.models import PaperItem
+from dynamic_paper.models import paper_item_factory
 
 
 class Resume(models.Model):
@@ -8,6 +8,6 @@ class Resume(models.Model):
     owner = models.ForeignKey('auth.User')
 
 
-class ResumeItem(PaperItem):
-    resume = models.ForeignKey('resume.Resume', verbose_name=_('Resume'))
+class ResumeItem(paper_item_factory('resume.Resume', verbose_name=_('Resume'))):
+    pass
 

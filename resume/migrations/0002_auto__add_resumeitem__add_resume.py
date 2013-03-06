@@ -11,6 +11,7 @@ class Migration(SchemaMigration):
         # Adding model 'ResumeItem'
         db.create_table(u'resume_resumeitem', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('paper', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['resume.Resume'])),
             ('type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['dynamic_paper.PaperItemType'])),
             ('value', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('parent', self.gf('mptt.fields.TreeForeignKey')(blank=True, related_name='children', null=True, to=orm['resume.ResumeItem'])),
@@ -18,7 +19,6 @@ class Migration(SchemaMigration):
             ('rght', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
             ('tree_id', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
             ('level', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True)),
-            ('resume', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['resume.Resume'])),
         ))
         db.send_create_signal(u'resume', ['ResumeItem'])
 
@@ -92,8 +92,8 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'paper': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['resume.Resume']"}),
             'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "'children'", 'null': 'True', 'to': u"orm['resume.ResumeItem']"}),
-            'resume': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['resume.Resume']"}),
             'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['dynamic_paper.PaperItemType']"}),

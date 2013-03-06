@@ -10,13 +10,16 @@ class PaperItemType(models.Model):
         return self.name
 
 
-class PaperItem(MPTTModel):
-    type = models.ForeignKey(PaperItemType, verbose_name=_('Type of element'))
-    value = models.CharField(verbose_name=_('Paper Item Value'), max_length=100)
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
+def paper_item_factory(*args, **kwargs):
+    class _PaperItem(MPTTModel):
+        paper = models.ForeignKey(*args, **kwargs)
+        type = models.ForeignKey(PaperItemType, verbose_name=_('Type of element'))
+        value = models.CharField(verbose_name=_('Paper Item Value'), max_length=100)
+        parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
-    def __unicode__(self):
-        return "{value} [{type}]".format(value=self.value,type=self.type.__unicode__())
+        def __unicode__(self):
+            return "{value} [{type}]".format(value=self.value,type=self.type.__unicode__())
 
-    class Meta:
-        abstract = True
+        class Meta:
+            abstract = True
+    return _PaperItem
