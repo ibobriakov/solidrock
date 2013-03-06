@@ -1,0 +1,44 @@
+[
+{
+    "pk": 1, 
+    "model": "dynamic_paper.paperitemtype", 
+    "fields": {
+        "name": "header"
+    }
+},
+{
+    "pk": 2, 
+    "model": "dynamic_paper.paperitemtype", 
+    "fields": {
+        "name": "job"
+    }
+},
+{
+    "pk": 3, 
+    "model": "dynamic_paper.paperitemtype", 
+    "fields": {
+        "name": "line"
+    }
+},
+{
+    "pk": 4, 
+    "model": "dynamic_paper.paperitemtype", 
+    "fields": {
+        "name": "phone"
+    }
+},
+{
+    "pk": 5, 
+    "model": "dynamic_paper.paperitemtype", 
+    "fields": {
+        "name": "address"
+    }
+},
+{
+    "pk": 6, 
+    "model": "dynamic_paper.paperitemtype", 
+    "fields": {
+        "name": "text"
+    }
+}
+]

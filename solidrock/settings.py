@@ -34,6 +34,10 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = ()
 TEMPLATE_DIRS = ()
 
+FIXTURE_DIRS = (
+    join(PROJECT_PATH, 'dynamic_paper', 'fixtures')
+)
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',

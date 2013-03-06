@@ -8,6 +8,6 @@ class CoverLetter(models.Model):
     owner = models.ForeignKey('auth.User')
 
 
-class  CoverLetterItem(paper_item_factory('cover_letter.CoverLetter', verbose_name=_('Cover Letter'))):
+class  CoverLetterItem(paper_item_factory('cover_letter.CoverLetter', verbose_name=_('Cover Letter')),models.Model):
     pass
 

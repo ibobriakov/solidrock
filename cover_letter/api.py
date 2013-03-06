@@ -8,3 +8,4 @@ class CoverLetterItemResource(PaperItemResource):
     class Meta:
         queryset = CoverLetterItem.objects.all()
         resource_name = 'cover_letter'
+        excludes = ['level', 'lft', 'rght', 'tree_id']
