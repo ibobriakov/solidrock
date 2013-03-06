@@ -13,6 +13,7 @@
         {% comment %}Bootstrap style include javascript{% endcomment %}
         {% block javascript %}
             {#TODO Add javascript url resolver#}
+            <script src="{% url 'url-resolver' %}" type="text/javascript"></script>
             <script src="{% static 'main/js/lib/jquery-latest.min.js' %}" type="text/javascript"></script>
             <script src="{% static 'main/js/lib/underscore-min.js' %}" type="text/javascript"></script>
             <script src="{% static 'main/js/lib/backbone-min.js' %}" type="text/javascript"></script>

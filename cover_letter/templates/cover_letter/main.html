@@ -19,13 +19,7 @@
         paper_view.collection.reset([
             {% recursetree object.coverletteritem_set.all %}
                 { {{ node.as_json|safe }}
-                {% if not node.is_leaf_node %}
-                    ,'children': new PaperCollection().reset([
-                        {{ children }}
-                    ])},
-                {% else %}
-                    },
-                {% endif %}
+                {% if not node.is_leaf_node %},'children': new PaperCollection().reset([{{ children }}])},{% else %}},{% endif %}
             {% endrecursetree %}
         ]);
         paper_view.render();
