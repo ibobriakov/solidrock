@@ -10,7 +10,8 @@ class MainView(TemplateView):
 
 
 def url_resolver(request):
-    javascript_code = "var urlResolver=" + json.dumps({
+    #todo add caching
+    javascript_code = "var url_resolver=" + json.dumps({
         'cover_letter_list': reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'cover_letter'}),
         'resume_list': reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'resume'})
     }) + ";"
