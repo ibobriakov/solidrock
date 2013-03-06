@@ -2,8 +2,13 @@
  * User: jackdevil
  */
 
-var PaperCollection = Backbone.Collection.extend({
-    model: PaperModel,
+function paper_collection_factory(paper_type,paper) {
+    return Backbone.Collection.extend({
+    model: paper_model_factory(paper_type,paper),
+    url_suffix: 'paper',
+    initialize: function(){
+        this.model.collection = this;
+    },
     get_model: function(id, collection) {
         var that = this,model;
         collection = collection || that;
@@ -22,4 +27,5 @@ var PaperCollection = Backbone.Collection.extend({
             return model;
         }
     }
-});
+})
+}

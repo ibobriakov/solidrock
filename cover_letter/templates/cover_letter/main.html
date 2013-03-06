@@ -16,12 +16,16 @@
 
 {% block initialize %}
     <script>
+        var type = 'cover_letter', paper = {{ object.pk }};
+        var paper_view = new (paper_view_factory(type,paper))();
         paper_view.collection.reset([
             {% recursetree object.coverletteritem_set.all %}
                 { {{ node.as_json|safe }}
-                {% if not node.is_leaf_node %},'children': new PaperCollection().reset([{{ children }}])},{% else %}},{% endif %}
+                {% if not node.is_leaf_node %},'children': new (paper_collection_factory(type,paper))().reset([{{ children }}])},{% else %}},{% endif %}
             {% endrecursetree %}
         ]);
         paper_view.render();
+        var sync = paper_sync_fabric();
+        sync();
     </script>
 {% endblock %}
