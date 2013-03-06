@@ -6,5 +6,5 @@ __author__ = 'jackdevil'
 
 urlpatterns = patterns(
     '',
-    url(r'^', CoverLetterView.as_view()),
+    url(r'^(?P<pk>\d+)/$', CoverLetterView.as_view()),
 )

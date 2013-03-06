@@ -5,5 +5,12 @@ from models import CoverLetterItem, CoverLetter
 __author__ = 'ir4y'
 
 
-admin.site.register(CoverLetter)
-admin.site.register(CoverLetterItem,MPTTModelAdmin)
+class CoverLetterItemInline(admin.TabularInline):
+    model = CoverLetterItem
+
+
+class CoverLetterAdmin(admin.ModelAdmin):
+    inlines = [CoverLetterItemInline, ]
+
+admin.site.register(CoverLetter, CoverLetterAdmin)
+admin.site.register(CoverLetterItem, MPTTModelAdmin)

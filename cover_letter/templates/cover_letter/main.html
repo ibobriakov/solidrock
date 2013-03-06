@@ -1,4 +1,5 @@
 {% extends 'cover_letter/base.html' %}
+{% load mptt_tags %}
 
 {% block templates %}
     <script type="text/template" id="papers_template">
@@ -16,18 +17,16 @@
 {% block initialize %}
     <script>
         paper_view.collection.reset([
-            {'id':1,'type':'text','value':'First Name'},
-            {'id':2,'type':'text','value':'Second Name'},
-            {'id':3,'type':'text','value':'Work',
-                'children': new PaperCollection().reset([
-                    {'id':4,'type':'text','value':'Work name'},
-                    {'id':5,'type':'text','value':'Work about'},
-                    {'id':6,'type':'text','value':'Work phone', 'children':new PaperCollection().reset([
-                        {'id':7,'type':'phone','value':'+0 000 000 00 00'},
-                        {'id':8,'type':'phone','value':'+0 000 000 00 00'}
-                    ])}
-                ])},
-            {'id':9,'type':'text','value':'About'},
+            {% recursetree object.coverletteritem_set.all %}
+                { {{ node.as_json|safe }}
+                {% if not node.is_leaf_node %}
+                    ,'children': new PaperCollection().reset([
+                        {{ children }}
+                    ])},
+                {% else %}
+                    },
+                {% endif %}
+            {% endrecursetree %}
         ]);
         paper_view.render();
     </script>
