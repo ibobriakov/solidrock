@@ -24,6 +24,9 @@ def paper_item_factory(*args, **kwargs):
         def as_json(self):
             return json.dumps({
                 'id': self.id,
+                'paper': self.paper_id,
+                'parent': self.parent_id if self.parent else False,
+                'resource_uri': self.get_resource_uri(),
                 'type': self.type.name,
                 'value': self.value
             })[1:-1]
