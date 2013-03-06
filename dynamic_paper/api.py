@@ -1,5 +1,7 @@
 from tastypie.resources import ModelResource
+from tastypie.exceptions import BadRequest
 from tastypie import fields
+
 
 __author__ = 'ir4y'
 
@@ -30,14 +32,16 @@ class PaperItemResource(ModelResource):
     def build_filters(self, filters=None):
         if filters is None:
             filters = {}
-
         parent = filters.pop('parent', None)
-
         orm_filters = super(PaperItemResource, self).build_filters(filters)
-
         if parent:
-            orm_filters["parent__in"] = [int(pk) for pk in parent]
-
+            if len(parent) != 1:
+                raise BadRequest("To many parents")
+            try:
+                pk = int(parent[0])
+            except ValueError:
+                raise BadRequest("parent id isn't a number")
+            orm_filters["parent__pk"] = pk
         return orm_filters
 
     class Meta:

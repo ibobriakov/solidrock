@@ -22,27 +22,6 @@ class PaperItemResourceTestMixin(object):
 
     def test_get_list_unauthorzied(self):
         """
-        Unauthorzied should see empty list
+        Unauthorzied shouldn't see anything
         """
-        resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json')
-        self.assertValidJSONResponse(resp)
-        self.assertEqual(len(self.deserialize(resp)['objects']), 0)
-
-    def test_get_list_authorzied(self):
-        """
-        Authorzied should see list with one item 'header' which value is username
-        """
-
-        #test for first user
-        self.api_client.client.login(username=self.user1.username, password=self.password1)
-        resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json')
-        self.assertValidJSONResponse(resp)
-        self.assertEqual(len(self.deserialize(resp)['objects']), 1)
-        self.assertEqual(self.deserialize(resp)['objects'][0], self.get_valid_json(self.test_item_1))
-
-        #test for second user
-        self.api_client.client.login(username=self.user2.username, password=self.password2)
-        resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json')
-        self.assertValidJSONResponse(resp)
-        self.assertEqual(len(self.deserialize(resp)['objects']), 1)
-        self.assertEqual(self.deserialize(resp)['objects'][0],self.get_valid_json(self.test_item_2))
+        self.assertHttpUnauthorized(self.api_client.get(self.get_api_dispatch_list_url(), format='json'))
