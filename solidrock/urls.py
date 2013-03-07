@@ -16,6 +16,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^cover_letter/', include('cover_letter.urls')),
+    url(r'^resume/', include('resume.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(v1_api.urls)),
     url(r'^', include('main.urls')),

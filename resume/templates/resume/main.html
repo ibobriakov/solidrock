@@ -1,0 +1,29 @@
+{% extends 'resume/base.html' %}
+{% load mptt_tags %}
+
+{% block templates %}
+    <script type="text/template" id="papers_template">
+        <% for ( var i = 0; i < papers.length; i++ ) { %>
+            <div class="paper" id="<%=papers[i].id%>"><%=papers[i].value%></div>
+        <% } %>
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h1>Cover Letter</h1>
+    <div id="paper"></div>
+{% endblock %}
+
+{% block initialize %}
+    <script>
+        var type = 'resume', paper = {{ object.pk }};
+        var paper_view = new (paper_view_factory(type,paper))();
+        paper_view.collection.reset([
+            {% recursetree object.resumeitem_set.all %}
+                { {{ node.as_json|safe }}
+                {% if not node.is_leaf_node %},'children': new (paper_collection_factory(type,paper))().reset([{{ children }}])},{% else %}},{% endif %}
+            {% endrecursetree %}
+        ]);
+        paper_view.render();
+    </script>
+{% endblock %}

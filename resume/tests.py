@@ -41,7 +41,7 @@ class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
     def test_get_list_authorized(self):
         """
         Authorzied should see list with one item 'header' which value is username
-
+        """
         #test for first user
         self.api_client.client.login(username=self.user1.username, password=self.password1)
         resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json')
@@ -53,4 +53,3 @@ class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
         resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json')
         self.assertValidJSONResponse(resp)
         self.assertEqual(len(self.deserialize(resp)['objects']), len(resume_template))
-        """
