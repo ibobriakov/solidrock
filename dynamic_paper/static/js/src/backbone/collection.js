@@ -9,22 +9,12 @@ function paper_collection_factory(paper_type,paper) {
     initialize: function(){
         this.model.collection = this;
     },
-    get_model: function(id, collection) {
-        var that = this,model;
+    get_model: function(id, collection){
+        var that = this;
         collection = collection || that;
-        model = collection.get(id);
-        if (model) {
-            return model;
-        } else {
-            collection.each(function(item) {
-                if (item.get('children')) {
-                    model = that.get_model(id,item.get('children'));
-                    if (model) {
-                        return model;
-                    }
-                }
-            });
-            return model;
+        if (collection.get(id)) return collection.get(id);
+        for (var i=0; i < collection.length; i++){
+            if (collection.at(i).get('children')) return that.get_model(id, collection.at(i).get('children'));
         }
     }
 })

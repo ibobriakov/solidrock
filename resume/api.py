@@ -10,7 +10,7 @@ class ResumeItemResource(PaperItemResource):
     class Meta:
         queryset = ResumeItem.objects.all()
         resource_name = 'resume'
-        always_return_data = True
+        #always_return_data = True
         excludes = ['level', 'lft', 'rght', 'tree_id']
         authentication = SessionAuthentication()
         authorization = DjangoAuthorization()
