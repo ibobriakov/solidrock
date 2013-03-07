@@ -58,7 +58,7 @@ class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
         self.assertValidJSONResponse(resp)
         self.assertEqual(len(self.deserialize(resp)['objects']), count)
 
-    def test_get_fparent_filter_list_authorized(self):
+    def test_get_parent_filter_list_authorized(self):
         """
         Authorzied should see list with one item 'header' which value is username
         """
@@ -80,3 +80,15 @@ class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
             resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json', data={'parent': parent_item.pk})
             self.assertValidJSONResponse(resp)
             self.assertEqual(len(self.deserialize(resp)['objects']), child_count)
+
+    def test_subitem_add(self):
+        self.api_client.client.login(username=self.user1.username, password=self.password1)
+        resume_item = self.resume_for_user1.resumeitem_set.filter(type__name="list")[0]
+        resp = self.api_client.post(self.get_api_dispatch_list_url(), format='json',
+                                    data={"paper": self.resume_for_user1.id, "type": "text",
+                                          "value": "", "parent": resume_item.id})
+        self.assertHttpCreated(resp)
+        self.assertIsNotNone(self.deserialize(resp)['id'])
+
+
+

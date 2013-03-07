@@ -1,6 +1,5 @@
 from tastypie.authentication import SessionAuthentication
-from tastypie.authorization import DjangoAuthorization
-from dynamic_paper.api import PaperItemResource
+from dynamic_paper.api import PaperItemResource, CustomDjangoAuthorization
 from models import CoverLetterItem
 
 __author__ = 'ir4y'
@@ -10,7 +9,7 @@ class CoverLetterItemResource(PaperItemResource):
     class Meta:
         queryset = CoverLetterItem.objects.all()
         resource_name = 'cover_letter'
-        #always_return_data = True
         excludes = ['level', 'lft', 'rght', 'tree_id']
+        always_return_data = True
         authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
+        authorization = CustomDjangoAuthorization()

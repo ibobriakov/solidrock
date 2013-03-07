@@ -1,6 +1,8 @@
+from tastypie.authorization import DjangoAuthorization
 from tastypie.resources import ModelResource
-from tastypie.exceptions import BadRequest
+from tastypie.exceptions import BadRequest, Unauthorized
 from tastypie import fields
+from models import PaperItemType
 
 
 __author__ = 'ir4y'
@@ -19,6 +21,12 @@ class PaperItemResource(ModelResource):
 
     def dehydrate_type(self, bundle):
         return bundle.obj.type.name
+
+    def hydrate(self, bundle):
+        bundle.obj.paper_id = bundle.data['paper']
+        bundle.obj.parent_id = bundle.data['parent']
+        bundle.obj.type_id = PaperItemType.objects.get(name=bundle.data['type']).id
+        return bundle
 
     def dehydrate_parent(self, bundle):
         if bundle.obj.parent:
@@ -46,3 +54,19 @@ class PaperItemResource(ModelResource):
 
     class Meta:
         excludes = ['level', 'lft', 'rght', 'tree_id']
+
+
+class CustomDjangoAuthorization(DjangoAuthorization):
+    def create_detail(self, object_list, bundle):
+        klass = self.base_checks(bundle.request, bundle.obj.__class__)
+
+        if klass is False:
+            raise Unauthorized("You are not allowed to access that resource.")
+
+        try:
+            parent_item = klass.objects.get(pk=bundle.data['parent'])
+        except klass.DoesNotExists:
+            raise Unauthorized("You are not allowed to access that resource.")
+        if parent_item.paper.owner != bundle.request.user:
+            raise Unauthorized("You are not allowed to access that resource.")
+        return True
