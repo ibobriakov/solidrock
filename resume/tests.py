@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from tastypie.test import ResourceTestCase
 from dynamic_paper.tests.utils import PaperItemResourceTestMixin
-from models import Resume, resume_template
+from models import Resume, resume_template, resume_items_template
 
 
 class SimpleTest(TestCase):
@@ -42,14 +42,41 @@ class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
         """
         Authorzied should see list with one item 'header' which value is username
         """
+        #initial fileds count
+        count = len(resume_template) + sum([len(l) for l in resume_items_template.itervalues()])
+
         #test for first user
         self.api_client.client.login(username=self.user1.username, password=self.password1)
         resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json')
         self.assertValidJSONResponse(resp)
-        self.assertEqual(len(self.deserialize(resp)['objects']), len(resume_template))
+
+        self.assertEqual(len(self.deserialize(resp)['objects']), count)
 
         #test for second user
         self.api_client.client.login(username=self.user2.username, password=self.password2)
         resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json')
         self.assertValidJSONResponse(resp)
-        self.assertEqual(len(self.deserialize(resp)['objects']), len(resume_template))
+        self.assertEqual(len(self.deserialize(resp)['objects']), count)
+
+    def test_get_fparent_filter_list_authorized(self):
+        """
+        Authorzied should see list with one item 'header' which value is username
+        """
+        #initial fileds count
+        parent_length = {key: len(value) for key, value in resume_items_template.iteritems()}
+
+        #test for first user
+        self.api_client.client.login(username=self.user1.username, password=self.password1)
+        for parent_type, child_count in parent_length.iteritems():
+            parent_item = self.resume_for_user1.resumeitem_set.filter(type__name=parent_type)[0]
+            resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json', data={'parent': parent_item.pk})
+            self.assertValidJSONResponse(resp)
+            self.assertEqual(len(self.deserialize(resp)['objects']), child_count)
+
+        #test for second user
+        self.api_client.client.login(username=self.user2.username, password=self.password2)
+        for parent_type, child_count in parent_length.iteritems():
+            parent_item = self.resume_for_user2.resumeitem_set.filter(type__name=parent_type)[0]
+            resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json', data={'parent': parent_item.pk})
+            self.assertValidJSONResponse(resp)
+            self.assertEqual(len(self.deserialize(resp)['objects']), child_count)

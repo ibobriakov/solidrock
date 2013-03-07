@@ -59,7 +59,8 @@ resume_items_template = {
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('date'), value="YYYY",
                                       paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="School or University Name", paper=resume_item.paper), ]}
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="School or University Name",
+                                      paper=resume_item.paper, parent=resume_item), ]}
 
 
 def resume_proxy(instance, created, **kwargs):
