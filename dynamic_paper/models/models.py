@@ -10,6 +10,9 @@ class PaperItemType(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        app_label = 'dynamic_paper'
+
 
 def paper_item_factory(*args, **kwargs):
     class _PaperItem(MPTTModel):
