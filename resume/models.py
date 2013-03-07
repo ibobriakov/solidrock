@@ -27,19 +27,25 @@ resume_template = [
     lambda paper:ResumeItem(type=get_paper_item('text'), value="Your Name", paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('line'), value="", paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('text'), value="Your Address", paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('phone'), value="Your Phone", paper=paper),
+    lambda paper:ResumeItem(type=get_paper_item('phone_list'), value="Your Phone", paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('text'), value="you@server.com", paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('header'), value="Career Overview", paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('list'), value="Key Strengths", paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('career'), value="Career History", paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('education'), value="Education & Training", paper=paper), ]
+    lambda paper:ResumeItem(type=get_paper_item('keystrengts_list'), value="Key Strengths", paper=paper),
+    lambda paper:ResumeItem(type=get_paper_item('career_list'), value="Career History", paper=paper),
+    lambda paper:ResumeItem(type=get_paper_item('education_list'), value="Education & Training", paper=paper), ]
 
-resume_items_template = {
+resume_type_template = {
+    'keyachievements': [
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
+                                      paper=resume_item.paper, parent=resume_item), ],
+    'keyresponsibilities': [
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
+                                      paper=resume_item.paper, parent=resume_item), ],
+    'keystrengts': [
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
+                                      paper=resume_item.paper, parent=resume_item), ],
     'phone': [
         lambda resume_item:ResumeItem(type=get_paper_item('text'), value="00 0000 0000",
-                                      paper=resume_item.paper, parent=resume_item), ],
-    'list': [
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore ipsum",
                                       paper=resume_item.paper, parent=resume_item), ],
     'career': [
         lambda resume_item:ResumeItem(type=get_paper_item('date'), value="Month YYYY",
@@ -50,9 +56,9 @@ resume_items_template = {
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('header'), value="Employer Company Name",
                                       paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('list'), value="Key Responsibilities",
+        lambda resume_item:ResumeItem(type=get_paper_item('keyresponsibilities_list'), value="Key Responsibilities",
                                       paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('list'), value="Key Achievements",
+        lambda resume_item:ResumeItem(type=get_paper_item('keyachievements_list'), value="Key Achievements",
                                       paper=resume_item.paper, parent=resume_item), ],
     'education': [
         lambda resume_item:ResumeItem(type=get_paper_item('date'), value="YYYY",
@@ -68,7 +74,7 @@ def resume_proxy(instance, created, **kwargs):
 
 
 def resume_item_proxy(instance, created, **kwargs):
-    return get_signal_for_page_item(resume_items_template)(instance, created, **kwargs)
+    return get_signal_for_page_item(resume_type_template)(instance, created, **kwargs)
 
 post_save.connect(resume_proxy, sender=Resume)
 post_save.connect(resume_item_proxy, sender=ResumeItem)

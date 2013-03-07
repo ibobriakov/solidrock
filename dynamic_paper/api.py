@@ -23,9 +23,10 @@ class PaperItemResource(ModelResource):
         return bundle.obj.type.name
 
     def hydrate(self, bundle):
-        bundle.obj.paper_id = bundle.data['paper']
-        bundle.obj.parent_id = bundle.data['parent']
-        bundle.obj.type_id = PaperItemType.objects.get(name=bundle.data['type']).id
+        if not bundle.obj.pk:
+            bundle.obj.paper_id = bundle.data['paper']
+            bundle.obj.parent_id = bundle.data['parent']
+            bundle.obj.type_id = PaperItemType.objects.get(name=bundle.data['type']).id
         return bundle
 
     def dehydrate_parent(self, bundle):
