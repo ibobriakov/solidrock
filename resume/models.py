@@ -1,3 +1,4 @@
+# -*- coding: utf8 -*-
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
@@ -21,7 +22,6 @@ class ResumeItem(paper_item_factory('resume.Resume', verbose_name=_('Resume'))):
 
     class Meta:
         app_label = 'resume'
-
 
 resume_template = [
     lambda paper:ResumeItem(type=get_paper_item('text'), value="Your Name", paper=paper),
@@ -67,6 +67,21 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('text'), value="School or University Name",
                                       paper=resume_item.paper, parent=resume_item), ]}
+
+# Структура данных для резюме:
+# В списке resume_template находятся элементы верхнего уровня
+# Если они являются списком, то их тип заканчивается на '_list'
+# Если тип сложный, то он описывается в словаре resume_type_template
+# Простые типы:
+# text - редактируемый с помощью input текст
+# date - редактируемое поле даты
+# line - просто линия не редактируемая
+# header - нередактируемый заголовок
+# Сложный тип состоит из нескольких простых (как структура)
+
+# Поведение резюме:
+# При добавлении элемента типа list со значнием являющимся типом (простым или сложным)
+# Для него автоматически создается внутренняя иерархия элементов для которой он будет являться родителем.
 
 
 def resume_proxy(instance, created, **kwargs):
