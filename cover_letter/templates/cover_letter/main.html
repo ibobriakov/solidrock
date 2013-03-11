@@ -1,14 +1,6 @@
 {% extends 'cover_letter/base.html' %}
 {% load mptt_tags %}
 
-{% block templates %}
-    <script type="text/template" id="papers_template">
-        <% for ( var i = 0; i < papers.length; i++ ) { %>
-            <div class="paper" id="<%=papers[i].id%>"><%=papers[i].value%></div>
-        <% } %>
-    </script>
-{% endblock %}
-
 {% block content %}
     <h1>Cover Letter</h1>
     <div id="paper"></div>

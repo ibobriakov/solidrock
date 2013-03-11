@@ -5,9 +5,9 @@
 function paper_view_factory(paper_type,paper){
     return Backbone.View.extend({
         collection: new (paper_collection_factory(paper_type,paper))(),
-        template: _.template($('#papers_template').html()),
         paper_body: '#paper',
         paper_item: '.paper',
+        paper_add: '.add-btn',
         url: false,
         initialize: function() {
             _.bindAll(this, 'render');
@@ -25,9 +25,14 @@ function paper_view_factory(paper_type,paper){
         },
         render: function(){
             var that = this;
-            $(this.paper_body).html(this.template({'papers':this.papers_to_json(this.collection)}));
-            $(this.paper_item).on('click',function(){$(this).attr('contenteditable','true')});
-            $(this.paper_item).blur(function(){that.collection.get_model($(this).attr('id')).set('value',$(this).html());});
+            $(this.paper_body).html(this.collection.html());
+            $(this.paper_item).blur(function(){
+                that.collection.get_model($(this).attr('data-id')).set('value',$(this).html());
+            });
+            $(this.paper_add).on('click',function(){
+                var model = that.collection.get_model($(this).attr('data-id'));
+                model.get('children').create({'paper':model.get('paper')});
+            });
             return this;
         }
     })

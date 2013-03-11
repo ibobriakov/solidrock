@@ -91,7 +91,7 @@ class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
 
     def test_subitem_add(self):
         self.api_client.client.login(username=self.user1.username, password=self.password1)
-        resume_item = self.resume_for_user1.resumeitem_set.filter(type__name="list")[0]
+        resume_item = self.resume_for_user1.resumeitem_set.filter(type__name="container")[0]
         resp = self.api_client.post(self.get_api_dispatch_list_url(), format='json',
                                     data={"paper": self.resume_for_user1.id, "type": "text",
                                           "value": "", "parent": resume_item.id})
