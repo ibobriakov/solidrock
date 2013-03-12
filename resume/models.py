@@ -26,27 +26,32 @@ class ResumeItem(paper_item_factory('resume.Resume', verbose_name=_('Resume'))):
 resume_template = [
     lambda paper:ResumeItem(type=get_paper_item('text'), value="Your Name", paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('line'), value="", paper=paper),
+
     lambda paper:ResumeItem(type=get_paper_item('text'), value="Your Address", paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('phone_list'), value="Your Phone", paper=paper),
+    lambda paper:ResumeItem(type=get_paper_item('phone_list'), value="Phones", paper=paper),
+    lambda paper:ResumeItem(type=get_paper_item('header'), value="Email", paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('text'), value="you@server.com", paper=paper),
+
     lambda paper:ResumeItem(type=get_paper_item('header'), value="Career Overview", paper=paper),
+    lambda paper:ResumeItem(type=get_paper_item('text'), value="Lorem ipsum dolor sit amet,", paper=paper),
+
     lambda paper:ResumeItem(type=get_paper_item('keystrengts_list'), value="Key Strengths", paper=paper),
+
     lambda paper:ResumeItem(type=get_paper_item('career_list'), value="Career History", paper=paper),
+
     lambda paper:ResumeItem(type=get_paper_item('education_list'), value="Education & Training", paper=paper), ]
 
 resume_type_template = {
-    'keyachievements': [
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
+    'phone': [
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Phone Type",
+                                      paper=resume_item.paper, parent=resume_item),
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="00 0000 0000",
                                       paper=resume_item.paper, parent=resume_item), ],
-    'keyresponsibilities': [
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
-                                      paper=resume_item.paper, parent=resume_item), ],
+
     'keystrengts': [
         lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
                                       paper=resume_item.paper, parent=resume_item), ],
-    'phone': [
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="00 0000 0000",
-                                      paper=resume_item.paper, parent=resume_item), ],
+
     'career': [
         lambda resume_item:ResumeItem(type=get_paper_item('date'), value="Month YYYY",
                                       paper=resume_item.paper, parent=resume_item),
@@ -54,12 +59,22 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Job title",
                                       paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('header'), value="Employer Company Name",
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Employer Company Name",
+                                      paper=resume_item.paper, parent=resume_item),
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lorem ipsum dolor sit amet,",
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('keyresponsibilities_list'), value="Key Responsibilities",
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('keyachievements_list'), value="Key Achievements",
                                       paper=resume_item.paper, parent=resume_item), ],
+
+    'keyachievements': [
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
+                                      paper=resume_item.paper, parent=resume_item), ],
+    'keyresponsibilities': [
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
+                                      paper=resume_item.paper, parent=resume_item), ],
+
     'education': [
         lambda resume_item:ResumeItem(type=get_paper_item('date'), value="YYYY",
                                       paper=resume_item.paper, parent=resume_item),

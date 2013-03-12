@@ -9,20 +9,22 @@
 {% endblock %}
 {% block templates %}
     <script id="paper_model" type="text/template">
-        <div <% if (model.get('type')=='text') { %>contenteditable='true'<% } %> style="margin-left:<%=level*5%>px;" class="paper <%=model.get('type')%>" data-id="<%=model.get('id')%>">
-            <% if (model.get('children')) { %>
-                <% if(model.get('type')!='container') { %>
-                    <div style="margin-left:<%=(level+1)*5%>px;" class="paper title"><%=model.get('value')%>
-                        <button class="add-btn" data-id="<%=model.get('id')%>">+</button>
-                    </div>
-                <% } %>
+        <% if (model.get('type').split('_')[1] == 'list') { %>
+            <div style="margin-left:<%=level*20%>px;" class="paper list header"><%=model.get('value')%><button class="add-btn" data-id="<%=model.get('id')%>">+</button></div>
+            <div style="margin-left:<%=level*20%>px;" class="paper list items">
                 <%=model.get('children').html(level)%>
-            <% } else { %>
-                <%=model.get('value')%>
-            <%}%>
-        </div>
+            </div>
+        <% } else if (model.get('type') == 'container') {  %>
+            <div style="margin-left:<%=level*20%>px;" class="paper container">
+                <%=model.get('children').html(level+1)%>
+            </div>
+        <% } else { %>
+            <div <% if (model.get('type')=='text') { %> contenteditable='true' <% } %> data-id="<%=model.get('id')%>" style="margin-left:<%=level*20%>px;" class="paper <%=model.get('type')%>"><%=model.get('value')%></div>
+        <% } %>
     </script>
     <script id="paper_collection" type="text/template">
-        <% for (var i=0; i < collection.length; i++) { %><%=collection.models[i].html(level)%><% } %>
+        <% for (var i=0; i < collection.length; i++) { %>
+            <%=collection.models[i].html(level)%>
+        <% } %>
     </script>
 {% endblock %}

@@ -1,19 +1,64 @@
 /**
  * User: jackdevil
  */
+
+var update_view = {};
+_.extend(update_view, Backbone.Events);
+
 function paper_model_factory (paper_type,paper){
     return Backbone.Model.extend({
-        defaults: { "type": "text", "value": "", "children": false },
+        defaults: { "type": "text", "value": "" },
         urlRoot: url_resolver[paper_type],
+        urlParent: url_resolver[paper_type]+'?parent=',
+        type: paper_type,
+        paper: paper,
         template: _.template($("#paper_model").html()),
         html: function(level){
-            level = level+1 | 0;
+            level = level | 0;
             return this.template({'model':this, 'level':level});
         },
         initialize: function(){
-            this.bind('change',function(){
-                this.save();
+            this.bind('change:pk', function(){
+                this.save({},{'wait':true});
             });
+            this.bind('change:value', function(){
+                this.save({},{'wait':true});
+            });
+            this.bind('sync', function(){
+                if (this.get('type') == 'container' && !this.get('children')) {
+                    var container_objects = this.get_objects_list(this.get('id'));
+                    var container_tree = this.generate_tree(container_objects);
+                    this.set('children',container_tree);
+                    update_view.trigger('update_view', 'models_sync')
+                }
+            });
+        },
+        get_objects_list: function(id) {
+            var objects = false;
+            id = id || this.id;
+            $.ajax({
+                url: this.urlParent+id,
+                async: false,
+                success: function(data) {
+                    objects = data.objects;
+                }
+            });
+            return objects;
+        },
+        generate_tree: function(objects){
+            var collection = new (paper_collection_factory(this.type,this.paper))();
+            for (var i=0; i < objects.length; i++) {
+                if (objects[i].type.split('_')[1] == 'list' || objects[i].type == 'container'){
+                    var model = new (paper_model_factory(this.type,this.paper))(objects[i]);
+                    var container_objects = this.get_objects_list(model.get('id'));
+                    var container_tree = this.generate_tree(container_objects);
+                    model.set('children',container_tree);
+                    collection.add(model);
+                } else {
+                    collection.add(objects[i]);
+                }
+            }
+            return collection;
         }
     });
 }

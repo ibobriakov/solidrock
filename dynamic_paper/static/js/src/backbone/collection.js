@@ -3,16 +3,18 @@
  */
 
 function paper_collection_factory(paper_type,paper) {
+    var collection_factory = this;
     return Backbone.Collection.extend({
     model: paper_model_factory(paper_type,paper),
     url_suffix: 'paper',
     template: _.template($("#paper_collection").html()),
     html: function(level){
-        level = level+1 | 0;
+        level = level | 0;
         return this.template({'collection':this, 'level':level});
     },
     initialize: function(){
         this.model.collection = this;
+        this.model.collection_factory = collection_factory;
     },
     get_model: function(id, collection){
         var that = this;
