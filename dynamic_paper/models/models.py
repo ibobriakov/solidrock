@@ -7,6 +7,12 @@ import json
 class PaperItemType(models.Model):
     name = models.CharField(verbose_name=_('Paper type name'), max_length=100)
 
+    def is_list(self):
+        return self.name.endswith("_list")
+
+    def type_name(self):
+        return self.name[:-5] if self.is_list() else self.name
+
     def __unicode__(self):
         return self.name
 

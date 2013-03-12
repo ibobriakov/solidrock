@@ -14,9 +14,9 @@ def get_signal_for_page(page_template):
 def get_signal_for_page_item(page_type_template):
     def create_page_item_childs(instance, created, **kwargs):
         if created:
-            if instance.type.name.endswith('_list'):
+            if instance.type.is_list():
                 klass = instance.__class__
-                klass.objects.create(type=get_paper_item('container'), value=instance.type.name[:-5],
+                klass.objects.create(type=get_paper_item('container'), value=instance.type.type_name(),
                                      paper=instance.paper, parent=instance)
             elif instance.type.name == "container":
                 for item in page_type_template[instance.value]:
