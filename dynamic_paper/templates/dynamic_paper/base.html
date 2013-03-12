@@ -15,12 +15,16 @@
         <% if (model.get('type').split('_')[1] == 'list') { %>
             <div style="left:<%=level*20%>px;" class="paper list header"><%=model.get('value')%><button class="add-btn" data-id="<%=model.get('id')%>">+</button></div>
             <div style="left:<%=level*20%>px;" class="paper list items">
-                <%=model.get('children').html(level)%>
+                <% if (model.get('children')) { %>
+                    <%=model.get('children').html(level)%>
+                <% } %>
             </div>
         <% } else if (model.get('type') == 'container') {  %>
             <div style="left:<%=level*20%>px;" class="paper container">
                 <button class="remove-btn" data-id="<%=model.get('id')%>">-</button>
-                <%=model.get('children').html(level+1)%>
+                <% if (model.get('children')) { %>
+                    <%=model.get('children').html(level+1)%>
+                <% } %>
             </div>
         <% } else { %>
             <div <% if (model.get('type')=='text') { %> contenteditable='true' <% } %> data-id="<%=model.get('id')%>" style="left:<%=level*20%>px;" class="paper <%=model.get('type')%>"><%=model.get('value')%></div>

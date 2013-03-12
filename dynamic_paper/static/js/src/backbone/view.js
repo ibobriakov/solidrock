@@ -34,6 +34,7 @@ function paper_view_factory(paper_type,paper){
             $(this.paper_add).on('click',function(){
                 var model = that.collection.get_model($(this).attr('data-id'));
                 var value = model.get('type').split('_')[0];
+                if (!model.get('children')) model.set('children',new (paper_collection_factory(paper_type,paper))());
                 model.get('children').create(
                     {'paper':model.get('paper'),'type':'container','parent':model.get('id'),'value':value},
                     {'wait':true}
