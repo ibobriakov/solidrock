@@ -8,6 +8,7 @@ function paper_view_factory(paper_type,paper){
         paper_body: '#paper',
         paper_item: '.paper',
         paper_add: '.add-btn',
+        paper_remove: '.remove-btn',
         url: url_resolver[paper_type],
         initialize: function() {
             _.bindAll(this, 'render');
@@ -37,6 +38,12 @@ function paper_view_factory(paper_type,paper){
                     {'paper':model.get('paper'),'type':'container','parent':model.get('id'),'value':value},
                     {'wait':true}
                 );
+            });
+            $(this.paper_remove).on('click',function(){
+                var model = that.collection.get_model($(this).attr('data-id'));
+                model.destroy({'wait':true});
+                model.collection.remove(model);
+                that.render();
             });
             update_view.on('update_view',function(msg){
                 that.render();
