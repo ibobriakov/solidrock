@@ -59,6 +59,8 @@ class PaperItemResource(ModelResource):
 
 class CustomDjangoAuthorization(DjangoAuthorization):
     def create_detail(self, object_list, bundle):
+        if bundle.data["type"] != "container":
+            raise BadRequest("Wrong type")
         klass = self.base_checks(bundle.request, bundle.obj.__class__)
 
         if klass is False:
@@ -70,4 +72,8 @@ class CustomDjangoAuthorization(DjangoAuthorization):
             raise Unauthorized("You are not allowed to access that resource.")
         if parent_item.paper.owner != bundle.request.user:
             raise Unauthorized("You are not allowed to access that resource.")
+
+        if parent_item.type.type_name() != bundle.data["value"]:
+            raise BadRequest("Wrong value for this parent")
+
         return True

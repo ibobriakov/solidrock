@@ -105,7 +105,7 @@ class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
 
         first_list_container = self.resume_for_user1.resumeitem_set.filter(type__name__endswith="_list")[0]
         second_list_container = self.resume_for_user1.resumeitem_set.filter(type__name__endswith="_list")\
-            .filter(type__name=first_list_container.type.name)[0]
+            .exclude(type__name=first_list_container.type.name)[0]
         type_name = first_list_container.type.type_name()
 
         #add container with wrong parent
