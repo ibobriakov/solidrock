@@ -5,6 +5,10 @@ __author__ = 'ir4y'
 
 
 class RegistrationResource(Resource):
+    """
+    REST backend for user registration
+    """
+    user_type = fields.CharField(attribute='user_type')
     company_name = fields.CharField(attribute='company_name')
     email_address = fields.CharField(attribute='email_address')
     phone_number = fields.CharField(attribute='phone_number')
