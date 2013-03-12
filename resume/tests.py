@@ -89,14 +89,41 @@ class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
                 self.assertValidJSONResponse(resp2)
                 self.assertEqual(len(self.deserialize(resp2)['objects']), child_count)
 
-    def test_subitem_add(self):
+    def test_valid_subitem_add(self):
         self.api_client.client.login(username=self.user1.username, password=self.password1)
-        resume_item = self.resume_for_user1.resumeitem_set.filter(type__name="container")[0]
+
+        first_list_container = self.resume_for_user1.resumeitem_set.filter(type__name__endswith="_list")[0]
+        type_name = first_list_container.type.type_name()
         resp = self.api_client.post(self.get_api_dispatch_list_url(), format='json',
-                                    data={"paper": self.resume_for_user1.id, "type": "text",
-                                          "value": "", "parent": resume_item.id})
+                                    data={"paper": self.resume_for_user1.id, "type": "container",
+                                          "value": type_name, "parent": first_list_container.id})
         self.assertHttpCreated(resp)
         self.assertIsNotNone(self.deserialize(resp)['id'])
 
+    def test_invalid_subitem_add(self):
+        self.api_client.client.login(username=self.user1.username, password=self.password1)
+
+        first_list_container = self.resume_for_user1.resumeitem_set.filter(type__name__endswith="_list")[0]
+        second_list_container = self.resume_for_user1.resumeitem_set.filter(type__name__endswith="_list")\
+            .filter(type__name=first_list_container.type.name)[0]
+        type_name = first_list_container.type.type_name()
+
+        #add container with wrong parent
+        resp = self.api_client.post(self.get_api_dispatch_list_url(), format='json',
+                                    data={"paper": self.resume_for_user1.id, "type": "container",
+                                          "value": type_name, "parent": second_list_container.id})
+        self.assertHttpBadRequest(resp)
+
+        #add not container
+        resp = self.api_client.post(self.get_api_dispatch_list_url(), format='json',
+                                    data={"paper": self.resume_for_user1.id, "type": "not_container",
+                                          "value": type_name, "parent": first_list_container.id})
+        self.assertHttpBadRequest(resp)
+
+        #add container  with wrong value
+        resp = self.api_client.post(self.get_api_dispatch_list_url(), format='json',
+                                    data={"paper": self.resume_for_user1.id, "type": "container",
+                                          "value": "wrong_value", "parent": first_list_container.id})
+        self.assertHttpBadRequest(resp)
 
 
