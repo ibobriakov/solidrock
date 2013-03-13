@@ -8,29 +8,29 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'User.user_type'
-        db.add_column(u'auth_user', 'user_type',
-                      self.gf('django.db.models.fields.IntegerField')(default=0),
-                      keep_default=False)
+        # Adding model 'Employer'
+        db.create_table(u'userprofile_employer', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
+            ('company', self.gf('django.db.models.fields.CharField')(unique=True, max_length=255, db_index=True)),
+            ('phone', self.gf('django.db.models.fields.CharField')(default='00000000000', max_length=11)),
+        ))
+        db.send_create_signal(u'userprofile', ['Employer'])
 
-        # Adding field 'User.is_email_active'
-        db.add_column(u'auth_user', 'is_email_active',
-                      self.gf('django.db.models.fields.BooleanField')(default=False, max_length=75),
-                      keep_default=False)
-
-        # Adding unique constraint on 'User', fields ['email']
-        db.create_unique(u'auth_user', ['email'])
+        # Adding model 'JobSeeker'
+        db.create_table(u'userprofile_jobseeker', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
+        ))
+        db.send_create_signal(u'userprofile', ['JobSeeker'])
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'User', fields ['email']
-        db.delete_unique(u'auth_user', ['email'])
+        # Deleting model 'Employer'
+        db.delete_table(u'userprofile_employer')
 
-        # Deleting field 'User.user_type'
-        db.delete_column(u'auth_user', 'user_type')
-
-        # Deleting field 'User.is_email_active'
-        db.delete_column(u'auth_user', 'is_email_active')
+        # Deleting model 'JobSeeker'
+        db.delete_table(u'userprofile_jobseeker')
 
 
     models = {
@@ -55,7 +55,7 @@ class Migration(SchemaMigration):
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'is_email_active': ('django.db.models.fields.EmailField', [], {'default': 'False', 'max_length': '75'}),
+            'is_email_active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
@@ -71,7 +71,19 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
+        u'userprofile.employer': {
+            'Meta': {'object_name': 'Employer'},
+            'company': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255', 'db_index': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'phone': ('django.db.models.fields.CharField', [], {'default': "'00000000000'", 'max_length': '11'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
+        },
+        u'userprofile.jobseeker': {
+            'Meta': {'object_name': 'JobSeeker'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
         }
     }
 
-    complete_apps = ['auth']
+    complete_apps = ['userprofile']
