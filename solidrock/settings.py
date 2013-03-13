@@ -85,7 +85,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'registration',
-    'registration_rest_backend',
 
     'south',
     'mptt',
@@ -97,6 +96,7 @@ LOCAL_APPS = (
     'dynamic_paper',
     'resume',
     'cover_letter',
+    'registration_rest_backend',
 )
 
 # A sample logging configuration. The only tangible logging
