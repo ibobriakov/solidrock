@@ -12,6 +12,8 @@ class RegistrationResource(Resource):
     """
     user_type = fields.CharField(attribute='user_type')
     company_name = fields.CharField(attribute='company_name')
+    first_name = fields.CharField(attribute='first_name')
+    last_name = fields.CharField(attribute='last_name')
     email_address = fields.CharField(attribute='email_address')
     phone_number = fields.CharField(attribute='phone_number')
     password = fields.CharField(attribute='password')

@@ -97,6 +97,7 @@ LOCAL_APPS = (
     'dynamic_paper',
     'resume',
     'cover_letter',
+    'userprofile',
 )
 
 # A sample logging configuration. The only tangible logging
