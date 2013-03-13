@@ -11,7 +11,7 @@ class UserOverride:
     )
     user_type = models.IntegerField(verbose_name=_('user type'), choices=USER_TYPE_CHOICES, default=0)
     email = models.EmailField(verbose_name=_('e-mail address'), unique=True)
-    is_email_active = models.EmailField(verbose_name=_('is e-mail active'), default=False)
+    is_email_active = models.BooleanField(verbose_name=_('is e-mail active'), default=False)
 
     def save(self, *args, **kwargs):
         if self.username != self.email:

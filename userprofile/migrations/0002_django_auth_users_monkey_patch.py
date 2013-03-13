@@ -15,7 +15,7 @@ class Migration(SchemaMigration):
 
         # Adding field 'User.is_email_active'
         db.add_column(u'auth_user', 'is_email_active',
-                      self.gf('django.db.models.fields.EmailField')(default=False, max_length=75),
+                      self.gf('django.db.models.fields.BooleanField')(default=False, max_length=75),
                       keep_default=False)
 
         # Adding unique constraint on 'User', fields ['email']
