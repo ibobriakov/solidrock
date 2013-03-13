@@ -29,7 +29,7 @@ class RegisterResourceTestCase(ResourceTestCase):
 
     def get_register_data(self, **kwargs):
         register_data = {
-            'user_type': 'employer',
+            'user_type': 'employer',  # or job_seeker
             'company_name': 'my_company',
             'email_address': 'employer@my_company.com',
             'phone_number': '+1234567',
@@ -49,7 +49,7 @@ class RegisterResourceTestCase(ResourceTestCase):
         #Register fail with password mismatch
         resp = self.api_client.post(self.get_register_url(), format='json',
                                     data=self.get_register_data(re_password=''))
-        self.assertHttpMethodNotAllowed(resp)
+        self.assertHttpBadRequest(resp)
 
         #Register correct
         resp = self.api_client.post(self.get_register_url(), format='json',
@@ -59,7 +59,7 @@ class RegisterResourceTestCase(ResourceTestCase):
         #User should be unique
         resp = self.api_client.post(self.get_register_url(), format='json',
                                     data=self.get_register_data())
-        self.assertHttpMethodNotAllowed(resp)
+        self.assertHttpBadRequest(resp)
 
         #Get new registered user
         new_user = User.objects.get(email=self.get_register_data()['email_address'])
@@ -82,9 +82,10 @@ class RegisterResourceTestCase(ResourceTestCase):
 
         resp = self.api_client.post(self.get_activation_url(), format='json',
                                     data={'activation_key': valid_profile.activation_key})
-        self.assertHttpAccepted(resp)
+        self.assertHttpCreated(resp)
 
         # Fetch the profile again to verify its activation key has
         # been reset.
         valid_profile = RegistrationProfile.objects.get(user=valid_user)
+        self.assertTrue(valid_profile.user.is_email_active)
         self.assertEqual(valid_profile.activation_key, RegistrationProfile.ACTIVATED)

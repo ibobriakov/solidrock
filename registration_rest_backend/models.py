@@ -10,6 +10,8 @@ class AbstractObject(object):
     def __getattr__(self, name):
         return self._data.get(name, None)
 
+    __getitem__ = __getattr__
+
     def __setattr__(self, name, value):
         self.__dict__['_data'][name] = value
 

@@ -97,6 +97,7 @@ LOCAL_APPS = (
     'resume',
     'cover_letter',
     'registration_rest_backend',
+    'userprofile',
 )
 
 # A sample logging configuration. The only tangible logging
