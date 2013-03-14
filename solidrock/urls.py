@@ -7,11 +7,19 @@ from tastypie.api import Api
 from cover_letter.api import CoverLetterItemResource
 from registration_rest_backend.api import RegistrationResource, ActivationResource
 from resume.api import ResumeItemResource
+from userprofile.api import JobSeekerInformationResource, JobSeekerCurrentEmploymentResource,\
+    JobSeekerPreviousEmploymentResource, JobSeekerEducationResource, JobSeekerRefereeResource
 
 v1_api = Api(api_name='v1')
 v1_api.register(CoverLetterItemResource())
 v1_api.register(ResumeItemResource())
 v1_api.register(RegistrationResource())
+v1_api.register(ActivationResource())
+v1_api.register(JobSeekerInformationResource())
+v1_api.register(JobSeekerCurrentEmploymentResource())
+v1_api.register(JobSeekerPreviousEmploymentResource())
+v1_api.register(JobSeekerEducationResource())
+v1_api.register(JobSeekerRefereeResource())
 v1_api.register(ActivationResource())
 
 

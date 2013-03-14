@@ -155,9 +155,9 @@ class JobSeekerReferee(AddressMixin, models.Model):
         app_label = 'userprofile'
 
 
-User.profile = property(lambda u: Employer.objects.get(user=u)[0]
+User.profile = property(lambda u: Employer.objects.get(user=u)
                         if u.user_type == 1 else
-                        JobSeeker.objects.get(user=u)[0])
+                        JobSeeker.objects.get(user=u))
 
 
 def create_job_seeker_profile(instance, created, **kwargs):
