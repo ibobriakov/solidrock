@@ -119,8 +119,9 @@ class JobSeekerReferee(AddressMixin, models.Model):
     position_title = models.CharField(verbose_name="Position Title or Relationship", max_length=255, blank=True)
     phone_number = PhoneField(verbose_name=_("Phone Number"), blank=True)
     email = models.EmailField(_('Email Address'), blank=True)
-    is_for_interview = models.BooleanField(verbose_name=_("Are you willing for this to be approached prior to an interview ?"),
-                                           default=False)
+    is_for_interview = \
+        models.BooleanField(verbose_name=_("Are you willing for this to be approached prior to an interview ?"),
+                            default=False)
 
     class Meta:
         app_label = 'userprofile'
