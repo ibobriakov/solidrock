@@ -12,6 +12,10 @@ class JobSeekerItemResource(ModelResource):
         query_set = super(JobSeekerItemResource, self).get_object_list(request)
         return query_set.filter(job_seeker=request.user.profile)
 
+    def hydrate(self, bundle):
+        bundle.obj.job_seeker = bundle.request.user.profile
+        return bundle
+
 
 class JobSeekerInformationResource(JobSeekerItemResource):
     class Meta:
