@@ -32,12 +32,18 @@ class Employer(models.Model):
     company = models.CharField(verbose_name=_('Company Name'), max_length=255, db_index=True, unique=True)
     phone = PhoneField(verbose_name=_('phone number'))
 
+    def __unicode__(self):
+        return "Employer profile for {1}".format(self.company)
+
     class Meta:
         app_label = 'userprofile'
 
 
 class JobSeeker(models.Model):
     user = models.OneToOneField('auth.User')
+
+    def __unicode__(self):
+        return "Job Seeker profile for {0}".format(self.user.__unicode__())
 
     @property
     def first_name(self):
@@ -68,6 +74,9 @@ class JobSeekerInformation(AddressMixin, models.Model):
     is_driver = models.BooleanField(verbose_name=_("Do you have a current driver's licence?"),
                                     default=False)
 
+    def __unicode__(self):
+        return "Job Seeker Information for {0}".format(self.job_seeker.__unicode__())
+
     class Meta:
         app_label = 'userprofile'
 
@@ -83,16 +92,22 @@ class JobSeekerCurrentEmployment(AddressMixin, models.Model):
     last_day_of_service = models.CharField(verbose_name="Last Day of Service", max_length=255, blank=True, null=True)
     leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
 
+    def __unicode__(self):
+        return "Job Seeker Current Employment for {0}".format(self.job_seeker.__unicode__())
+
     class Meta:
         app_label = 'userprofile'
 
 
-class JobSeekerPerviousEmployment(AddressMixin, models.Model):
+class JobSeekerPreviousEmployment(AddressMixin, models.Model):
     job_seeker = models.ForeignKey('userprofile.JobSeeker', related_name='pervious_employments_set')
     name = models.CharField(verbose_name="Name of Employer", max_length=255, blank=True, null=True)
     position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True, null=True)
     brief = models.TextField(verbose_name="Brief Description of Duties", blank=True, null=True)
     leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
+
+    def __unicode__(self):
+        return "Job Seeker Previous Employment for {0}".format(self.job_seeker.__unicode__())
 
     class Meta:
         app_label = 'userprofile'
@@ -100,6 +115,9 @@ class JobSeekerPerviousEmployment(AddressMixin, models.Model):
 
 class JobSeekerEducationType(SlugTraits('type_name'), models.Model):
     type_name = models.CharField(verbose_name=_("Name of Education Type"), max_length=150)
+
+    def __unicode__(self):
+        return self.type_name
 
     class Meta:
         app_label = 'userprofile'
@@ -109,6 +127,11 @@ class JobSeekerEducation(models.Model):
     job_seeker = models.ForeignKey('userprofile.JobSeeker', related_name='educations_set')
     education_type = models.ForeignKey('userprofile.JobSeekerEducationType')
     value = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return "Job Seeker Education {0} - {1} for {2}".format(self.education_type.__unicode__(),
+                                                               self.value,
+                                                               self.job_seeker.__unicode__())
 
     class Meta:
         app_label = 'userprofile'
@@ -123,6 +146,9 @@ class JobSeekerReferee(AddressMixin, models.Model):
     is_for_interview = \
         models.BooleanField(verbose_name=_("Are you willing for this to be approached prior to an interview ?"),
                             default=False)
+
+    def __unicode__(self):
+        return "Job Seeker Referee for {0}".format(self.job_seeker.__unicode__())
 
     class Meta:
         app_label = 'userprofile'

@@ -2,7 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from models import Employer, JobSeeker, JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPerviousEmployment,\
+from models import Employer, JobSeeker, JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
                    JobSeekerEducationType, JobSeekerEducation, JobSeekerReferee
 from userprofile.forms import CustomUserChangeForm
 
@@ -22,8 +22,8 @@ class CustomUserAdmin(UserAdmin):
     )
 
 
-class JobSeekerPerviousEmploymentTabInline(admin.StackedInline):
-    model = JobSeekerPerviousEmployment
+class JobSeekerPreviousEmploymentTabInline(admin.StackedInline):
+    model = JobSeekerPreviousEmployment
 
 
 class JobSeekerEducationTabInline(admin.TabularInline):
@@ -35,7 +35,7 @@ class JobSeekerRefereeTabInline(admin.StackedInline):
 
 
 class JobSeekerAdmin(admin.ModelAdmin):
-    inlines = (JobSeekerPerviousEmploymentTabInline, JobSeekerEducationTabInline, JobSeekerRefereeTabInline)
+    inlines = (JobSeekerPreviousEmploymentTabInline, JobSeekerEducationTabInline, JobSeekerRefereeTabInline)
 
 
 admin.site.register(User, CustomUserAdmin)
@@ -43,4 +43,5 @@ admin.site.register(Employer)
 admin.site.register(JobSeeker, JobSeekerAdmin)
 admin.site.register(JobSeekerInformation)
 admin.site.register(JobSeekerCurrentEmployment)
+admin.site.register(JobSeekerEducationType)
 

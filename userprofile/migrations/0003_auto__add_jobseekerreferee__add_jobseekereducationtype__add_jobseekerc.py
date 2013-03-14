@@ -51,8 +51,17 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('userprofile', ['JobSeekerCurrentEmployment'])
 
-        # Adding model 'JobSeekerPerviousEmployment'
-        db.create_table(u'userprofile_jobseekerperviousemployment', (
+        # Adding model 'JobSeekerEducation'
+        db.create_table(u'userprofile_jobseekereducation', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('job_seeker', self.gf('django.db.models.fields.related.ForeignKey')(related_name='educations_set', to=orm['userprofile.JobSeeker'])),
+            ('education_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['userprofile.JobSeekerEducationType'])),
+            ('value', self.gf('django.db.models.fields.CharField')(max_length=255)),
+        ))
+        db.send_create_signal('userprofile', ['JobSeekerEducation'])
+
+        # Adding model 'JobSeekerPreviousEmployment'
+        db.create_table(u'userprofile_jobseekerpreviousemployment', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('address_first', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('address_second', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
@@ -64,16 +73,7 @@ class Migration(SchemaMigration):
             ('brief', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('leaving_reason', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
-        db.send_create_signal('userprofile', ['JobSeekerPerviousEmployment'])
-
-        # Adding model 'JobSeekerEducation'
-        db.create_table(u'userprofile_jobseekereducation', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('job_seeker', self.gf('django.db.models.fields.related.ForeignKey')(related_name='educations_set', to=orm['userprofile.JobSeeker'])),
-            ('education_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['userprofile.JobSeekerEducationType'])),
-            ('value', self.gf('django.db.models.fields.CharField')(max_length=255)),
-        ))
-        db.send_create_signal('userprofile', ['JobSeekerEducation'])
+        db.send_create_signal('userprofile', ['JobSeekerPreviousEmployment'])
 
         # Adding model 'JobSeekerInformation'
         db.create_table(u'userprofile_jobseekerinformation', (
@@ -109,11 +109,11 @@ class Migration(SchemaMigration):
         # Deleting model 'JobSeekerCurrentEmployment'
         db.delete_table(u'userprofile_jobseekercurrentemployment')
 
-        # Deleting model 'JobSeekerPerviousEmployment'
-        db.delete_table(u'userprofile_jobseekerperviousemployment')
-
         # Deleting model 'JobSeekerEducation'
         db.delete_table(u'userprofile_jobseekereducation')
+
+        # Deleting model 'JobSeekerPreviousEmployment'
+        db.delete_table(u'userprofile_jobseekerpreviousemployment')
 
         # Deleting model 'JobSeekerInformation'
         db.delete_table(u'userprofile_jobseekerinformation')
@@ -221,8 +221,8 @@ class Migration(SchemaMigration):
             'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'postcode': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'})
         },
-        'userprofile.jobseekerperviousemployment': {
-            'Meta': {'object_name': 'JobSeekerPerviousEmployment'},
+        'userprofile.jobseekerpreviousemployment': {
+            'Meta': {'object_name': 'JobSeekerPreviousEmployment'},
             'address_first': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'address_second': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'brief': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
