@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from main.utils import patch_model
@@ -154,6 +155,14 @@ class JobSeekerReferee(AddressMixin, models.Model):
         app_label = 'userprofile'
 
 
-User.profile = property(lambda u:   Employer.objects.get(user=u)[0]
-                                    if u.user_type == 1 else
-                                    JobSeeker.objects.get(user=u)[0])
+User.profile = property(lambda u: Employer.objects.get(user=u)[0]
+                        if u.user_type == 1 else
+                        JobSeeker.objects.get(user=u)[0])
+
+
+def create_job_seeker_profile(instance, created, **kwargs):
+    if created:
+        JobSeekerInformation.objects.create(job_seeker=instance)
+        JobSeekerCurrentEmployment.objects.create(job_seeker=instance)
+
+post_save.connect(create_job_seeker_profile, sender=JobSeeker)
