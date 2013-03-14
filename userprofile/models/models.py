@@ -52,7 +52,7 @@ class JobSeeker(models.Model):
 
 
 class JobSeekerInformation(AddressMixin, models.Model):
-    user = models.OneToOneField('userprofile.Employer')
+    user = models.OneToOneField('userprofile.Employer', related_name='personal_information')
     photo = models.ImageField(verbose_name=_("Profile picture(optional)"), blank=True, null=True)
     home_phone = PhoneField(verbose_name=_("Home Phone Number"), blank=True)
     daytime_phone = PhoneField(verbose_name=_("Daytime Phone Number"), blank=True)
@@ -72,7 +72,7 @@ class JobSeekerInformation(AddressMixin, models.Model):
 
 
 class JobSeekerCurrentEmployment(AddressMixin, models.Model):
-    user = models.OneToOneField('userprofile.Employer')
+    user = models.OneToOneField('userprofile.Employer', related_name='current_employment')
     name = models.CharField(verbose_name="Name of Employer", max_length=255, blank=True)
     position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True)
     date_commenced = models.DateField(verbose_name="Date Commenced", blank=True)
@@ -80,6 +80,17 @@ class JobSeekerCurrentEmployment(AddressMixin, models.Model):
     brief = models.TextField(verbose_name="Brief Description of Duties", blank=True)
     job_type = models.CharField(verbose_name="Fulltime, Parttime or Casual", max_length=255, blank=True)
     last_day_of_service = models.CharField(verbose_name="Last Day of Service", max_length=255, blank=True)
+    leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True)
+
+    class Meta:
+        app_label = 'userprofile'
+
+
+class JobSeekerPerviousEmployment(AddressMixin, models.Model):
+    user = models.ForeignKey('userprofile.Employer', related_name='pervious_employments_set')
+    name = models.CharField(verbose_name="Name of Employer", max_length=255, blank=True)
+    position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True)
+    brief = models.TextField(verbose_name="Brief Description of Duties", blank=True)
     leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True)
 
     class Meta:
