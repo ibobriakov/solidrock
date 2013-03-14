@@ -28,10 +28,16 @@ class UserOverride:
 patch_model(User, UserOverride)
 
 
-class Employer(models.Model):
+class Employer(AddressMixin, models.Model):
     user = models.OneToOneField('auth.User')
     company = models.CharField(verbose_name=_('Company Name'), max_length=255, db_index=True, unique=True)
-    phone = PhoneField(verbose_name=_('phone number'))
+    abn_or_acn = models.CharField(verbose_name=_('ABN/ACN'), max_length=255, blank=True, null=True)
+    business_phone = PhoneField(verbose_name=_('Business Phone'), blank=True, null=True)
+    brief = models.TextField(verbose_name=_("Brief Description of Your Company"), blank=True, null=True)
+    name = models.CharField(verbose_name=_('Name'), max_length=150, blank=True, null=True)
+    phone = PhoneField(verbose_name=_('Phone'))
+    email = models.EmailField(verbose_name=_('Email Address'), blank=True, null=True)
+    agree = models.BooleanField(verbose_name=_('Do you agree to the Terms and Conditions?'), default=False)
 
     def __unicode__(self):
         return "Employer profile for {1}".format(self.company)
