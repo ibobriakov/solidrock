@@ -2,7 +2,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from models import Employer, JobSeeker
+from models import Employer, JobSeeker, JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPerviousEmployment,\
+                   JobSeekerEducationType, JobSeekerEducation, JobSeekerReferee
 from userprofile.forms import CustomUserChangeForm
 
 __author__ = 'ir4y'
@@ -20,6 +21,26 @@ class CustomUserAdmin(UserAdmin):
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
+
+class JobSeekerPerviousEmploymentTabInline(admin.TabularInline):
+    model = JobSeekerPerviousEmployment
+
+
+class JobSeekerEducationTabInline(admin.TabularInline):
+    model = JobSeekerEducation
+
+
+class JobSeekerRefereeTabInline(admin.TabularInline):
+    model = JobSeekerReferee
+
+
+class JobSeekerAdmin(admin.ModelAdmin):
+    inlines = (JobSeekerPerviousEmploymentTabInline, JobSeekerEducationTabInline, JobSeekerRefereeTabInline)
+
+
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Employer)
 admin.site.register(JobSeeker)
+admin.site.register(JobSeekerInformation)
+admin.site.register(JobSeekerCurrentEmployment)
+
