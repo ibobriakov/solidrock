@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from main.utils import patch_model
 from fields import PhoneField
-from mixins import AddressMixin
+from mixins import AddressMixin, SlugTraits
 
 
 class UserOverride:
@@ -96,6 +96,21 @@ class JobSeekerPerviousEmployment(AddressMixin, models.Model):
     class Meta:
         app_label = 'userprofile'
 
+
+class JobSeekerEducationType(SlugTraits('type_name'), models.Model):
+    type_name = models.CharField(verbose_name=_("Name of Education Type"))
+
+    class Meta:
+        app_label = 'userprofile'
+
+
+class JobSeekerEducation(models.Model):
+    user = models.ForeignKey('userprofile.Employer', related_name='pervious_employments_set')
+    education_type = models.ForeignKey('userprofile.JobSeekerEducationType')
+    value = models.CharField(max_length=255)
+
+    class Meta:
+        app_label = 'userprofile'
 
 User.profile = property(lambda u:   Employer.objects.get(user=u)[0]
                                     if u.user_type == 1 else
