@@ -2,10 +2,10 @@
 
 {% block templates %}
     <script id="form-template" type="text/template">
-        <% for (var i=0; i < fields.length; i++) { %>
+        <% for (var i=0; i < _.keys(fields).length; i++) { %>
             <div class="field">
-                <label><%=fields.at(i).get('label')%></label>
-                <input data-value="<%=fields.at(i).get('name')%>.value" type="<%=fields.at(i).get('type')%>">
+                <label><%=model.titles[_.keys(fields)[i]]%></label>
+                <input data-value="<%=type%>.<%=_.keys(fields)[i]%>" type="<%=model.types[_.keys(fields)[i]]%>">
             </div>
         <% } %>
     </script>
