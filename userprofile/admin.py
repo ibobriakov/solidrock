@@ -22,7 +22,7 @@ class CustomUserAdmin(UserAdmin):
     )
 
 
-class JobSeekerPerviousEmploymentTabInline(admin.TabularInline):
+class JobSeekerPerviousEmploymentTabInline(admin.StackedInline):
     model = JobSeekerPerviousEmployment
 
 
@@ -30,7 +30,7 @@ class JobSeekerEducationTabInline(admin.TabularInline):
     model = JobSeekerEducation
 
 
-class JobSeekerRefereeTabInline(admin.TabularInline):
+class JobSeekerRefereeTabInline(admin.StackedInline):
     model = JobSeekerReferee
 
 
@@ -40,7 +40,7 @@ class JobSeekerAdmin(admin.ModelAdmin):
 
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Employer)
-admin.site.register(JobSeeker)
+admin.site.register(JobSeeker, JobSeekerAdmin)
 admin.site.register(JobSeekerInformation)
 admin.site.register(JobSeekerCurrentEmployment)
 

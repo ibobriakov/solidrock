@@ -7,21 +7,21 @@ __author__ = 'ir4y'
 
 
 class AddressMixin(models.Model):
-    address_first = models.CharField(max_length=255, blank=True)
-    address_second = models.CharField(max_length=255, blank=True)
-    city = models.CharField(max_length=255, blank=True)
-    postcode = models.CharField(max_length=10, blank=True)
+    address_first = models.CharField(max_length=255, blank=True, null=True)
+    address_second = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
+    postcode = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
         abstract = True
 
 
-def SlugTraits(base_filed_name='name',verbose_name=_("slug")):
+def SlugTraits(base_filed_name='name', verbose_name=_("slug")):
     fileld_name = base_filed_name + '_slug'
     fields = {
         fileld_name: models.SlugField(verbose_name=verbose_name, max_length=255, blank=True, null=True)
     }
-    SlugMixin = create_model('SlugMixin', fields=fields ,module='main.models', options={'abstract': True})
+    SlugMixin = create_model('SlugMixin', fields=fields, module='main.models', options={'abstract': True})
 
     def save(self, **kwargs):
         original_text = getattr(self, base_filed_name)

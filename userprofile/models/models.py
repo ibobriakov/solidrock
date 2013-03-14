@@ -52,12 +52,13 @@ class JobSeeker(models.Model):
 
 
 class JobSeekerInformation(AddressMixin, models.Model):
-    user = models.OneToOneField('userprofile.Employer', related_name='personal_information')
-    photo = models.ImageField(verbose_name=_("Profile picture(optional)"), blank=True, null=True)
-    home_phone = PhoneField(verbose_name=_("Home Phone Number"), blank=True)
-    daytime_phone = PhoneField(verbose_name=_("Daytime Phone Number"), blank=True)
-    mobile_phone = PhoneField(verbose_name=_("Mobile Phone Number"), blank=True)
-    email = models.EmailField(_('Email Address'), blank=True)
+    job_seeker = models.OneToOneField('userprofile.JobSeeker', related_name='personal_information')
+    photo = models.ImageField(verbose_name=_("Profile picture(optional)"), upload_to="user_photo/%Y/%m/%d",
+                              blank=True, null=True)
+    home_phone = PhoneField(verbose_name=_("Home Phone Number"), blank=True, null=True)
+    daytime_phone = PhoneField(verbose_name=_("Daytime Phone Number"), blank=True, null=True)
+    mobile_phone = PhoneField(verbose_name=_("Mobile Phone Number"), blank=True, null=True)
+    email = models.EmailField(_('Email Address'), blank=True, null=True)
     can_contact_at_work = models.BooleanField(verbose_name=_("Can Potential employers contact you at work?"),
                                               default=False)
     is_australian = models.BooleanField(verbose_name=_("Are you an Australian Citizen/Permanent Resident?"),
@@ -72,40 +73,40 @@ class JobSeekerInformation(AddressMixin, models.Model):
 
 
 class JobSeekerCurrentEmployment(AddressMixin, models.Model):
-    user = models.OneToOneField('userprofile.Employer', related_name='current_employment')
-    name = models.CharField(verbose_name="Name of Employer", max_length=255, blank=True)
-    position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True)
-    date_commenced = models.DateField(verbose_name="Date Commenced", blank=True)
-    department = models.CharField(verbose_name="Department/Section", max_length=255, blank=True)
-    brief = models.TextField(verbose_name="Brief Description of Duties", blank=True)
-    job_type = models.CharField(verbose_name="Fulltime, Parttime or Casual", max_length=255, blank=True)
-    last_day_of_service = models.CharField(verbose_name="Last Day of Service", max_length=255, blank=True)
-    leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True)
+    job_seeker = models.OneToOneField('userprofile.JobSeeker', related_name='current_employment')
+    name = models.CharField(verbose_name="Name of Employer", max_length=255, blank=True, null=True)
+    position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True, null=True)
+    date_commenced = models.DateField(verbose_name="Date Commenced", blank=True, null=True)
+    department = models.CharField(verbose_name="Department/Section", max_length=255, blank=True, null=True)
+    brief = models.TextField(verbose_name="Brief Description of Duties", blank=True, null=True)
+    job_type = models.CharField(verbose_name="Fulltime, Parttime or Casual", max_length=255, blank=True, null=True)
+    last_day_of_service = models.CharField(verbose_name="Last Day of Service", max_length=255, blank=True, null=True)
+    leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
 
     class Meta:
         app_label = 'userprofile'
 
 
 class JobSeekerPerviousEmployment(AddressMixin, models.Model):
-    user = models.ForeignKey('userprofile.Employer', related_name='pervious_employments_set')
-    name = models.CharField(verbose_name="Name of Employer", max_length=255, blank=True)
-    position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True)
-    brief = models.TextField(verbose_name="Brief Description of Duties", blank=True)
-    leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True)
+    job_seeker = models.ForeignKey('userprofile.JobSeeker', related_name='pervious_employments_set')
+    name = models.CharField(verbose_name="Name of Employer", max_length=255, blank=True, null=True)
+    position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True, null=True)
+    brief = models.TextField(verbose_name="Brief Description of Duties", blank=True, null=True)
+    leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
 
     class Meta:
         app_label = 'userprofile'
 
 
 class JobSeekerEducationType(SlugTraits('type_name'), models.Model):
-    type_name = models.CharField(verbose_name=_("Name of Education Type"))
+    type_name = models.CharField(verbose_name=_("Name of Education Type"), max_length=150)
 
     class Meta:
         app_label = 'userprofile'
 
 
 class JobSeekerEducation(models.Model):
-    user = models.ForeignKey('userprofile.Employer', related_name='educations_set')
+    job_seeker = models.ForeignKey('userprofile.JobSeeker', related_name='educations_set')
     education_type = models.ForeignKey('userprofile.JobSeekerEducationType')
     value = models.CharField(max_length=255)
 
@@ -114,11 +115,11 @@ class JobSeekerEducation(models.Model):
 
 
 class JobSeekerReferee(AddressMixin, models.Model):
-    user = models.ForeignKey('userprofile.Employer', related_name='referees_set')
-    name = models.CharField(verbose_name="Name", max_length=255, blank=True)
-    position_title = models.CharField(verbose_name="Position Title or Relationship", max_length=255, blank=True)
-    phone_number = PhoneField(verbose_name=_("Phone Number"), blank=True)
-    email = models.EmailField(_('Email Address'), blank=True)
+    job_seeker = models.ForeignKey('userprofile.JobSeeker', related_name='referees_set')
+    name = models.CharField(verbose_name="Name", max_length=255, blank=True, null=True)
+    position_title = models.CharField(verbose_name="Position Title or Relationship", max_length=255, blank=True, null=True)
+    phone_number = PhoneField(verbose_name=_("Phone Number"), blank=True, null=True)
+    email = models.EmailField(_('Email Address'), blank=True, null=True)
     is_for_interview = \
         models.BooleanField(verbose_name=_("Are you willing for this to be approached prior to an interview ?"),
                             default=False)
