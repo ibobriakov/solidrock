@@ -1,44 +1,17 @@
 {% extends 'registration/base.html' %}
 
 {% block templates %}
-    <script id="login-template" type="text/template">
-        <div class="field">
-            <label>Email Address</label>
-            <input data-value="login.email" type="text">
-        </div>
-        <div class="field">
-            <label>Password</label>
-            <input data-value="login.password" type="password">
-        </div>
+    <script id="form-template" type="text/template">
+        <% for (var i=0; i < fields.length; i++) { %>
+            <div class="field">
+                <label><%=fields.at(i).get('label')%></label>
+                <input data-value="<%=fields.at(i).get('name')%>.value" type="<%=fields.at(i).get('type')%>">
+            </div>
+        <% } %>
     </script>
 {% endblock %}
 
 {% block content %}
     <h1>Login</h1>
-    <form id="login-form"></form>
-
-    <h1>Registration</h1>
-    <form>
-        <div class="field">
-            <label>Company Name</label>
-            <input type="text">
-        </div>
-        <div class="field">
-            <label>Email Address</label>
-            <input type="text">
-        </div>
-        <div class="field">
-            <label>Phone Number</label>
-            <input type="text">
-        </div>
-        <div class="field f-small">
-            <label>Password</label>
-            <input type="password">
-        </div>
-        <div class="field f-small">
-            <label>Re-type Password</label>
-            <input type="password">
-        </div>
-        <div class="continue">Continue</div>
-    </form>
+    <form id="registration-form"></form>
 {% endblock %}
