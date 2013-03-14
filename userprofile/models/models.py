@@ -40,7 +40,7 @@ class Employer(AddressMixin, models.Model):
     agree = models.BooleanField(verbose_name=_('Do you agree to the Terms and Conditions?'), default=False)
 
     def __unicode__(self):
-        return "Employer profile for {1}".format(self.company)
+        return "Employer profile for {0}".format(self.company)
 
     class Meta:
         app_label = 'userprofile'

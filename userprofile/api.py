@@ -4,9 +4,26 @@ from tastypie.authorization import DjangoAuthorization
 from tastypie.exceptions import ImmediateHttpResponse
 from tastypie.resources import ModelResource
 from models import JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
-    JobSeekerEducation, JobSeekerReferee
+    JobSeekerEducation, JobSeekerReferee, Employer
 
 __author__ = 'ir4y'
+
+
+class EmployerResource(ModelResource):
+    def get_object_list(self, request):
+        query_set = super(EmployerResource, self).get_object_list(request)
+        return query_set.filter(user=request.user)
+
+    def hydrate(self, bundle):
+        bundle.obj.user = bundle.request.user
+        return bundle
+
+    class Meta:
+        queryset = Employer.objects.all()
+        resource_name = 'employer'
+        always_return_data = True
+        authentication = SessionAuthentication()
+        authorization = DjangoAuthorization()
 
 
 class JobSeekerItemResource(ModelResource):
@@ -82,7 +99,7 @@ class JobSeekerEducationResource(JobSeekerItemResource):
 class JobSeekerRefereeResource(JobSeekerItemResource):
     class Meta:
         queryset = JobSeekerReferee.objects.all()
-        resource_name = 'Job_seeker_referee'
+        resource_name = 'job_seeker_referee'
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = DjangoAuthorization()
