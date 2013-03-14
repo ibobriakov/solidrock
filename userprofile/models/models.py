@@ -162,7 +162,7 @@ User.profile = property(lambda u: Employer.objects.get(user=u)
 
 def create_job_seeker_profile(instance, created, **kwargs):
     if created:
-        JobSeekerInformation.objects.create(job_seeker=instance)
+        JobSeekerInformation.objects.create(job_seeker=instance, email=instance.user.email)
         JobSeekerCurrentEmployment.objects.create(job_seeker=instance)
 
 post_save.connect(create_job_seeker_profile, sender=JobSeeker)
