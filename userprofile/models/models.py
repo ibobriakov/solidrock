@@ -105,12 +105,26 @@ class JobSeekerEducationType(SlugTraits('type_name'), models.Model):
 
 
 class JobSeekerEducation(models.Model):
-    user = models.ForeignKey('userprofile.Employer', related_name='pervious_employments_set')
+    user = models.ForeignKey('userprofile.Employer', related_name='educations_set')
     education_type = models.ForeignKey('userprofile.JobSeekerEducationType')
     value = models.CharField(max_length=255)
 
     class Meta:
         app_label = 'userprofile'
+
+
+class JobSeekerReferee(AddressMixin, models.Model):
+    user = models.ForeignKey('userprofile.Employer', related_name='referees_set')
+    name = models.CharField(verbose_name="Name", max_length=255, blank=True)
+    position_title = models.CharField(verbose_name="Position Title or Relationship", max_length=255, blank=True)
+    phone_number = PhoneField(verbose_name=_("Phone Number"), blank=True)
+    email = models.EmailField(_('Email Address'), blank=True)
+    is_for_interview = models.BooleanField(verbose_name=_("Are you willing for this to be approached prior to an interview ?"),
+                                           default=False)
+
+    class Meta:
+        app_label = 'userprofile'
+
 
 User.profile = property(lambda u:   Employer.objects.get(user=u)[0]
                                     if u.user_type == 1 else
