@@ -5,11 +5,10 @@
         <% for (var i=0; i < _.keys(fields).length; i++) { %>
             <div class="field">
                 <label><%=model.titles[_.keys(fields)[i]]%></label>
-                <span data-text="<%=type%>.<%=_.keys(fields)[i]%>"></span>
                 <input data-value="<%=type%>.<%=_.keys(fields)[i]%>" type="<%=model.types[_.keys(fields)[i]]%>">
             </div>
         <% } %>
-        <button data-on-click="<%=type%>:commit">Commit</button>
+        <a href="#" data-on-click="<%=type%>:commit">Commit</a>
     </script>
 {% endblock %}
 

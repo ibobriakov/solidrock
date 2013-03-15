@@ -9,7 +9,7 @@ function paper_view_factory(paper_type,paper){
         paper_item: '.paper',
         paper_add: '.add-btn',
         paper_remove: '.remove-btn',
-        url: url_resolver[paper_type],
+        url: rest_url[paper_type].list_endpoint,
         initialize: function() {
             _.bindAll(this, 'render');
             this.collection.view = this;

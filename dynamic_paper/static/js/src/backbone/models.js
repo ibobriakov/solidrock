@@ -8,8 +8,8 @@ _.extend(update_view, Backbone.Events);
 function paper_model_factory (paper_type,paper){
     return Backbone.Model.extend({
         defaults: { "type": "text", "value": "" },
-        urlRoot: url_resolver[paper_type],
-        urlParent: url_resolver[paper_type]+'?parent=',
+        urlRoot: rest_url[paper_type].list_endpoint,
+        urlParent: rest_url[paper_type].list_endpoint+'?parent=',
         type: paper_type,
         paper: paper,
         template: _.template($("#paper_model").html()),

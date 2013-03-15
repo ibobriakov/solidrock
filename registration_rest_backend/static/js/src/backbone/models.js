@@ -4,7 +4,7 @@
 
 function form_model_fabric(type,attributes) {
     var Model = Backbone.Model.extend({
-        urlRoot: url_resolver[type],
+        urlRoot: rest_url[type].list_endpoint,
         types: attributes.types,
         titles: attributes.titles,
         initialize: function() {
