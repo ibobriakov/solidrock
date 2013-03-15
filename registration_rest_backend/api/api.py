@@ -32,6 +32,7 @@ class EmployerRegistrationResource(RegistrationResource):
         always_return_data = True
         validation = RegisterValidation()
         types_override = {
+            'user_type': 'hidden',
             'password': 'password',
             're_password': 'password',
             'email_address': 'email',
@@ -60,6 +61,7 @@ class JobSeekerRegistrationResource(RegistrationResource):
         always_return_data = True
         validation = RegisterValidation()
         types_override = {
+            'user_type': 'hidden',
             'password': 'password',
             're_password': 'password',
             'email_address': 'email',
