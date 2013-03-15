@@ -61,6 +61,7 @@ class RegistrationResource(Resource):
         resource_name = 'registration'
         allowed_methods = ['post']
         object_class = AbstractUserObject
+        always_return_data = True
 
 
 class ActivationResource(Resource):

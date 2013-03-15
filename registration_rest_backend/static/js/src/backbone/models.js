@@ -9,7 +9,7 @@ function form_model_fabric(type,attributes) {
         titles: attributes.titles,
         initialize: function() {
             this.bind('change',function(){
-                console.log(this);
+                //console.log(this);
             })
         },
         validate: function(){
