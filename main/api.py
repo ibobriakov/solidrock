@@ -1,7 +1,9 @@
+from django.utils.text import capfirst
+
 __author__ = 'ir4y'
 
 
-class ResourceTypesOverrideMixin(object):
+class ResourceTypesOverrideSchemaMixin(object):
     """
     This class override default type of resource item
     it use types_override dict in Meta section
@@ -27,9 +29,20 @@ class ResourceTypesOverrideMixin(object):
             }
     """
     def build_schema(self):
-        data = super(ResourceTypesOverrideMixin, self).build_schema()
+        data = super(ResourceTypesOverrideSchemaMixin, self).build_schema()
         if hasattr(self._meta, 'types_override'):
             for field_name, field_data in data['fields'].iteritems():
                 if field_name in self._meta.types_override:
                     field_data['type'] = self._meta.types_override[field_name]
+        return data
+
+
+class ResourceTitleSchemaMixin(object):
+    def get_label(self, field_name):
+        return " ".join(map(capfirst, field_name.split("_")))
+
+    def build_schema(self):
+        data = super(ResourceTitleSchemaMixin, self).build_schema()
+        for field_name, field_data in data['fields'].iteritems():
+            field_data['label'] = self.get_label(field_name)
         return data

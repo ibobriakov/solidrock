@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from tastypie import fields
 from tastypie.exceptions import ImmediateHttpResponse
 from tastypie.resources import Resource
-from main.api import ResourceTypesOverrideMixin
+from main.api import ResourceTitleSchemaMixin, ResourceTypesOverrideSchemaMixin
 from ..models import AbstractUserObject, ActivationObject, LoginObject
 from ..backends import RestBackend
 from registration_rest_backend.api.resources import RegistrationResource
@@ -94,7 +94,7 @@ class ActivationResource(Resource):
         object_class = ActivationObject
 
 
-class LoginResource(ResourceTypesOverrideMixin, Resource):
+class LoginResource(ResourceTitleSchemaMixin, ResourceTypesOverrideSchemaMixin, Resource):
     username = fields.CharField(attribute='username')
     password = fields.CharField(attribute='password')
 
