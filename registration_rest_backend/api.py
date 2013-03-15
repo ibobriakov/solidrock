@@ -23,6 +23,12 @@ class RegistrationResource(Resource):
 
     registration_backend = RestBackend()
 
+    def full_dehydrate(self, bundle, for_list=False):
+        del(bundle.data['password'])
+        del(bundle.data['re_password'])
+        bundle.data['redirect_url'] = '/'
+        return bundle
+
     def obj_create(self, bundle, request=None, **kwargs):
         if not bundle.request.user.is_anonymous():
             raise BadRequest("You shouldn't be authorized")
