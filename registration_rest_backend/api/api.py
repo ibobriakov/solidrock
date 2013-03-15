@@ -1,4 +1,3 @@
-import json
 from django.contrib.auth import authenticate, login
 from tastypie import fields
 from tastypie.exceptions import ImmediateHttpResponse
@@ -7,7 +6,6 @@ from main.api import ResourceTypesOverrideMixin
 from ..models import AbstractUserObject, ActivationObject, LoginObject
 from ..backends import RestBackend
 from registration_rest_backend.api.resources import RegistrationResource
-from registration_rest_backend.api.validation import LoginValidation
 from userprofile.models import Employer, JobSeeker
 
 __author__ = 'ir4y'
@@ -125,7 +123,6 @@ class LoginResource(ResourceTypesOverrideMixin, Resource):
         allowed_methods = ['post']
         object_class = LoginObject
         always_return_data = True
-        #validation = LoginValidation()
         types_override = {
             'password': 'password',
         }
