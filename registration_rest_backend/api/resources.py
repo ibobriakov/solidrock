@@ -25,6 +25,11 @@ class RegistrationResource(ResourceLabelSchemaMixin, ResourceTypesOverrideSchema
     def get_schema(self, request, **kwargs):
         return self.create_response(request,  self.build_schema())
 
+    def build_schema(self):
+        data = super(ResourceTypesOverrideSchemaMixin, self).build_schema()
+        data['fields']['user_type']['default'] = "employer" if data['fields']['user_type']['default'] else "job_seeker"
+        return data
+
     def obj_create(self, bundle, request=None, **kwargs):
         self.is_valid(bundle)
 
