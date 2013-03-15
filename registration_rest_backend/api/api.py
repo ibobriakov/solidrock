@@ -1,10 +1,13 @@
+import json
+from django.contrib.auth import authenticate, login
 from tastypie import fields
-
+from tastypie.exceptions import ImmediateHttpResponse
 from tastypie.resources import Resource
-
-from ..models import AbstractUserObject, ActivationObject
+from main.api import ResourceTypesOverrideMixin
+from ..models import AbstractUserObject, ActivationObject, LoginObject
 from ..backends import RestBackend
 from registration_rest_backend.api.resources import RegistrationResource
+from registration_rest_backend.api.validation import LoginValidation
 from userprofile.models import Employer, JobSeeker
 
 __author__ = 'ir4y'
@@ -75,6 +78,9 @@ class ActivationResource(Resource):
         self.registration_backend.activate(bundle.request, bundle.obj.activation_key)
         return bundle
 
+    def get_schema(self, request, **kwargs):
+        return self.create_response(request,  self.build_schema())
+
     def detail_uri_kwargs(self, bundle_or_obj):
         """
         Doesn't need this
@@ -87,5 +93,39 @@ class ActivationResource(Resource):
         object_class = ActivationObject
 
 
-class LoginResource(Resource):
-    pass
+class LoginResource(ResourceTypesOverrideMixin, Resource):
+    username = fields.CharField(attribute='username')
+    password = fields.CharField(attribute='password')
+
+    def get_schema(self, request, **kwargs):
+        return self.create_response(request,  self.build_schema())
+
+    def obj_create(self, bundle, request=None, **kwargs):
+        bundle = self.full_hydrate(bundle)
+        user = authenticate(username=bundle.obj.username, password=bundle.obj.password)
+        if user is not None:
+            login(bundle.request, user)
+        else:
+            bundle.errors['login'] = "User password miss match"
+            raise ImmediateHttpResponse(response=self.error_response(bundle.request, bundle.errors))
+        return bundle
+
+    def full_dehydrate(self, bundle, for_list=False):
+        bundle.data = {'redirect_url': '/'}
+        return bundle
+
+    def detail_uri_kwargs(self, bundle_or_obj):
+        """
+        Doesn't need this
+        """
+        return {}
+
+    class Meta:
+        resource_name = 'login'
+        allowed_methods = ['post']
+        object_class = LoginObject
+        always_return_data = True
+        #validation = LoginValidation()
+        types_override = {
+            'password': 'password',
+        }

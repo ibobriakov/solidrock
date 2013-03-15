@@ -5,7 +5,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from tastypie.api import Api
 from cover_letter.api import CoverLetterItemResource
-from registration_rest_backend.api import JobSeekerRegistrationResource, EmployerRegistrationResource, ActivationResource
+from registration_rest_backend.api import JobSeekerRegistrationResource, EmployerRegistrationResource,\
+    ActivationResource, LoginResource
 from resume.api import ResumeItemResource
 
 v1_api = Api(api_name='v1')
@@ -14,6 +15,7 @@ v1_api.register(ResumeItemResource())
 v1_api.register(JobSeekerRegistrationResource())
 v1_api.register(EmployerRegistrationResource())
 v1_api.register(ActivationResource())
+v1_api.register(LoginResource())
 
 
 admin.autodiscover()

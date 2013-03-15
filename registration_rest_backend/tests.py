@@ -23,6 +23,9 @@ class RegisterResourceTestCase(ResourceTestCase):
     def get_employer_register_url(self):
         return self.__get_register_url('employer_registration')
 
+    def get_login_url(self):
+        return self.__get_register_url('login')
+
     def __get_register_url(self, user_type):
         return reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': user_type})
 
@@ -94,3 +97,18 @@ class RegisterResourceTestCase(ResourceTestCase):
         valid_profile = RegistrationProfile.objects.get(user=valid_user)
         self.assertTrue(valid_profile.user.is_email_active)
         self.assertEqual(valid_profile.activation_key, RegistrationProfile.ACTIVATED)
+
+    def test_rest_login_sucess(self):
+        resp = self.api_client.post(self.get_login_url(), format='json',
+                                    data={'username': self.user1.username,
+                                          'password': self.password1})
+        self.assertHttpCreated(resp)
+        self.assertTrue('redirect_url' in self.deserialize(resp))
+
+    def test_rest_login_error(self):
+        resp = self.api_client.post(self.get_login_url(), format='json',
+                                    data={'username': self.user1.username,
+                                          'password': 'wrong'})
+        self.assertHttpBadRequest(resp)
+        self.assertTrue('login' in self.deserialize(resp))
+
