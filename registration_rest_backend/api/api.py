@@ -6,6 +6,7 @@ from main.api import ResourceTypesOverrideMixin
 from ..models import AbstractUserObject, ActivationObject, LoginObject
 from ..backends import RestBackend
 from registration_rest_backend.api.resources import RegistrationResource
+from registration_rest_backend.api.validation import RegisterValidation
 from userprofile.models import Employer, JobSeeker
 
 __author__ = 'ir4y'
@@ -29,6 +30,7 @@ class EmployerRegistrationResource(RegistrationResource):
         allowed_methods = ['post']
         object_class = AbstractUserObject
         always_return_data = True
+        validation = RegisterValidation()
         types_override = {
             'password': 'password',
             're_password': 'password',
@@ -56,6 +58,7 @@ class JobSeekerRegistrationResource(RegistrationResource):
         allowed_methods = ['post']
         object_class = AbstractUserObject
         always_return_data = True
+        validation = RegisterValidation()
         types_override = {
             'password': 'password',
             're_password': 'password',

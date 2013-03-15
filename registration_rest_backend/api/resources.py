@@ -1,6 +1,6 @@
 from tastypie.resources import Resource
 from main.api import ResourceTypesOverrideMixin
-from tastypie.exceptions import BadRequest
+from tastypie.exceptions import BadRequest, ImmediateHttpResponse
 from registration_rest_backend.backends import RestBackend
 
 __author__ = 'ir4y'
@@ -26,13 +26,11 @@ class RegistrationResource(ResourceTypesOverrideMixin, Resource):
         return self.create_response(request,  self.build_schema())
 
     def obj_create(self, bundle, request=None, **kwargs):
-        if not bundle.request.user.is_anonymous():
-            raise BadRequest("You shouldn't be authorized")
+        self.is_valid(bundle)
+
+        if bundle.errors:
+            raise ImmediateHttpResponse(response=self.error_response(bundle.request, bundle.errors))
         bundle = self.full_hydrate(bundle)
-
-        if bundle.obj['password'] != bundle.obj['re_password']:
-            raise BadRequest('Password missmatch')
-
         new_user = self.registration_backend.register(bundle.request,
                                                       username=bundle.obj['email_address'],
                                                       email=bundle.obj['email_address'],
