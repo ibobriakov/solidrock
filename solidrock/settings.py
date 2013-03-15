@@ -84,6 +84,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'registration',
+    'registration_rest_backend',
 
     'south',
     'mptt',
@@ -95,6 +97,7 @@ LOCAL_APPS = (
     'dynamic_paper',
     'resume',
     'cover_letter',
+    'userprofile',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -130,5 +133,8 @@ for item in LOCAL_APPS:
     INSTALLED_APPS += (item,)
     TEMPLATE_DIRS += (join(PROJECT_PATH, item, 'templates'),)
     STATICFILES_DIRS += ((item, join(PROJECT_PATH, item, 'static')),)
+
+#Django-registration settings
+ACCOUNT_ACTIVATION_DAYS = 7
 
 from local import *

@@ -1,0 +1,42 @@
+[
+{
+    "pk": 1, 
+    "model": "userprofile.jobseekereducationtype", 
+    "fields": {
+        "type_name_slug": "school-college-or-university-name", 
+        "type_name": "School, College, or University Name"
+    }
+},
+{
+    "pk": 2, 
+    "model": "userprofile.jobseekereducationtype", 
+    "fields": {
+        "type_name_slug": "major-course-of-study-or-classes-taken", 
+        "type_name": "Major Course of Study or Classes Taken"
+    }
+},
+{
+    "pk": 3, 
+    "model": "userprofile.jobseekereducationtype", 
+    "fields": {
+        "type_name_slug": "degrees-andor-post-graduate-qualifications-obtained", 
+        "type_name": "Degrees and/or Post-Graduate Qualifications Obtained"
+    }
+},
+{
+    "pk": 4, 
+    "model": "userprofile.jobseekereducationtype", 
+    "fields": {
+        "type_name_slug": "certificates-andor-diplomas-obtained", 
+        "type_name": "Certificates and/or Diplomas Obtained"
+    }
+},
+{
+    "pk": 5, 
+    "model": "userprofile.jobseekereducationtype", 
+    "fields": {
+        "type_name_slug": "any-other-course-currently-enrolled-in", 
+        "type_name": "Any Other Course Currently Enrolled In"
+    }
+}
+]
