@@ -22,7 +22,7 @@ function form_view_fabric(type,attributes) {
 
 var job_seeker_view = new (form_view_fabric('registration',{
     'fields':{'first_name':'','last_name':'','email_address':'','password':'','re_password':'','user_type':'job_seeker'},
-    'types':{'first_name':'text','last_name':'text','email_address':'text','password':'password','re_password':'password','user_type':'hidden'},
+    'types':{'first_name':'text','last_name':'text','email_address':'email','password':'password','re_password':'password','user_type':'hidden'},
     'titles':{'first_name':'First Name','last_name':'Last Name','email_address':'Email','password':'Password','re_password':'Re-Password','user_type':''}
 }))({el:$('#registration-form')});
 
