@@ -2,9 +2,9 @@
  * Create user: jackdevil
  */
 
-function form_view_fabric(type,attributes) {
+function form_view_fabric(type) {
     return Backbone.View.extend ({
-        model: form_model_fabric(type,attributes),
+        model: form_model_fabric(type),
         template: _.template($("#form-template").html()),
         render: function() {
             this.$el.html(this.template({
@@ -21,10 +21,6 @@ function form_view_fabric(type,attributes) {
     });
 }
 
-var job_seeker_view = new (form_view_fabric('job_seeker_registration',{
-    'fields':{'first_name':'','last_name':'','email_address':'','password':'','re_password':'','user_type':'job_seeker'},
-    'types':{'first_name':'text','last_name':'text','email_address':'email','password':'password','re_password':'password','user_type':'hidden'},
-    'titles':{'first_name':'First Name','last_name':'Last Name','email_address':'Email','password':'Password','re_password':'Re-Password','user_type':''}
-}))({el:$('#registration-form')});
+var job_seeker_view = new (form_view_fabric('job_seeker_registration'))({el:$('#registration-form')});1
 
 job_seeker_view.render();

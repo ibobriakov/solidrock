@@ -2,19 +2,24 @@
  * Create user: jackdevil
  */
 
-function form_model_fabric(type,attributes) {
-    var Model = Backbone.Model.extend({
-        urlRoot: rest_url[type].list_endpoint,
-        types: attributes.types,
-        titles: attributes.titles,
-        initialize: function() {
-        },
-        commit: function(){
-            this.save();
-        },
-        validate: function(){
-            return false;
+function form_model_fabric(type) {
+    var data = get_async_json(rest_url[type].schema);
+    var defaults = {}, labels = {}, types = {};
+    _.each(data.fields,function(value,key){
+        if (key!='resource_uri'){
+            defaults[key] = value.default;
+            labels[key] = value.label;
+            types[key] = value.type;
         }
     });
-    return new Model(attributes.fields);
+    var Model = Backbone.Model.extend({
+        urlRoot: rest_url[type].list_endpoint,
+        defaults: defaults,
+        labels: labels,
+        types: types,
+        commit: function(){
+            this.save();
+        }
+    });
+    return new Model();
 }
