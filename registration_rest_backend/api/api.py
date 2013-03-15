@@ -52,7 +52,7 @@ class JobSeekerRegistrationResource(RegistrationResource):
         return JobSeeker.objects.create(user=new_user)
 
     class Meta:
-        resource_name = 'jobseeker_registration'
+        resource_name = 'job_seeker_registration'
         allowed_methods = ['post']
         object_class = AbstractUserObject
         always_return_data = True
