@@ -14,6 +14,5 @@ def url_resolver(request):
     javascript_code = "var url_resolver=" + json.dumps({
         'cover_letter': reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'cover_letter'}),
         'resume': reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'resume'}),
-        'registration': reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'registration'})
     }) + ";"
     return HttpResponse(javascript_code, mimetype='text/javascript')
