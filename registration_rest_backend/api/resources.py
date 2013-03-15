@@ -1,12 +1,12 @@
 from tastypie.resources import Resource
-from main.api import ResourceTypesOverrideSchemaMixin, ResourceTitleSchemaMixin
+from main.api import ResourceTypesOverrideSchemaMixin, ResourceLabelSchemaMixin
 from tastypie.exceptions import ImmediateHttpResponse
 from registration_rest_backend.backends import RestBackend
 
 __author__ = 'ir4y'
 
 
-class RegistrationResource(ResourceTitleSchemaMixin, ResourceTypesOverrideSchemaMixin, Resource):
+class RegistrationResource(ResourceLabelSchemaMixin, ResourceTypesOverrideSchemaMixin, Resource):
     """
     REST backend for user registration
     """

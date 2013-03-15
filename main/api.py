@@ -37,12 +37,12 @@ class ResourceTypesOverrideSchemaMixin(object):
         return data
 
 
-class ResourceTitleSchemaMixin(object):
+class ResourceLabelSchemaMixin(object):
     def get_label(self, field_name):
         return " ".join(map(capfirst, field_name.split("_")))
 
     def build_schema(self):
-        data = super(ResourceTitleSchemaMixin, self).build_schema()
+        data = super(ResourceLabelSchemaMixin, self).build_schema()
         for field_name, field_data in data['fields'].iteritems():
             field_data['label'] = self.get_label(field_name)
         return data
