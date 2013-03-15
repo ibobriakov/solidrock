@@ -8,4 +8,4 @@ __author__ = 'ir4y'
 urlpatterns = patterns(
     '',
     url(r'^(?P<pk>\d+)/$', ResumeView.as_view()),
-    )
+)
