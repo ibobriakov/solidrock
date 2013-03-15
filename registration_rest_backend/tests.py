@@ -17,8 +17,17 @@ class RegisterResourceTestCase(ResourceTestCase):
         self.user1, self.password1 = self.__add_user('user1', 'password1')
         super(RegisterResourceTestCase, self).setUp()
 
-    def get_register_url(self):
-        return reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'registration'})
+    def get_job_seeker_register_url(self):
+        return self.get_register_url('job_seeker_registration')
+
+    def get_employer_register_url(self):
+        return self.__get_register_url('employer_registration')
+
+    def get_login_url(self):
+        return self.__get_register_url('login')
+
+    def __get_register_url(self, user_type):
+        return reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': user_type})
 
     def get_activation_url(self):
         return reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'activation'})
@@ -29,7 +38,6 @@ class RegisterResourceTestCase(ResourceTestCase):
 
     def get_register_data(self, **kwargs):
         register_data = {
-            'user_type': 'employer',  # or job_seeker
             'company_name': 'my_company',
             'email_address': 'employer@my_company.com',
             'phone_number': '+1234567',
@@ -41,23 +49,23 @@ class RegisterResourceTestCase(ResourceTestCase):
 
     def test_authorized(self):
         self.api_client.client.login(username=self.user1.username, password=self.password1)
-        resp = self.api_client.post(self.get_register_url(), format='json',
+        resp = self.api_client.post(self.get_employer_register_url(), format='json',
                                     data=self.get_register_data())
         self.assertHttpBadRequest(resp)
 
     def test_unauthorized_register(self):
         #Register fail with password mismatch
-        resp = self.api_client.post(self.get_register_url(), format='json',
+        resp = self.api_client.post(self.get_employer_register_url(), format='json',
                                     data=self.get_register_data(re_password=''))
         self.assertHttpBadRequest(resp)
 
         #Register correct
-        resp = self.api_client.post(self.get_register_url(), format='json',
+        resp = self.api_client.post(self.get_employer_register_url(), format='json',
                                     data=self.get_register_data())
         self.assertHttpCreated(resp)
 
         #User should be unique
-        resp = self.api_client.post(self.get_register_url(), format='json',
+        resp = self.api_client.post(self.get_employer_register_url(), format='json',
                                     data=self.get_register_data())
         self.assertHttpBadRequest(resp)
 
@@ -73,7 +81,7 @@ class RegisterResourceTestCase(ResourceTestCase):
 
     def test_valid_activation(self):
         #Register correct
-        resp = self.api_client.post(self.get_register_url(), format='json',
+        resp = self.api_client.post(self.get_employer_register_url(), format='json',
                                     data=self.get_register_data())
         self.assertHttpCreated(resp)
 
@@ -89,3 +97,18 @@ class RegisterResourceTestCase(ResourceTestCase):
         valid_profile = RegistrationProfile.objects.get(user=valid_user)
         self.assertTrue(valid_profile.user.is_email_active)
         self.assertEqual(valid_profile.activation_key, RegistrationProfile.ACTIVATED)
+
+    def test_rest_login_sucess(self):
+        resp = self.api_client.post(self.get_login_url(), format='json',
+                                    data={'username': self.user1.username,
+                                          'password': self.password1})
+        self.assertHttpCreated(resp)
+        self.assertTrue('redirect_url' in self.deserialize(resp))
+
+    def test_rest_login_error(self):
+        resp = self.api_client.post(self.get_login_url(), format='json',
+                                    data={'username': self.user1.username,
+                                          'password': 'wrong'})
+        self.assertHttpBadRequest(resp)
+        self.assertTrue('login' in self.deserialize(resp))
+

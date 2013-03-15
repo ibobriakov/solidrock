@@ -10,15 +10,13 @@
     </head>
     <body>
         {% block content %}{% endblock %}
-        <div class="form"></div>
+        {% load staticfiles %}
         {% block javascript %}
             <script src="{% static 'main/js/lib/jquery-latest.min.js' %}" type="text/javascript"></script>
             <script src="{% static 'main/js/lib/underscore-min.js' %}" type="text/javascript"></script>
             <script src="{% static 'main/js/lib/backbone-min.js' %}" type="text/javascript"></script>
-            <script src="{% static 'main/js/lib/backbone-forms.js' %}" type="text/javascript"></script>
+            <script src="{% static 'main/js/lib/rivets.min.js' %}" type="text/javascript"></script>
             <script src="{% url 'url-resolver' %}" type="text/javascript"></script>
-
-            <script src="{% static 'main/js/src/backbone/form.js' %}" type="text/javascript"></script>
         {% endblock %}
         {% block initialize %}{% endblock %}
         <script src="{% static 'main/js/src/backbone/sync.js' %}" type="text/javascript"></script>

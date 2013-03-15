@@ -25,3 +25,7 @@ class AbstractUserObject(AbstractObject):
 
 class ActivationObject(AbstractObject):
     pass
+
+
+class LoginObject(AbstractObject):
+    pass
