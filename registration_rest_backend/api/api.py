@@ -13,7 +13,7 @@ __author__ = 'ir4y'
 
 
 class EmployerRegistrationResource(RegistrationResource):
-    user_type = 1  # User.USER_TYPE_CHOICES 'Employer'
+    user_type = fields.IntegerField(readonly=True, default=1)  # User.USER_TYPE_CHOICES 'Employer'
     company_name = fields.CharField(attribute='company_name')
     email_address = fields.CharField(attribute='email_address')
     phone_number = fields.CharField(attribute='phone_number')
@@ -40,7 +40,7 @@ class EmployerRegistrationResource(RegistrationResource):
 
 
 class JobSeekerRegistrationResource(RegistrationResource):
-    user_type = 0  # User.USER_TYPE_CHOICES 'Job Seeker'
+    user_type = fields.IntegerField(readonly=True, default=0)  # User.USER_TYPE_CHOICES 'Job Seeker'
     first_name = fields.CharField(attribute='first_name')
     last_name = fields.CharField(attribute='last_name')
     email_address = fields.CharField(attribute='email_address')

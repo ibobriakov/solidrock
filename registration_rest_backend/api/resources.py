@@ -35,7 +35,7 @@ class RegistrationResource(ResourceTypesOverrideMixin, Resource):
                                                       username=bundle.obj['email_address'],
                                                       email=bundle.obj['email_address'],
                                                       password=bundle.obj['password'],
-                                                      user_type=self.user_type)
+                                                      user_type=self.user_type.default)
         self.create_profile(new_user, bundle)
         return bundle
 

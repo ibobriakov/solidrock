@@ -39,7 +39,7 @@ class RegisterResourceTestCase(ResourceTestCase):
     def get_register_data(self, **kwargs):
         register_data = {
             'company_name': 'my_company',
-            'email_address': 'employer@my_company.com',
+            'email_address': 'employer@mycompany.com',
             'phone_number': '+1234567',
             'password': 'password',
             're_password': 'password'
