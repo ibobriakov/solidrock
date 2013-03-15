@@ -14,7 +14,8 @@ function form_view_fabric(type,attributes) {
             }));
             var object = {};
             object[type] = this.model;
-            this.rivets = rivets.bind(this.el, object);
+            this.rivets = rivets;
+            this.rivets.bind(this.el, object);
             return this;
         }
     });
