@@ -8,6 +8,7 @@
                 <input data-value="<%=type%>.<%=key%>" type="<%=model.types[key]%>">
             </div>
         <% }) %>
+        <div class="errors" data-text="<%=type%>:get_errors"></div>
         <a href="#" data-on-click="<%=type%>:commit">Commit</a>
     </script>
 {% endblock %}

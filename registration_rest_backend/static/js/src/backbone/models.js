@@ -19,6 +19,9 @@ function form_model_fabric(type) {
         types: types,
         commit: function(){
             this.save();
+        },
+        get_errors: function(){
+            return this.error;
         }
     });
     return new Model();
