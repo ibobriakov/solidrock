@@ -17,14 +17,22 @@ function form_model_fabric(type) {
         defaults: defaults,
         labels: labels,
         types: types,
+        initialize: function(){
+            this.bind('change:redirect_url',function(){
+                console.log(this.changed);
+            });
+        },
         commit: function(){
             var that = this;
             this.save({},{ wait: true,
-                error:function(model,response) {
+                error: function(model,response) {
                     that.view.errors = JSON.parse(response.responseText)[type];
                     that.view.render();
                 },
-                success: function(model,response){console.log(model,response)}
+                success: function(){
+                    that.view.errors = [];
+                    that.view.render();
+                }
             });
         },
         get_errors: function(){

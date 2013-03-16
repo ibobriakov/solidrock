@@ -11,20 +11,19 @@ class RegisterValidation(Validation):
         errors = {}
 
         if not bundle.request.user.is_anonymous():
-            errors['__all__'] = ['You should not be login for register.']
+            errors['__all__'] = ['You should not be login for register']
         if bundle.data['password'] != bundle.data['re_password']:
-            errors["password"] = ['password missmatch']
+            errors["password"] = ['Password missmatch']
 
         for key, value in bundle.data.items():
             if not value:
                 if key not in errors:
                     errors[key] = []
-                errors[key].append('required.')
+                errors[key].append('Field required')
         try:
             validate_email(bundle.data['email_address'])
         except ValidationError as err:
             if 'email_address' not in errors:
                 errors['email_address'] = []
-            errors['email_address'] = err
-
+            errors['email_address'].append(err.messages)
         return errors
