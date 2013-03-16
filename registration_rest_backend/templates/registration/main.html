@@ -1,14 +1,33 @@
 {% extends 'registration/base.html' %}
 
+{% block stylesheet %}
+    <style>
+        .field {
+            color: blue;
+        }
+        .field.error {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
 {% block templates %}
     <script id="form-template" type="text/template">
         <% _.each(fields,function(value,key) { %>
-            <div class="field">
-                <% if (model.types[key] != 'hidden') { %><label><%=model.labels[key]%></label><% } %>
-                <input data-value="<%=type%>.<%=key%>" type="<%=model.types[key]%>">
-            </div>
+        <div class="field <% if (errors[key]) { %>error<% } %>">
+            <% if (model.types[key] != 'hidden') { %><label><%=model.labels[key]%></label><% } %>
+            <input data-value="<%=type%>.<%=key%>" type="<%=model.types[key]%>">
+        </div>
         <% }) %>
-        <div class="errors" data-text="<%=type%>:get_errors"></div>
+        <% if (errors) { %>
+        <div class="errors">
+            <ul>
+                <% _.each(errors,function(value,key) { %>
+                <li><%=value%></li>
+                <% }) %>
+            </ul>
+        </div>
+        <% } %>
         <a href="#" data-on-click="<%=type%>:commit">Commit</a>
     </script>
 {% endblock %}

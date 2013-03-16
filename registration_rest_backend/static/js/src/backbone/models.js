@@ -18,7 +18,14 @@ function form_model_fabric(type) {
         labels: labels,
         types: types,
         commit: function(){
-            this.save();
+            var that = this;
+            this.save({},{ wait: true,
+                error:function(model,response) {
+                    that.view.errors = JSON.parse(response.responseText)[type];
+                    that.view.render();
+                },
+                success: function(model,response){console.log(model,response)}
+            });
         },
         get_errors: function(){
             return this.error;
