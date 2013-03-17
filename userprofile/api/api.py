@@ -58,12 +58,14 @@ class JobSeekerInformationResource(JobSeekerItemResource):
         return bundle
 
     def save(self, bundle, skip_errors=False):
+        user_update = bundle.obj.job_seeker.user
+        # self.is_valid(bundle) clash bundle.obj.job_seeker.user
         self.is_valid(bundle)
 
         if bundle.errors and not skip_errors:
             raise ImmediateHttpResponse(response=self.error_response(bundle.request, bundle.errors))
 
-        bundle.obj.job_seeker.user.save()
+        user_update.save()
         return super(JobSeekerInformationResource, self).save(bundle,skip_errors)
 
     class Meta:
