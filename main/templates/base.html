@@ -10,6 +10,17 @@
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}" type="text/css" media="screen"/>
     <link rel="stylesheet" href="{% static 'main/css/select2.css' %}" type="text/css" media="screen"/>
     {% endblock %}
+    {% block library-js %}
+        <script src="{% static 'main/js/lib/jquery-latest.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/lib/underscore-min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/lib/backbone-min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/lib/rivets.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/src/extra/main.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/src/backbone/fabrics.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/src/backbone/sync.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/src/extra/rivets-conf.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/src/extra/select2.js' %}" type="text/javascript"></script>
+    {% endblock %}
     {% block templates %}
     {% endblock %}
 </head>
@@ -29,9 +40,12 @@
     {% include "footer.html" %}
 </footer>
 
+{% if not user.is_authenticated %}
 <div class="window login">
     {% include "auth.html" %}
 </div>
+{% endif %}
+
 <div class="window terms">
     <div class="window_block">
         <div class="top">
@@ -90,17 +104,7 @@
     </div>
     <div class="_hide"></div>
 </div>
-{% block javascript %}
-    <script src="{% static 'main/js/lib/jquery-latest.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'main/js/lib/underscore-min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'main/js/lib/backbone-min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'main/js/lib/rivets.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'main/js/src/select2.js' %}" type="text/javascript"></script>
-    <script src="{% static 'main/js/src/main.js' %}" type="text/javascript"></script>
-    {% block initialize %}
-
-    {% endblock %}
-    <script src="{% static 'main/js/src/backbone/sync.js' %}" type="text/javascript"></script>
+{% block initialize-js %}
 {% endblock %}
 </body>
 </html>

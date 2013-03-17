@@ -31,7 +31,6 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^registration/', include('registration_rest_backend.urls')),
     url(r'^cover_letter/', include('cover_letter.urls')),
     url(r'^resume/', include('resume.urls')),
     url(r'^admin/', include(admin.site.urls)),

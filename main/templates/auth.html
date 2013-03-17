@@ -1,3 +1,30 @@
+<script id="form-template" type="text/template">
+    <% _.each(fields,function(value,key) { %>
+    <% if (model.types[key]) { %>
+    <div class="field <%=model.types[key]%> <% if (errors[key]) { %>error<% } %>">
+        <% if (model.types[key] != 'hidden') { %><label><%=model.labels[key]%></label><% } %>
+        <input data-value="<%=type%>.<%=key%>" type="<%=model.types[key]%>">
+        <% if (errors[key]) { %>
+        <ul>
+            <% _.each(errors[key],function(value){ %>
+            <li><%=value%></li>
+            <% }) %>
+        </ul>
+        <% } %>
+    </div>
+    <% } %>
+    <% }) %>
+    <% if (errors['__all__']) { %>
+    <div class="field error">
+        <ul>
+            <% _.each(errors['__all__'],function(value){ %>
+            <li><%=value%></li>
+            <% }) %>
+        </ul>
+    </div>
+    <% } %>
+    <div class="continue" data-on-click="<%=type%>:commit">Continue</div>
+</script>
 <div class="window_block">
     <div class="top">
         <div class="title">Login or Register</div>
@@ -7,17 +34,7 @@
         <div class="block avt">
             <div class="title">Users Login Here</div>
             <fieldset>
-                <form>
-                    <div class="field">
-                        <label>Email Address</label>
-                        <input type="text"/>
-                    </div>
-                    <div class="field">
-                        <label>Password<a href="#">Forgot Your Password?</a></label>
-                        <input type="password"/>
-                    </div>
-                    <input type="submit" value="Submit"/>
-                </form>
+                <form id="login_form"></form>
             </fieldset>
         </div>
         <div class="block reg">
@@ -37,3 +54,5 @@
     </div>
 </div>
 <div class="_hide"></div>
+{% load staticfiles %}
+<script src="{% static 'main/js/src/extra/auth.js' %}" type="text/javascript"></script>
