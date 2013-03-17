@@ -1,15 +1,17 @@
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
-from tastypie.authorization import DjangoAuthorization
 from tastypie.exceptions import ImmediateHttpResponse
 from tastypie.resources import ModelResource
-from models import JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
+from main.api import ResourceFieldsOrderSchemaMixin
+from ..models import JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
     JobSeekerEducation, JobSeekerReferee, Employer
+from authorization import UserProfileAuthorization
+
 
 __author__ = 'ir4y'
 
 
-class EmployerResource(ModelResource):
+class EmployerResource(ResourceFieldsOrderSchemaMixin, ModelResource):
     def get_object_list(self, request):
         query_set = super(EmployerResource, self).get_object_list(request)
         return query_set.filter(user=request.user)
@@ -23,10 +25,10 @@ class EmployerResource(ModelResource):
         resource_name = 'employer'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
+        authorization = UserProfileAuthorization()
 
 
-class JobSeekerItemResource(ModelResource):
+class JobSeekerItemResource(ResourceFieldsOrderSchemaMixin, ModelResource):
     def get_object_list(self, request):
         query_set = super(JobSeekerItemResource, self).get_object_list(request)
         return query_set.filter(job_seeker=request.user.profile)
@@ -66,7 +68,7 @@ class JobSeekerInformationResource(JobSeekerItemResource):
         resource_name = 'job_seeker_information'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
+        authorization = UserProfileAuthorization()
 
 
 class JobSeekerCurrentEmploymentResource(JobSeekerItemResource):
@@ -75,7 +77,7 @@ class JobSeekerCurrentEmploymentResource(JobSeekerItemResource):
         resource_name = 'job_seeker_current_employment'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
+        authorization = UserProfileAuthorization()
 
 
 class JobSeekerPreviousEmploymentResource(JobSeekerItemResource):
@@ -84,7 +86,7 @@ class JobSeekerPreviousEmploymentResource(JobSeekerItemResource):
         resource_name = 'job_seeker_previous_employment'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
+        authorization = UserProfileAuthorization()
 
 
 class JobSeekerEducationResource(JobSeekerItemResource):
@@ -93,7 +95,7 @@ class JobSeekerEducationResource(JobSeekerItemResource):
         resource_name = 'job_seeker_education'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
+        authorization = UserProfileAuthorization()
 
 
 class JobSeekerRefereeResource(JobSeekerItemResource):
@@ -102,4 +104,4 @@ class JobSeekerRefereeResource(JobSeekerItemResource):
         resource_name = 'job_seeker_referee'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
+        authorization = UserProfileAuthorization()

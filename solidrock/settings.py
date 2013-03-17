@@ -57,6 +57,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'main.backends.PermissionBackend'
+)
+
 ANONYMOUS_USER_ID = -1
 SITE_ID = 1
 SECRET_KEY = '#mu+(#^z@t#q4=06!uvslz*amvj18!kjrzxq)t2&ue_99g8a2v'
