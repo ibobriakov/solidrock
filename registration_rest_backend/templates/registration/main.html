@@ -1,21 +1,11 @@
 {% extends 'registration/base.html' %}
 
-{% block stylesheet %}
-    <style>
-        .field {
-            color: blue;
-        }
-        .field.error {
-            color: red;
-        }
-    </style>
-{% endblock %}
-
 {% block templates %}
+    {{ block.super }}
     <script id="form-template" type="text/template">
         <% _.each(fields,function(value,key) { %>
             <% if (model.types[key]) { %>
-                <div class="field <% if (errors[key]) { %>error<% } %>">
+                <div class="field <%=model.types[key]%> <% if (errors[key]) { %>error<% } %>">
                     <% if (model.types[key] != 'hidden') { %><label><%=model.labels[key]%></label><% } %>
                     <input data-value="<%=type%>.<%=key%>" type="<%=model.types[key]%>">
                     <% if (errors[key]) { %>
@@ -37,11 +27,16 @@
         </ul>
             </div>
         <% } %>
-        <a href="#" data-on-click="<%=type%>:commit">Commit</a>
+        <div class="continue" data-on-click="<%=type%>:commit">Continue</a>
     </script>
 {% endblock %}
 
-{% block content %}
-    <h1>Login</h1>
-    <form id="registration-form"></form>
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        var job_seeker_view = new (form_view_fabric('job_seeker_registration'))({el:$('#register_job_seeker_form')});
+        job_seeker_view.render();
+        var employer_view = new (form_view_fabric('employer_registration'))({el:$('#register_employer_form')});
+        employer_view.render();
+    </script>
 {% endblock %}

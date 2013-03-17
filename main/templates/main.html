@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <div class="search_block">
+        <div class="_search_box _select_map">
+            <div class="_top">
+                <div class="_icon"></div>
+                <div class="_title">Select Your Area to Search for Jobs</div>
+            </div>
+            <div class="_center">
+                <div id="canvas">
+                    <div id="paper"></div>
+                    <div id="nsw">
+                        <h2>New South Wales</h2>
+                    </div>
+                    <div id="vic">
+                        <h2>Victoria</h2>
+                    </div>
+                    <div id="wa">
+                        <h2>Western Australia</h2>
+                    </div>
+                    <div id="sa">
+                        <h2>South Australia</h2>
+                    </div>
+                    <div id="nt">
+                        <h2>Northern Territory</h2>
+                    </div>
+                    <div id="qld">
+                        <h2>Queensland</h2>
+                    </div>
+                    <div id="tas">
+                        <h2>Tasmania</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="_search_box _search_job">
+            <div class="_top">
+                <div class="_icon"></div>
+                <div class="_title">Job Search</div>
+            </div>
+            <div class="_center">
+                <form>
+                    <fieldset>
+                        <div class="_field">
+                            <label>Keywords</label>
+                            <input type="text" placeholder="Enter Keywords"/>
+                        </div>
+                        <div class="_field">
+                            <label>Executive Positions</label>
+                            <select id="e1">
+                                <option>All Executive Positions</option>
+                                <option>All Executive Positions</option>
+                                <option>All Executive Positions</option>
+                                <option>All Executive Positions</option>
+                                <option>All Executive Positions</option>
+                            </select>
+                        </div>
+                        <div class="_field">
+                            <label>Category</label>
+                            <select id="e2">
+                                <option>Any Category</option>
+                                <option>Any Category</option>
+                                <option>Any Category</option>
+                                <option>Any Category</option>
+                                <option>Any Category</option>
+                            </select>
+                        </div>
+                        <div class="_field">
+                            <label>Location</label>
+                            <select id="e3">
+                                <option>Australia</option>
+                                <option>Australia</option>
+                                <option>Australia</option>
+                                <option>Australia</option>
+                                <option>Australia</option>
+                            </select>
+                        </div>
+                        <div class="_field _pod">
+                            <label>Sub-category</label>
+                            <select id="e4">
+                                <option>Any Sub-category</option>
+                                <option>Any Sub-category</option>
+                                <option>Any Sub-category</option>
+                                <option>Any Sub-category</option>
+                                <option>Any Sub-category</option>
+                            </select>
+                        </div>
+                        <div class="_field _pod">
+                            <label>Area</label>
+                            <select id="e5">
+                                <option>All Australia</option>
+                                <option>Western Australia</option>
+                                <option>Northern Territory</option>
+                                <option>Queensland</option>
+                                <option>New South Wales</option>
+                                <option>South Australia</option>
+                                <option>Victoria</option>
+                                <option>Tasmania</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <div class="_submit">
+                        <div class="_more">More Options</div>
+                        <input class="_search_button" type="submit" value="Search"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="_slider_block">
+        <div class="_slider">
+            <div class="_slider_title">Featured Jobs</div>
+            <div class="_sl_block">
+                <div class="_sl_prev"></div>
+                <div class="VjCarouselLite">
+                    <ul>
+                        <li><a href="#"><img src="{% static 'main/img/slider_li.png' %}"/></a></li>
+                        <li><a href="#"><img src="{% static 'main/img/slider_li.png' %}"/></a></li>
+                        <li><a href="#"><img src="{% static 'main/img/slider_li.png' %}"/></a></li>
+                        <li><a href="#"><img src="{% static 'main/img/slider_li.png' %}"/></a></li>
+                        <li><a href="#"><img src="{% static 'main/img/slider_li.png' %}"/></a></li>
+                        <li><a href="#"><img src="{% static 'main/img/slider_li.png' %}"/></a></li>
+                    </ul>
+                </div>
+                <div class="_sl_next"></div>
+            </div>
+        </div>
+    </div>
+    <div class="_banners_block">
+        <div class="_banners">
+            <a href="#"><img src="{% static 'main/img/banner1.jpg' %}"/></a>
+            <a href="#"><img src="{% static 'main/img/banner2.jpg' %}"/></a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'main/js/src/extra/jcarousellite_1.0.1.min.js' %}"></script>
+    <script src="{% static 'main/js/src/extra/map.js' %}"></script>
+    <script src="{% static 'main/js/src/extra/js.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#e1").select2();
+            $("#e2").select2();
+            $("#e3").select2();
+            $("#e4").select2();
+            $("#e5").select2();
+        });
+    </script>
+{% endblock %}

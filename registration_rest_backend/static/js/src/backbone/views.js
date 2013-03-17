@@ -25,7 +25,3 @@ function form_view_fabric(type) {
         }
     });
 }
-
-var job_seeker_view = new (form_view_fabric('job_seeker_registration'))({el:$('#registration-form')});1
-
-job_seeker_view.render();
