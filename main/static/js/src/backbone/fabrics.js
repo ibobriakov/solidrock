@@ -5,12 +5,19 @@
 function form_model_fabric(type) {
     var data = get_async_json(rest_url[type].schema);
     var defaults = {}, labels = {}, types = {};
+//    TODO return fields list.
+
+    var fields = [];
     _.each(data.fields,function(value,key){
         if (key!='resource_uri'){
-            defaults[key] = value.default;
-            labels[key] = value.label;
-            types[key] = value.type;
+            fields[value.order_index] = key;
         }
+    });
+
+    _.each(fields,function(key){
+        defaults[key] = data.fields[key].default;
+        labels[key] = data.fields[key].label;
+        types[key] = data.fields[key].type;
     });
     var Model = Backbone.Model.extend({
         urlRoot: rest_url[type].list_endpoint,
