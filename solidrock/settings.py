@@ -94,6 +94,7 @@ INSTALLED_APPS = (
     'south',
     'mptt',
     'tastypie',
+    'gunicorn',
 )
 
 LOCAL_APPS = (
