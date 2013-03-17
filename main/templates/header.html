@@ -10,9 +10,15 @@
 </ul>
 <a class="_logo" href="#"></a>
 <div class="_login">
-    <div class="_avatar"><img src="{% static 'main/img/avatar.png' %}"/></div>
-    <div class="_hello">Welcome Guest</div>
-    <div class="_button">Login</div>
+    {% if user.is_authenticated %}
+        <div class="_avatar"><img src="{% static 'main/img/avatar.png' %}"/></div>
+        <div class="_hello">{{ user }}</div>
+        <div class="">Logout</div>
+    {% else %}
+        <div class="_avatar"><img src="{% static 'main/img/avatar.png' %}"/></div>
+        <div class="_hello">Guest</div>
+        <div class="_button">Login</div>
+    {% endif %}
 </div>
 <div class="_navigation" style="clear:none;">
     <ul style="float:left;">
