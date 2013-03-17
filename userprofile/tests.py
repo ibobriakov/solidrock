@@ -44,6 +44,14 @@ class UserprofileResourceTestCase(ResourceTestCase):
         self.assertHttpAccepted(resp)
         self.assertTrue("MyCompany1", self.employer1.profile.company)
 
+    def test_employer_profile_email_validation(self):
+        self.api_client.client.login(username=self.employer1.username, password=self.employer1_password)
+        resp = self.api_client.put(self._get_url('employer', self.employer1.profile.id),
+                                   format='json',
+                                   data={'email': "error"})
+        self.assertHttpBadRequest(resp)
+        self.assertTrue('email' in self.deserialize(resp)['employer'])
+
     def test_employer_profile_changes_by_other_user(self):
         self.api_client.client.login(username=self.employer2.username, password=self.employer2_password)
         resp = self.api_client.put(self._get_url('employer', self.employer1.profile.id),
