@@ -46,3 +46,14 @@ class ResourceLabelSchemaMixin(object):
         for field_name, field_data in data['fields'].iteritems():
             field_data['label'] = self.get_label(field_name)
         return data
+
+
+class ResourceFieldsOrderSchemaMixin(object):
+    def build_schema(self):
+        data = super(ResourceFieldsOrderSchemaMixin, self).build_schema()
+        for field_name, field_data in data['fields'].iteritems():
+            if hasattr(self._meta, 'fields_order'):
+                field_data['order_index'] = self._meta.fields_order.index(field_name)
+            else:
+                field_data['order_index'] = self.fields.keys().index(field_name)
+        return data

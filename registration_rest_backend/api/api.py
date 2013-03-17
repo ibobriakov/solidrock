@@ -31,6 +31,8 @@ class EmployerRegistrationResource(RegistrationResource):
         object_class = AbstractUserObject
         always_return_data = True
         validation = RegisterValidation()
+        fields_order = ('user_type', 'company_name', 'email_address', 'phone_number',
+                        'password', 're_password', 'resource_uri')
         types_override = {
             'user_type': 'hidden',
             'email_address': 'email',
