@@ -25,5 +25,5 @@ class RegisterValidation(Validation):
         except ValidationError as err:
             if 'email_address' not in errors:
                 errors['email_address'] = []
-            errors['email_address'].append(err.messages)
+            errors['email_address'] = err.messages
         return errors
