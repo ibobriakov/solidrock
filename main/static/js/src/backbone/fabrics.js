@@ -26,7 +26,7 @@ function form_model_fabric(type) {
         types: types,
         initialize: function(){
             this.bind('change:redirect_url',function(){
-                console.log(this.changed);
+                window.location.replace(this.get('redirect_url'));
             });
         },
         commit: function(){

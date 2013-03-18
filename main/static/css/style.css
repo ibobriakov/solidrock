@@ -17,6 +17,15 @@ a {
     color: #409bcd;
 }
 
+.error input{
+    border:1px red solid;
+}
+
+form .error_list{
+    color: red;
+    font-size: 10px;
+}
+
 a:hover {
     text-decoration: underline;
 }
@@ -710,6 +719,7 @@ footer ._footer ._footer_nav ul li a {
 .register_employer {
     display: none;
 }
+
 
 /* Страница соискателя */
 .job_seeker {
@@ -1441,3 +1451,4 @@ footer ._footer ._footer_nav ul li a {
     height: 400px;
     width: 300px;
 }
+
