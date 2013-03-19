@@ -12,21 +12,21 @@
     {{ block.super }}
     <script id="paper_model" type="text/template">
         <% if (model.get('type').split('_')[1] == 'list') { %>
-        <div style="left:<%=level*20%>px;" class="<%=model.get('item_class')%>"><%=model.get('value')%><button class="add-btn" data-id="<%=model.get('id')%>">+</button></div>
-        <div style="left:<%=level*20%>px;" class="group">
+        <div class="<%=model.get('item_class')%>"><%=model.get('value')%><button class="add-btn" data-id="<%=model.get('id')%>">+</button></div>
+        <div class="group">
             <% if (model.get('children')) { %>
             <%=model.get('children').html(level)%>
             <% } %>
         </div>
         <% } else if (model.get('type') == 'container') {  %>
-        <div style="left:<%=level*20%>px;" class="container <%=model.get('item_class')%>">
+        <div class="container <%=model.get('item_class')%>">
             <% if (model.get('children')) { %>
             <%=model.get('children').html(level+1)%>
             <% } %>
             <button class="remove-btn" data-id="<%=model.get('id')%>">X</button>
         </div>
         <% } else { %>
-        <div <% if (model.get('type')=='text') { %> contenteditable='true' <% } %> data-id="<%=model.get('id')%>" style="left:<%=level*20%>px;" class="<%=model.get('type')%> <%=model.get('item_class')%>"><%=model.get('value')%></div>
+        <div <% if (model.get('type')=='text') { %> contenteditable='true' <% } %> data-id="<%=model.get('id')%>" class="<%=model.get('type')%> <%=model.get('item_class')%>"><%=model.get('value')%></div>
         <% } %>
     </script>
     <script id="paper_collection" type="text/template">
