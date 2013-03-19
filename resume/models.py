@@ -53,6 +53,8 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item), ],
 
     'career': [
+        lambda resume_item:ResumeItem(type=get_paper_item('header'), item_class="title mini-grey", value="Job #",
+                                      paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('date'), item_class="title mini span", value="Month YYYY",
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('date'), item_class="title mini span", value="Month YYYY",
@@ -78,6 +80,8 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item), ],
 
     'education': [
+        lambda resume_item:ResumeItem(type=get_paper_item('header'), item_class="title mini-grey", value="School #",
+                                      paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title span", value="YYYY",
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title span", value="YYYY",
