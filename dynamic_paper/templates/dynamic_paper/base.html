@@ -20,10 +20,10 @@
         </div>
         <% } else if (model.get('type') == 'container') {  %>
         <div style="left:<%=level*20%>px;" class="container <%=model.get('item_class')%>">
-            <button class="remove-btn" data-id="<%=model.get('id')%>">X</button>
             <% if (model.get('children')) { %>
             <%=model.get('children').html(level+1)%>
             <% } %>
+            <button class="remove-btn" data-id="<%=model.get('id')%>">X</button>
         </div>
         <% } else { %>
         <div <% if (model.get('type')=='text') { %> contenteditable='true' <% } %> data-id="<%=model.get('id')%>" style="left:<%=level*20%>px;" class="<%=model.get('type')%> <%=model.get('item_class')%>"><%=model.get('value')%></div>

@@ -49,7 +49,7 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item), ],
 
     'keystrengts': [
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="", value="Lore Ipsum",
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="list-item", value="Lore Ipsum",
                                       paper=resume_item.paper, parent=resume_item), ],
 
     'career': [
@@ -69,10 +69,10 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item), ],
 
     'keyachievements': [
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="list-item", value="Lore Ipsum",
                                       paper=resume_item.paper, parent=resume_item), ],
     'keyresponsibilities': [
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), value="Lore Ipsum",
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="list-item", value="Lore Ipsum",
                                       paper=resume_item.paper, parent=resume_item), ],
 
     'education': [
