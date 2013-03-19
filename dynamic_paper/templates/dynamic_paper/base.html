@@ -1,10 +1,7 @@
 {% extends 'base.html' %}
 
 {% load staticfiles %}
-{% block stylesheet %}
-    {{ block.super }}
-    <link href="{% static 'dynamic_paper/css/style.css' %}" rel="stylesheet" media="screen">
-{% endblock %}
+
 {% block library-js %}
     {{ block.super }}
     <script src="{% static 'dynamic_paper/js/src/backbone/models.js' %}" type="text/javascript"></script>
@@ -15,21 +12,21 @@
     {{ block.super }}
     <script id="paper_model" type="text/template">
         <% if (model.get('type').split('_')[1] == 'list') { %>
-        <div style="left:<%=level*20%>px;" class="paper list header"><%=model.get('value')%><button class="add-btn" data-id="<%=model.get('id')%>">+</button></div>
-        <div style="left:<%=level*20%>px;" class="paper list items">
+        <div style="left:<%=level*20%>px;" class="<%=model.get('item_class')%>"><%=model.get('value')%><button class="add-btn" data-id="<%=model.get('id')%>">+</button></div>
+        <div style="left:<%=level*20%>px;" class="group">
             <% if (model.get('children')) { %>
             <%=model.get('children').html(level)%>
             <% } %>
         </div>
         <% } else if (model.get('type') == 'container') {  %>
-        <div style="left:<%=level*20%>px;" class="paper container">
+        <div style="left:<%=level*20%>px;" class="container <%=model.get('item_class')%>">
             <button class="remove-btn" data-id="<%=model.get('id')%>">X</button>
             <% if (model.get('children')) { %>
             <%=model.get('children').html(level+1)%>
             <% } %>
         </div>
         <% } else { %>
-        <div <% if (model.get('type')=='text') { %> contenteditable='true' <% } %> data-id="<%=model.get('id')%>" style="left:<%=level*20%>px;" class="paper <%=model.get('type')%>"><%=model.get('value')%></div>
+        <div <% if (model.get('type')=='text') { %> contenteditable='true' <% } %> data-id="<%=model.get('id')%>" style="left:<%=level*20%>px;" class="<%=model.get('type')%> <%=model.get('item_class')%>"><%=model.get('value')%></div>
         <% } %>
     </script>
     <script id="paper_collection" type="text/template">

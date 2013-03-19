@@ -24,6 +24,7 @@ def paper_item_factory(*args, **kwargs):
     class _PaperItem(MPTTModel):
         paper = models.ForeignKey(*args, **kwargs)
         type = models.ForeignKey(PaperItemType, verbose_name=_('Type of element'))
+        item_class = models.CharField(blank=True, null=True, max_length=50)
         value = models.CharField(verbose_name=_('Paper Item Value'), max_length=100)
         parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
@@ -34,6 +35,7 @@ def paper_item_factory(*args, **kwargs):
             return json.dumps({
                 'id': self.id,
                 'paper': self.paper_id,
+                'item_class': self.item_class,
                 'parent': self.parent_id if self.parent else False,
                 'resource_uri': self.get_resource_uri(),
                 'type': self.type.name,
