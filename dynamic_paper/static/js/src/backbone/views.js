@@ -5,7 +5,6 @@
 function paper_view_factory(paper_type,paper){
     return Backbone.View.extend({
         collection: new (paper_collection_factory(paper_type,paper))(),
-        paper_body: '#paper',
         paper_item: '.paper',
         paper_add: '.add-btn',
         paper_remove: '.remove-btn',
@@ -51,7 +50,7 @@ function paper_view_factory(paper_type,paper){
             })
         },
         render: function(){
-            $(this.paper_body).html(this.collection.html());
+            this.$el.html(this.collection.html());
             this.bind_event();
             return this;
         }

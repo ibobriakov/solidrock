@@ -1,6 +1,6 @@
 .paper{
     position: relative;
-    width: 200px;
+    width: 300px;
 }
 .container {
     background-color: #cccccc;
@@ -9,6 +9,11 @@
     min-height: 30px;
 }
 
+.list .add-btn{
+    width: 20px;
+}
+
 .container .remove-btn{
     float: right;
+    width: 20px;
 }
