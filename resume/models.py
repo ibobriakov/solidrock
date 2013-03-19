@@ -43,9 +43,9 @@ resume_template = [
 
 resume_type_template = {
     'phone': [
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title mini", value="Phone Type",
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title mini span", value="Phone Type",
                                       paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="", value="00 0000 0000",
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="span", value="00 0000 0000",
                                       paper=resume_item.paper, parent=resume_item), ],
 
     'keystrengts': [
@@ -53,9 +53,11 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item), ],
 
     'career': [
-        lambda resume_item:ResumeItem(type=get_paper_item('date'), item_class="title mini", value="Month YYYY",
+        lambda resume_item:ResumeItem(type=get_paper_item('date'), item_class="title mini span", value="Month YYYY",
                                       paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('date'), item_class="title mini", value="Month YYYY",
+        lambda resume_item:ResumeItem(type=get_paper_item('date'), item_class="title mini span", value="Month YYYY",
+                                      paper=resume_item.paper, parent=resume_item),
+        lambda resume_item:ResumeItem(type=get_paper_item('line'), item_class="span", value="|",
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title mini", value="Job title",
                                       paper=resume_item.paper, parent=resume_item),
@@ -76,12 +78,14 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item), ],
 
     'education': [
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title", value="YYYY",
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title span", value="YYYY",
                                       paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title", value="YYYY",
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title span", value="YYYY",
+                                      paper=resume_item.paper, parent=resume_item),
+        lambda resume_item:ResumeItem(type=get_paper_item('line'), item_class="title span", value="|",
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('text'), value="School or University Name",
-                                      paper=resume_item.paper, item_class="title mini", parent=resume_item), ]}
+                                      paper=resume_item.paper, item_class="title span", parent=resume_item), ]}
 
 # Структура данных для резюме:
 # В списке resume_template находятся элементы верхнего уровня

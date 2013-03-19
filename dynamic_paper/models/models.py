@@ -25,7 +25,7 @@ def paper_item_factory(*args, **kwargs):
         paper = models.ForeignKey(*args, **kwargs)
         type = models.ForeignKey(PaperItemType, verbose_name=_('Type of element'))
         item_class = models.CharField(blank=True, null=True, max_length=50)
-        value = models.CharField(verbose_name=_('Paper Item Value'), max_length=100)
+        value = models.TextField(verbose_name=_('Paper Item Value'))
         parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
         def __unicode__(self):
