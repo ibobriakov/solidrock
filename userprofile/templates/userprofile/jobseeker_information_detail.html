@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block templates %}
+    <script id="form-template" type="text/template">
+        <% _.each(fields,function(value,key) { %>
+        <% if (model.types[key]) { %>
+        <div class="field <%=model.types[key]%> <% if (errors[key]) { %>error<% } %>">
+            <% if (model.types[key] != 'hidden') { %><label><%=model.labels[key]%></label><% } %>
+            <input data-value="<%=type%>.<%=key%>" type="<%=model.types[key]%>">
+            <% if (errors[key]) { %>
+            <div class="error_list">
+                <% _.each(errors[key],function(value){ %>
+                <p><%=value%></p>
+                <% }) %>
+            </div>
+            <% } %>
+        </div>
+        <% } %>
+        <% }) %>
+        <% if (errors['__all__']) { %>
+        <div class="field error">
+            <ul>
+                <% _.each(errors['__all__'],function(value){ %>
+                <li><%=value%></li>
+                <% }) %>
+            </ul>
+        </div>
+        <% } %>
+        <div class="continue" data-on-click="<%=type%>:commit">Continue</div>
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="_content stages">
+
+    <h1>Your Application Information</h1>
+
+    <div class="left">
+        <ul>
+            <li class="active"><a href="#">Section 1: Personal Information</a></li>
+            <li><a href="#">Section 2: Current Employment</a></li>
+            <li><a href="#">Section 3: Previous Employment</a></li>
+            <li><a href="#">Section 4: Education</a></li>
+            <li><a href="#">Section 5: References</a></li>
+            <li><a href="#">Submit and Terms</a></li>
+        </ul>
+    </div>
+
+    <div class="right">
+    <ul>
+        <li class="active" id="s1" style="border-right-width: 1px; border-right-style: solid; border-right-color: rgb(213, 213, 213);">Section 1</li>
+        <li id="s2" style="border-right-width: 1px; border-right-style: solid; border-right-color: rgb(255, 255, 255);" class="">Section 2</li>
+        <li id="s3" style="border-right-width: 1px; border-right-style: solid; border-right-color: rgb(255, 255, 255);" class="">Section 3</li>
+        <li id="s4" style="border-right-width: 1px; border-right-style: solid; border-right-color: rgb(255, 255, 255);" class="">Section 4</li>
+        <li id="s5" style="border-right-width: 1px; border-right-style: solid; border-right-color: rgb(255, 255, 255);" class="">Section 5</li>
+    </ul>
+    <form>
+    <div class="form">
+    <div class="s1" style="display: block;">
+        <div class="title">Personal Information</div>
+        <fieldset>
+            <div class="left_info">
+                <div class="field fl_left">
+                    <label>Last Name</label>
+                    <input class="it2" type="text">
+                </div>
+                <div class="field">
+                    <label>First Name</label>
+                    <input type="text">
+                </div>
+                <div class="field">
+                    <label>Address</label>
+                    <input class="it4" type="text">
+                    <input class="it4" type="text">
+                    <input class="it4" type="text">
+                </div>
+                <div class="field">
+                    <label>Postcode</label>
+                    <input class="it3" type="text">
+                </div>
+            </div>
+            <div class="bot_info">
+                <div class="_submit">
+                    <div class="exit">Save and Exit</div>
+                    <div class="cont">Save and Continue</div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    </form>
+    </div>
+    </div>
+    <script>
+        var personal_information_view = new (form_view_fabric('job_seeker_information'))({el:$('.bot_info')});
+        personal_information_view.render();
+    </script>
+    </div>
+{% endblock %}

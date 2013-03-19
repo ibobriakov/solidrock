@@ -17,3 +17,6 @@ class PermissionBackend(object):
                       'userprofile.add_jobseekerreferee',):
             return True
         return False
+
+    def authenticate(self):
+        return False

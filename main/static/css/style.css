@@ -652,6 +652,19 @@ footer ._footer ._footer_nav ul li a {
     width: 133px;
 }
 
+.window .window_block .center.reg-avt .block.avt fieldset .continue {
+    clear: both;
+    width: 125px;
+    background: #409bcd;
+    margin: 90px auto 0;
+    padding: 6px 0;
+    text-align: center;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .window .window_block .center.reg-avt .block.reg fieldset .continue {
     clear: both;
     width: 125px;

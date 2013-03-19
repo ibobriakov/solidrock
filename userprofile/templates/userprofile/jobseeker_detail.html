@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="_content job_seeker">
+
+    <h1>{{ profile.user.first_name }} {{ profile.user.last_name }}’s Account Home Page</h1>
+
+    <div class="user_info">
+        <div class="avatar"></div>
+        <div class="hello">Hi {{ profile.user.first_name }} {{ profile.user.last_name }}!</div>
+        <div class="desc">Welcome to Your Account Home Page. From here you can manage all of your application information, resumes, and cover letters that you will submit when applying for jobs. You can also see a list of your saved favorite job postings you’ve marked in your searches.</div>
+    </div>
+
+    <div class="app_info">
+        <div class="title">Your Application Information</div>
+        <div class="center">
+            <ul>
+                <li><a href="#">View Your Application Information</a></li>
+                <li><a href="{% url "job_seeker.profile.information" %}">Edit Your Application Information</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="res_info_block">
+        <div class="res_info">
+            <div class="title">Your Resumes</div>
+            <div class="table">
+                <table>
+                    <tbody>
+                        {% for resume in profile.user.resume_set.all %}
+                            <tr>
+                                <td class="col-1">{{ resume.name }}</td>
+                                <td class="col-2"><a href="#">view</a></td>
+                                <td class="col-3"><a href="{% url "resume.edit" resume.pk %}">edit</a></td>
+                                <td class="col-4"><a href="#">delete</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="add"><a href="#">Add New Resume</a></div>
+        </div>
+        <div class="res_info">
+            <div class="title">Your Cover Letters</div>
+            <div class="table">
+                <table>
+                    <tbody>
+                    {% for cover_letter in profile.user.coverletter_set.all %}
+                        <tr>
+                            <td class="col-1">{{ cover_letter.name }}</td>
+                            <td class="col-2"><a href="#">view</a></td>
+                            <td class="col-3"><a href="#">edit</a></td>
+                            <td class="col-4"><a href="#">delete</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="add"><a href="#">Add New Cover Letter</a></div>
+        </div>
+        <div class="res_info">
+            <div class="title">Jobs You’ve Applied For</div>
+            <div class="table">
+                <table>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="add"><a href="#">Search For Jobs</a></div>
+        </div>
+    </div>
+
+    </div>
+{% endblock %}

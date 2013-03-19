@@ -4,12 +4,12 @@
 {% block content %}
     <div class="_content builder">
 
-        <h1>Resume Builder<a href="#">Exit Resume Builder</a></h1>
+        <h1>Resume Builder<a href="{% url "job_seeker.profile.base" %}">Exit Resume Builder</a></h1>
 
         <div class="top">
-            <div class="title">Name This Resume</div>
+            <div class="title">Resume</div>
             <form>
-                <input type="text" value="Cover Resume #1">
+                <input type="text" value="{{ resume.name }}">
                 <div class="links">
                     <a class="link" href="#">Resume Builder Instructions</a>
                     <div class="pop">Popluate</div>
@@ -47,9 +47,7 @@
                 <li>|</li>
                 <li><a href="#">download a PDF</a></li>
             </ul>
-            <div class="list_it">
-
-            </div>
+            <div class="list_it"></div>
         </div>
         <div class="list str2">Страница 2<br><br><br><br><br><br><br><br><br><br><br><br></div>
 
