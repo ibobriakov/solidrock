@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
@@ -39,6 +40,9 @@ class Employer(AddressMixin, models.Model):
     email = models.EmailField(verbose_name=_('Email Address'), blank=True, null=True)
     agree = models.BooleanField(verbose_name=_('Do you agree to the Terms and Conditions?'), default=False)
 
+    def url(self):
+        return reverse('job_seeker.profile.base')
+
     def __unicode__(self):
         return "Employer profile for {0}".format(self.company)
 
@@ -48,6 +52,9 @@ class Employer(AddressMixin, models.Model):
 
 class JobSeeker(models.Model):
     user = models.OneToOneField('auth.User')
+
+    def url(self):
+        return reverse('job_seeker.profile.base')
 
     def __unicode__(self):
         return "Job Seeker profile for {0}".format(self.user.__unicode__())

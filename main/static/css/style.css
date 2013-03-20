@@ -196,7 +196,7 @@ footer ._footer ._footer_nav ul li a {
     margin: -4px 0 0;
 }
 
-._login ._button {
+._login ._auth, ._login ._logout {
     width: 96px;
     text-align: center;
     background: #409bcd;

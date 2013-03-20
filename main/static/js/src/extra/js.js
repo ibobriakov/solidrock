@@ -9,37 +9,15 @@ $(document).ready(function(){
      
      /* Модальное окно */
      // Регистрация/авторизация
-     $('._login ._button').click(function(e) {
-		e.preventDefault();
-		var id = $('.window.login .window_block');
-		var maskHeight = $(document).height();
-		var maskWidth = $(window).width();
-		$('.window.login ._hide').css({'width':maskWidth,'height':maskHeight});
-		$('.window.login ._hide').fadeIn(500);
-		$('.window.login ._hide').fadeTo(500);
-		var winH = $(window).height();
-		var winW = $(window).width();
-		$(id).css('top',  winH/2-$(id).height()/2);
-		$(id).css('left', winW/2-$(id).width()/2);
-		$(id).fadeIn(500);
-	});
-	$('.window .close').click(function (e) {
-		e.preventDefault();
-		$('._hide, .window_block').hide();
-	});
-	$('.window.login ._hide').click(function () {
-		$(this).hide();
-		$('.window.login .window_block').hide();
-	});
-    
-    $('.window .window_block .center.reg-avt .block.reg ul li').click(function() {
-        $('.window .window_block .center.reg-avt .block.reg ul li').removeClass('active');
-        $(this).addClass('active');
-        var id = $(this).attr('id');
-        $('.register_job_seeker, .register_employer').css('display','none');
-        $('.'+id).css('display','block');
-       
-    });
+//	$('.window .close').click(function (e) {
+//		e.preventDefault();
+//
+//	});
+//	$('.window.login ._hide').click(function () {
+//		$(this).hide();
+//		$('.window.login .window_block').hide();
+//	});
+
     // Сроки и политика
     $('._footer_nav li a').click(function(e) {
 		e.preventDefault();
