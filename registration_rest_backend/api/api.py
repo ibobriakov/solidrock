@@ -6,7 +6,7 @@ from main.api import ResourceLabelSchemaMixin, ResourceTypesOverrideSchemaMixin,
 from ..models import AbstractUserObject, ActivationObject, LoginObject
 from ..backends import RestBackend
 from registration_rest_backend.api.resources import RegistrationResource
-from registration_rest_backend.api.validation import RegisterValidation
+from registration_rest_backend.api.validation import RegisterValidation, LoginValidation
 from userprofile.models import Employer, JobSeeker
 
 __author__ = 'ir4y'
@@ -109,13 +109,15 @@ class LoginResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         return self.create_response(request,  self.build_schema())
 
     def obj_create(self, bundle, request=None, **kwargs):
+        self.is_valid(bundle)
+
+        if bundle.errors:
+            raise ImmediateHttpResponse(response=self.error_response(bundle.request, bundle.errors))
+
         bundle = self.full_hydrate(bundle)
         user = authenticate(username=bundle.obj.username, password=bundle.obj.password)
         if user is not None:
             login(bundle.request, user)
-        else:
-            bundle.errors['login'] = "User password miss match"
-            raise ImmediateHttpResponse(response=self.error_response(bundle.request, bundle.errors))
         return bundle
 
     def full_dehydrate(self, bundle, for_list=False):
@@ -134,6 +136,7 @@ class LoginResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         object_class = LoginObject
         always_return_data = True
         fields_order = ('username', 'password', 'resource_uri')
+        validation = LoginValidation()
         types_override = {
             'password': 'password',
         }

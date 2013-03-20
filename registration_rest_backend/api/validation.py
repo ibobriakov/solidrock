@@ -1,3 +1,5 @@
+from collections import defaultdict
+from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from tastypie.validation import Validation
@@ -8,22 +10,32 @@ class RegisterValidation(Validation):
         if not bundle.data:
             return {'__all__': 'Not quite what I had in mind.'}
 
-        errors = {}
+        errors = defaultdict(list)
 
         if not bundle.request.user.is_anonymous():
-            errors['__all__'] = ['You should not be login for register']
+            errors['__all__'].append('You should not be login for register')
         if bundle.data['password'] != bundle.data['re_password']:
-            errors["password"] = ['Password missmatch']
+            errors["password"].append('Password missmatch')
 
         for key, value in bundle.data.items():
             if not value:
-                if key not in errors:
-                    errors[key] = []
                 errors[key].append('Field required')
         try:
             validate_email(bundle.data['email_address'])
         except ValidationError as err:
-            if 'email_address' not in errors:
-                errors['email_address'] = []
-            errors['email_address'] = err.messages
+            errors['email_address'].append(err.messages)
+        return errors
+
+
+class LoginValidation(Validation):
+    def is_valid(self, bundle, request=None):
+        errors = defaultdict(list)
+        username = bundle.data['username']
+        password = bundle.data['password']
+        for key, value in bundle.data.items():
+            if not value:
+                errors[key].append('Field required')
+        user = authenticate(username=username, password=password)
+        if user is None:
+            errors['username'].append("User password miss match")
         return errors

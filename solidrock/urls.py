@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import logout
 from tastypie.api import Api
 from cover_letter.api import CoverLetterItemResource
 from registration_rest_backend.api import JobSeekerRegistrationResource, EmployerRegistrationResource,\
@@ -36,8 +37,9 @@ urlpatterns = patterns(
     url(r'^resume/', include('resume.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(v1_api.urls)),
+    url(r'logout/', 'registration_rest_backend.views.logout_view', name="logout"),
     url(r'^', include('main.urls')),
-)
+)git 
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
