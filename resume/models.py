@@ -25,7 +25,7 @@ class ResumeItem(paper_item_factory('resume.Resume', verbose_name=_('Resume'))):
 
 resume_template = [
     lambda paper:ResumeItem(type=get_paper_item('text'), item_class="title", value="Your Name", paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('line'), item_class="line_break", value="", paper=paper),
+    lambda paper:ResumeItem(type=get_paper_item('line'), item_class="line_break", value=" ", paper=paper),
 
     lambda paper:ResumeItem(type=get_paper_item('text'), item_class="", value="Your Address", paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('phone_list'), item_class="title mini", value="Phones", paper=paper),
