@@ -39,7 +39,7 @@ urlpatterns = patterns(
     url(r'^api/', include(v1_api.urls)),
     url(r'logout/', 'registration_rest_backend.views.logout_view', name="logout"),
     url(r'^', include('main.urls')),
-)git 
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
