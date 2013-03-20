@@ -6,17 +6,6 @@ $(document).ready(function(){
         visible: 3,
         speed: 700
      });},400 );
-     
-     /* Модальное окно */
-     // Регистрация/авторизация
-//	$('.window .close').click(function (e) {
-//		e.preventDefault();
-//
-//	});
-//	$('.window.login ._hide').click(function () {
-//		$(this).hide();
-//		$('.window.login .window_block').hide();
-//	});
 
     // Сроки и политика
     $('._footer_nav li a').click(function(e) {
