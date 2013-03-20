@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponseRedirect
-from django.views.generic import DetailView, DeleteView
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import DetailView
 from models import Resume
 
 
@@ -20,6 +21,6 @@ class ResumeView(DetailView):
         return  object
 
 
-class ResumeDeleteView(DeleteView):
-    def get_success_url(self):
-        return self.request.user.profile.url
+def delete_resume_view(request, resume_pk):
+    get_object_or_404(Resume, pk=resume_pk, owner=request.user).delete()
+    return redirect('job_seeker.profile.base')
