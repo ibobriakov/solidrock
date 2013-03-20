@@ -26,13 +26,5 @@ function profile_model_fabric(type) {
             });
         }
     });
-    var values = {};
-    _.each(data.objects[0],function(value,key){
-        if (typeof (value) == 'boolean') {
-            values[key] = value.toString();
-        } else {
-            values[key] = value;
-        }
-    });
-    return new Model(values);
+    return new Model(data.objects[0]);
 }

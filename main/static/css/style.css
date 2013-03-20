@@ -948,7 +948,7 @@ footer ._footer ._footer_nav ul li a {
     bottom: -1px;
 }
 
-.stages .right ul li {
+.stages .right ul li a {
     float: left;
     background: #e4732b;
     color: #fff;
@@ -957,15 +957,17 @@ footer ._footer ._footer_nav ul li a {
     border-right: 1px solid #fff;
     border-bottom: 1px solid #d5d5d5;
     cursor: pointer;
+    text-decoration: none;
 }
 
-.stages .right ul li.active {
+.stages .right ul li.active a {
     background: #f2fbff;
     color: #e4732b;
     border-left: 1px solid #d5d5d5;
     border-top: 1px solid #d5d5d5;
     border-right: 1px solid #d5d5d5;
     border-bottom: none;
+    text-decoration: none;
 }
 
 .stages .right .form {
@@ -1117,39 +1119,39 @@ footer ._footer ._footer_nav ul li a {
 }
 
 /* Personal Information */
-.stages .right .form .s1 {
+.stages .right .form .section1 {
 }
 
-.stages .right .form .s1 .left_info {
+.stages .right .form .section1 .left_info {
     float: left;
     width: 447px;
 }
 
-.stages .right .form .s1 .avatar {
+.stages .right .form .section1 .avatar {
     float: right;
     width: 205px;
     color: #d86a2b;
     font-size: 16px;
 }
 
-.stages .right .form .s1 .avatar .img {
+.stages .right .form .section1 .avatar .img {
     width: 203px;
     height: 203px;
     border: 1px solid #c4c4c4;
     margin: 7px 0 3px;
 }
 
-.stages .right .form .s1 .avatar .links {
+.stages .right .form .section1 .avatar .links {
     color: #409bcd;
     font-size: 12px;
     text-align: center;
 }
 
-.stages .right .form .s1 .avatar .links a {
+.stages .right .form .section1 .avatar .links a {
     margin: 0 2px;
 }
 
-.stages .right .form .s1 .bot_info {
+.stages .right .form .section1 .bot_info {
     overflow: hidden;
     clear: both;
 }

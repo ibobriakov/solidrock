@@ -7,31 +7,29 @@
 {% endblock %}
 {% block content %}
     <div class="_content stages" xmlns="http://www.w3.org/1999/html">
-
         <h1>Your Application Information</h1>
-
         <div class="left">
-            <ul>
-                <li class="active"><a href="#">Section 1: Personal Information</a></li>
-                <li><a href="#">Section 2: Current Employment</a></li>
-                <li><a href="#">Section 3: Previous Employment</a></li>
-                <li><a href="#">Section 4: Education</a></li>
-                <li><a href="#">Section 5: References</a></li>
+            <ul class="sections_text">
+                <li class="section1 active"><a href="#section/1">Section 1: Personal Information</a></li>
+                <li class="section2" ><a href="#section/2">Section 2: Current Employment</a></li>
+                <li class="section3" ><a href="#section/3">Section 3: Previous Employment</a></li>
+                <li class="section4" ><a href="#section/4">Section 4: Education</a></li>
+                <li class="section5" ><a href="#section/5">Section 5: References</a></li>
                 <li><a href="#">Submit and Terms</a></li>
             </ul>
         </div>
-
+        <a id="section_top"></a>
         <div class="right">
-            <ul>
-                <li class="active" id="s1">Section 1</li>
-                <li id="s2">Section 2</li>
-                <li id="s3">Section 3</li>
-                <li id="s4">Section 4</li>
-                <li id="s5">Section 5</li>
+            <ul class="sections_tab">
+                <li class="section1 active"><a href="#section/1">Section 1</a></li>
+                <li class="section2"><a href="#section/2">Section 2</a></li>
+                <li class="section3"><a href="#section/3">Section 3</a></li>
+                <li class="section4"><a href="#section/4">Section 4</a></li>
+                <li class="section5"><a href="#section/5">Section 5</a></li>
             </ul>
-            <div class="form">
+            <div class="form sections_form">
                 <form>
-                    <div class="s1">
+                    <div class="page section1">
                         <div class="title">Personal Information</div>
                         <fieldset>
                             <div class="left_info">
@@ -54,6 +52,7 @@
                                     <input data-value="job_seeker_information.postcode" class="it3" type="text">
                                 </div>
                             </div>
+                            {# ToDo Avatar do not work #}
                             <div class="avatar">
                                 <div>Profile Picture (optional)</div>
                                 <div class="img"><img src="img/002.jpg"></div>
@@ -100,14 +99,110 @@
                                 </div>
                                 <div class="_submit">
                                     <div class="exit">Save and Exit</div>
-                                    <div class="cont" data-on-click="job_seeker_information:commit">Save and Continue</div>
+                                    <a href="#section/2" class="cont" data-on-click="job_seeker_information:commit">Save and Continue</a>
                                 </div>
                             </div>
                         </fieldset>
                     </div>
-                    <script> new (profile_view_fabric('job_seeker_information'))({el:$('div.s1')});</script>
+                    <script>new (profile_view_fabric('job_seeker_information'))({el:$('div.section1')});</script>
+                    <div class="page section2" style="display: none">
+                        <div class="title">Current Employment</div>
+                        <div class="text">(If now unemployed give details of last employer)</div>
+                        <fieldset>
+                            <div class="field">
+                                <label>Name of Employer</label>
+                                <input data-value="job_seeker_current_employment.name" class="it4" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Address</label>
+                                <input data-value="job_seeker_current_employment.address_first" class="it4" type="text">
+                                <input data-value="job_seeker_current_employment.address_second" class="it4" type="text">
+                                <input data-value="job_seeker_current_employment.city" class="it4" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Postcode</label>
+                                <input data-value="job_seeker_current_employment.postcode" class="it3" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Position Title</label>
+                                <input data-value="job_seeker_current_employment.position_title" class="it3" type="text">
+                            </div>
+                            <div class="field date">
+                                <label>Date Commenced</label>
+                                <input data-value="job_seeker_current_employment.date_commenced" class="it3" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Department/Section</label>
+                                <input data-value="job_seeker_current_employment.department" class="it4" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Brief Description of Duties</label>
+                                <textarea data-value="job_seeker_current_employment.brief"></textarea>
+                            </div>
+                            <div class="field fl_left">
+                                <label>Fulltime, Parttime or Casual</label>
+                                <input data-value="job_seeker_current_employment.job_type" class="it2" type="text">
+                            </div>
+                            <div class="field fl_left">
+                                <label>Last Day of Service <span>(if no longer employed)</span></label>
+                                <input data-value="job_seeker_current_employment.last_day_of_service" class="it2" type="text">
+                            </div>
+                            <div class="field fl_clear">
+                                <label>Reason for Leaving <span>(if no longer employed)</span></label>
+                                <textarea data-value="job_seeker_current_employment.leaving_reason"></textarea>
+                            </div>
+                            <div class="_submit">
+                                <div class="exit">Save and Exit</div>
+                                <div class="cont" data-on-click="job_seeker_current_employment:commit">Save and Continue</div>
+                            </div>
+                        </fieldset>
+                    </div >
+                    <script>new (profile_view_fabric('job_seeker_current_employment'))({el:$('div.section2')});</script>
+                    <div class="page section3" style="display: none;">
+                        <div class="title">Previous Employment</div>
+                        <div class="text">(Most recent Employer first. Please cover you last three positions if applicable)</div>
+                        <fieldset>
+                            <div class="field">
+                                <label>Name of Employer</label>
+                                <input class="it4" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Address</label>
+                                <input class="it4" type="text">
+                                <input class="it4" type="text">
+                                <input class="it4" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Postcode</label>
+                                <input class="it3" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Position Title</label>
+                                <input class="it3" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Brief Description of Duties</label>
+                                <textarea></textarea>
+                            </div>
+                            <div class="field">
+                                <label>Reason for Leaving</label>
+                                <textarea></textarea>
+                            </div>
+                            <a href="#">Add Another Position</a>
+                            <div class="_submit">
+                                <div class="exit">Save and Exit</div>
+                                <div class="cont">Save and Continue</div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <script>new (profile_view_fabric('job_seeker_previous_employment'))({el:$('div.section3')});</script>
                 </form>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block initialize-js %}
+    <script src="{% static 'userprofile/js/src/backbone/route.js' %}" type="text/javascript"></script>
+    {{ block.super }}
 {% endblock %}
