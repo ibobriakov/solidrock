@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, url
 from views import JobSeekerBaseDetailView, JobSeekerInformationDetailView
 
 
 urlpatterns = patterns(
     '',
-    url(r'^job_seeker/$',
+    url(r'^$',
         JobSeekerBaseDetailView.as_view(),
         name='job_seeker.profile.base'),
-    url(r'^job_seeker/information/$',
+    url(r'^information/$',
         JobSeekerInformationDetailView.as_view(),
         name='job_seeker.profile.information'),
-)
+    )
