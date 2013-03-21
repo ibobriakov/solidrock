@@ -7,24 +7,9 @@
  */
 
 function profile_model_fabric(type) {
-    var data = get_async_json(rest_url[type].list_endpoint);
-    var Model = Backbone.Model.extend({
-        urlRoot: rest_url[type].list_endpoint,
-        initialize: function(){
-        },
+    return Backbone.Model.extend({
         commit: function() {
-            var that = this;
-            this.save({},{ wait: true,
-                error: function(model,response) {
-                    that.view.errors = JSON.parse(response.responseText)[type];
-                    that.view.render();
-                },
-                success: function(){
-                    that.view.errors = [];
-                    that.view.render();
-                }
-            });
+            this.save({},{ wait: true });
         }
     });
-    return new Model(data.objects[0]);
 }

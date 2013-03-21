@@ -16,6 +16,7 @@ class JobSeekerBaseDetailView(DetailView):
 class JobSeekerInformationDetailView(DetailView):
     model = JobSeeker
     template_name = 'job_seeker/information_detail.html'
+    context_object_name = 'profile'
 
     def get_object(self, queryset=None):
         return get_object_or_404(self.model, user=self.request.user)

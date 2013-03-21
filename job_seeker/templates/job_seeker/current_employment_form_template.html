@@ -1,0 +1,44 @@
+<fieldset>
+    <div class="field">
+        <label>Name of Employer</label>
+        <input data-value="<%=type%>_<%=index%>.name" class="it4" type="text">
+    </div>
+    <div class="field">
+        <label>Address</label>
+        <input data-value="<%=type%>_<%=index%>.address_first" class="it4" type="text">
+        <input data-value="<%=type%>_<%=index%>.address_second" class="it4" type="text">
+        <input data-value="<%=type%>_<%=index%>.city" class="it4" type="text">
+    </div>
+    <div class="field">
+        <label>Postcode</label>
+        <input data-value="<%=type%>_<%=index%>.postcode" class="it3" type="text">
+    </div>
+    <div class="field">
+        <label>Position Title</label>
+        <input data-value="<%=type%>_<%=index%>.position_title" class="it3" type="text">
+    </div>
+    <div class="field date">
+        <label>Date Commenced</label>
+        <input data-value="<%=type%>_<%=index%>.date_commenced" class="it3" type="text">
+    </div>
+    <div class="field">
+        <label>Department/Section</label>
+        <input data-value="<%=type%>_<%=index%>.department" class="it4" type="text">
+    </div>
+    <div class="field">
+        <label>Brief Description of Duties</label>
+        <textarea data-value="<%=type%>_<%=index%>.brief"></textarea>
+    </div>
+    <div class="field fl_left">
+        <label>Fulltime, Parttime or Casual</label>
+        <input data-value="<%=type%>_<%=index%>.job_type" class="it2" type="text">
+    </div>
+    <div class="field fl_left">
+        <label>Last Day of Service <span>(if no longer employed)</span></label>
+        <input data-value="<%=type%>_<%=index%>.last_day_of_service" class="it2" type="text">
+    </div>
+    <div class="field fl_clear">
+        <label>Reason for Leaving <span>(if no longer employed)</span></label>
+        <textarea data-value="<%=type%>_<%=index%>.leaving_reason"></textarea>
+    </div>
+</fieldset>

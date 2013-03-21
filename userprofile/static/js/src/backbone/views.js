@@ -1,21 +1,24 @@
 /**
- * Created with PyCharm.
  * User: jackdevil
- * Date: 20.03.13
- * Time: 20:49
- * To change this template use File | Settings | File Templates.
  */
 
-function profile_view_fabric(type, template_selector) {
-    template_selector = template_selector || '#form-template';
+function profile_view_fabric(type, template) {
+    template = template || $('#'+type+'_form_template');
     return Backbone.View.extend ({
-        model: profile_model_fabric(type),
-        initialize: function(){
-            this.model.view = this;
-            var object = {};
-            object[type] = this.model;
-            this.rivets = rivets;
-            this.rivets.bind(this.el, object);
+        template: _.template(template.html()),
+        initialize: function() {
+            this.collection.view = this;
+            this.render();
+        },
+        render: function() {
+            var that = this;
+            this.$el.html(this.template({'collection':this.collection.toJSON(),'type':type}));
+            this.collection.each(function(element, index, list){
+                var object = {};
+                object[type+'_'+index] = element;
+                element.rivets = rivets;
+                element.rivets.bind(that.el, object);
+            });
         }
     });
 }

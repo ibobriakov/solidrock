@@ -1467,3 +1467,25 @@ footer ._footer ._footer_nav ul li a {
     width: 300px;
 }
 
+div.styled input[type="radio"] {
+    display:none;
+}
+
+div.styled input[type="radio"] + label {
+    font-family:Arial, sans-serif;
+    font-size:14px;
+}
+
+div.styled input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(../img/checkbox.png) left top no-repeat;
+    cursor:pointer;
+}
+
+div.styled input[type="radio"]:checked + label span {
+    background:url(../img/checkbox.png) 0 -22px;
+}

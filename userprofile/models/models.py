@@ -1,3 +1,4 @@
+import json
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
@@ -88,6 +89,13 @@ class JobSeekerInformation(AddressMixin, models.Model):
     is_driver = models.BooleanField(verbose_name=_("Do you have a current driver's licence?"),
                                     default=False)
 
+    def as_dict(self):
+        fields_dict = {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
+                for f in self.__dict__ if not f[0] == '_'}
+        fields_dict['first_name'] = self.job_seeker.first_name
+        fields_dict['last_name'] = self.job_seeker.last_name
+        return fields_dict
+
     def __unicode__(self):
         return "Job Seeker Information for {0}".format(self.job_seeker.__unicode__())
 
@@ -106,6 +114,10 @@ class JobSeekerCurrentEmployment(AddressMixin, models.Model):
     last_day_of_service = models.CharField(verbose_name="Last Day of Service", max_length=255, blank=True, null=True)
     leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
 
+    def as_dict(self):
+        return {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
+                       for f in self.__dict__ if not f[0] == '_'}
+
     def __unicode__(self):
         return "Job Seeker Current Employment for {0}".format(self.job_seeker.__unicode__())
 
@@ -114,11 +126,15 @@ class JobSeekerCurrentEmployment(AddressMixin, models.Model):
 
 
 class JobSeekerPreviousEmployment(AddressMixin, models.Model):
-    job_seeker = models.ForeignKey('userprofile.JobSeeker', related_name='pervious_employments_set')
+    job_seeker = models.ForeignKey('userprofile.JobSeeker', related_name='previous_employments_set')
     name = models.CharField(verbose_name="Name of Employer", max_length=255, blank=True, null=True)
     position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True, null=True)
     brief = models.TextField(verbose_name="Brief Description of Duties", blank=True, null=True)
     leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
+
+    def as_dict(self):
+        return {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
+                for f in self.__dict__ if not f[0] == '_'}
 
     def __unicode__(self):
         return "Job Seeker Previous Employment for {0}".format(self.job_seeker.__unicode__())

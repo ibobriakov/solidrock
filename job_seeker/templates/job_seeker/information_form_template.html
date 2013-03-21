@@ -1,0 +1,102 @@
+    <fieldset>
+        <div class="left_info">
+            <div class="field fl_left">
+                <label>Last Name</label>
+                <input data-value="<%=type%>_<%=index%>.last_name" class="it2" type="text">
+            </div>
+            <div class="field">
+                <label>First Name</label>
+                <input data-value="<%=type%>_<%=index%>.first_name" type="text">
+            </div>
+            <div class="field">
+                <label>Address</label>
+                <input data-value="<%=type%>_<%=index%>.address_first" class="it4" type="text">
+                <input data-value="<%=type%>_<%=index%>.address_second" class="it4" type="text">
+                <input data-value="<%=type%>_<%=index%>.city" class="it4" type="text">
+            </div>
+            <div class="field">
+                <label>Postcode</label>
+                <input data-value="<%=type%>_<%=index%>.postcode" class="it3" type="text">
+            </div>
+        </div>
+        ToDo Avatar do not work
+        <div class="avatar">
+            <div>Profile Picture (optional)</div>
+            <div class="img"><img src="img/002.jpg"></div>
+            <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
+        </div>
+        <div class="bot_info">
+            <div class="field fl_left">
+                <label>Home Phone Number</label>
+                <input data-value="<%=type%>_<%=index%>.home_phone" class="it2" type="text">
+            </div>
+            <div class="field fl_left">
+                <label>Daytime Phone Number</label>
+                <input data-value="<%=type%>_<%=index%>.daytime_phone" class="it2" type="text">
+            </div>
+            <div class="field fl_left">
+                <label>Mobile Phone Number</label>
+                <input data-value="<%=type%>_<%=index%>.mobile_phone" class="it2" type="text">
+            </div>
+            <div class="field">
+                <label>Email Address</label>
+                <input data-value="<%=type%>_<%=index%>.email" class="it3" type="text">
+            </div>
+            <div class="field styled">
+                <label>Can potential employers contact you at work?</label>
+                <input id="can_contact_at_work_yes_<%=index%>" data-checked="<%=type%>_<%=index%>.can_contact_at_work"
+                       value="true" type="radio" name="ch1">
+                <label for="can_contact_at_work_yes_<%=index%>">
+                    <span></span>Yes
+                </label>
+                <input id="can_contact_at_work_no_<%=index%>" class="styled"
+                       data-checked="<%=type%>_<%=index%>.can_contact_at_work" value="false" type="radio"
+                       name="ch1">
+                <label for="can_contact_at_work_no_<%=index%>">
+                    <span></span>No
+                </label>
+            </div>
+            <div class="field fl_left styled">
+                <label>Are you an Australian Citizen / Permanent Resident?</label>
+                <input id="is_australian_yes_<%=index%>" data-checked="<%=type%>_<%=index%>.is_australian" value="true"
+                       type="radio" name="ch2">
+                <label for="is_australian_yes_<%=index%>">
+                    <span></span>Yes
+                </label>
+                <input id="is_australian_no_<%=index%>" class="styled" data-checked="<%=type%>_<%=index%>.is_australian"
+                       value="false" type="radio" name="ch2">
+                <label for="is_australian_no_<%=index%>">
+                    <span></span>No
+                </label>
+            </div>
+            <div class="field styled">
+                <label>If no do you have a working visa?</label>
+                <input id="have_visa_yes_<%=index%>" data-checked="<%=type%>_<%=index%>.have_visa" value="true" type="radio"
+                       name="ch3">
+                <label for="have_visa_yes_<%=index%>">
+                    <span></span>Yes
+                </label>
+                <input id="have_visa_no_<%=index%>" data-checked="<%=type%>_<%=index%>.have_visa" value="false" type="radio"
+                       name="ch3">
+                <label for="have_visa_no_<%=index%>">
+                    <span></span>No
+                </label>
+            </div>
+            <div class="text">(Note: To be eligible for employment, applicants must have the appropriate work visa
+                or have permanent residency status.)
+            </div>
+            <div class="field styled">
+                <label>Do you hold a current driver’s licence?</label>
+                <input id="is_driver_yes_<%=index%>" data-checked="<%=type%>_<%=index%>.is_driver" value="true" type="radio"
+                       name="ch4">
+                <label for="is_driver_yes_<%=index%>">
+                    <span></span>Yes
+                </label>
+                <input id="is_driver_no_<%=index%>" data-checked="<%=type%>_<%=index%>.is_driver" value="false" type="radio"
+                       name="ch4">
+                <label for="is_driver_no_<%=index%>">
+                    <span></span>No
+                </label>
+            </div>
+        </div>
+    </fieldset>

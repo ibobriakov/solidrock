@@ -1,10 +1,45 @@
-{% extends 'base.html' %}
-{% load staticfiles %}
-{% block library-js %}
+{% extends 'userprofile/base.html' %}
+{% load serialize %}
+
+{% block templates %}
     {{ block.super }}
-    <script src="{% static 'userprofile/js/src/backbone/models.js' %}" type="text/javascript"></script>
-    <script src="{% static 'userprofile/js/src/backbone/views.js' %}" type="text/javascript"></script>
+    <script id="job_seeker_information_form_template" type="text/template">
+        <% _.each(collection,function(element, index) { %>
+        <div class="title">Personal Information</div>
+            {% include "job_seeker/information_form_template.html" %}
+        <% }) %>
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <a href="#section/2" class="cont" >Save and Continue</a>
+        </div>
+    </script>
+
+    <script id="job_seeker_current_employment_form_template" type="text/template">
+        <% _.each(collection,function(element, index) { %>
+        <div class="title">Current Employment</div>
+        <div class="text">(If now unemployed give details of last employer)</div>
+            {% include "job_seeker/current_employment_form_template.html" %}
+        <% }) %>
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <div class="cont" >Save and Continue</div>
+        </div>
+    </script>
+
+    <script id="job_seeker_previous_employment_form_template" type="text/template">
+        <% _.each(collection,function(element, index) { %>
+        <div class="title">Previous Employment</div><% if (index) { %><a href="#">remove</a><% } %>
+        <div class="text">(Most recent Employer first. Please cover you last three positions if applicable)</div>
+            {% include "job_seeker/previous_employment_form_template.html" %}
+        <% }) %>
+        <a href="#">Add Another Position</a>
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <a class="cont" href="#section/3" >Save and Continue</a>
+        </div>
+    </script>
 {% endblock %}
+
 {% block content %}
     <div class="_content stages" xmlns="http://www.w3.org/1999/html">
         <h1>Your Application Information</h1>
@@ -29,257 +64,120 @@
             </ul>
             <div class="form sections_form">
                 <form>
-                    <div class="page section1">
-                        <div class="title">Personal Information</div>
-                        <fieldset>
-                            <div class="left_info">
-                                <div class="field fl_left">
-                                    <label>Last Name</label>
-                                    <input data-value="job_seeker_information.last_name" class="it2" type="text">
-                                </div>
-                                <div class="field">
-                                    <label>First Name</label>
-                                    <input data-value="job_seeker_information.first_name" type="text">
-                                </div>
-                                <div class="field">
-                                    <label>Address</label>
-                                    <input data-value="job_seeker_information.address_first" class="it4" type="text">
-                                    <input data-value="job_seeker_information.address_second" class="it4" type="text">
-                                    <input data-value="job_seeker_information.city" class="it4" type="text">
-                                </div>
-                                <div class="field">
-                                    <label>Postcode</label>
-                                    <input data-value="job_seeker_information.postcode" class="it3" type="text">
-                                </div>
-                            </div>
-                            {# ToDo Avatar do not work #}
-                            <div class="avatar">
-                                <div>Profile Picture (optional)</div>
-                                <div class="img"><img src="img/002.jpg"></div>
-                                <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
-                            </div>
-                            <div class="bot_info">
-                                <div class="field fl_left">
-                                    <label>Home Phone Number</label>
-                                    <input data-value="job_seeker_information.home_phone" class="it2" type="text">
-                                </div>
-                                <div class="field fl_left">
-                                    <label>Daytime Phone Number</label>
-                                    <input data-value="job_seeker_information.daytime_phone" class="it2" type="text">
-                                </div>
-                                <div class="field fl_left">
-                                    <label>Mobile Phone Number</label>
-                                    <input data-value="job_seeker_information.mobile_phone" class="it2" type="text">
-                                </div>
-                                <div class="field">
-                                    <label>Email Address</label>
-                                    <input data-value="job_seeker_information.email" class="it3" type="text">
-                                </div>
-                                <div class="field">
-                                    <label>Can potential employers contact you at work?</label>
-                                    <input class="styled" data-checked="job_seeker_information.can_contact_at_work" value="true"  type="radio" name="ch1">Yes
-                                    <input class="styled" data-checked="job_seeker_information.can_contact_at_work" value="false" type="radio" name="ch1">No
-                                </div>
-                                <div class="field fl_left">
-                                    <label>Are you an Australian Citizen / Permanent Resident?</label>
-                                    <input class="styled" data-checked="job_seeker_information.is_australian" value="true" type="radio" name="ch2">Yes
-                                    <input class="styled" data-checked="job_seeker_information.is_australian" value="false" type="radio" name="ch2">No
-                                </div>
-                                <div class="field">
-                                    <label>If no do you have a working visa?</label>
-                                    <input class="styled" data-checked="job_seeker_information.have_visa" value="true" type="radio" name="ch3">Yes
-                                    <input class="styled" data-checked="job_seeker_information.have_visa" value="false" type="radio" name="ch3">No
-                                </div>
-                                <div class="text">(Note: To be eligible for employment, applicants must have the appropriate work visa or have permanent residency status.)
-                                </div>
-                                <div class="field">
-                                    <label>Do you hold a current driver’s licence?</label>
-                                    <input class="styled" data-checked="job_seeker_information.is_driver" value="true" type="radio" name="ch4">Yes
-                                    <input class="styled" data-checked="job_seeker_information.is_driver" value="false" type="radio" name="ch4">No
-                                </div>
-                                <div class="_submit">
-                                    <div class="exit">Save and Exit</div>
-                                    <a href="#section/2" class="cont" data-on-click="job_seeker_information:commit">Save and Continue</a>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <script>new (profile_view_fabric('job_seeker_information'))({el:$('div.section1')});</script>
-                    <div class="page section2" style="display: none">
-                        <div class="title">Current Employment</div>
-                        <div class="text">(If now unemployed give details of last employer)</div>
-                        <fieldset>
-                            <div class="field">
-                                <label>Name of Employer</label>
-                                <input data-value="job_seeker_current_employment.name" class="it4" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Address</label>
-                                <input data-value="job_seeker_current_employment.address_first" class="it4" type="text">
-                                <input data-value="job_seeker_current_employment.address_second" class="it4" type="text">
-                                <input data-value="job_seeker_current_employment.city" class="it4" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Postcode</label>
-                                <input data-value="job_seeker_current_employment.postcode" class="it3" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Position Title</label>
-                                <input data-value="job_seeker_current_employment.position_title" class="it3" type="text">
-                            </div>
-                            <div class="field date">
-                                <label>Date Commenced</label>
-                                <input data-value="job_seeker_current_employment.date_commenced" class="it3" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Department/Section</label>
-                                <input data-value="job_seeker_current_employment.department" class="it4" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Brief Description of Duties</label>
-                                <textarea data-value="job_seeker_current_employment.brief"></textarea>
-                            </div>
-                            <div class="field fl_left">
-                                <label>Fulltime, Parttime or Casual</label>
-                                <input data-value="job_seeker_current_employment.job_type" class="it2" type="text">
-                            </div>
-                            <div class="field fl_left">
-                                <label>Last Day of Service <span>(if no longer employed)</span></label>
-                                <input data-value="job_seeker_current_employment.last_day_of_service" class="it2" type="text">
-                            </div>
-                            <div class="field fl_clear">
-                                <label>Reason for Leaving <span>(if no longer employed)</span></label>
-                                <textarea data-value="job_seeker_current_employment.leaving_reason"></textarea>
-                            </div>
-                            <div class="_submit">
-                                <div class="exit">Save and Exit</div>
-                                <div class="cont" data-on-click="job_seeker_current_employment:commit">Save and Continue</div>
-                            </div>
-                        </fieldset>
-                    </div >
-                    <script>new (profile_view_fabric('job_seeker_current_employment'))({el:$('div.section2')});</script>
-                    <div class="page section3" style="display: none;">
-                        <div class="title">Previous Employment</div>
-                        <div class="text">(Most recent Employer first. Please cover you last three positions if applicable)</div>
-                        <fieldset>
-                            <div class="field">
-                                <label>Name of Employer</label>
-                                <input data-value="job_seeker_previous_employment.name" class="it4" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Address</label>
-                                <input data-value="job_seeker_previous_employment.address_first" class="it4" type="text">
-                                <input data-value="job_seeker_previous_employment.address_second" class="it4" type="text">
-                                <input data-value="job_seeker_previous_employment.city" class="it4" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Postcode</label>
-                                <input data-value="job_seeker_previous_employment.postcode" class="it3" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Position Title</label>
-                                <input data-value="job_seeker_previous_employment.position_title" class="it3" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Brief Description of Duties</label>
-                                <textarea data-value="job_seeker_previous_employment.brief"></textarea>
-                            </div>
-                            <div class="field">
-                                <label>Reason for Leaving</label>
-                                <textarea data-value="job_seeker_previous_employment.leaving_reason"></textarea>
-                            </div>
-                            <a href="#">Add Another Position</a>
-                            <div class="_submit">
-                                <div class="exit">Save and Exit</div>
-                                <div class="cont" data-on-click="job_seeker_previous_employment:commit">Save and Continue</div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <script>new (profile_view_fabric('job_seeker_previous_employment'))({el:$('div.section3')});</script>
-                    <div class="section4" style="display: none;">
-                        <div class="title">Education</div>
-                        <div class="text">(Qualifications from Schools, Colleges and Universities. Please list your highest qualification first.)</div>
-                        <fieldset>
-                            <div class="field">
-                                <label>School, College, or University Name</label>
-                                <input class="it4" type="text">
-                                <a href="#">Add another School, College or University</a>
-                            </div>
-                            <div class="field">
-                                <label>Major Course of Study or Classes Taken</label>
-                                <input class="it4" type="text">
-                                <a href="#">Add another Major Course of Study or Class Taken</a>
-                            </div>
-                            <div class="field">
-                                <label>Degrees and/or Post-Graduate Qualifications Obtained</label>
-                                <input class="it4" type="text">
-                                <a href="#">Add another Degree and/or Post-Graduate Qualification Obtained</a>
-                            </div>
-                            <div class="field">
-                                <label>Certificates and/or Diplomas Obtained</label>
-                                <input class="it4" type="text">
-                                <a href="#">Add another Certificate and/or Diploma Obtained</a>
-                            </div>
-                            <div class="field">
-                                <label>Any Other Course Currently Enrolled In</label>
-                                <input class="it4" type="text">
-                            </div>
-                            <div class="_submit">
-                                <div class="exit">Save and Exit</div>
-                                <div class="cont">Save and Continue</div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <script>var education = new (profile_view_fabric('job_seeker_education'))({el:$('div.section4')});</script>
-                    <div class="section5" style="display: none;">
-                        <div class="title">Referees</div>
-                        <div class="text">(Please give the names and addresses of your two most recent employers or other work related referees.)</div>
-                        <fieldset>
-                            <div class="field">
-                                <label>Name</label>
-                                <input data-value="job_seeker_previous_employment.leaving_reason" class="it3" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Position Title or Relationship</label>
-                                <input class="it3" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Address</label>
-                                <input class="it4" type="text">
-                                <input class="it4" type="text">
-                                <input class="it4" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Postcode</label>
-                                <input class="it3" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Phone Number</label>
-                                <input class="it2" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Email Address</label>
-                                <input class="it3" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Are you willing for this referee to be approached prior to an interview?</label>
-                                <label><input class="styled" type="radio" name="ch5" style="position: absolute; left: -9999px;"><span class="radio" style="display:inline-block"></span>Yes</label><label><input class="styled" type="radio" name="ch5" style="position: absolute; left: -9999px;"><span class="radio" style="display:inline-block"></span>No</label>
-                            </div>
-                            <a href="#">Add Another Referee</a>
-                            <div class="_submit">
-                                <div class="exit">Save and Exit</div>
-                                <input type="submit" value="Submit and Terms">
-                            </div>
-                        </fieldset>
-                    </div>
-                    <script>new (profile_view_fabric('job_seeker_referee'))({el:$('div.section5')});</script>
+                    <div class="page section1"></div>
+                    <div class="page section2"></div>
+                    <div class="page section3"></div>
+
+                    <script>
+                        var page_dict = {
+                            'job_seeker_information':{
+                                'section':1,
+                                'collection': {% autoescape off %}{{ profile.personal_information|as_json }}{% endautoescape %}
+                            },
+                            'job_seeker_current_employment':{
+                                'section':2,
+                                'collection': {% autoescape off %}{{ profile.current_employment|as_json }}{% endautoescape %}
+                            },
+                            'job_seeker_previous_employment':{
+                                'section':3,
+                                'collection': {% autoescape off %}{{ profile.previous_employments_set.all|as_json }}{% endautoescape %}
+                            }
+                        };
+                        _.each(page_dict,function(value,key) {
+                            new (profile_view_fabric(key))({
+                                el: $('div.page.section'+value.section),
+                                collection: new (profile_collection_fabric(key))(value.collection)
+                            });
+                        });
+                    </script>
+
+{#                    <div class="page section4" style="display: none;">#}
+{#                        <div class="title">Education</div>#}
+{#                        <div class="text">(Qualifications from Schools, Colleges and Universities. Please list your highest qualification first.)</div>#}
+{#                        <fieldset>#}
+{#                            <div class="field">#}
+{#                                <label>School, College, or University Name</label>#}
+{#                                <input class="it4" type="text">#}
+{#                                <a href="#">Add another School, College or University</a>#}
+{#                            </div>#}
+{#                            <div class="field">#}
+{#                                <label>Major Course of Study or Classes Taken</label>#}
+{#                                <input class="it4" type="text">#}
+{#                                <a href="#">Add another Major Course of Study or Class Taken</a>#}
+{#                            </div>#}
+{#                            <div class="field">#}
+{#                                <label>Degrees and/or Post-Graduate Qualifications Obtained</label>#}
+{#                                <input class="it4" type="text">#}
+{#                                <a href="#">Add another Degree and/or Post-Graduate Qualification Obtained</a>#}
+{#                            </div>#}
+{#                            <div class="field">#}
+{#                                <label>Certificates and/or Diplomas Obtained</label>#}
+{#                                <input class="it4" type="text">#}
+{#                                <a href="#">Add another Certificate and/or Diploma Obtained</a>#}
+{#                            </div>#}
+{#                            <div class="field">#}
+{#                                <label>Any Other Course Currently Enrolled In</label>#}
+{#                                <input class="it4" type="text">#}
+{#                            </div>#}
+{#                            <div class="_submit">#}
+{#                                <div class="exit">Save and Exit</div>#}
+{#                                <div class="cont">Save and Continue</div>#}
+{#                            </div>#}
+{#                        </fieldset>#}
+{#                    </div>#}
+{#                    <script>var education = new (profile_view_fabric('job_seeker_education'))({el:$('div.section4')});</script>#}
+{#                    <div class="page section5" style="display: none;">#}
+{#                        <div class="title">Referees</div>#}
+{#                        <div class="text">(Please give the names and addresses of your two most recent employers or other work related referees.)</div>#}
+{#                        <fieldset>#}
+{#                            <div class="field">#}
+{#                                <label>Name</label>#}
+{#                                <input data-value="job_seeker_referee.name" class="it3" type="text">#}
+{#                            </div>#}
+{#                            <div class="field">#}
+{#                                <label>Position Title or Relationship</label>#}
+{#                                <input data-value="job_seeker_referee.position_title" class="it3" type="text">#}
+{#                            </div>#}
+{#                            <div class="field">#}
+{#                                <label>Address</label>#}
+{#                                <input data-value="job_seeker_referee.address_first" class="it4" type="text">#}
+{#                                <input data-value="job_seeker_referee.address_second" class="it4" type="text">#}
+{#                                <input data-value="job_seeker_referee.city" class="it4" type="text">#}
+{#                            </div>#}
+{#                            <div class="field">#}
+{#                                <label>Postcode</label>#}
+{#                                <input data-value="job_seeker_referee.postcode" class="it3" type="text">#}
+{#                            </div>#}
+{#                            <div class="field">#}
+{#                                <label>Phone Number</label>#}
+{#                                <input data-value="job_seeker_referee.phone_number" class="it2" type="text">#}
+{#                            </div>#}
+{#                            <div class="field">#}
+{#                                <label>Email Address</label>#}
+{#                                <input data-value="job_seeker_referee.email" class="it3" type="text">#}
+{#                            </div>#}
+{#                            <div class="field styled">#}
+{#                                <label>Are you willing for this referee to be approached prior to an interview?</label>#}
+{#                                <input id="is_for_interview_yes" type="radio" name="ch5" data-checked="job_seeker_referee.is_for_interview" value="true">#}
+{#                                <label for="is_for_interview_yes">#}
+{#                                    <span></span>Yes#}
+{#                                </label>#}
+{#                                <input id="is_for_interview_no" type="radio" name="ch5" data-checked="job_seeker_referee.is_for_interview" value="false">#}
+{#                                <label for="is_for_interview_no">#}
+{#                                    <span></span>No#}
+{#                                </label>#}
+{#                            </div>#}
+{#                            <a href="#">Add Another Referee</a>#}
+{#                            <div class="_submit">#}
+{#                                <div class="exit">Save and Exit</div>#}
+{#                                <div class="cont" data-on-click="job_seeker_referee:commit">Submit and Terms</div>#}
+{#                            </div>#}
+{#                        </fieldset>#}
+{#                    </div>#}
+{#                    <script>new (profile_view_fabric('job_seeker_referee'))({el:$('div.section5')});</script>#}
                 </form>
             </div>
         </div>
     </div>
 {% endblock %}
 
-{% block initialize-js %}
-    <script src="{% static 'userprofile/js/src/backbone/route.js' %}" type="text/javascript"></script>
-    {{ block.super }}
-{% endblock %}
