@@ -45,6 +45,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^job_seeker/', include('job_seeker.urls')),
+    url(r'^employer/', include('employer.urls')),
     url(r'^cover_letter/', include('cover_letter.urls')),
     url(r'^resume/', include('resume.urls')),
     url(r'^admin/', include(admin.site.urls)),
