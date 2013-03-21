@@ -37,10 +37,24 @@
             <div class="field fl_left">
                 <label>Mobile Phone Number</label>
                 <input data-value="<%=type%>_<%=index%>.mobile_phone" class="it2" type="text">
+                <% if (element.errors['mobile_phone']) { %>
+                <div class="error_list">
+                    <% _.each(element.errors['mobile_phone'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                </div>
+                <% } %>
             </div>
             <div class="field">
                 <label>Email Address</label>
                 <input data-value="<%=type%>_<%=index%>.email" class="it3" type="text">
+                <% if (element.errors['email']) { %>
+                <div class="error_list">
+                    <% _.each(element.errors['email'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                </div>
+                <% } %>
             </div>
             <div class="field styled">
                 <label>Can potential employers contact you at work?</label>

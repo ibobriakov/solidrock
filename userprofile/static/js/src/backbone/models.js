@@ -8,8 +8,23 @@
 
 function profile_model_fabric(type) {
     return Backbone.Model.extend({
+        errors: {},
         commit: function() {
-            this.save({},{ wait: true });
+            var error = false;
+            this.save([],{ wait: true,
+                error: function(model,response){
+                    error = true;
+                    model.errors = JSON.parse(response.responseText)[type];
+                    model.view.render();
+                },
+                success: function(model){
+                    error = false;
+                    model.errors = [];
+                    section_route.next_section();
+                    model.view.render();
+                }
+            });
+            return error;
         }
     });
 }

@@ -5,7 +5,9 @@
  * Time: 22:59
  * To change this template use File | Settings | File Templates.
  */
+
 var SectionRoute = Backbone.Router.extend({
+    section: 1,
     routes: {
         "section/:query": "change_section",
         "section":"change_section"
@@ -21,10 +23,15 @@ var SectionRoute = Backbone.Router.extend({
     change_section: function(section){
         section = section || 1;
         this.show_section(section);
+        this.section = section;
         window.scrollTo(0,$('#section_top').offset().top);
+    },
+    next_section: function() {
+        this.section = parseInt(this.section) + 1;
+        this.change_section(this.section);
+        this.navigate('#section/' + this.section);
+        return this;
     }
-
-
 });
 
 var section_route = new SectionRoute();

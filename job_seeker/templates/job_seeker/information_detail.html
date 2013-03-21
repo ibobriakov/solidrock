@@ -10,7 +10,7 @@
         <% }) %>
         <div class="_submit">
             <div class="exit">Save and Exit</div>
-            <a href="#section/2" class="cont" >Save and Continue</a>
+            <div class="cont" data-on-click="job_seeker_information_view:commit" >Save and Continue</div>
         </div>
     </script>
 
@@ -22,7 +22,7 @@
         <% }) %>
         <div class="_submit">
             <div class="exit">Save and Exit</div>
-            <div class="cont" >Save and Continue</div>
+            <div class="cont" data-on-click="job_seeker_current_employment_view:commit" >Save and Continue</div>
         </div>
     </script>
 
@@ -32,10 +32,10 @@
         <div class="text">(Most recent Employer first. Please cover you last three positions if applicable)</div>
             {% include "job_seeker/previous_employment_form_template.html" %}
         <% }) %>
-        <a href="#">Add Another Position</a>
+        <a href="#" data-on-click="job_seeker_previous_employment_view:create">Add Another Position</a>
         <div class="_submit">
             <div class="exit">Save and Exit</div>
-            <a class="cont" href="#section/3" >Save and Continue</a>
+            <div class="cont" data-on-click="job_seeker_previous_employment_view:commit" >Save and Continue</div>
         </div>
     </script>
 {% endblock %}
