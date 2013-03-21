@@ -1,4 +1,5 @@
 from django.utils.text import capfirst
+from tastypie import fields
 
 __author__ = 'ir4y'
 
@@ -39,6 +40,9 @@ class ResourceTypesOverrideSchemaMixin(object):
 
 class ResourceLabelSchemaMixin(object):
     def get_label(self, field_name):
+        if hasattr(self._meta, 'queryset'):
+            if field_name in self._meta.queryset.model._meta._name_map:
+                return self._meta.queryset.model._meta._name_map[field_name][0].verbose_name
         return " ".join(map(capfirst, field_name.split("_")))
 
     def build_schema(self):
@@ -56,4 +60,13 @@ class ResourceFieldsOrderSchemaMixin(object):
                 field_data['order_index'] = self._meta.fields_order.index(field_name)
             else:
                 field_data['order_index'] = self.fields.keys().index(field_name)
+        return data
+
+
+class ResourceRelatedFieldsUrlSchemaMixin(object):
+    def build_schema(self):
+        data = super(ResourceRelatedFieldsUrlSchemaMixin, self).build_schema()
+        for field_name, field_object in self.fields.items():
+            if isinstance(field_object, fields.ToOneField):
+                data['fields'][field_name]['url_name'] = field_object.to._meta.resource_name
         return data

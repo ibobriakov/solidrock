@@ -38,6 +38,7 @@ class SpecialCondition(models.Model):
 
 
 class Job(models.Model):
+    owner = models.ForeignKey('auth.User')
     name = models.CharField(verbose_name="Name This Job Posting", max_length=100)
     title = models.CharField(verbose_name="Job Title", max_length=100)
     description = models.TextField(verbose_name="Description")
@@ -66,7 +67,7 @@ class Essential(models.Model):
     essential = models.CharField(verbose_name="Essential", max_length=100)
 
     def __unicode__(self):
-        return self.name
+        return self.essential
 
 
 class Desireable(models.Model):
@@ -74,7 +75,7 @@ class Desireable(models.Model):
     desireable = models.CharField(verbose_name="Desireable", max_length=100)
 
     def __unicode__(self):
-        return self.name
+        return self.desireable
 
 
 

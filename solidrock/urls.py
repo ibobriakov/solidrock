@@ -3,7 +3,6 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth.views import logout
 from tastypie.api import Api
 from cover_letter.api import CoverLetterItemResource
 from registration_rest_backend.api import JobSeekerRegistrationResource, EmployerRegistrationResource,\
@@ -12,6 +11,8 @@ from resume.api import ResumeItemResource
 from userprofile.api import JobSeekerInformationResource, JobSeekerCurrentEmploymentResource,\
     JobSeekerPreviousEmploymentResource, JobSeekerEducationResource, JobSeekerRefereeResource, \
     EmployerResource
+from employer.api import JobResource, LocationResource, SalaryRangeResource, HourResource,\
+    EmploymentTypeResource, SpecialConditionResource, EssentialResource, DesireableResource
 
 v1_api = Api(api_name='v1')
 v1_api.register(EmployerResource())
@@ -26,6 +27,14 @@ v1_api.register(JobSeekerEducationResource())
 v1_api.register(JobSeekerRefereeResource())
 v1_api.register(ActivationResource())
 v1_api.register(LoginResource())
+v1_api.register(JobResource())
+v1_api.register(LocationResource())
+v1_api.register(SalaryRangeResource())
+v1_api.register(HourResource())
+v1_api.register(EmploymentTypeResource())
+v1_api.register(SpecialConditionResource())
+v1_api.register(EssentialResource())
+v1_api.register(DesireableResource())
 
 
 admin.autodiscover()
