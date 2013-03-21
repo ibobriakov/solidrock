@@ -140,7 +140,7 @@ class JobSeekerEducationType(SlugTraits('type_name'), models.Model):
 class JobSeekerEducation(models.Model):
     job_seeker = models.ForeignKey('userprofile.JobSeeker', related_name='educations_set')
     education_type = models.ForeignKey('userprofile.JobSeekerEducationType')
-    value = models.CharField(max_length=255)
+    value = models.CharField(max_length=255, blank=True, null=True)
 
     def __unicode__(self):
         return "Job Seeker Education {0} - {1} for {2}".format(self.education_type.__unicode__(),

@@ -164,7 +164,84 @@
                         <fieldset>
                             <div class="field">
                                 <label>Name of Employer</label>
+                                <input data-value="job_seeker_previous_employment.name" class="it4" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Address</label>
+                                <input data-value="job_seeker_previous_employment.address_first" class="it4" type="text">
+                                <input data-value="job_seeker_previous_employment.address_second" class="it4" type="text">
+                                <input data-value="job_seeker_previous_employment.city" class="it4" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Postcode</label>
+                                <input data-value="job_seeker_previous_employment.postcode" class="it3" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Position Title</label>
+                                <input data-value="job_seeker_previous_employment.position_title" class="it3" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Brief Description of Duties</label>
+                                <textarea data-value="job_seeker_previous_employment.brief"></textarea>
+                            </div>
+                            <div class="field">
+                                <label>Reason for Leaving</label>
+                                <textarea data-value="job_seeker_previous_employment.leaving_reason"></textarea>
+                            </div>
+                            <a href="#">Add Another Position</a>
+                            <div class="_submit">
+                                <div class="exit">Save and Exit</div>
+                                <div class="cont" data-on-click="job_seeker_previous_employment:commit">Save and Continue</div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <script>new (profile_view_fabric('job_seeker_previous_employment'))({el:$('div.section3')});</script>
+                    <div class="section4" style="display: none;">
+                        <div class="title">Education</div>
+                        <div class="text">(Qualifications from Schools, Colleges and Universities. Please list your highest qualification first.)</div>
+                        <fieldset>
+                            <div class="field">
+                                <label>School, College, or University Name</label>
                                 <input class="it4" type="text">
+                                <a href="#">Add another School, College or University</a>
+                            </div>
+                            <div class="field">
+                                <label>Major Course of Study or Classes Taken</label>
+                                <input class="it4" type="text">
+                                <a href="#">Add another Major Course of Study or Class Taken</a>
+                            </div>
+                            <div class="field">
+                                <label>Degrees and/or Post-Graduate Qualifications Obtained</label>
+                                <input class="it4" type="text">
+                                <a href="#">Add another Degree and/or Post-Graduate Qualification Obtained</a>
+                            </div>
+                            <div class="field">
+                                <label>Certificates and/or Diplomas Obtained</label>
+                                <input class="it4" type="text">
+                                <a href="#">Add another Certificate and/or Diploma Obtained</a>
+                            </div>
+                            <div class="field">
+                                <label>Any Other Course Currently Enrolled In</label>
+                                <input class="it4" type="text">
+                            </div>
+                            <div class="_submit">
+                                <div class="exit">Save and Exit</div>
+                                <div class="cont">Save and Continue</div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <script>var education = new (profile_view_fabric('job_seeker_education'))({el:$('div.section4')});</script>
+                    <div class="s5" style="display: block;">
+                        <div class="title">Referees</div>
+                        <div class="text">(Please give the names and addresses of your two most recent employers or other work related referees.)</div>
+                        <fieldset>
+                            <div class="field">
+                                <label>Name</label>
+                                <input class="it3" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Position Title or Relationship</label>
+                                <input class="it3" type="text">
                             </div>
                             <div class="field">
                                 <label>Address</label>
@@ -177,25 +254,25 @@
                                 <input class="it3" type="text">
                             </div>
                             <div class="field">
-                                <label>Position Title</label>
+                                <label>Phone Number</label>
+                                <input class="it2" type="text">
+                            </div>
+                            <div class="field">
+                                <label>Email Address</label>
                                 <input class="it3" type="text">
                             </div>
                             <div class="field">
-                                <label>Brief Description of Duties</label>
-                                <textarea></textarea>
+                                <label>Are you willing for this referee to be approached prior to an interview?</label>
+                                <label><input class="styled" type="radio" name="ch5" style="position: absolute; left: -9999px;"><span class="radio" style="display:inline-block"></span>Yes</label><label><input class="styled" type="radio" name="ch5" style="position: absolute; left: -9999px;"><span class="radio" style="display:inline-block"></span>No</label>
                             </div>
-                            <div class="field">
-                                <label>Reason for Leaving</label>
-                                <textarea></textarea>
-                            </div>
-                            <a href="#">Add Another Position</a>
+                            <a href="#">Add Another Referee</a>
                             <div class="_submit">
                                 <div class="exit">Save and Exit</div>
-                                <div class="cont">Save and Continue</div>
+                                <input type="submit" value="Submit and Terms">
                             </div>
                         </fieldset>
                     </div>
-                    <script>new (profile_view_fabric('job_seeker_previous_employment'))({el:$('div.section3')});</script>
+                    <script>new (profile_view_fabric('job_seeker_referee'))({el:$('div.section5')});</script>
                 </form>
             </div>
         </div>
