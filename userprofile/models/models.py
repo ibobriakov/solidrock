@@ -177,5 +177,8 @@ def create_job_seeker_profile(instance, created, **kwargs):
     if created:
         JobSeekerInformation.objects.create(job_seeker=instance, email=instance.user.email)
         JobSeekerCurrentEmployment.objects.create(job_seeker=instance)
+        for education_type in JobSeekerEducationType.objects.all():
+            JobSeekerEducation.objects.create(job_seeker=instance, education_type=education_type)
+
 
 post_save.connect(create_job_seeker_profile, sender=JobSeeker)
