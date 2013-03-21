@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from userprofile.models.fields import PhoneField
 
@@ -58,6 +59,9 @@ class Job(models.Model):
     contact_phone = PhoneField(verbose_name='Phone', blank=True, null=True, default='')
     contact_email = models.EmailField(verbose_name='Email')
 
+    categories = models.ManyToManyField('employer.JobCategory', through='employer.JobSelectedCategory')
+    sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedCategory')
+
     def __unicode__(self):
         return self.name
 
@@ -78,5 +82,26 @@ class Desireable(models.Model):
         return self.desireable
 
 
+class JobCategory(models.Model):
+    category_name = models.CharField(verbose_name="Category Name", max_length=100)
+
+    def __unicode__(self):
+        return self.category_name
 
 
+class JobSubCategory(models.Model):
+    category = models.ForeignKey('employer.JobCategory', verbose_name="Category", related_name='subcategories_set')
+    sub_category_name = models.CharField(verbose_name="Sub Category Name", max_length=100)
+
+    def __unicode__(self):
+        return self.sub_category_name
+
+
+class JobSelectedCategory(models.Model):
+    job = models.ForeignKey('employer.Job')
+    category = models.ForeignKey('employer.JobCategory')
+    sub_category = models.ForeignKey('employer.JobSubCategory')
+
+    def clean(self):
+        if self.sub_category not in self.category.jobsubcategory_set.all():
+            raise  ValidationError("Category and subcategory miss match")

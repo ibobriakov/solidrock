@@ -5,7 +5,7 @@ from tastypie.resources import ModelResource
 from tastypie.validation import FormValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
 from models import JobLocation, SalaryRange, Hour, EmploymentType, SpecialCondition
-from models import Job, Essential, Desireable
+from models import Job, Essential, Desireable, JobCategory, JobSubCategory
 from userprofile.api import UserProfileAuthorization
 
 __author__ = 'ir4y'
@@ -90,3 +90,20 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         authentication = SessionAuthentication()
         authorization = UserProfileAuthorization()
         validation = FormValidation(form_class=modelform_factory(Job))
+
+
+class JobCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResource):
+    subcategories_set = fields.ToManyField('employer.api.JobSubCategoryResource', 'subcategories_set',
+                                           full=True, blank=True, null=True)
+
+    class Meta:
+        queryset = JobCategory.objects.all()
+        allowed_methods = ('get',)
+
+
+class JobSubCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResource):
+    category = fields.ToOneField('employer.api.JobCategoryResource', 'category')
+
+    class Meta:
+        queryset = JobSubCategory.objects.all()
+        allowed_methods = ('get',)
