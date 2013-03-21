@@ -40,7 +40,7 @@ class ResourceTypesOverrideSchemaMixin(object):
 
 class ResourceLabelSchemaMixin(object):
     def get_label(self, field_name):
-        if hasattr(self._meta, 'queryset'):
+        if self._meta.queryset is not None:
             if field_name in self._meta.queryset.model._meta._name_map:
                 return self._meta.queryset.model._meta._name_map[field_name][0].verbose_name
         return " ".join(map(capfirst, field_name.split("_")))
