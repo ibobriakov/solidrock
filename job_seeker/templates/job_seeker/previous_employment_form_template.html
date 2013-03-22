@@ -1,28 +1,84 @@
 <fieldset>
     <div class="field">
         <label>Name of Employer</label>
-        <input data-value="<%=type%>_<%=index%>.name" class="it4" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.name" class="it4" type="text">
+        <% if (element.errors['name']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['name'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field">
         <label>Address</label>
-        <input data-value="<%=type%>_<%=index%>.address_first" class="it4" type="text">
-        <input data-value="<%=type%>_<%=index%>.address_second" class="it4" type="text">
-        <input data-value="<%=type%>_<%=index%>.city" class="it4" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.address_first" class="it4" type="text">
+        <% if (element.errors['address_first']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['address_first'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
+        <input data-value="<%=type%>_<%=element.cid%>.address_second" class="it4" type="text">
+        <% if (element.errors['address_second']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['address_second'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
+        <input data-value="<%=type%>_<%=element.cid%>.city" class="it4" type="text">
+        <% if (element.errors['city']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['city'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field">
         <label>Postcode</label>
-        <input data-value="<%=type%>_<%=index%>.postcode" class="it3" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.postcode" class="it3" type="text">
+        <% if (element.errors['postcode']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['postcode'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field">
         <label>Position Title</label>
-        <input data-value="<%=type%>_<%=index%>.position_title" class="it3" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.position_title" class="it3" type="text">
+        <% if (element.errors['position_title']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['position_title'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field">
         <label>Brief Description of Duties</label>
-        <textarea data-value="<%=type%>_<%=index%>.brief"></textarea>
+        <textarea data-value="<%=type%>_<%=element.cid%>.brief"></textarea>
+        <% if (element.errors['brief']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['brief'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
-    <div class="field">
-        <label>Reason for Leaving</label>
-        <textarea data-value="<%=type%>_<%=index%>.leaving_reason"></textarea>
+    <div class="field fl_clear">
+        <label>Reason for Leaving <span>(if no longer employed)</span></label>
+        <textarea data-value="<%=type%>_<%=element.cid%>.leaving_reason"></textarea>
+        <% if (element.errors['leaving_reason']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['leaving_reason'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
 </fieldset>

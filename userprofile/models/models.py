@@ -159,8 +159,11 @@ class JobSeekerEducation(models.Model):
     value = models.CharField(max_length=255, blank=True, null=True)
 
     def as_dict(self):
-        return {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
-                for f in self.__dict__ if not f[0] == '_'}
+        return {
+            'education_type': self.education_type.type_name_slug,
+            'value': self.value,
+            'id': self.id
+        }
 
     def __unicode__(self):
         return "Job Seeker Education {0} - {1} for {2}".format(self.education_type.__unicode__(),

@@ -4,36 +4,36 @@
 {% block templates %}
     {{ block.super }}
     <script id="job_seeker_information_form_template" type="text/template">
-        <% _.each(collection,function(element, index) { %>
+        <% _.each(collection.models,function(element, index) { %>
         <div class="title">Personal Information</div>
             {% include "job_seeker/information_form_template.html" %}
         <% }) %>
         <div class="_submit">
-            <div class="exit">Save and Exit</div>
+            <div class="exit" data-on-click="job_seeker_information_view:commit_and_exit">Save and Exit</div>
             <div class="cont" data-on-click="job_seeker_information_view:commit" >Save and Continue</div>
         </div>
     </script>
     <script id="job_seeker_current_employment_form_template" type="text/template">
-        <% _.each(collection,function(element, index) { %>
+        <% _.each(collection.models,function(element, index) { %>
         <div class="title">Current Employment</div>
         <div class="text">(If now unemployed give details of last employer)</div>
             {% include "job_seeker/current_employment_form_template.html" %}
         <% }) %>
         <div class="_submit">
-            <div class="exit">Save and Exit</div>
+            <div class="exit" data-on-click="job_seeker_current_employment_view:commit_and_exit">Save and Exit</div>
             <div class="cont" data-on-click="job_seeker_current_employment_view:commit" >Save and Continue</div>
         </div>
     </script>
     <script id="job_seeker_previous_employment_form_template" type="text/template">
-        <% _.each(collection,function(element, index) { %>
+        <% _.each(collection.models,function(element, index) { %>
         <div class="title">Previous Employment</div>
-        <% if (index) { %><a href="#" data-on-click="job_seeker_previous_employment_view:remove" data-index="<%=index%>">remove</a><% } %>
+        <% if (index) { %><a href="#" data-on-click="job_seeker_previous_employment_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
         <div class="text">(Most recent Employer first. Please cover you last three positions if applicable)</div>
             {% include "job_seeker/previous_employment_form_template.html" %}
         <% }) %>
         <a href="#" data-on-click="job_seeker_previous_employment_view:create">Add Another Position</a>
         <div class="_submit">
-            <div class="exit">Save and Exit</div>
+            <div class="exit" data-on-click="job_seeker_previous_employment_view:commit_and_exit">Save and Exit</div>
             <div class="cont" data-on-click="job_seeker_previous_employment_view:commit" >Save and Continue</div>
         </div>
     </script>
@@ -43,46 +43,104 @@
         <fieldset>
             <div class="field">
                 <label>School, College, or University Name</label>
-{#                <% collection.where('')%>#}
-                <input class="it4" type="text">
-                <a href="#">Add another School, College or University</a>
+                <% _.each(collection.where({'education_type':'school-college-or-university-name'}),function(element,index){ %>
+                    <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
+                    <% if (element.errors) { %>
+                    <div class="error_list">
+                        <% _.each(element.errors['education_type'],function(value){ %>
+                        <p><%=value%></p>
+                        <% }) %>
+                        <% _.each(element.errors['value'],function(value){ %>
+                        <p><%=value%></p>
+                        <% }) %>
+                    </div>
+                    <% } %>
+                <% }) %>
+                <a href="#" data-type-name="education_type" data-type="school-college-or-university-name" data-on-click="job_seeker_education_view:create_by_type">Add another School, College or University</a>
             </div>
             <div class="field">
                 <label>Major Course of Study or Classes Taken</label>
-                <input class="it4" type="text">
-                <a href="#">Add another Major Course of Study or Class Taken</a>
+                <% _.each(collection.where({'education_type':'major-course-of-study-or-classes-taken'}),function(element,index){ %>
+                <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
+                <% if (element.errors) { %>
+                <div class="error_list">
+                    <% _.each(element.errors['education_type'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                    <% _.each(element.errors['value'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                </div>
+                <% } %>
+                <% }) %>
+                <a href="#" data-type-name="education_type" data-type="major-course-of-study-or-classes-taken" data-on-click="job_seeker_education_view:create_by_type">Add another Major Course of Study or Class Taken</a>
             </div>
             <div class="field">
                 <label>Degrees and/or Post-Graduate Qualifications Obtained</label>
-                <input class="it4" type="text">
-                <a href="#">Add another Degree and/or Post-Graduate Qualification Obtained</a>
+                <% _.each(collection.where({'education_type':'degrees-andor-post-graduate-qualifications-obtained'}),function(element,index){ %>
+                <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
+                <% if (element.errors) { %>
+                <div class="error_list">
+                    <% _.each(element.errors['education_type'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                    <% _.each(element.errors['value'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                </div>
+                <% } %>
+                <% }) %>
+                <a href="#" data-type-name="education_type" data-type="degrees-andor-post-graduate-qualifications-obtained" data-on-click="job_seeker_education_view:create_by_type">Add another Degree and/or Post-Graduate Qualification Obtained</a>
             </div>
             <div class="field">
                 <label>Certificates and/or Diplomas Obtained</label>
-                <input class="it4" type="text">
-                <a href="#">Add another Certificate and/or Diploma Obtained</a>
+                <% _.each(collection.where({'education_type':'certificates-andor-diplomas-obtained'}),function(element,index){ %>
+                <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
+                <% if (element.errors) { %>
+                <div class="error_list">
+                    <% _.each(element.errors['education_type'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                    <% _.each(element.errors['value'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                </div>
+                <% } %>
+                <% }) %>
+                <a href="#" data-type-name="education_type" data-type="certificates-andor-diplomas-obtained" data-on-click="job_seeker_education_view:create_by_type">Add another Certificate and/or Diploma Obtained</a>
             </div>
             <div class="field">
                 <label>Any Other Course Currently Enrolled In</label>
-                <input class="it4" type="text">
+                <% _.each(collection.where({'education_type':'any-other-course-currently-enrolled-in'}),function(element,index){ %>
+                <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
+                <% if (element.errors) { %>
+                <div class="error_list">
+                    <% _.each(element.errors['education_type'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                    <% _.each(element.errors['value'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                </div>
+                <% } %>
+                <% }) %>
             </div>
             </fieldset>
         <div class="_submit">
-            <div class="exit">Save and Exit</div>
-            <div class="cont" data-on-click="job_seeker_previous_employment_view:commit" >Save and Continue</div>
+            <div class="exit" data-on-click="job_seeker_education_view:commit_and_exit">Save and Exit</div>
+            <div class="cont" data-on-click="job_seeker_education_view:commit" >Save and Continue</div>
         </div>
     </script>
     <script id="job_seeker_referee_form_template" type="text/template">
-        <% _.each(collection,function(element, index) { %>
+        <% _.each(collection.models,function(element, index) { %>
         <div class="title">Referees</div>
-        <% if (index) { %><a href="#" data-on-click="job_seeker_referee_view:remove" data-index="<%=index%>">remove</a><% } %>
+        <% if (index) { %><a href="#" data-on-click="job_seeker_referee_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
         <div class="text">(Please give the names and addresses of your two most recent employers or other work related referees.)</div>
         {% include "job_seeker/referee_form_template.html" %}
         <% }) %>
         <a href="#" data-on-click="job_seeker_referee_view:create">Add Another Position</a>
         <div class="_submit">
-            <div class="exit">Save and Exit</div>
-            <div class="cont" data-on-click="job_seeker_referee_view:commit">Save and Continue</div>
+            <div class="exit" data-on-click="job_seeker_referee_view:commit_and_exit">Save and Exit</div>
         </div>
     </script>
 {% endblock %}

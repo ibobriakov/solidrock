@@ -9,22 +9,20 @@
 function profile_model_fabric(type) {
     return Backbone.Model.extend({
         errors: {},
-        commit: function() {
-            var error = false;
+        commit: function(next_section) {
             this.save([],{ wait: true,
                 error: function(model,response){
-                    error = true;
                     model.errors = JSON.parse(response.responseText)[type];
                     model.view.render();
                 },
                 success: function(model){
-                    error = false;
                     model.errors = [];
-                    section_route.next_section();
-                    model.view.render();
+                    if (next_section) {
+                        section_route.next_section(next_section);
+                        model.view.render();
+                    }
                 }
             });
-            return error;
         }
     });
 }

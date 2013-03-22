@@ -26,10 +26,10 @@ var SectionRoute = Backbone.Router.extend({
         this.section = section;
         window.scrollTo(0,$('#section_top').offset().top);
     },
-    next_section: function() {
-        this.section = parseInt(this.section) + 1;
-        this.change_section(this.section);
-        this.navigate('#section/' + this.section);
+    next_section: function(section) {
+        section = section || parseInt(this.section) + 1;
+        this.change_section(section);
+        this.navigate('#section/' + section);
         return this;
     }
 });

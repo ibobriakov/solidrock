@@ -1,39 +1,102 @@
 <fieldset>
     <div class="field">
         <label>Name</label>
-        <input data-value="<%=type%>_<%=index%>.name" class="it3" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.name" class="it3" type="text">
+        <% if (element.errors['name']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['name'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field">
         <label>Position Title or Relationship</label>
-        <input data-value="<%=type%>_<%=index%>.position_title" class="it3" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.position_title" class="it3" type="text">
+        <% if (element.errors['position_title']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['position_title'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field">
         <label>Address</label>
-        <input data-value="<%=type%>_<%=index%>.address_first" class="it4" type="text">
-        <input data-value="<%=type%>_<%=index%>.address_second" class="it4" type="text">
-        <input data-value="<%=type%>_<%=index%>.city" class="it4" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.address_first" class="it4" type="text">
+        <% if (element.errors['address_first']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['address_first'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
+        <input data-value="<%=type%>_<%=element.cid%>.address_second" class="it4" type="text">
+        <% if (element.errors['address_second']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['address_second'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
+        <input data-value="<%=type%>_<%=element.cid%>.city" class="it4" type="text">
+        <% if (element.errors['city']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['city'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field">
         <label>Postcode</label>
-        <input data-value="<%=type%>_<%=index%>.postcode" class="it3" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.postcode" class="it3" type="text">
+        <% if (element.errors['postcode']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['postcode'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field">
         <label>Phone Number</label>
-        <input data-value="<%=type%>_<%=index%>.phone_number" class="it2" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.phone_number" class="it2" type="text">
+        <% if (element.errors['phone_number']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['phone_number'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field">
         <label>Email Address</label>
-        <input data-value="<%=type%>_<%=index%>.email" class="it3" type="text">
+        <input data-value="<%=type%>_<%=element.cid%>.email" class="it3" type="text">
+        <% if (element.errors['email']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['email'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
     <div class="field styled">
         <label>Are you willing for this referee to be approached prior to an interview?</label>
-        <input id="is_for_interview_yes_<%=index%>" type="radio" name="ch5" data-checked="<%=type%>_<%=index%>.is_for_interview" value="true">
-        <label for="is_for_interview_yes_<%=index%>">
+        <input id="is_for_interview_yes_<%=element.cid%>" type="radio" name="ch5" data-checked="<%=type%>_<%=element.cid%>.is_for_interview" value="true">
+        <label for="is_for_interview_yes_<%=element.cid%>">
             <span></span>Yes
         </label>
-        <input id="is_for_interview_no_<%=index%>" type="radio" name="ch5" data-checked="<%=type%>_<%=index%>.is_for_interview" value="false">
-        <label for="is_for_interview_no_<%=index%>">
+        <input id="is_for_interview_no_<%=element.cid%>" type="radio" name="ch5" data-checked="<%=type%>_<%=element.cid%>.is_for_interview" value="false">
+        <label for="is_for_interview_no_<%=element.cid%>">
             <span></span>No
         </label>
+        <% if (element.errors['is_for_interview']) { %>
+        <div class="error_list">
+            <% _.each(element.errors['is_for_interview'],function(value){ %>
+            <p><%=value%></p>
+            <% }) %>
+        </div>
+        <% } %>
     </div>
 </fieldset>
