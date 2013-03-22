@@ -110,10 +110,15 @@ class JobSeekerPreviousEmploymentResource(JobSeekerItemResource):
 
 
 class JobSeekerEducationResource(JobSeekerItemResource):
-    education_type = fields.CharField(readonly=True)
+    education_type = fields.CharField('education_type_id')
 
     def dehydrate_education_type(self, bundle):
         return bundle.obj.education_type.type_name_slug
+
+    def hydrate_education_type(self, bundle):
+        education_type = JobSeekerEducationType.objects.get(type_name_slug=bundle.data['education_type'])
+        bundle.data['education_type'] = education_type.pk
+        return bundle
 
     class Meta:
         queryset = JobSeekerEducation.objects.all()

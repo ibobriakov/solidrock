@@ -9,10 +9,12 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 from tastypie.test import ResourceTestCase
-from userprofile.models import Employer, JobSeeker
+from userprofile.models import Employer, JobSeeker, JobSeekerEducationType
 
 
-class UserprofileResourceTestCase(ResourceTestCase):
+class UserProfileResourceTestCase(ResourceTestCase):
+    fixtures = ['educationtype.json']
+
     def setUp(self):
         self.job_seeker1, self.job_seeker1_password = self._add_user('job_seeker1', 'password1', 0)
         JobSeeker.objects.create(user=self.job_seeker1)
@@ -24,7 +26,7 @@ class UserprofileResourceTestCase(ResourceTestCase):
         self.employer2, self.employer2_password = self._add_user('employer2', 'password2', 1)
         Employer.objects.create(user=self.employer2, company="Company2", phone="987654321")
 
-        super(UserprofileResourceTestCase, self).setUp()
+        super(UserProfileResourceTestCase, self).setUp()
 
     def _get_url(self, resource_name, pk=None):
         if not pk:
@@ -139,3 +141,13 @@ class UserprofileResourceTestCase(ResourceTestCase):
         self.assertTrue(self.job_seeker1.profile.referees_set.count() == 1)
         self.assertTrue(self.job_seeker1.profile.referees_set.all()[0].is_for_interview)
 
+    def test_job_seeker_add_education(self):
+        self.api_client.client.login(username=self.job_seeker1.username, password=self.job_seeker1_password)
+        education_type = JobSeekerEducationType.objects.all()[0]
+        resp = self.api_client.post(self._get_url('job_seeker_education'),
+                                    format='json',
+                                    data={'education_type': education_type.type_name_slug,
+                                          'value': "TestValue"})
+        self.assertHttpCreated(resp)
+        educations = self.job_seeker1.profile.educations_set.filter(value="TestValue", education_type=education_type)
+        self.assertEqual(educations.count(), 1)
