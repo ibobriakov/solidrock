@@ -79,6 +79,16 @@ class RegisterResourceTestCase(ResourceTestCase):
         # New user should can use resource.
         self.assertTrue(new_user.is_active)
 
+    def test_user_already_exists(self):
+        resp = self.api_client.post(self.get_employer_register_url(), format='json',
+                                    data=self.get_register_data())
+        self.assertHttpCreated(resp)
+
+        resp = self.api_client.post(self.get_employer_register_url(), format='json',
+                                    data=self.get_register_data())
+        self.assertHttpBadRequest(resp)
+        self.assertTrue('email_address' in self.deserialize(resp)['employer_registration'])
+
     def test_valid_activation(self):
         #Register correct
         resp = self.api_client.post(self.get_employer_register_url(), format='json',
