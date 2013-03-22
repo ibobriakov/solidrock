@@ -6,8 +6,8 @@ function paper_view_factory(paper_type,paper){
     return Backbone.View.extend({
         collection: new (paper_collection_factory(paper_type,paper))(),
         paper_item: '.paper',
-        paper_add: '.add-btn',
-        paper_remove: '.remove-btn',
+        paper_add: '.add',
+        paper_remove: '.del',
         url: rest_url[paper_type].list_endpoint,
         initialize: function() {
             _.bindAll(this, 'render');

@@ -63,8 +63,9 @@
         </div>
         <div class="avatar">
             <div>Profile Picture (optional)</div>
-            <div class="img"><img src="img/002.jpg"></div>
-            <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
+            {% load staticfiles %}
+            <div class="img"><img src="{% static "main/img/avatar_test.jpg" %}"></div>
+{#            <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>#}
         </div>
         <div class="bot_info">
             <div class="field fl_left">

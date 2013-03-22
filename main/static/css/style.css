@@ -626,6 +626,19 @@ footer ._footer ._footer_nav ul li a {
     padding: 8px 15px;
 }
 
+.window .window_block .center.reg-avt .block.reg ul li a {
+    background: #e4732b;
+    color: #fff;
+    font-size: 21px;
+    text-decoration: none;
+}
+
+.window .window_block .center.reg-avt .block.reg ul li.active a {
+    background: #f2fbff;
+    color: #e4732b;
+    text-decoration: none;
+}
+
 .window .window_block .center.reg-avt .block.reg ul li:last-child {
     -moz-box-shadow: 2px -3px 3px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 2px -3px 3px rgba(0, 0, 0, 0.2);
