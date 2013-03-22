@@ -6,7 +6,7 @@ from tastypie.resources import ModelResource
 from tastypie.validation import FormValidation
 from main.api import ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin, ResourceTypesOverrideSchemaMixin
 from ..models import JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
-    JobSeekerEducation, JobSeekerReferee, Employer
+    JobSeekerEducation, JobSeekerReferee, Employer, JobSeekerEducationType
 from authorization import UserProfileAuthorization
 
 
@@ -110,6 +110,11 @@ class JobSeekerPreviousEmploymentResource(JobSeekerItemResource):
 
 
 class JobSeekerEducationResource(JobSeekerItemResource):
+    education_type = fields.CharField(readonly=True)
+
+    def dehydrate_education_type(self, bundle):
+        return bundle.obj.education_type.type_name_slug
+
     class Meta:
         queryset = JobSeekerEducation.objects.all()
         resource_name = 'job_seeker_education'
