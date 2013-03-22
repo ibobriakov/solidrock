@@ -5,6 +5,7 @@ from django.contrib.sites.models import Site
 from registration.backends.simple import SimpleBackend
 from registration.models import RegistrationProfile
 from registration import signals
+from tasks import send_activation_email
 
 
 class RestBackend(SimpleBackend):
@@ -21,7 +22,7 @@ class RestBackend(SimpleBackend):
             site = Site.objects.get_current()
         else:
             site = RequestSite(request)
-        registration_profile.send_activation_email(site)
+        send_activation_email.delay(registration_profile, site)
 
         new_user.user_type = kwargs['username']
 

@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'mptt',
     'tastypie',
     'gunicorn',
+    'djcelery',
 )
 
 LOCAL_APPS = (
@@ -145,4 +146,10 @@ for item in LOCAL_APPS:
 #Django-registration settings
 ACCOUNT_ACTIVATION_DAYS = 7
 
+#celery url
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
 from local import *
+
+import djcelery
+djcelery.setup_loader()
