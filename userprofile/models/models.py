@@ -158,6 +158,10 @@ class JobSeekerEducation(models.Model):
     education_type = models.ForeignKey('userprofile.JobSeekerEducationType')
     value = models.CharField(max_length=255, blank=True, null=True)
 
+    def as_dict(self):
+        return {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
+                for f in self.__dict__ if not f[0] == '_'}
+
     def __unicode__(self):
         return "Job Seeker Education {0} - {1} for {2}".format(self.education_type.__unicode__(),
                                                                self.value,
@@ -177,6 +181,10 @@ class JobSeekerReferee(AddressMixin, models.Model):
         models.BooleanField(verbose_name=_("Are you willing for this to be approached prior to an interview ?"),
                             default=False)
 
+    def as_dict(self):
+        return {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
+                for f in self.__dict__ if not f[0] == '_'}
+
     def __unicode__(self):
         return "Job Seeker Referee for {0}".format(self.job_seeker.__unicode__())
 
@@ -193,6 +201,8 @@ def create_job_seeker_profile(instance, created, **kwargs):
     if created:
         JobSeekerInformation.objects.create(job_seeker=instance, email=instance.user.email)
         JobSeekerCurrentEmployment.objects.create(job_seeker=instance)
+        JobSeekerPreviousEmployment.objects.create(job_seeker=instance)
+        JobSeekerReferee.objects.create(job_seeker=instance)
         for education_type in JobSeekerEducationType.objects.all():
             JobSeekerEducation.objects.create(job_seeker=instance, education_type=education_type)
 

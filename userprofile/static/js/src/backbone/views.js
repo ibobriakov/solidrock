@@ -8,12 +8,19 @@ function profile_view_fabric(type, template) {
         template: _.template(template.html()),
         initialize: function() {
             this.collection.view = this;
+            if (!this.collection.models) this.collection
             this.render();
         },
         commit: function() {
             this.collection.each(function(element,index){
                element.commit();
             });
+        },
+        remove: function(event){
+            var model = this.collection.at($(event.toElement).attr('data-index'));
+            model.destroy();
+            this.render();
+            return false;
         },
         create: function() {
             this.collection.add({});

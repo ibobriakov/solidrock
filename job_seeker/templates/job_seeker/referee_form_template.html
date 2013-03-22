@@ -1,0 +1,39 @@
+<fieldset>
+    <div class="field">
+        <label>Name</label>
+        <input data-value="<%=type%>_<%=index%>.name" class="it3" type="text">
+    </div>
+    <div class="field">
+        <label>Position Title or Relationship</label>
+        <input data-value="<%=type%>_<%=index%>.position_title" class="it3" type="text">
+    </div>
+    <div class="field">
+        <label>Address</label>
+        <input data-value="<%=type%>_<%=index%>.address_first" class="it4" type="text">
+        <input data-value="<%=type%>_<%=index%>.address_second" class="it4" type="text">
+        <input data-value="<%=type%>_<%=index%>.city" class="it4" type="text">
+    </div>
+    <div class="field">
+        <label>Postcode</label>
+        <input data-value="<%=type%>_<%=index%>.postcode" class="it3" type="text">
+    </div>
+    <div class="field">
+        <label>Phone Number</label>
+        <input data-value="<%=type%>_<%=index%>.phone_number" class="it2" type="text">
+    </div>
+    <div class="field">
+        <label>Email Address</label>
+        <input data-value="<%=type%>_<%=index%>.email" class="it3" type="text">
+    </div>
+    <div class="field styled">
+        <label>Are you willing for this referee to be approached prior to an interview?</label>
+        <input id="is_for_interview_yes_<%=index%>" type="radio" name="ch5" data-checked="<%=type%>_<%=index%>.is_for_interview" value="true">
+        <label for="is_for_interview_yes_<%=index%>">
+            <span></span>Yes
+        </label>
+        <input id="is_for_interview_no_<%=index%>" type="radio" name="ch5" data-checked="<%=type%>_<%=index%>.is_for_interview" value="false">
+        <label for="is_for_interview_no_<%=index%>">
+            <span></span>No
+        </label>
+    </div>
+</fieldset>

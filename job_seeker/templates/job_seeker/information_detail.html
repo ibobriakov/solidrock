@@ -13,7 +13,6 @@
             <div class="cont" data-on-click="job_seeker_information_view:commit" >Save and Continue</div>
         </div>
     </script>
-
     <script id="job_seeker_current_employment_form_template" type="text/template">
         <% _.each(collection,function(element, index) { %>
         <div class="title">Current Employment</div>
@@ -25,10 +24,10 @@
             <div class="cont" data-on-click="job_seeker_current_employment_view:commit" >Save and Continue</div>
         </div>
     </script>
-
     <script id="job_seeker_previous_employment_form_template" type="text/template">
         <% _.each(collection,function(element, index) { %>
-        <div class="title">Previous Employment</div><% if (index) { %><a href="#">remove</a><% } %>
+        <div class="title">Previous Employment</div>
+        <% if (index) { %><a href="#" data-on-click="job_seeker_previous_employment_view:remove" data-index="<%=index%>">remove</a><% } %>
         <div class="text">(Most recent Employer first. Please cover you last three positions if applicable)</div>
             {% include "job_seeker/previous_employment_form_template.html" %}
         <% }) %>
@@ -36,6 +35,54 @@
         <div class="_submit">
             <div class="exit">Save and Exit</div>
             <div class="cont" data-on-click="job_seeker_previous_employment_view:commit" >Save and Continue</div>
+        </div>
+    </script>
+    <script id="job_seeker_education_form_template" type="text/template">
+        <div class="title">Education</div>
+        <div class="text">(Qualifications from Schools, Colleges and Universities. Please list your highest qualification first.)</div>
+        <fieldset>
+            <div class="field">
+                <label>School, College, or University Name</label>
+{#                <% collection.where('')%>#}
+                <input class="it4" type="text">
+                <a href="#">Add another School, College or University</a>
+            </div>
+            <div class="field">
+                <label>Major Course of Study or Classes Taken</label>
+                <input class="it4" type="text">
+                <a href="#">Add another Major Course of Study or Class Taken</a>
+            </div>
+            <div class="field">
+                <label>Degrees and/or Post-Graduate Qualifications Obtained</label>
+                <input class="it4" type="text">
+                <a href="#">Add another Degree and/or Post-Graduate Qualification Obtained</a>
+            </div>
+            <div class="field">
+                <label>Certificates and/or Diplomas Obtained</label>
+                <input class="it4" type="text">
+                <a href="#">Add another Certificate and/or Diploma Obtained</a>
+            </div>
+            <div class="field">
+                <label>Any Other Course Currently Enrolled In</label>
+                <input class="it4" type="text">
+            </div>
+            </fieldset>
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <div class="cont" data-on-click="job_seeker_previous_employment_view:commit" >Save and Continue</div>
+        </div>
+    </script>
+    <script id="job_seeker_referee_form_template" type="text/template">
+        <% _.each(collection,function(element, index) { %>
+        <div class="title">Referees</div>
+        <% if (index) { %><a href="#" data-on-click="job_seeker_referee_view:remove" data-index="<%=index%>">remove</a><% } %>
+        <div class="text">(Please give the names and addresses of your two most recent employers or other work related referees.)</div>
+        {% include "job_seeker/referee_form_template.html" %}
+        <% }) %>
+        <a href="#" data-on-click="job_seeker_referee_view:create">Add Another Position</a>
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <div class="cont" data-on-click="job_seeker_referee_view:commit">Save and Continue</div>
         </div>
     </script>
 {% endblock %}
@@ -65,9 +112,10 @@
             <div class="form sections_form">
                 <form>
                     <div class="page section1"></div>
-                    <div class="page section2"></div>
-                    <div class="page section3"></div>
-
+                    <div class="page section2" style="display: none"></div>
+                    <div class="page section3" style="display: none"></div>
+                    <div class="page section4" style="display: none"></div>
+                    <div class="page section5" style="display: none"></div>
                     <script>
                         var page_dict = {
                             'job_seeker_information':{
@@ -81,7 +129,16 @@
                             'job_seeker_previous_employment':{
                                 'section':3,
                                 'collection': {% autoescape off %}{{ profile.previous_employments_set.all|as_json }}{% endautoescape %}
+                            },
+                            'job_seeker_education':{
+                                'section':4,
+                                'collection': {% autoescape off %}{{ profile.educations_set.all|as_json }}{% endautoescape %}
+                            },
+                            'job_seeker_referee':{
+                                'section':5,
+                                'collection': {% autoescape off %}{{ profile.referees_set.all|as_json }}{% endautoescape %}
                             }
+
                         };
                         _.each(page_dict,function(value,key) {
                             new (profile_view_fabric(key))({
@@ -90,91 +147,6 @@
                             });
                         });
                     </script>
-
-{#                    <div class="page section4" style="display: none;">#}
-{#                        <div class="title">Education</div>#}
-{#                        <div class="text">(Qualifications from Schools, Colleges and Universities. Please list your highest qualification first.)</div>#}
-{#                        <fieldset>#}
-{#                            <div class="field">#}
-{#                                <label>School, College, or University Name</label>#}
-{#                                <input class="it4" type="text">#}
-{#                                <a href="#">Add another School, College or University</a>#}
-{#                            </div>#}
-{#                            <div class="field">#}
-{#                                <label>Major Course of Study or Classes Taken</label>#}
-{#                                <input class="it4" type="text">#}
-{#                                <a href="#">Add another Major Course of Study or Class Taken</a>#}
-{#                            </div>#}
-{#                            <div class="field">#}
-{#                                <label>Degrees and/or Post-Graduate Qualifications Obtained</label>#}
-{#                                <input class="it4" type="text">#}
-{#                                <a href="#">Add another Degree and/or Post-Graduate Qualification Obtained</a>#}
-{#                            </div>#}
-{#                            <div class="field">#}
-{#                                <label>Certificates and/or Diplomas Obtained</label>#}
-{#                                <input class="it4" type="text">#}
-{#                                <a href="#">Add another Certificate and/or Diploma Obtained</a>#}
-{#                            </div>#}
-{#                            <div class="field">#}
-{#                                <label>Any Other Course Currently Enrolled In</label>#}
-{#                                <input class="it4" type="text">#}
-{#                            </div>#}
-{#                            <div class="_submit">#}
-{#                                <div class="exit">Save and Exit</div>#}
-{#                                <div class="cont">Save and Continue</div>#}
-{#                            </div>#}
-{#                        </fieldset>#}
-{#                    </div>#}
-{#                    <script>var education = new (profile_view_fabric('job_seeker_education'))({el:$('div.section4')});</script>#}
-{#                    <div class="page section5" style="display: none;">#}
-{#                        <div class="title">Referees</div>#}
-{#                        <div class="text">(Please give the names and addresses of your two most recent employers or other work related referees.)</div>#}
-{#                        <fieldset>#}
-{#                            <div class="field">#}
-{#                                <label>Name</label>#}
-{#                                <input data-value="job_seeker_referee.name" class="it3" type="text">#}
-{#                            </div>#}
-{#                            <div class="field">#}
-{#                                <label>Position Title or Relationship</label>#}
-{#                                <input data-value="job_seeker_referee.position_title" class="it3" type="text">#}
-{#                            </div>#}
-{#                            <div class="field">#}
-{#                                <label>Address</label>#}
-{#                                <input data-value="job_seeker_referee.address_first" class="it4" type="text">#}
-{#                                <input data-value="job_seeker_referee.address_second" class="it4" type="text">#}
-{#                                <input data-value="job_seeker_referee.city" class="it4" type="text">#}
-{#                            </div>#}
-{#                            <div class="field">#}
-{#                                <label>Postcode</label>#}
-{#                                <input data-value="job_seeker_referee.postcode" class="it3" type="text">#}
-{#                            </div>#}
-{#                            <div class="field">#}
-{#                                <label>Phone Number</label>#}
-{#                                <input data-value="job_seeker_referee.phone_number" class="it2" type="text">#}
-{#                            </div>#}
-{#                            <div class="field">#}
-{#                                <label>Email Address</label>#}
-{#                                <input data-value="job_seeker_referee.email" class="it3" type="text">#}
-{#                            </div>#}
-{#                            <div class="field styled">#}
-{#                                <label>Are you willing for this referee to be approached prior to an interview?</label>#}
-{#                                <input id="is_for_interview_yes" type="radio" name="ch5" data-checked="job_seeker_referee.is_for_interview" value="true">#}
-{#                                <label for="is_for_interview_yes">#}
-{#                                    <span></span>Yes#}
-{#                                </label>#}
-{#                                <input id="is_for_interview_no" type="radio" name="ch5" data-checked="job_seeker_referee.is_for_interview" value="false">#}
-{#                                <label for="is_for_interview_no">#}
-{#                                    <span></span>No#}
-{#                                </label>#}
-{#                            </div>#}
-{#                            <a href="#">Add Another Referee</a>#}
-{#                            <div class="_submit">#}
-{#                                <div class="exit">Save and Exit</div>#}
-{#                                <div class="cont" data-on-click="job_seeker_referee:commit">Submit and Terms</div>#}
-{#                            </div>#}
-{#                        </fieldset>#}
-{#                    </div>#}
-{#                    <script>new (profile_view_fabric('job_seeker_referee'))({el:$('div.section5')});</script>#}
                 </form>
             </div>
         </div>
