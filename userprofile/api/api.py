@@ -5,6 +5,7 @@ from tastypie.authentication import SessionAuthentication
 from tastypie.exceptions import ImmediateHttpResponse
 from tastypie.resources import ModelResource
 from tastypie.validation import FormValidation
+from constance import config
 from main.api import ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin, ResourceTypesOverrideSchemaMixin
 from ..models import JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
     JobSeekerEducation, JobSeekerReferee, Employer, JobSeekerEducationType
@@ -65,7 +66,10 @@ class JobSeekerInformationResource(JobSeekerItemResource):
         return bundle.obj.job_seeker.user.last_name
 
     def dehydrate_photo(self, bundle):
-        return get_thumbnail(bundle.obj.photo, '203x203', crop="center").url
+        if bundle.obj.photo:
+            return get_thumbnail(bundle.obj.photo, '203x203', crop="center").url
+        else:
+            return config.DEFAULT_AVATAR
 
     def hydrate(self, bundle):
         super(JobSeekerInformationResource, self).hydrate(bundle)

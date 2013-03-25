@@ -8,7 +8,9 @@ billiard==2.7.3.22
 celery==3.0.16
 distribute==0.6.35
 django-celery==3.0.11
+django-constance==0.5
 django-mptt==0.5.5
+django-picklefield==0.3.0
 django-registration==0.8
 django-tastypie==0.9.12
 gunicorn==0.17.2

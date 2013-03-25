@@ -97,6 +97,8 @@ INSTALLED_APPS = (
     'gunicorn',
     'djcelery',
     'sorl.thumbnail',
+    'constance',
+    'constance.backends.database',
 )
 
 LOCAL_APPS = (
@@ -137,6 +139,10 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+CONSTANCE_CONFIG = {
+    'DEFAULT_AVATAR': ('/static/main/img/avatar_test.jpg', 'Default avatar url')
 }
 
 for item in LOCAL_APPS:
