@@ -6,7 +6,7 @@ from tastypie.validation import FormValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
 from models import JobLocation, SalaryRange, Hour, EmploymentType, SpecialCondition
 from models import Job, Essential, Desireable, JobCategory, JobSubCategory
-from userprofile.api import UserProfileAuthorization
+from userprofile.api import AuthorizationWithObjectPermissions
 
 __author__ = 'ir4y'
 
@@ -88,7 +88,7 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         resource_name = 'job'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = UserProfileAuthorization()
+        authorization = AuthorizationWithObjectPermissions()
         validation = FormValidation(form_class=modelform_factory(Job))
 
 

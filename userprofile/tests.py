@@ -138,8 +138,8 @@ class UserProfileResourceTestCase(ResourceTestCase):
                                          'is_for_interview': True})
         self.assertHttpAccepted(resp)
         self.assertTrue(self.deserialize(resp)['is_for_interview'])
-        self.assertTrue(self.job_seeker1.profile.referees_set.count() == 1)
-        self.assertTrue(self.job_seeker1.profile.referees_set.all()[0].is_for_interview)
+        self.assertEqual(self.job_seeker1.profile.referees_set.count(), 2)
+        self.assertTrue(self.job_seeker1.profile.referees_set.all()[1].is_for_interview)
 
     def test_job_seeker_add_education(self):
         self.api_client.client.login(username=self.job_seeker1.username, password=self.job_seeker1_password)

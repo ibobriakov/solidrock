@@ -2,7 +2,9 @@ __author__ = 'ir4y'
 
 
 class PermissionBackend(object):
-    def has_perm(self, user, perm, obj):
+    def has_perm(self, user, perm, obj=None):
+        if obj is None:
+            return False
         if perm == 'userprofile.change_employer':
             return obj.user == user
         elif perm in ('userprofile.change_jobseekerinformation',
@@ -16,6 +18,8 @@ class PermissionBackend(object):
                       'userprofile.add_jobseekereducation',
                       'userprofile.add_jobseekerreferee',):
             return True
+        elif perm in ('resume.change_resumeitem',):
+            return obj.paper.owner == user
         return False
 
     def authenticate(self):

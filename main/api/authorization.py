@@ -4,7 +4,7 @@ from tastypie.exceptions import Unauthorized
 __author__ = 'ir4y'
 
 
-class UserProfileAuthorization(DjangoAuthorization):
+class AuthorizationWithObjectPermissions(DjangoAuthorization):
         def create_list(self, object_list, bundle):
             klass = self.base_checks(bundle.request, object_list.model)
 
@@ -13,7 +13,7 @@ class UserProfileAuthorization(DjangoAuthorization):
 
             permission = '%s.add_%s' % (klass._meta.app_label, klass._meta.module_name)
 
-            if not bundle.request.user.has_perm(permission,object_list):
+            if not bundle.request.user.has_perm(permission, object_list):
                 return []
 
             return object_list

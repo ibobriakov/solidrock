@@ -7,7 +7,7 @@ from tastypie.validation import FormValidation
 from main.api import ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin, ResourceTypesOverrideSchemaMixin
 from ..models import JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
     JobSeekerEducation, JobSeekerReferee, Employer, JobSeekerEducationType
-from authorization import UserProfileAuthorization
+from main.api.authorization import AuthorizationWithObjectPermissions
 
 
 __author__ = 'ir4y'
@@ -27,7 +27,7 @@ class EmployerResource(ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin,
         resource_name = 'employer'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = UserProfileAuthorization()
+        authorization = AuthorizationWithObjectPermissions()
         validation = FormValidation(form_class=modelform_factory(Employer))
 
 
@@ -85,7 +85,7 @@ class JobSeekerInformationResource(JobSeekerItemResource):
         resource_name = 'job_seeker_information'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = UserProfileAuthorization()
+        authorization = AuthorizationWithObjectPermissions()
         validation = FormValidation(form_class=modelform_factory(JobSeekerInformation))
 
 
@@ -95,7 +95,7 @@ class JobSeekerCurrentEmploymentResource(JobSeekerItemResource):
         resource_name = 'job_seeker_current_employment'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = UserProfileAuthorization()
+        authorization = AuthorizationWithObjectPermissions()
         validation = FormValidation(form_class=modelform_factory(JobSeekerCurrentEmployment))
 
 
@@ -105,7 +105,7 @@ class JobSeekerPreviousEmploymentResource(JobSeekerItemResource):
         resource_name = 'job_seeker_previous_employment'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = UserProfileAuthorization()
+        authorization = AuthorizationWithObjectPermissions()
         validation = FormValidation(form_class=modelform_factory(JobSeekerPreviousEmployment))
 
 
@@ -125,7 +125,7 @@ class JobSeekerEducationResource(JobSeekerItemResource):
         resource_name = 'job_seeker_education'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = UserProfileAuthorization()
+        authorization = AuthorizationWithObjectPermissions()
         validation = FormValidation(form_class=modelform_factory(JobSeekerEducation))
 
 
@@ -135,5 +135,5 @@ class JobSeekerRefereeResource(JobSeekerItemResource):
         resource_name = 'job_seeker_referee'
         always_return_data = True
         authentication = SessionAuthentication()
-        authorization = UserProfileAuthorization()
+        authorization = AuthorizationWithObjectPermissions()
         validation = FormValidation(form_class=modelform_factory(JobSeekerReferee))
