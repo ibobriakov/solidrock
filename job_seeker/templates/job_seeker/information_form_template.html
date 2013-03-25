@@ -66,14 +66,9 @@
             <div>Profile Picture (optional)</div>
             {% load staticfiles %}
             <div class="img">
-                {% thumbnail user.profile.personal_information.photo "203x203" crop="center" as im %}
-                    <img src="{{ im.url }}">
-                {% empty %}
-                    <img src="{% static "main/img/avatar_test.jpg" %}">
-                {% endthumbnail %}
+                <img id="avatar_img" data-src="<%=type%>_<%=element.cid%>.avatar">
             </div>
-            <input id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}" multiple>
-{#            <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>#}
+            <input id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}">
         </div>
         <div class="bot_info">
             <div class="field fl_left">
