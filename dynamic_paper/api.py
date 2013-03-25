@@ -55,25 +55,3 @@ class PaperItemResource(ModelResource):
 
     class Meta:
         excludes = ['level', 'lft', 'rght', 'tree_id']
-
-
-class CustomDjangoAuthorization(DjangoAuthorization):
-    def create_detail(self, object_list, bundle):
-        if bundle.data["type"] != "container":
-            raise BadRequest("Wrong type")
-        klass = self.base_checks(bundle.request, bundle.obj.__class__)
-
-        if klass is False:
-            raise Unauthorized("You are not allowed to access that resource.")
-
-        try:
-            parent_item = klass.objects.get(pk=bundle.data['parent'])
-        except klass.DoesNotExists:
-            raise Unauthorized("You are not allowed to access that resource.")
-        if parent_item.paper.owner != bundle.request.user:
-            raise Unauthorized("You are not allowed to access that resource.")
-
-        if parent_item.type.type_name() != bundle.data["value"]:
-            raise BadRequest("Wrong value for this parent")
-
-        return True
