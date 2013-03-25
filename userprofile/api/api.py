@@ -46,6 +46,7 @@ class JobSeekerItemResource(ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaM
 class JobSeekerInformationResource(JobSeekerItemResource):
     first_name = fields.CharField()
     last_name = fields.CharField()
+    photo = fields.FileField(readonly=True)
 
     def dehydrate_have_visa(self, bundle):
         return str(bundle.obj.have_visa).lower()
