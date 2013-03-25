@@ -1342,3 +1342,41 @@ div.styled input[type="radio"]:checked + label span {
     background:url(../img/checkbox.png) 0 -22px;
 }
 
+/*Help Tip*/
+.field {
+    position: relative;
+}
+.help-tip {
+    width:220px;
+    background: #f2fbff;
+    border: 1px solid #d5d5d5;
+    position: absolute;
+    top: -13px;
+    left: -261px;
+    display: none;
+    min-height: 100px;
+    z-index: 5;
+}
+.help-tip-title {
+    padding: 0 10px;
+    background: #409bcd;
+    font-size: 18px;
+    height: 25px;
+    line-height: 25px;
+    color:white;
+}
+.help-tip-text {
+    font-size: 12px;
+    color:#94949;
+    padding: 10px;
+}
+.help-tip-right{
+    background: url(../img/help-tip-right.png);
+    width:31px;
+    height: 35px;
+    position: absolute;
+    right:-31px;
+}
+.field input:focus + .help-tip{
+    display: block;
+}

@@ -213,13 +213,13 @@
 
 {% block initialize-js %}
     {{ block.super }}
-    <script>
-        $('#fileupload').fileupload({
-            singleFileUploads: true,
-            dataType: 'json',
-            done: function (e, data) {
-                $('#avatar_img').attr('src',data.result.url);
-            }
-        });
-    </script>
+{#    <script>#}
+{#        $('#fileupload').fileupload({#}
+{#            singleFileUploads: true,#}
+{#            dataType: 'json',#}
+{#            done: function (e, data) {#}
+{#                $('#avatar_img').attr('src',data.result.url);#}
+{#            }#}
+{#        });#}
+{#    </script>#}
 {% endblock %}
