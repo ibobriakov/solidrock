@@ -1,4 +1,5 @@
 from django.forms.models import modelform_factory
+from sorl.thumbnail.shortcuts import get_thumbnail
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.exceptions import ImmediateHttpResponse
@@ -62,6 +63,9 @@ class JobSeekerInformationResource(JobSeekerItemResource):
 
     def dehydrate_last_name(self, bundle):
         return bundle.obj.job_seeker.user.last_name
+
+    def dehydrate_photo(self, bundle):
+        return get_thumbnail(bundle.obj.photo, '203x203', crop="center").url
 
     def hydrate(self, bundle):
         super(JobSeekerInformationResource, self).hydrate(bundle)
