@@ -1043,7 +1043,6 @@ footer ._footer ._footer_nav ul li a {
 .stages .right .form .field.fl_left {
     float: left;
     margin-right: 20px;
-    overflow: hidden;
 }
 
 .stages .right .form .field.fl_clear {
@@ -1378,5 +1377,9 @@ div.styled input[type="radio"]:checked + label span {
     right:-31px;
 }
 .field input:focus + .help-tip{
+    display: block;
+}
+
+.field.fl_left input:focus + .help-tip{
     display: block;
 }
