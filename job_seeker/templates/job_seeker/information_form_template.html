@@ -65,6 +65,7 @@
             <div>Profile Picture (optional)</div>
             {% load staticfiles %}
             <div class="img"><img src="{% static "main/img/avatar_test.jpg" %}"></div>
+            <input id="fileupload" type="file" name="files[]" data-url="/upload/" multiple>
 {#            <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>#}
         </div>
         <div class="bot_info">

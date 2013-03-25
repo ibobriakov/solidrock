@@ -6,17 +6,21 @@ function profile_view_fabric(type, template) {
     template = template || $('#'+type+'_form_template');
     return Backbone.View.extend ({
         template: _.template(template.html()),
+        action: {},
         initialize: function() {
             this.collection.view = this;
+            this.action['section'] = false;
+            this.action['url'] = false;
             this.render();
         },
         commit: function() {
-            var next_section = parseInt(section_route.section)+1;
+            this.action['section'] = parseInt(section_route.section)+1;
             this.collection.each(function(element){
-               element.commit(next_section);
+               element.commit();
             });
         },
         commit_and_exit: function(){
+            this.action['url'] = '/job_seeker/';
             this.collection.each(function(element){
                 element.commit(false);
             });
@@ -39,6 +43,22 @@ function profile_view_fabric(type, template) {
             this.render();
             return false;
         },
+        check_model_valid: function() {
+            for (var i=0; i < this.collection.models.length; i++){
+                if (!this.collection.models[i].valid) {
+                    return true;
+                }
+            }
+            if (this.view.action['section']) {
+                section_route.next_section(this.view.action['section']);
+                this.view.render();
+                this.view.action['section'] = false;
+            } else if (this.view.action['url']) {
+                document.location.href = this.view.action['url'];
+                this.view.action['url'] = false;
+            }
+            return false;
+        },
         render: function() {
             this.$el.html(this.template({'collection':this.collection,'type':type}));
 
@@ -54,6 +74,7 @@ function profile_view_fabric(type, template) {
                 element.rivets = rivets;
                 element.rivets.bind(that.el, model_object);
                 element.view = that;
+                element.on('sync',that.check_model_valid);
             });
         }
     });

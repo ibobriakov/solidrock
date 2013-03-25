@@ -2,11 +2,17 @@
 import json
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
 
 class MainView(TemplateView):
     template_name = 'main.html'
+
+
+@csrf_exempt
+def upload(request):
+    print(request)
 
 
 def url_resolver(request):
