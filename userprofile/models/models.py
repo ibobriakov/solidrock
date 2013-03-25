@@ -1,9 +1,11 @@
 import json
+from constance import config
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
+from sorl.thumbnail import get_thumbnail
 from main.utils import patch_model
 from fields import PhoneField
 from mixins import AddressMixin, SlugTraits
@@ -94,6 +96,10 @@ class JobSeekerInformation(AddressMixin, models.Model):
                 for f in self.__dict__ if not f[0] == '_'}
         fields_dict['first_name'] = self.job_seeker.first_name
         fields_dict['last_name'] = self.job_seeker.last_name
+        if self.photo:
+            fields_dict['photo'] = get_thumbnail(self.photo, '203x203', crop="center").url
+        else:
+            fields_dict['photo'] = config.DEFAULT_AVATAR
         return fields_dict
 
     def __unicode__(self):

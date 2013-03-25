@@ -8,7 +8,6 @@
 
 function profile_collection_fabric(type) {
     return Backbone.Collection.extend({
-        url: rest_url[type].list_endpoint,
         model: profile_model_fabric(type),
         initialize: function(){
           if (!this.models) this.add({});

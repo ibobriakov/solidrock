@@ -7,6 +7,14 @@ function profile_model_fabric(type) {
     return Backbone.Model.extend({
         errors: {},
         valid: false,
+        urlRoot: rest_url[type].list_endpoint,
+        url: function(){
+            if (this.id){
+                return this.urlRoot + this.id + '/';
+            } else {
+                return this.urlRoot;
+            }
+        },
         commit: function() {
             this.valid = false;
             this.save([],{ wait: true,

@@ -66,7 +66,7 @@
             <div>Profile Picture (optional)</div>
             {% load staticfiles %}
             <div class="img">
-                <img id="avatar_img" data-src="<%=type%>_<%=element.cid%>.avatar">
+                <img id="avatar_img" data-src="<%=type%>_<%=element.cid%>.photo">
             </div>
             <input id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}">
         </div>
