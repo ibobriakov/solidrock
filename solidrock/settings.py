@@ -96,6 +96,7 @@ INSTALLED_APPS = (
     'tastypie',
     'gunicorn',
     'djcelery',
+    'sorl.thumbnail',
 )
 
 LOCAL_APPS = (
