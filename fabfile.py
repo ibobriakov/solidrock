@@ -3,18 +3,18 @@ from fabric.api import env, cd, run, prefix
 from fabric.operations import local
 from solidrock.settings import LOCAL_APPS
 
-env.hosts = ['solidrock@solidrock.ru:22']
+env.hosts = ['solidrock@allsol.ru:7624']
 prefix = prefix('source /home/solidrock/bin/activate')
 
 def deploy():
     with cd('/home/solidrock/site/solidrock'):
         with prefix:
-            run('hg pull -u -b default')
-            run('pip install -r deps.pip')
+            run('git pull')
             run('python ./manage.py syncdb')
             run('python ./manage.py migrate')
             run('python ./manage.py collectstatic --noinput')
-            run('touch solidrock/wsgi.py')
+            run(' supervisorctl -c /home/solidrock/etc/supervisor/supervisord.conf  restart celeryd')
+            run(' supervisorctl -c /home/solidrock/etc/supervisor/supervisord.conf  restart gunicorn')
 
 def manage(command='help'):
     with cd('/home/solidrock/site/solidrock'):
