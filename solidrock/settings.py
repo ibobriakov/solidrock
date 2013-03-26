@@ -103,6 +103,7 @@ INSTALLED_APPS = (
     'constance',
     'constance.backends.database',
     'flatblocks',
+    'redactor',
 )
 
 LOCAL_APPS = (
