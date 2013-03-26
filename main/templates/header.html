@@ -25,7 +25,9 @@
     <ul style="float:left;">
         <li {% if url_name == "search" %}class="active"{% endif %}><a href="{% url "search" %}">SEARCH</a></li>
         {% if user.is_authenticated %}
-            <li {% if url_name|startswith:"job_seeker" or url_name|startswith:"resume"  or url_name|startswith:"cover_letter" %}class="active"{% endif %}><a href="{{ user.profile.url }}">MY ACCOUNT</a></li>
+            <li {% if url_name|startswith:"job_seeker" or url_name|startswith:"resume"  or url_name|startswith:"cover_letter" or url_name|startswith:"employer" %}class="active"{% endif %}>
+                <a href="{{ user.profile.url }}">MY ACCOUNT</a>
+            </li>
         {% endif %}
         <li><a href="#">EMPLOYERS</a></li>
         <li {% if url_name == "explore" %}class="active"{% endif %}><a href="{% url "explore" %}">EXPLORE SOLID ROCK RECRUITMENT</a></li>

@@ -44,7 +44,7 @@ class Employer(AddressMixin, models.Model):
     agree = models.BooleanField(verbose_name=_('Do you agree to the Terms and Conditions?'), default=False)
 
     def url(self):
-        return reverse('job_seeker.profile.base')
+        return reverse('employer.profile.base')
 
     def __unicode__(self):
         return "Employer profile for {0}".format(self.company)

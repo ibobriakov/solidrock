@@ -5,7 +5,7 @@ from models import Job
 
 
 class EmployerView(TemplateView):
-    template_name = "employer/main.html"
+    template_name = "employer/detail.html"
 
 
 class CreateJobView(TemplateView):

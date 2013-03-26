@@ -1,0 +1,72 @@
+{% extends 'userprofile/base.html' %}
+{% load flatblock_tags %}
+{% load thumbnail %}
+
+{% block templates %}
+    {{ block.super }}
+    <script id="employer_form_template" type="text/template">
+        <% _.each(collection.models,function(element, index) { %>
+            {% include "employer/form_template.html" %}
+        <% }) %>
+        <div class="_submit">
+            <div class="exit" data-on-click="employer_view:commit_and_exit">Save and Exit</div>
+        </div>
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="_content stages">
+        <h1>Your Business Information</h1>
+
+        <div class="left">
+            <div class="company-logo">
+                <div>Company Logo (optional)</div>
+                {% load staticfiles %}
+                <div class="img">
+                    <img id="avatar_img" data-src="<%=type%>_<%=element.cid%>.photo">
+                    <div class="links"><a id="link_upload_file" href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
+                </div>
+                <input class="_hide" id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}">
+            </div>
+        </div>
+        <div class="right">
+            <div class="form">
+                <form>
+                    <div class="section1"></div>
+                </form>
+            </div>
+            <script>
+                var page_dict = {
+                    'employer': {
+                        'section': 1,
+                        'collection': [{}]
+{#                        {% autoescape off %}{% endautoescape %}#}
+                    }
+                };
+                _.each(page_dict, function (value, key) {
+                    new (profile_view_fabric(key))({
+                        el: $('.section' + value.section),
+                        collection: new (profile_collection_fabric(key))(value.collection)
+                    });
+                });
+            </script>
+        </div>
+    </div>
+{% endblock %}
+
+{#{% block initialize-js %}#}
+{#    {{ block.super }}#}
+{#    <script>#}
+{#        $('#fileupload').fileupload({#}
+{#            singleFileUploads: true,#}
+{#            dataType: 'json',#}
+{#            done: function (e, data) {#}
+{#                $('#avatar_img').attr('src',data.result.url);#}
+{#            }#}
+{#        });#}
+{#        $('#link_upload_file').on('click',function(){#}
+{#            $('#fileupload').trigger('click');#}
+{#            return false;#}
+{#        });#}
+{#    </script>#}
+{#{% endblock %}#}
