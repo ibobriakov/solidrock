@@ -144,14 +144,14 @@
         </div>
         <div class="field">
             <label>Phone Number</label>
-            <input data-value="<%=type%>_<%=element.cid%>.phone_number" class="it2" type="text">
+            <input data-value="<%=type%>_<%=element.cid%>.phone" class="it2" type="text">
             <div class="help-tip">
                 <div class="help-tip-title">Helpful Tip!</div>
                 <div class="help-tip-text"><div class="help-tip-right"></div>Phone Number.</div>
             </div>
-            <% if (element.errors['phone_number']) { %>
+            <% if (element.errors['phone']) { %>
             <div class="error_list">
-                <% _.each(element.errors['phone_number'],function(value){ %>
+                <% _.each(element.errors['phone'],function(value){ %>
                 <p><%=value%></p>
                 <% }) %>
             </div>

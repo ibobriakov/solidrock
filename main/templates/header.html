@@ -35,7 +35,11 @@
 
     </ul>
     <ul style="float:right;">
-        <li class="_reg"><a href="#">JOB SEEKERS REGISTER HERE</a></li>
-        <li class="_post"><a href="#">POST A JOB</a></li>
+        {% if not user.is_authenticated %}
+        <li class="_reg"><a href="#register/job_seeker">JOB SEEKERS REGISTER HERE</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <li class="_post"><a href="#">POST A JOB</a></li>
+        {% endif %}
     </ul>
 </div>

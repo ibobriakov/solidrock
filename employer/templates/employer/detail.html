@@ -1,6 +1,7 @@
 {% extends 'userprofile/base.html' %}
 {% load flatblock_tags %}
 {% load thumbnail %}
+{% load serialize %}
 
 {% block templates %}
     {{ block.super }}
@@ -23,7 +24,7 @@
                 <div>Company Logo (optional)</div>
                 {% load staticfiles %}
                 <div class="img">
-                    <img id="avatar_img" data-src="<%=type%>_<%=element.cid%>.photo">
+                    <img id="avatar_img" data-src="employer_<%=element.cid%>.photo">
                     <div class="links"><a id="link_upload_file" href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
                 </div>
                 <input class="_hide" id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}">
@@ -39,8 +40,7 @@
                 var page_dict = {
                     'employer': {
                         'section': 1,
-                        'collection': [{}]
-{#                        {% autoescape off %}{% endautoescape %}#}
+                        'collection':{% autoescape off %}{{ user.profile|as_json }}{% endautoescape %}
                     }
                 };
                 _.each(page_dict, function (value, key) {
@@ -54,19 +54,19 @@
     </div>
 {% endblock %}
 
-{#{% block initialize-js %}#}
-{#    {{ block.super }}#}
-{#    <script>#}
-{#        $('#fileupload').fileupload({#}
-{#            singleFileUploads: true,#}
-{#            dataType: 'json',#}
-{#            done: function (e, data) {#}
-{#                $('#avatar_img').attr('src',data.result.url);#}
-{#            }#}
-{#        });#}
-{#        $('#link_upload_file').on('click',function(){#}
-{#            $('#fileupload').trigger('click');#}
-{#            return false;#}
-{#        });#}
-{#    </script>#}
-{#{% endblock %}#}
+{% block initialize-js %}
+    {{ block.super }}
+    <script>
+        $('#fileupload').fileupload({
+            singleFileUploads: true,
+            dataType: 'json',
+            done: function (e, data) {
+                $('#avatar_img').attr('src',data.result.url);
+            }
+        });
+        $('#link_upload_file').on('click',function(){
+            $('#fileupload').trigger('click');
+            return false;
+        });
+    </script>
+{% endblock %}
