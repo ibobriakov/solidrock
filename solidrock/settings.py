@@ -91,8 +91,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'registration',
+    'django.contrib.flatpages',
 
+    'registration',
     'south',
     'mptt',
     'tastypie',
