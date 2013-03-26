@@ -9,6 +9,13 @@ function paper_model_factory (paper_type,paper){
     return Backbone.Model.extend({
         defaults: { "type": "text", "value": "" },
         urlRoot: rest_url[paper_type].list_endpoint,
+        url: function(){
+            if (this.id){
+                return this.urlRoot + this.id + '/';
+            } else {
+                return this.urlRoot;
+            }
+        },
         urlParent: rest_url[paper_type].list_endpoint+'?parent=',
         type: paper_type,
         paper: paper,
