@@ -15,16 +15,16 @@ class RestBackend(SimpleBackend):
         Send email activation message
 
         """
-        username, email, password = kwargs['username'], kwargs['email'], kwargs['password']
-        new_user = User.objects.create_user(username, email, password)
+        username = kwargs.pop('username')
+        email = kwargs.pop('email')
+        password = kwargs.pop('password')
+        new_user = User.objects.create_user(username, email, password, **kwargs)
         registration_profile = RegistrationProfile.objects.create_profile(new_user)
         if Site._meta.installed:
             site = Site.objects.get_current()
         else:
             site = RequestSite(request)
         send_activation_email.delay(registration_profile, site)
-
-        new_user.user_type = kwargs['username']
 
         # authenticate() always has to be called before login(), and
         # will return the user we just created.
