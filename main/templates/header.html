@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load main_tags %}
 {% load flatpages %}
+{% load thumbnail %}
 <ul class="_top_navigation">
     {% get_flatpages '/articles/' as articles_pages %}
     {% for article in articles_pages %}
@@ -13,7 +14,13 @@
 <a class="_logo" href="/"></a>
 <div class="_login">
     {% if user.is_authenticated %}
-        <div class="_avatar"><img src="{% static 'main/img/avatar.png' %}"/></div>
+        <div class="_avatar">
+            {% thumbnail user.profile.avatar "40x40" crop="center" as im %}
+                <img src="{{ im.url }}"/>
+            {% empty %}
+                <img src="{% static 'main/img/avatar.png' %}"/>
+            {% endthumbnail %}
+        </div>
         <div class="_hello">{{ user }}</div>
         <a href="{% url "logout" %}" class="_logout">Logout</a>
     {% else %}
@@ -26,7 +33,8 @@
     <ul style="float:left;">
         <li {% if url_name == "search" %}class="active"{% endif %}><a href="{% url "search" %}">SEARCH</a></li>
         {% if user.is_authenticated %}
-            <li {% if url_name|startswith:"job_seeker" or url_name|startswith:"resume"  or url_name|startswith:"cover_letter" or url_name|startswith:"employer" %}class="active"{% endif %}>
+            {# TODO refactor this agly if #}
+            <li {% if url_name|startswith:"job_seeker" or url_name|startswith:"resume"  or url_name|startswith:"cover_letter" or url_name|startswith:"employer" and url_name != "employers"%}class="active"{% endif %}>
                 <a href="{{ user.profile.url }}">MY ACCOUNT</a>
             </li>
         {% endif %}

@@ -43,6 +43,10 @@ class Employer(AddressMixin, models.Model):
     email = models.EmailField(verbose_name=_('Email Address'), blank=True, null=True)
     agree = models.BooleanField(verbose_name=_('Do you agree to the Terms and Conditions?'), default=False)
 
+    @property
+    def avatar(self):
+        return self.logo
+
     def url(self):
         return reverse('employer.profile.base')
 
@@ -69,6 +73,10 @@ class JobSeeker(models.Model):
     @property
     def last_name(self):
         return self.user.last_name
+
+    @property
+    def avatar(self):
+        return self.personal_information.photo
 
     class Meta:
         app_label = 'userprofile'
