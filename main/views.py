@@ -3,8 +3,9 @@ import json
 from constance import config
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from sorl.thumbnail.shortcuts import get_thumbnail
+from userprofile.models import Employer
 
 
 class MainView(TemplateView):
@@ -15,6 +16,10 @@ class MainView(TemplateView):
         context['next'] = self.request.GET['next'] if 'next' in self.request.GET else None
         return context
 
+
+class EmployerListView(ListView):
+    template_name = 'employers.html'
+    model = Employer
 
 @csrf_exempt
 def upload(request, purpose):

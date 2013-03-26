@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Employers list</h1>
+    <table style="width: 100%;">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>abn/acn</td>
+                <td>business_phone</td>
+                <td>email</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in object_list %}
+            <tr>
+                <td>{{ item.company }}</td>
+                <td>{{ item.abn_or_acn }}</td>
+                <td>{{ item.business_phone }}</td>
+                <td>{{ item.email }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

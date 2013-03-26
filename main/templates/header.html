@@ -1,13 +1,14 @@
 {% load staticfiles %}
 {% load main_tags %}
+{% load flatpages %}
 <ul class="_top_navigation">
-    <li><a href="#">Links if Needed</a></li>
-    <li>|</li>
-    <li><a href="#">Another Link</a></li>
-    <li>|</li>
-    <li><a href="#">Link</a></li>
-    <li>|</li>
-    <li><a href="#">Etc.</a></li>
+    {% get_flatpages '/articles/' as articles_pages %}
+    {% for article in articles_pages %}
+        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+        {% if forloop.revcounter0 %}
+        <li>|</li>
+        {% endif %}
+    {% endfor %}
 </ul>
 <a class="_logo" href="/"></a>
 <div class="_login">
@@ -29,7 +30,7 @@
                 <a href="{{ user.profile.url }}">MY ACCOUNT</a>
             </li>
         {% endif %}
-        <li><a href="#">EMPLOYERS</a></li>
+        <li {% if url_name == "employers" %}class="active"{% endif %}><a href="{% url "employers" %}">EMPLOYERS</a></li>
         <li {% if url_name == "explore" %}class="active"{% endif %}><a href="{% url "explore" %}">EXPLORE SOLID ROCK RECRUITMENT</a></li>
         <li style="margin:0;" {% if url_name == "contact_us" %}class="active"{% endif %}><a href="{% url "contact_us" %}">CONTACT US</a></li>
 
