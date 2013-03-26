@@ -147,7 +147,8 @@ LOGGING = {
 }
 
 CONSTANCE_CONFIG = {
-    'DEFAULT_AVATAR': ('/static/main/img/avatar_test.jpg', 'Default avatar url')
+    'DEFAULT_AVATAR': ('/static/main/img/avatar_test.jpg', 'Default avatar url'),
+    'DEFAULT_COMPANY_LOGO': ('/static/main/img/avatar_test.jpg', 'Default avatar url'),
 }
 
 for item in LOCAL_APPS:

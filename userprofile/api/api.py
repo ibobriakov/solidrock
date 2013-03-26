@@ -24,6 +24,12 @@ class EmployerResource(ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin,
         bundle.obj.user = bundle.request.user
         return bundle
 
+    def dehydrate_logo(self, bundle):
+        if bundle.obj.logo:
+            return get_thumbnail(bundle.obj.logo, '203x203', crop="center").url
+        else:
+            return config.DEFAULT_COMPANY_LOGO
+
     class Meta:
         queryset = Employer.objects.all()
         resource_name = 'employer'

@@ -34,6 +34,8 @@ patch_model(User, UserOverride)
 
 class Employer(AddressMixin, models.Model):
     user = models.OneToOneField('auth.User')
+    logo = models.ImageField(verbose_name=_("Company Logo (optional)"), upload_to="company_logo/%Y/%m/%d",
+                             blank=True, null=True)
     company = models.CharField(verbose_name=_('Company Name'), max_length=255, db_index=True, unique=True)
     abn_or_acn = models.CharField(verbose_name=_('ABN/ACN'), max_length=255, blank=True, null=True)
     business_phone = PhoneField(verbose_name=_('Business Phone'), blank=True, null=True)
