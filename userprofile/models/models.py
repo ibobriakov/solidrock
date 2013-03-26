@@ -91,6 +91,9 @@ class JobSeekerInformation(AddressMixin, models.Model):
     is_driver = models.BooleanField(verbose_name=_("Do you have a current driver's licence?"),
                                     default=False)
 
+    def get_photo_url(self):
+        return self.photo.url if self.photo else config.DEFAULT_AVATAR
+
     def as_dict(self):
         fields_dict = {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
                 for f in self.__dict__ if not f[0] == '_'}

@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 {% load flatblock_tags %}
+{% load thumbnail %}
 {% block content %}
     <div class="_content job_seeker">
 
-    <h1>{{ profile.user.first_name }} {{ profile.user.last_name }}’s Account Home Page</h1>
+    <h1>{{ profile.first_name }} {{ profile.last_name }}’s Account Home Page</h1>
 
     <div class="user_info">
         <div class="avatar">
-            <img src="img/001.jpg">
+            {% thumbnail profile.personal_information.photo "137x137" crop="center" as im %}
+                <img src="{{ im.url }}">
+            {% empty %}
+                <img width="137" height="137" src="{{ profile.personal_information.get_photo_url }}">
+            {% endthumbnail %}
         </div>
         <div class="hello">Hi {{ profile.user.first_name }} {{ profile.user.last_name }}!</div>
         <div class="desc">{% flatblock "job_seeker.hello" %}</div>
