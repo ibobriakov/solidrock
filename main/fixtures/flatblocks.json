@@ -1,11 +1,29 @@
 [
-{
-  "pk": 1, 
-  "model": "flatblocks.flatblock", 
-  "fields": {
-    "content": "Welcome to Your Account Home Page. From here you can manage all of your application information, resumes, and cover letters that you will submit when applying for jobs. You can also see a list of your saved favorite job postings you\u2019ve marked in your searches.", 
-    "header": "", 
-    "slug": "job_seeker.hello"
-  }
-}
+    {
+        "pk": 1,
+        "model": "flatblocks.flatblock",
+        "fields": {
+            "content": "Welcome to Your Account Home Page. From here you can manage all of your application information, resumes, and cover letters that you will submit when applying for jobs. You can also see a list of your saved favorite job postings you\u2019ve marked in your searches.",
+            "header": "",
+            "slug": "job_seeker.hello"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "flatblocks.flatblock",
+        "fields": {
+            "content": "<p>In these terms and conditions, \u201cwe\u201d \u201cus\u201d and \u201cour\u201d refers to Solid Rock Recruitment Pty Ltd.  Your access to and use of all information on this website including purchase of our service/s is provided subject to the following terms and conditions.</p>\r\n        <p>We reserve the right to amend this Notice at any time and your use of the website following any amendments will represent your agreement to be bound by these terms and conditions as amended.  We therefore recommend that each time you access our website you read these terms and conditions.</p>\r\n        <h4>Registered Users</h4>\r\n        <ol>\r\n            <li>In order to access the services provided on this website, you must become a registered user.  You must \t\t\t\tcomplete registration by providing certain information as set out on our membership/registration page.  Please\r\n                refer to our Privacy Policy linked on our home page for information relating to our collection, storage and use of\r\n                the details you provide on registration.</li>\r\n            <li>You agree to ensure that your registration details are true and accurate at all times and you undertake to update\r\n                your registration details from time to time when they change.</li>\r\n            <li>On registration, we provide you with a password. On registration you agree to pay for our services as set out on\r\n                our website.</li>\r\n            <li>We reserve the right to terminate your registration at any time if you breach these terms and conditions.</li>\r\n            <li>On registration, we provide you with a password. On registration you agree to pay for our services as set out on\r\n                our website.</li>\r\n            <li>On registration, we provide you with a password. On registration you agree to pay for our services as set out on\r\n                our website.</li>\r\n            <li>On registration, we provide you with a password. On registration you agree to pay for our services as set out on\r\n                our website.</li>\r\n            <li>On registration, we provide you with a password. On registration you agree to pay for our services as set out on\r\n                our website.</li>\r\n        </ol>",
+            "header": "",
+            "slug": "main.terms_conditions"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "flatblocks.flatblock",
+        "fields": {
+            "content": "<p><p><b>Privacy policy</b>&nbsp;is a statement or a legal document (<a href=\"http://en.wikipedia.org/wiki/Privacy_law\">privacy law</a>) that discloses some or all of the ways a party gathers, uses, discloses and manages a customer or client's data. Personal information can be anything that can be used to identify an individual, not limited to but including; name, address, date of birth, marital status, contact information, ID issue and expiry date, financial records, credit information, medical history, where you travel, and intentions to acquire goods and services.<sup><a href=\"http://en.wikipedia.org/wiki/Privacy_policy#cite_note-1\">[1]</a></sup>&nbsp;In the case of a business it is often a statement that declares a party's policy on how it collects, stores, and releases personal information it collects. It informs the client what specific information is collected, and whether it is kept confidential, shared with partners, or sold to other firms or enterprises.&nbsp;<sup><a href=\"http://en.wikipedia.org/wiki/Privacy_policy#cite_note-2\">[2]</a></sup></p><p>Privacy policy is important to the modern state, because grounded in it is the individual's physical and moral autonomy. For this reason, it is worthy of constitutional protection.<sup><a href=\"http://en.wikipedia.org/wiki/Privacy_policy#cite_note-3\">[3]</a></sup>&nbsp;The exact contents of a privacy policy will depend upon the applicable law and may need to address requirements across geographical boundaries and legal jurisdictions. Most countries have their own legislation and guidelines of who is covered, what information can be collected, and what it can be used for. In general, data protection laws in Europe cover the private sector as well as the public sector. Their privacy laws apply not only to government operations but also to private enterprises and commercial transactions. In North America, privacy laws (except in Quebec) apply only to the public sector, not to the private sector. However, most private sector organizations in North America have taken the initiative to develop their own privacy policies and codes of conduct.<sup><a href=\"http://en.wikipedia.org/wiki/Privacy_policy#cite_note-4\">[4]</a></sup></p><br></p>",
+            "header": "",
+            "slug": "main.privacy_policy"
+        }
+    }
 ]
