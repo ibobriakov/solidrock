@@ -1,5 +1,6 @@
 from tastypie.authentication import SessionAuthentication
 from dynamic_paper.api import PaperResource, PaperItemResource
+from dynamic_paper.api.validation import PaperItemValidation
 from main.api import AuthorizationWithObjectPermissions
 from models import Resume, ResumeItem
 
@@ -23,3 +24,4 @@ class ResumeItemResource(PaperItemResource):
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
+        validation = PaperItemValidation()

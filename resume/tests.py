@@ -1,17 +1,8 @@
 
 from django.core.urlresolvers import reverse
-from django.test import TestCase
 from tastypie.test import ResourceTestCase
 from dynamic_paper.tests.utils import PaperItemResourceTestMixin
-from models import Resume, resume_template, resume_type_template
-
-
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+from models import Resume, resume_type_template
 
 
 class ResumeResourceTest(PaperItemResourceTestMixin, ResourceTestCase):

@@ -1,7 +1,7 @@
 from tastypie.resources import ModelResource
 from tastypie.exceptions import BadRequest
 from tastypie import fields
-from models import PaperItemType
+from ..models import PaperItemType
 
 
 __author__ = 'ir4y'
@@ -33,7 +33,10 @@ class PaperItemResource(ModelResource):
         if not bundle.obj.pk:
             bundle.obj.paper_id = bundle.data['paper']
             bundle.obj.parent_id = bundle.data['parent']
-            bundle.obj.type_id = PaperItemType.objects.get(name=bundle.data['type']).id
+            try:
+                bundle.obj.type_id = PaperItemType.objects.get(name=bundle.data['type']).id
+            except PaperItemType.DoesNotExist:
+                bundle.obj.type_id = None
         return bundle
 
     def dehydrate_parent(self, bundle):
