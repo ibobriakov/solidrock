@@ -1,9 +1,19 @@
 from tastypie.authentication import SessionAuthentication
-from dynamic_paper.api import PaperItemResource
+from dynamic_paper.api import PaperResource, PaperItemResource
+from dynamic_paper.api.validation import PaperItemValidation
 from main.api import AuthorizationWithObjectPermissions
-from models import ResumeItem
+from models import Resume, ResumeItem
 
 __author__ = 'ir4y'
+
+
+class ResumeResource(PaperResource):
+    class Meta:
+        queryset = Resume.objects.all()
+        resource_name = 'resume_name'
+        always_return_data = True
+        authentication = SessionAuthentication()
+        authorization = AuthorizationWithObjectPermissions()
 
 
 class ResumeItemResource(PaperItemResource):
@@ -14,3 +24,4 @@ class ResumeItemResource(PaperItemResource):
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
+        validation = PaperItemValidation()

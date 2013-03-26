@@ -15,6 +15,9 @@ class SimpleTest(TestCase):
 
 
 class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
+    def get_api_change_name(self, pk):
+        return reverse('api_dispatch_detail', kwargs={'api_name': 'v1', 'resource_name': 'cover_letter_name','pk': pk})
+
     def get_api_dispatch_list_url(self):
         return reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'cover_letter'})
 
@@ -53,3 +56,16 @@ class CoverLetterResourceTest(PaperItemResourceTestMixin, ResourceTestCase):
         resp = self.api_client.get(self.get_api_dispatch_list_url(), format='json')
         self.assertValidJSONResponse(resp)
         self.assertEqual(len(self.deserialize(resp)['objects']), len(cover_letter_template))
+
+    def change_name(self):
+        self.api_client.client.login(username=self.user1.username, password=self.password1)
+        resp = self.api_client.put(self.get_api_change_name(self.cover_letter_for_user1.pk),
+                                   data={'name': 'Changed_Name'},
+                                   format='json')
+        self.assertHttpAccepted(resp)
+        new_name = CoverLetter.objects.get(pk=self.cover_letter_for_user1.pk).name
+        self.assertEqual(new_name, 'Changed_Name')
+        resp = self.api_client.put(self.get_api_change_name(self.cover_letter_for_user2.pk),
+                                   data={'name': 'Changed_Name'},
+                                   format='json')
+        self.assertHttpUnauthorized(resp)

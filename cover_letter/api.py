@@ -1,9 +1,19 @@
 from tastypie.authentication import SessionAuthentication
-from dynamic_paper.api import PaperItemResource
+from dynamic_paper.api import PaperResource, PaperItemResource
+from dynamic_paper.api.validation import PaperItemValidation
 from main.api import AuthorizationWithObjectPermissions
-from models import CoverLetterItem
+from models import CoverLetter, CoverLetterItem
 
 __author__ = 'ir4y'
+
+
+class CoverLetterResource(PaperResource):
+    class Meta:
+        queryset = CoverLetter.objects.all()
+        resource_name = 'cover_letter_name'
+        always_return_data = True
+        authentication = SessionAuthentication()
+        authorization = AuthorizationWithObjectPermissions()
 
 
 class CoverLetterItemResource(PaperItemResource):
@@ -14,3 +24,4 @@ class CoverLetterItemResource(PaperItemResource):
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
+        validation = PaperItemValidation()

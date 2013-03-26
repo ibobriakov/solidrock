@@ -1,11 +1,18 @@
-from tastypie.authorization import DjangoAuthorization
 from tastypie.resources import ModelResource
-from tastypie.exceptions import BadRequest, Unauthorized
+from tastypie.exceptions import BadRequest
 from tastypie import fields
-from models import PaperItemType
+from ..models import PaperItemType
 
 
 __author__ = 'ir4y'
+
+
+class PaperResource(ModelResource):
+    def get_object_list(self, request):
+        query_set = super(PaperResource, self).get_object_list(request)
+        if request.user.is_anonymous():
+            return query_set.none()
+        return query_set.filter(owner=request.user)
 
 
 class PaperItemResource(ModelResource):
@@ -26,7 +33,10 @@ class PaperItemResource(ModelResource):
         if not bundle.obj.pk:
             bundle.obj.paper_id = bundle.data['paper']
             bundle.obj.parent_id = bundle.data['parent']
-            bundle.obj.type_id = PaperItemType.objects.get(name=bundle.data['type']).id
+            try:
+                bundle.obj.type_id = PaperItemType.objects.get(name=bundle.data['type']).id
+            except PaperItemType.DoesNotExist:
+                bundle.obj.type_id = None
         return bundle
 
     def dehydrate_parent(self, bundle):
@@ -52,6 +62,3 @@ class PaperItemResource(ModelResource):
                 raise BadRequest("parent id isn't a number")
             orm_filters["parent__pk"] = pk
         return orm_filters
-
-    class Meta:
-        excludes = ['level', 'lft', 'rght', 'tree_id']
