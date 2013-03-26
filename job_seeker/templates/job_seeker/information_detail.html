@@ -45,11 +45,12 @@
                 <label>School, College, or University Name</label>
                 <% _.each(collection.where({'education_type':'school-college-or-university-name'}),function(element,index){ %>
                     <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
-                    <% if (element.errors) { %>
+                    <div class="help-tip">
+                        <div class="help-tip-title">Helpful Tip!</div>
+                        <div class="help-tip-text"><div class="help-tip-right"></div>School, College, or University Name.</div>
+                    </div>
+                    <% if (element.errors['value']) { %>
                     <div class="error_list">
-                        <% _.each(element.errors['education_type'],function(value){ %>
-                        <p><%=value%></p>
-                        <% }) %>
                         <% _.each(element.errors['value'],function(value){ %>
                         <p><%=value%></p>
                         <% }) %>
@@ -62,11 +63,12 @@
                 <label>Major Course of Study or Classes Taken</label>
                 <% _.each(collection.where({'education_type':'major-course-of-study-or-classes-taken'}),function(element,index){ %>
                 <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
-                <% if (element.errors) { %>
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Major Course of Study or Classes Taken.</div>
+                </div>
+                <% if (element.errors['value']) { %>
                 <div class="error_list">
-                    <% _.each(element.errors['education_type'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
                     <% _.each(element.errors['value'],function(value){ %>
                     <p><%=value%></p>
                     <% }) %>
@@ -79,11 +81,12 @@
                 <label>Degrees and/or Post-Graduate Qualifications Obtained</label>
                 <% _.each(collection.where({'education_type':'degrees-andor-post-graduate-qualifications-obtained'}),function(element,index){ %>
                 <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
-                <% if (element.errors) { %>
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Degrees and/or Post-Graduate Qualifications Obtained.</div>
+                </div>
+                <% if (element.errors['value']) { %>
                 <div class="error_list">
-                    <% _.each(element.errors['education_type'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
                     <% _.each(element.errors['value'],function(value){ %>
                     <p><%=value%></p>
                     <% }) %>
@@ -96,11 +99,12 @@
                 <label>Certificates and/or Diplomas Obtained</label>
                 <% _.each(collection.where({'education_type':'certificates-andor-diplomas-obtained'}),function(element,index){ %>
                 <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
-                <% if (element.errors) { %>
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Certificates and/or Diplomas Obtained</div>
+                </div>
+                <% if (element.errors['value']) { %>
                 <div class="error_list">
-                    <% _.each(element.errors['education_type'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
                     <% _.each(element.errors['value'],function(value){ %>
                     <p><%=value%></p>
                     <% }) %>
@@ -113,11 +117,12 @@
                 <label>Any Other Course Currently Enrolled In</label>
                 <% _.each(collection.where({'education_type':'any-other-course-currently-enrolled-in'}),function(element,index){ %>
                 <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
-                <% if (element.errors) { %>
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Any Other Course Currently Enrolled In.</div>
+                </div>
+                <% if (element.errors['value']) { %>
                 <div class="error_list">
-                    <% _.each(element.errors['education_type'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
                     <% _.each(element.errors['value'],function(value){ %>
                     <p><%=value%></p>
                     <% }) %>
@@ -213,13 +218,13 @@
 
 {% block initialize-js %}
     {{ block.super }}
-{#    <script>#}
-{#        $('#fileupload').fileupload({#}
-{#            singleFileUploads: true,#}
-{#            dataType: 'json',#}
-{#            done: function (e, data) {#}
-{#                $('#avatar_img').attr('src',data.result.url);#}
-{#            }#}
-{#        });#}
-{#    </script>#}
+    <script>
+        $('#fileupload').fileupload({
+            singleFileUploads: true,
+            dataType: 'json',
+            done: function (e, data) {
+                $('#avatar_img').attr('src',data.result.url);
+            }
+        });
+    </script>
 {% endblock %}

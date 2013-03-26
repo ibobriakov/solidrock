@@ -22,6 +22,10 @@
             <div class="field fl_left">
                 <label>First Name</label>
                 <input data-value="<%=type%>_<%=element.cid%>.first_name" type="text">
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>First name.</div>
+                </div>
                 <% if (element.errors['last_name']) { %>
                 <div class="error_list">
                     <% _.each(element.errors['first_name'],function(value){ %>
@@ -29,20 +33,15 @@
                     <% }) %>
                 </div>
                 <% } %>
-                <div class="help-tip">
-                    <div class="help-tip-title">
-                        Helpful Tip!
-                    </div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>
-                        First name.
-                    </div>
-                </div>
             </div>
             <div class="clear" ></div>
             <div class="field">
                 <label>Address first</label>
                 <input data-value="<%=type%>_<%=element.cid%>.address_first" class="it4" type="text">
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Address first.</div>
+                </div>
                 <% if (element.errors['address_first']) { %>
                 <div class="error_list">
                     <% _.each(element.errors['address_first'],function(value){ %>
@@ -50,15 +49,14 @@
                     <% }) %>
                 </div>
                 <% } %>
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>Address first.</div>
-                </div>
             </div>
             <div class="field">
                 <label>Address second</label>
                 <input data-value="<%=type%>_<%=element.cid%>.address_second" class="it4" type="text">
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Address second.</div>
+                </div>
                 <% if (element.errors['address_second']) { %>
                 <div class="error_list">
                     <% _.each(element.errors['address_second'],function(value){ %>
@@ -66,17 +64,14 @@
                     <% }) %>
                 </div>
                 <% } %>
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>
-                        Address second.
-                    </div>
-                </div>
              </div>
             <div class="field">
                 <label>City</label>
                 <input data-value="<%=type%>_<%=element.cid%>.city" class="it4" type="text">
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip! </div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>City.</div>
+                </div>
                 <% if (element.errors['city']) { %>
                 <div class="error_list">
                     <% _.each(element.errors['city'],function(value){ %>
@@ -84,17 +79,14 @@
                     <% }) %>
                 </div>
                 <% } %>
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip! </div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>
-                        City.
-                    </div>
-                </div>
             </div>
             <div class="field">
                 <label>Postcode</label>
                 <input data-value="<%=type%>_<%=element.cid%>.postcode" class="it3" type="text">
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip! </div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Postcode.</div>
+                </div>
                 <% if (element.errors['postcode']) { %>
                 <div class="error_list">
                     <% _.each(element.errors['postcode'],function(value){ %>
@@ -102,13 +94,6 @@
                     <% }) %>
                 </div>
                 <% } %>
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip! </div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>
-                        Postcode.
-                    </div>
-                </div>
             </div>
         </div>
         <div class="avatar">
@@ -123,13 +108,6 @@
             <div class="field fl_left">
                 <label>Home Phone Number</label>
                 <input data-value="<%=type%>_<%=element.cid%>.home_phone" class="it2" type="text">
-                <% if (element.errors['home_phone']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['home_phone'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
                 <div class="help-tip">
                     <div class="help-tip-title">Helpful Tip!</div>
                     <div class="help-tip-text">
@@ -137,10 +115,21 @@
                         Home Phone Number.
                     </div>
                 </div>
+                <% if (element.errors['home_phone']) { %>
+                <div class="error_list">
+                    <% _.each(element.errors['home_phone'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                </div>
+                <% } %>
             </div>
             <div class="field fl_left">
                 <label>Daytime Phone Number</label>
                 <input data-value="<%=type%>_<%=element.cid%>.daytime_phone" class="it2" type="text">
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Daytime Phone Number.</div>
+                </div>
                 <% if (element.errors['daytime_phone']) { %>
                 <div class="error_list">
                     <% _.each(element.errors['daytime_phone'],function(value){ %>
@@ -148,17 +137,14 @@
                     <% }) %>
                 </div>
                 <% } %>
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>
-                        Daytime Phone Number.
-                    </div>
-                </div>
             </div>
             <div class="field fl_left">
                 <label>Mobile Phone Number</label>
                 <input data-value="<%=type%>_<%=element.cid%>.mobile_phone" class="it2" type="text">
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Mobile Phone Number.</div>
+                </div>
                 <% if (element.errors['mobile_phone']) { %>
                 <div class="error_list">
                     <% _.each(element.errors['mobile_phone'],function(value){ %>
@@ -166,18 +152,15 @@
                     <% }) %>
                 </div>
                 <% } %>
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>
-                        Mobile Phone Number.
-                    </div>
-                </div>
             </div>
             <div class="clear" ></div>
             <div class="field">
                 <label>Email Address</label>
                 <input data-value="<%=type%>_<%=element.cid%>.email" class="it3" type="text">
+                <div class="help-tip">
+                    <div class="help-tip-title">Helpful Tip!</div>
+                    <div class="help-tip-text"><div class="help-tip-right"></div>Email address.</div>
+                </div>
                 <% if (element.errors['email']) { %>
                 <div class="error_list">
                     <% _.each(element.errors['email'],function(value){ %>
@@ -185,13 +168,6 @@
                     <% }) %>
                 </div>
                 <% } %>
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>
-                        Email address.
-                    </div>
-                </div>
             </div>
             <div class="field styled">
                 <label>Can potential employers contact you at work?</label>
