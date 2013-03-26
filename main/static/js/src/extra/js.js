@@ -8,21 +8,6 @@ $(document).ready(function(){
      });},400 );
 
     // Сроки и политика
-    $('._footer_nav li a').click(function(e) {
-		e.preventDefault();
-		var id = $('.window.terms .window_block');
-		var maskHeight = $(document).height();
-		var maskWidth = $(window).width();
-		$('.window.terms ._hide').css({'width':maskWidth,'height':maskHeight});
-		$('.window.terms ._hide').fadeIn(500);
-		$('.window.terms ._hide').fadeTo(500);
-		var winH = $(window).height();
-		var winW = $(window).width();
-        var hhh = $(document).height();
-		$(id).css('top',  hhh-$(id).height()/0.75);
-		$(id).css('left', winW/2-$(id).width()/2);
-		$(id).fadeIn(500);
-	});
 	$('.window .close').click(function (e) {
 		e.preventDefault();
 		$('._hide, .window_block').hide();

@@ -706,6 +706,16 @@ footer ._footer ._footer_nav ul li a {
     cursor: pointer;
 }
 
+.window.terms div.top ul a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.window.terms div.top ul .active a {
+    text-decoration: none;
+    color: #e4732b;
+}
+
 .window.terms .window_block .top ul li.active {
     background: #fff;
     color: #e4732b;

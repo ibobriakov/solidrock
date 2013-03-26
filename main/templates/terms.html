@@ -1,0 +1,19 @@
+{% load flatblock_tags %}
+<div class="window_block">
+    <div class="top">
+        <ul>
+            <li id="terms_conditions_tab" class="active"><a href="#terms_conditions">Terms & Conditions</a></li>
+            <li id="privacy_policy_tab"><a href="#privacy_policy">Privacy Policy</a></li>
+        </ul>
+        <div class="close"></div>
+    </div>
+    <div class="center">
+        <div id="terms_conditions_content">
+            {% flatblock "main.terms_conditions" %}
+        </div>
+        <div id="privacy_policy_content" style="display: none">
+            {% flatblock "main.privacy_policy" %}
+        </div>
+    </div>
+</div>
+<div class="_hide"></div>
