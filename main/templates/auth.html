@@ -35,7 +35,7 @@
         <div class="block avt">
             <div class="title">Users Login Here</div>
             <fieldset>
-                <form id="login_form"></form>
+                <form id="login_form" {% if next %}data-next-url="{{ next }}"{% endif %}></form>
             </fieldset>
         </div>
         <div class="block reg">

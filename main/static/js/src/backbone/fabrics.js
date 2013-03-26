@@ -25,12 +25,11 @@ function form_model_fabric(type) {
         labels: labels,
         types: types,
         initialize: function(){
-            this.bind('change:redirect_url',function(){
-                window.location.replace(this.get('redirect_url'));
-            });
         },
-        commit: function(){
+        commit: function(event){
             var that = this;
+            var parent = event.toElement.parentElement;
+            var next = $(parent).attr('data-next-url');
             this.save({},{ wait: true,
                 error: function(model,response) {
                     that.view.errors = JSON.parse(response.responseText)[type];
@@ -39,6 +38,11 @@ function form_model_fabric(type) {
                 success: function(){
                     that.view.errors = [];
                     that.view.render();
+                    if (next) {
+                        window.location.replace(next);
+                    } else {
+                        window.location.replace('/');
+                    }
                 }
             });
         },

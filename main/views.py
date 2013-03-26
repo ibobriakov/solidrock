@@ -10,6 +10,11 @@ from sorl.thumbnail.shortcuts import get_thumbnail
 class MainView(TemplateView):
     template_name = 'main.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(MainView, self).get_context_data(**kwargs)
+        context['next'] = self.request.GET['next'] if 'next' in self.request.GET else None
+        return context
+
 
 @csrf_exempt
 def upload(request, purpose):

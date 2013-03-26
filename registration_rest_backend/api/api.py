@@ -121,7 +121,7 @@ class LoginResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         return bundle
 
     def full_dehydrate(self, bundle, for_list=False):
-        bundle.data = {'redirect_url': '/'}
+        bundle.data = {'success': True}
         return bundle
 
     def detail_uri_kwargs(self, bundle_or_obj):

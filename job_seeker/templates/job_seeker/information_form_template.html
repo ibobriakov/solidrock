@@ -101,8 +101,9 @@
             {% load staticfiles %}
             <div class="img">
                 <img id="avatar_img" data-src="<%=type%>_<%=element.cid%>.photo">
+                <div class="links"><a id="link_upload_file" href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
             </div>
-            <input id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}">
+            <input class="_hide" id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}">
         </div>
         <div class="bot_info">
             <div class="field fl_left">
