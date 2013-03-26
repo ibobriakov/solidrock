@@ -24,8 +24,6 @@ function form_model_fabric(type) {
         defaults: defaults,
         labels: labels,
         types: types,
-        initialize: function(){
-        },
         commit: function(event){
             var that = this;
             var parent = event.toElement.parentElement;

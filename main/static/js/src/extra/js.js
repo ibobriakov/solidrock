@@ -8,14 +8,14 @@ $(document).ready(function(){
      });},400 );
 
     // Сроки и политика
-	$('.window .close').click(function (e) {
-		e.preventDefault();
-		$('._hide, .window_block').hide();
-	});
-	$('.window.terms ._hide').click(function () {
-		$(this).hide();
-		$('.window.terms .window_block').hide();
-	});
+//	$('.window .close').click(function (e) {
+//		e.preventDefault();
+//
+//	});
+//	$('.window.terms ._hide').click(function () {
+//		$(this).hide();
+//		$
+//	});
 
     $('.right ul li').click(function() {
         $('.right ul li').removeClass('active').css('border-right','1px solid #fff');

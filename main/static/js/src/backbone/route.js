@@ -7,7 +7,12 @@ var GlobalRoute = Backbone.Router.extend({
         "register/job_seeker": "register_job_seeker",
         "register/employer": "register_employer",
         "terms_conditions": "terms_conditions",
-        "privacy_policy":"privacy_policy"
+        "privacy_policy":"privacy_policy",
+        "close":"close"
+    },
+    close: function(){
+        $('._hide, .window_block').hide();
+        $('.window.terms .window_block').hide();
     },
     terms_conditions: function(){
         this.show_terms_modal();
