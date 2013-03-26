@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load flatblock_tags %}
 {% block content %}
     <div class="_content job_seeker">
 
@@ -8,7 +8,7 @@
     <div class="user_info">
         <div class="avatar"></div>
         <div class="hello">Hi {{ profile.user.first_name }} {{ profile.user.last_name }}!</div>
-        <div class="desc">Welcome to Your Account Home Page. From here you can manage all of your application information, resumes, and cover letters that you will submit when applying for jobs. You can also see a list of your saved favorite job postings you’ve marked in your searches.</div>
+        <div class="desc">{% flatblock "job_seeker.hello" %}</div>
     </div>
 
     <div class="app_info">
