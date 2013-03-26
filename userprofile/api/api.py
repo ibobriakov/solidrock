@@ -6,16 +6,19 @@ from tastypie.exceptions import ImmediateHttpResponse
 from tastypie.resources import ModelResource
 from tastypie.validation import FormValidation
 from constance import config
-from main.api import ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin, ResourceTypesOverrideSchemaMixin
+from main.api import ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin
 from ..models import JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
     JobSeekerEducation, JobSeekerReferee, Employer, JobSeekerEducationType
 from main.api.authorization import AuthorizationWithObjectPermissions
+from userprofile.api.validation import EmployerResourceValidation
 
 
 __author__ = 'ir4y'
 
 
 class EmployerResource(ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ModelResource):
+    logo = fields.FileField(readonly=True)
+
     def get_object_list(self, request):
         query_set = super(EmployerResource, self).get_object_list(request)
         return query_set.filter(user=request.user)
@@ -36,7 +39,7 @@ class EmployerResource(ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin,
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = FormValidation(form_class=modelform_factory(Employer))
+        validation = EmployerResourceValidation(form_class=modelform_factory(Employer))
 
 
 class JobSeekerItemResource(ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ModelResource):
