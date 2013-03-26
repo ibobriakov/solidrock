@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load main_tags %}
 <ul class="_top_navigation">
     <li><a href="#">Links if Needed</a></li>
     <li>|</li>
@@ -22,8 +23,10 @@
 </div>
 <div class="_navigation" style="clear:none;">
     <ul style="float:left;">
-        <li class="active"><a href="#">SEARCH</a></li>
-        {% if user.is_authenticated %}<li><a href="{{ user.profile.url }}">MY ACCOUNT</a></li>{% endif %}
+        <li><a href="#">SEARCH</a></li>
+        {% if user.is_authenticated %}
+            <li {% if url_name|startswith:"job_seeker" or url_name|startswith:"resume"  or url_name|startswith:"cover_letter" %}class="active"{% endif %}><a href="{{ user.profile.url }}">MY ACCOUNT</a></li>
+        {% endif %}
         <li><a href="#">EMPLOYERS</a></li>
         <li><a href="#">EXPLORE SOLID ROCK RECRUITMENT</a></li>
         <li style="margin:0;"><a href="#">CONTACT US</a></li>
