@@ -3,21 +3,18 @@
 
 {% block content %}
     <div class="_content builder">
-
         <h1>Resume Builder<a href="{% url "job_seeker.profile.base" %}">Exit Resume Builder</a></h1>
-
         <div class="top">
             <div class="title">Resume</div>
             <form>
                 <input type="text" value="{{ resume.name }}">
                 <div class="links">
                     <a class="link" href="#">Resume Builder Instructions</a>
-                    <div class="pop">Popluate</div>
+{#                    <div class="pop">Popluate</div>#}
 {#                    <div class="save">Save</div>#}
                 </div>
             </form>
         </div>
-
         <div class="nav">
             <ul class="pages">
                 <li id="str1" class="active">Page 1</li>

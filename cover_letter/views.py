@@ -12,6 +12,7 @@ def create_cover_letter_view(request):
 class CoverLetterView(DetailView):
     template_name = 'cover_letter/main.html'
     model = CoverLetter
+    context_object_name = 'cover_letter'
 
     def get_object(self, queryset=None):
         object = super(CoverLetterView, self).get_object(queryset)
