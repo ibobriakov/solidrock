@@ -4,6 +4,7 @@ from dynamic_paper.api.validation import PaperItemValidation
 from main.api import AuthorizationWithObjectPermissions
 from models import Resume, ResumeItem
 
+__all__ = ['ResumeItemResource', 'ResumeResource']
 __author__ = 'ir4y'
 
 

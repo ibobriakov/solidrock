@@ -7,6 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.test import TestCase
 
 from tastypie.test import ResourceTestCase
 from userprofile.models import Employer, JobSeeker, JobSeekerEducationType
@@ -151,3 +152,13 @@ class UserProfileResourceTestCase(ResourceTestCase):
         self.assertHttpCreated(resp)
         educations = self.job_seeker1.profile.educations_set.filter(value="TestValue", education_type=education_type)
         self.assertEqual(educations.count(), 1)
+
+
+class AsJsonTemplateFilterTest(TestCase):
+    def test_get_resource_class(self):
+        from userprofile.templatetags.utils import get_resource_class
+        from resume.models import Resume, ResumeItem
+        from resume.api import ResumeResource, ResumeItemResource
+        self.assertRaises(KeyError, get_resource_class, None)
+        self.assertTrue(isinstance(get_resource_class(Resume), ResumeResource))
+        self.assertTrue(isinstance(get_resource_class(ResumeItem), ResumeItemResource))

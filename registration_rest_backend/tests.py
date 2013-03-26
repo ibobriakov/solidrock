@@ -113,7 +113,7 @@ class RegisterResourceTestCase(ResourceTestCase):
                                     data={'username': self.user1.username,
                                           'password': self.password1})
         self.assertHttpCreated(resp)
-        self.assertTrue('redirect_url' in self.deserialize(resp))
+        self.assertTrue(self.deserialize(resp)['success'])
 
     def test_rest_login_error(self):
         resp = self.api_client.post(self.get_login_url(), format='json',

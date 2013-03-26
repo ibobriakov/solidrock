@@ -9,6 +9,9 @@ from models import Job, Essential, Desireable, JobCategory, JobSubCategory
 from userprofile.api import AuthorizationWithObjectPermissions
 
 __author__ = 'ir4y'
+__all__ = ['JobResource', 'LocationResource', 'SalaryRangeResource', 'HourResource',
+           'EmploymentTypeResource', 'SpecialConditionResource', 'EssentialResource', 'DesireableResource',
+           'JobCategoryResource', 'JobSubCategoryResource']
 
 
 class LocationResource(ModelResource):

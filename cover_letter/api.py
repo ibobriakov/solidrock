@@ -4,6 +4,7 @@ from dynamic_paper.api.validation import PaperItemValidation
 from main.api import AuthorizationWithObjectPermissions
 from models import CoverLetter, CoverLetterItem
 
+__all__ = ['CoverLetterResource', 'CoverLetterItemResource']
 __author__ = 'ir4y'
 
 
