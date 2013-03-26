@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from tastypie.validation import Validation
+from userprofile.models import Employer
 
 
 class RegisterValidation(Validation):
@@ -28,6 +29,10 @@ class RegisterValidation(Validation):
 
         if User.objects.filter(email=bundle.data['email_address']).count():
             errors['email_address'].append("User with this email is already exists")
+
+        if 'company_name' in bundle.data:
+            if Employer.objects.filter(company=bundle.data['company_name']).count():
+                errors['company_name'].append("Employer with this company name already exists")
 
         return errors
 
