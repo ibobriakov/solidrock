@@ -4,10 +4,10 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from tastypie.api import Api
-from cover_letter.api import CoverLetterItemResource
+from cover_letter.api import CoverLetterResource, CoverLetterItemResource
 from registration_rest_backend.api import JobSeekerRegistrationResource, EmployerRegistrationResource,\
     ActivationResource, LoginResource
-from resume.api import ResumeItemResource
+from resume.api import ResumeItemResource, ResumeResource
 from userprofile.api import JobSeekerInformationResource, JobSeekerCurrentEmploymentResource,\
     JobSeekerPreviousEmploymentResource, JobSeekerEducationResource, JobSeekerRefereeResource, \
     EmployerResource
@@ -17,7 +17,9 @@ from employer.api import JobResource, LocationResource, SalaryRangeResource, Hou
 
 v1_api = Api(api_name='v1')
 v1_api.register(EmployerResource())
+v1_api.register(CoverLetterResource())
 v1_api.register(CoverLetterItemResource())
+v1_api.register(ResumeResource())
 v1_api.register(ResumeItemResource())
 v1_api.register(JobSeekerRegistrationResource())
 v1_api.register(EmployerRegistrationResource())
