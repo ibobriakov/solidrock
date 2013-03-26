@@ -94,17 +94,6 @@ class JobSeekerInformation(AddressMixin, models.Model):
     def get_photo_url(self):
         return self.photo.url if self.photo else config.DEFAULT_AVATAR
 
-    def as_dict(self):
-        fields_dict = {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
-                for f in self.__dict__ if not f[0] == '_'}
-        fields_dict['first_name'] = self.job_seeker.first_name
-        fields_dict['last_name'] = self.job_seeker.last_name
-        if self.photo:
-            fields_dict['photo'] = get_thumbnail(self.photo, '203x203', crop="center").url
-        else:
-            fields_dict['photo'] = config.DEFAULT_AVATAR
-        return fields_dict
-
     def __unicode__(self):
         return "Job Seeker Information for {0}".format(self.job_seeker.__unicode__())
 
@@ -123,10 +112,6 @@ class JobSeekerCurrentEmployment(AddressMixin, models.Model):
     last_day_of_service = models.CharField(verbose_name="Last Day of Service", max_length=255, blank=True, null=True)
     leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
 
-    def as_dict(self):
-        return {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
-                       for f in self.__dict__ if not f[0] == '_'}
-
     def __unicode__(self):
         return "Job Seeker Current Employment for {0}".format(self.job_seeker.__unicode__())
 
@@ -140,10 +125,6 @@ class JobSeekerPreviousEmployment(AddressMixin, models.Model):
     position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True, null=True)
     brief = models.TextField(verbose_name="Brief Description of Duties", blank=True, null=True)
     leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
-
-    def as_dict(self):
-        return {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
-                for f in self.__dict__ if not f[0] == '_'}
 
     def __unicode__(self):
         return "Job Seeker Previous Employment for {0}".format(self.job_seeker.__unicode__())
@@ -167,13 +148,6 @@ class JobSeekerEducation(models.Model):
     education_type = models.ForeignKey('userprofile.JobSeekerEducationType')
     value = models.CharField(max_length=255, blank=True, null=True)
 
-    def as_dict(self):
-        return {
-            'education_type': self.education_type.type_name_slug,
-            'value': self.value,
-            'id': self.id
-        }
-
     def __unicode__(self):
         return "Job Seeker Education {0} - {1} for {2}".format(self.education_type.__unicode__(),
                                                                self.value,
@@ -192,10 +166,6 @@ class JobSeekerReferee(AddressMixin, models.Model):
     is_for_interview = \
         models.BooleanField(verbose_name=_("Are you willing for this to be approached prior to an interview ?"),
                             default=False)
-
-    def as_dict(self):
-        return {f: str(self.__dict__[f]).lower() if type(self.__dict__[f]) == bool else self.__dict__[f] \
-                for f in self.__dict__ if not f[0] == '_'}
 
     def __unicode__(self):
         return "Job Seeker Referee for {0}".format(self.job_seeker.__unicode__())

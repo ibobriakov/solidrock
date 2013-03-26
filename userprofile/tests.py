@@ -162,3 +162,14 @@ class AsJsonTemplateFilterTest(TestCase):
         self.assertRaises(KeyError, get_resource_class, None)
         self.assertTrue(isinstance(get_resource_class(Resume), ResumeResource))
         self.assertTrue(isinstance(get_resource_class(ResumeItem), ResumeItemResource))
+
+    def test_as_json_filter(self):
+        from userprofile.templatetags.serialize import as_json
+        from resume.models import Resume, ResumeItem
+        user = User.objects.create_user('user1', 'user1@example.com', 'password', user_type=0)  # Job seeker
+        JobSeeker.objects.create(user=user)
+        self.assertTrue(isinstance(as_json(user.profile.personal_information), str))
+
+        resume = Resume.objects.create(owner=user, name="Resume")
+        self.assertTrue(isinstance(as_json(ResumeItem.objects.filter(paper=resume)), str))
+

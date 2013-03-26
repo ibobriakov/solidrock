@@ -1,5 +1,6 @@
 import json
 from django.db.models.query import QuerySet
+from utils import get_resource_class
 
 __author__ = 'jackdevil'
 
@@ -10,7 +11,9 @@ register = template.Library()
 
 @register.filter(name='as_json')
 def as_json(data):
-    if type(data) is QuerySet:
-        return json.dumps([model.as_dict() for model in data])
-    else:
-        return json.dumps([data.as_dict()])
+    def tastypie_resource_serialize(data):
+        data_resource = get_resource_class(type(data))
+        bundle = data_resource.build_bundle(obj=data, request=None)
+        return data_resource.full_dehydrate(bundle).data
+    return json.dumps(map(tastypie_resource_serialize, data if type(data) is QuerySet else [data]))
+
