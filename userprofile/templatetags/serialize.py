@@ -9,7 +9,7 @@ from django import template
 register = template.Library()
 
 
-@register.filter(name='as_json')
+@register.filter()
 def as_json(data):
     def tastypie_resource_serialize(data):
         data_resource = get_resource_class(type(data))
