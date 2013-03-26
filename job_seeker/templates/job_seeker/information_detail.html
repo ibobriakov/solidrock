@@ -204,7 +204,7 @@
 
                         };
                         _.each(page_dict,function(value,key) {
-                            new (profile_view_fabric(key))({
+                            new (profile_view_fabric(key,'/job_seeker/'))({
                                 el: $('div.page.section'+value.section),
                                 collection: new (profile_collection_fabric(key))(value.collection)
                             });
@@ -230,5 +230,13 @@
             $('#fileupload').trigger('click');
             return false;
         });
+        $('#link_remove_file').on('click',function(){
+            $.ajax({
+                url: $(this).attr('data-url')
+            }).done(function ( data ) {
+                        $('#avatar_img').attr('src',data.url);
+                    });
+            return false;
+        })
     </script>
 {% endblock %}

@@ -13,10 +13,13 @@
                 <div>Company Logo (optional)</div>
                 {% load staticfiles %}
                 <div class="img">
-                    <img id="avatar_img" data-src="<%=type%>_<%=element.cid%>.logo">
-                    <div class="links"><a id="link_upload_file" href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
+                    <img id="company_logo" data-src="<%=type%>_<%=element.cid%>.logo">
+                    <div class="links">
+                        <a id="link_upload_file" href="#">Upload Photo</a>|
+                        <a data-url="{% url "remove" "employer_company_logo" %}" id="link_remove_file" href="#">Delete Picture</a>
+                    </div>
                 </div>
-                <input class="_hide" id="fileupload" type="file" name="files[]" data-url="{% url "upload" "employer_logo" %}">
+                <input class="_hide" id="fileupload" type="file" name="files[]" data-url="{% url "upload" "employer_company_logo" %}">
             </div>
         </div>
         <div class="right">
@@ -45,7 +48,7 @@
                     }
                 };
                 _.each(page_dict, function (value, key) {
-                    new (profile_view_fabric(key))({
+                    new (profile_view_fabric(key,'/'))({
                         el: $('._content.stages'),
                         collection: new (profile_collection_fabric(key))(value.collection)
                     });
@@ -60,12 +63,20 @@
             singleFileUploads: true,
             dataType: 'json',
             done: function (e, data) {
-                $('#avatar_img').attr('src',data.result.url);
+                $('#company_logo').attr('src',data.result.url);
             }
         });
         $('#link_upload_file').on('click',function(){
             $('#fileupload').trigger('click');
             return false;
         });
+        $('#link_remove_file').on('click',function(){
+            $.ajax({
+                url: $(this).attr('data-url')
+            }).done(function ( data ) {
+                $('#company_logo').attr('src',data.url);
+            });
+            return false;
+        })
     </script>
 {% endblock %}

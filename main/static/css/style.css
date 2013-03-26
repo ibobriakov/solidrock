@@ -1392,3 +1392,26 @@ div.styled input[type="radio"]:checked + label span {
 .field.fl_left input:focus + .help-tip{
     display: block;
 }
+
+.company-logo {
+    width: 205px;
+    font-size: 16px;
+}
+
+.company-logo div:first-child {
+    color: #d86a2b;
+}
+
+.company-logo img {
+    width: 220px;
+    height: 220px;
+    border: 1px solid #c4c4c4;
+    margin: 7px 0 3px;
+}
+
+.company-logo .links {
+    color: #409bcd;
+    font-size: 12px;
+    text-align: center;
+}
+

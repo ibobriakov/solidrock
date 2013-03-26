@@ -2,7 +2,7 @@
  * User: jackdevil
  */
 
-function profile_view_fabric(type, template) {
+function profile_view_fabric(type,redirect_url, template) {
     template = template || $('#'+type+'_form_template');
     return Backbone.View.extend ({
         template: _.template(template.html()),
@@ -22,7 +22,7 @@ function profile_view_fabric(type, template) {
         },
         
         commit_and_exit: function(){
-            this.action['url'] = '/job_seeker/';
+            this.action['url'] = redirect_url;
             this.collection.each(function(element){
                 element.commit(false);
             });
