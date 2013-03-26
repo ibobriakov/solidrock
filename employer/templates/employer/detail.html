@@ -6,36 +6,37 @@
 {% block templates %}
     {{ block.super }}
     <script id="employer_form_template" type="text/template">
-        <% _.each(collection.models,function(element, index) { %>
-            {% include "employer/form_template.html" %}
-        <% }) %>
-        <div class="_submit">
-            <div class="exit" data-on-click="employer_view:commit_and_exit">Save and Exit</div>
-        </div>
-    </script>
-{% endblock %}
-
-{% block content %}
-    <div class="_content stages">
         <h1>Your Business Information</h1>
-
+        <% _.each(collection.models,function(element, index) { %>
         <div class="left">
             <div class="company-logo">
                 <div>Company Logo (optional)</div>
                 {% load staticfiles %}
                 <div class="img">
-                    <img id="avatar_img" data-src="employer_<%=element.cid%>.photo">
+                    <img id="avatar_img" data-src="<%=type%>_<%=element.cid%>.logo">
                     <div class="links"><a id="link_upload_file" href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
                 </div>
-                <input class="_hide" id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}">
+                <input class="_hide" id="fileupload" type="file" name="files[]" data-url="{% url "upload" "employer_logo" %}">
             </div>
         </div>
         <div class="right">
             <div class="form">
                 <form>
-                    <div class="section1"></div>
+                    <div class="section1">
+                        {% include "employer/form_template.html" %}
+                        <div class="_submit">
+                            <div class="exit" data-on-click="employer_view:commit_and_exit">Save and Exit</div>
+                        </div>
+                    </div>
                 </form>
             </div>
+        </div>
+        <% }) %>
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="_content stages"></div>
             <script>
                 var page_dict = {
                     'employer': {
@@ -45,13 +46,11 @@
                 };
                 _.each(page_dict, function (value, key) {
                     new (profile_view_fabric(key))({
-                        el: $('.section' + value.section),
+                        el: $('._content.stages'),
                         collection: new (profile_collection_fabric(key))(value.collection)
                     });
                 });
             </script>
-        </div>
-    </div>
 {% endblock %}
 
 {% block initialize-js %}
