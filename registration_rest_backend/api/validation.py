@@ -34,6 +34,10 @@ class RegisterValidation(Validation):
             if Employer.objects.filter(company=bundle.data['company_name']).count():
                 errors['company_name'].append("Employer with this company name already exists")
 
+        if 'phone_number' in bundle.data:
+            if len(bundle.data['phone_number']) > 11:
+                errors['phone_number'].append("Phone number is too long")
+
         return errors
 
 
