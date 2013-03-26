@@ -18,7 +18,7 @@ class PermissionBackend(object):
                       'userprofile.add_jobseekereducation',
                       'userprofile.add_jobseekerreferee',):
             return True
-        elif perm in ('resume.change_resumeitem',):
+        elif perm in ('resume.change_resumeitem', 'cover_letter.change_coverletteritem',):
             return obj.paper.owner == user
         return False
 

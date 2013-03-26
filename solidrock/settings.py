@@ -102,6 +102,8 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'constance',
     'constance.backends.database',
+    'flatblocks',
+    'redactor',
 )
 
 LOCAL_APPS = (
@@ -158,6 +160,8 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 #celery url
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
+FLATBLOCKS_AUTOCREATE_STATIC_BLOCKS = True
 
 from local import *
 

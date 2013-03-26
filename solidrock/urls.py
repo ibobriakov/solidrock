@@ -51,7 +51,7 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(v1_api.urls)),
     url(r'logout/', 'registration_rest_backend.views.logout_view', name="logout"),
-    url(r'^pages/', include('django.contrib.flatpages.urls')),
+    url(r'^redactor/', include('redactor.urls')),
     url(r'^', include('main.urls')),
 )
 

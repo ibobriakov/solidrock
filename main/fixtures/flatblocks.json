@@ -1,0 +1,11 @@
+[
+{
+  "pk": 1, 
+  "model": "flatblocks.flatblock", 
+  "fields": {
+    "content": "Welcome to Your Account Home Page. From here you can manage all of your application information, resumes, and cover letters that you will submit when applying for jobs. You can also see a list of your saved favorite job postings you\u2019ve marked in your searches.", 
+    "header": "", 
+    "slug": "job_seeker.hello"
+  }
+}
+]
