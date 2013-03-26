@@ -23,7 +23,7 @@
 </div>
 <div class="_navigation" style="clear:none;">
     <ul style="float:left;">
-        <li><a href="#">SEARCH</a></li>
+        <li {% if url_name == "search" %}class="active"{% endif %}><a href="{% url "search" %}">SEARCH</a></li>
         {% if user.is_authenticated %}
             <li {% if url_name|startswith:"job_seeker" or url_name|startswith:"resume"  or url_name|startswith:"cover_letter" %}class="active"{% endif %}><a href="{{ user.profile.url }}">MY ACCOUNT</a></li>
         {% endif %}
