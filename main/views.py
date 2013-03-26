@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
-from django.core.urlresolvers import reverse
+from constance import config
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
@@ -26,10 +26,11 @@ def upload(request, purpose):
     return HttpResponse(json.dumps({'url': url}), mimetype='application/json')
 
 
-def url_resolver(request):
-    #todo add caching
-    javascript_code = "var url_resolver=" + json.dumps({
-        'cover_letter': reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'cover_letter'}),
-        'resume': reverse('api_dispatch_list', kwargs={'api_name': 'v1', 'resource_name': 'resume'}),
-    }) + ";"
-    return HttpResponse(javascript_code, mimetype='text/javascript')
+@csrf_exempt
+def remove(request, purpose):
+    if purpose == 'job_seeker_photo':
+        job_seeker_information = request.user.profile.personal_information
+        job_seeker_information.photo = None
+        job_seeker_information.save()
+        url = config.DEFAULT_AVATAR
+    return HttpResponse(json.dumps({'url': url}), mimetype='application/json')
