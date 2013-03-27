@@ -2,9 +2,9 @@
  * User: jackdevil
  */
 
-function paper_view_factory(paper_type,paper){
+function paper_view_factory(paper_type,paper,button){
     return Backbone.View.extend({
-        collection: new (paper_collection_factory(paper_type,paper))(),
+        collection: new (paper_collection_factory(paper_type, paper, button))(),
         paper_item: '.paper',
         paper_add: '.add',
         paper_remove: '.del',

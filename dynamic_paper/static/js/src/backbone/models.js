@@ -5,7 +5,7 @@
 var update_view = {};
 _.extend(update_view, Backbone.Events);
 
-function paper_model_factory (paper_type,paper){
+function paper_model_factory (paper_type,paper,button){
     return Backbone.Model.extend({
         defaults: { "type": "text", "value": "" },
         urlRoot: rest_url[paper_type].list_endpoint,
@@ -22,7 +22,7 @@ function paper_model_factory (paper_type,paper){
         template: _.template($("#paper_model").html()),
         html: function(level){
             level = level | 0;
-            return this.template({'model':this, 'level':level});
+            return this.template({'model':this, 'level':level, 'button':button});
         },
         initialize: function(){
             this.bind('change:pk', function(){

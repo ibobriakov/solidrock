@@ -48,8 +48,8 @@
 
 {% block initialize-js %}
     <script>
-        var type = 'cover_letter', paper = {{ object.pk }};
-        var paper_view = new (paper_view_factory(type,paper))({el: $('.list_it.letter')});
+        var type = 'cover_letter', paper = {{ object.pk }}, button = false;
+        var paper_view = new (paper_view_factory(type,paper,button))({el: $('.list_it.letter')});
         paper_view.collection.reset([
             {% recursetree object.coverletteritem_set.all %}
                 { {{ node.as_json|safe }}

@@ -2,10 +2,10 @@
  * User: jackdevil
  */
 
-function paper_collection_factory(paper_type,paper) {
+function paper_collection_factory(paper_type,paper,button) {
     var collection_factory = this;
     return Backbone.Collection.extend({
-    model: paper_model_factory(paper_type,paper),
+    model: paper_model_factory(paper_type,paper,button),
     url_suffix: 'paper',
     template: _.template($("#paper_collection").html()),
     html: function(level){

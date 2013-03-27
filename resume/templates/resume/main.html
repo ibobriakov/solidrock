@@ -46,8 +46,8 @@
 
 {% block initialize-js %}
     <script>
-        var type = 'resume', paper = {{ object.pk }};
-        var paper_view = new (paper_view_factory(type,paper))({el: $('.list_it')});
+        var type = 'resume', paper = {{ object.pk }}, button = true;
+        var paper_view = new (paper_view_factory(type,paper,button))({el: $('.list_it')});
         paper_view.collection.reset([
             {% recursetree object.resumeitem_set.all %}
                 { {{ node.as_json|safe }}
