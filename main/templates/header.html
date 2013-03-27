@@ -21,12 +21,16 @@
                 <img src="{% static 'main/img/avatar.png' %}"/>
             {% endthumbnail %}
         </div>
-        <div class="_hello">{{ user }}</div>
-        <a href="{% url "logout" %}" class="_logout">Logout</a>
+        <div>
+            <div class="_hello">{{ user }}</div>
+            <a href="{% url "logout" %}" class="_logout">Logout</a>
+        </div>
     {% else %}
         <div class="_avatar"><img src="{% static 'main/img/avatar.png' %}"/></div>
-        <div class="_hello">Guest</div>
-        <a href="#login" class="_auth">Login</a>
+        <div>
+            <div class="_hello">Guest</div>
+            <a href="#login" class="_auth">Login</a>
+        </div>
     {% endif %}
 </div>
 <div class="_navigation" style="clear:none;">

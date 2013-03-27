@@ -37,7 +37,7 @@
                         {% for resume in profile.user.resume_set.all %}
                             <tr>
                                 <td class="col-1">{{ resume.name }}</td>
-                                <td class="col-2"><a href="#">view</a></td>
+                                <td class="col-2"><a href="{% url "resume.edit" resume.pk %}">view</a></td>
                                 <td class="col-3"><a href="{% url "resume.edit" resume.pk %}">edit</a></td>
                                 <td class="col-4"><a href="{% url 'resume.delete' resume.pk %}">delete</a></td>
                             </tr>
@@ -55,7 +55,7 @@
                     {% for cover_letter in profile.user.coverletter_set.all %}
                         <tr>
                             <td class="col-1">{{ cover_letter.name }}</td>
-                            <td class="col-2"><a href="#">view</a></td>
+                            <td class="col-2"><a href="{% url "cover_letter.edit" cover_letter.pk %}">view</a></td>
                             <td class="col-3"><a href="{% url "cover_letter.edit" cover_letter.pk %}">edit</a></td>
                             <td class="col-4"><a href="{% url "cover_letter.delete" cover_letter.pk %}">delete</a></td>
                         </tr>
