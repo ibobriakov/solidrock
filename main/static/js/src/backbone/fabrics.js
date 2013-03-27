@@ -26,7 +26,7 @@ function form_model_fabric(type) {
         types: types,
         commit: function(event){
             var that = this;
-            var parent = event.toElement.parentElement;
+            var parent = event.target.parentElement;
             var next = $(parent).attr('data-next-url');
             this.save({},{ wait: true,
                 error: function(model,response) {

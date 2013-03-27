@@ -38,8 +38,13 @@ resume_template = [
                             paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('header'), item_class="title", value="Career Overview",
                             paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('text'), item_class="", value="Lorem ipsum dolor sit amet,",
-                            paper=paper),
+
+    lambda paper:ResumeItem(type=get_paper_item('text'), item_class="", value="""Lorem ipsum dolor sit amet,
+    consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+    volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
+    aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+    molestie consequat.""", paper=paper),
+
     lambda paper:ResumeItem(type=get_paper_item('keystrengts_list'), item_class="title", value="Key Strengths",
                             paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('career_list'), item_class="title", value="Career History",
@@ -71,8 +76,13 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title", value="Employer Company Name",
                                       paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="", value="Lorem ipsum dolor sit amet,",
-                                      paper=resume_item.paper, parent=resume_item),
+
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="", value="""Lorem ipsum dolor sit amet,
+        consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+        volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
+        aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+        molestie consequat.""", paper=resume_item.paper, parent=resume_item),
+
         lambda resume_item:ResumeItem(type=get_paper_item('keyresponsibilities_list'), item_class="title mini",
                                       value="Key Responsibilities",
                                       paper=resume_item.paper, parent=resume_item),
