@@ -1393,6 +1393,10 @@ div.styled input[type="radio"]:checked + label span {
     display: block;
 }
 
+.field textarea:focus + .help-tip{
+    display: block;
+}
+
 .company-logo {
     width: 205px;
     font-size: 16px;
@@ -1415,6 +1419,6 @@ div.styled input[type="radio"]:checked + label span {
     text-align: center;
 }
 
-.paper-right {
-    text-align:right;
+.list_it.letter .paper.container {
+    float: right;
 }

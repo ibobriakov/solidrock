@@ -30,9 +30,9 @@ cover_letter_template = [
     lambda paper:CoverLetterItem(type=get_paper_item('right_list'), item_class="paper-right paper-block",
                                  value=" ", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini date", value="Date", paper=paper),
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini date clear", value="Date", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini", value="Re: Job Title",
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini clear", value="Re: Job Title",
                                  paper=paper),
 
     lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", value="""Lorem ipsum dolor sit amet,
