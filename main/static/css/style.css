@@ -1422,3 +1422,11 @@ div.styled input[type="radio"]:checked + label span {
 .list_it.letter .paper.container {
     float: right;
 }
+
+div.paper-block{
+    margin-bottom: 30px;
+}
+
+.paper.text.title.mini.date{
+    padding-top: 50px;
+}
