@@ -8,8 +8,11 @@ class EmployerView(TemplateView):
     template_name = "employer/detail.html"
 
 
-class CreateJobView(TemplateView):
-    template_name = "employer/main.html"
+def create_job_view(request):
+    new_job = Job.objects.create(owner=request.user,
+                                 contact_phone=request.user.profile.business_phone,
+                                 contact_email=request.user.profile.email)
+    return redirect('employer.job.edit', new_job.pk)
 
 
 class EditJobView(DetailView):

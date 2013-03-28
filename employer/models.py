@@ -75,7 +75,7 @@ class Job(models.Model):
     sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedCategory')
 
     def __unicode__(self):
-        return self.name
+        return "Job by {0}".format(self.owner)
 
 
 class Essential(models.Model):
