@@ -2,16 +2,13 @@ from django.forms.models import modelform_factory
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
-from tastypie.validation import FormValidation
+from employer.api.validation import EmployerResourceValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
-from models import JobLocation, SalaryRange, Hour, EmploymentType, SpecialCondition
-from models import Job, Essential, Desireable, JobCategory, JobSubCategory
+from ..models import JobLocation, SalaryRange, Hour, EmploymentType, SpecialCondition
+from ..models import Job, Essential, Desireable, JobCategory, JobSubCategory
 from userprofile.api import AuthorizationWithObjectPermissions
 
 __author__ = 'ir4y'
-__all__ = ['JobResource', 'LocationResource', 'SalaryRangeResource', 'HourResource',
-           'EmploymentTypeResource', 'SpecialConditionResource', 'EssentialResource', 'DesireableResource',
-           'JobCategoryResource', 'JobSubCategoryResource']
 
 
 class LocationResource(ModelResource):
@@ -92,7 +89,7 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = FormValidation(form_class=modelform_factory(Job))
+        validation = EmployerResourceValidation(form_class=modelform_factory(Job))
 
 
 class JobCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResource):

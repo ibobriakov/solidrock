@@ -40,23 +40,34 @@ class SpecialCondition(models.Model):
 
 class Job(models.Model):
     owner = models.ForeignKey('auth.User')
-    name = models.CharField(verbose_name="Name This Job Posting", max_length=100)
-    title = models.CharField(verbose_name="Job Title", max_length=100)
-    description = models.TextField(verbose_name="Description")
-    location = models.ForeignKey('employer.JobLocation', verbose_name="Job Location")
-    award = models.CharField(verbose_name="Applicabla Award (if applicable)", max_length=100, blank=True, null=True)
-    salary_range = models.ForeignKey('employer.SalaryRange', verbose_name="Salary Range", blank=True, null=True)
-    hours = models.ForeignKey('employer.Hour', verbose_name="Hours")
-    employment_type = models.ForeignKey('employer.EmploymentType', verbose_name="Type of Employment")
+    name = models.CharField(verbose_name="Name This Job Posting", max_length=100,
+                            blank=True, null=True)
+    title = models.CharField(verbose_name="Job Title", max_length=100,
+                             blank=True, null=True)
+    description = models.TextField(verbose_name="Description",
+                                   blank=True, null=True)
+    location = models.ForeignKey('employer.JobLocation', verbose_name="Job Location",
+                                 blank=True, null=True)
+    award = models.CharField(verbose_name="Applicabla Award (if applicable)", max_length=100,
+                             blank=True, null=True)
+    salary_range = models.ForeignKey('employer.SalaryRange', verbose_name="Salary Range",
+                                     blank=True, null=True)
+    hours = models.ForeignKey('employer.Hour', verbose_name="Hours",
+                              blank=True, null=True)
+    employment_type = models.ForeignKey('employer.EmploymentType', verbose_name="Type of Employment",
+                                        blank=True, null=True)
     special_conditions = models.ForeignKey('employer.SpecialCondition', verbose_name="Special Condition",
                                            blank=True, null=True)
     other_conditions = models.CharField(verbose_name='If "Other" Please Indicate', max_length=255,
                                         blank=True, null=True)
-    open_date = models.DateField(verbose_name="Date Job Listing Opens", blank=True, null=True)
-    end_date = models.DateField(verbose_name="Date Job Listing Ends", blank=True, null=True)
-
-    contact_name = models.CharField(verbose_name='Name', max_length=150)
-    contact_phone = PhoneField(verbose_name='Phone', blank=True, null=True, default='')
+    open_date = models.DateField(verbose_name="Date Job Listing Opens",
+                                 blank=True, null=True)
+    end_date = models.DateField(verbose_name="Date Job Listing Ends",
+                                blank=True, null=True)
+    contact_name = models.CharField(verbose_name='Name', max_length=150,
+                                    blank=True, null=True)
+    contact_phone = PhoneField(verbose_name='Phone',
+                               blank=True, null=True, default='')
     contact_email = models.EmailField(verbose_name='Email')
 
     categories = models.ManyToManyField('employer.JobCategory', through='employer.JobSelectedCategory')
