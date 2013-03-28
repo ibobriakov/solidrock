@@ -65,15 +65,15 @@ class DesireableResource(ModelResource):
 
 class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
                   ResourceRelatedFieldsUrlSchemaMixin, ModelResource):
-    location = fields.ToOneField(LocationResource, 'location', full=True)
+    location = fields.ToOneField(LocationResource, 'location', full=True, null=True)
     salary_range = fields.ToOneField(SalaryRangeResource, 'salary_range', blank=True, null=True, full=True)
-    hours = fields.ToOneField(HourResource, 'hours', full=True)
-    employment_type = fields.ToOneField(EmploymentTypeResource, 'employment_type', full=True)
+    hours = fields.ToOneField(HourResource, 'hours', full=True, null=True)
+    employment_type = fields.ToOneField(EmploymentTypeResource, 'employment_type', full=True, null=True)
     special_conditions = fields.ToOneField(SpecialConditionResource, 'special_conditions',
                                            blank=True, null=True, full=True)
 
-    essential_set = fields.ToManyField(EssentialResource, 'essential_set', full=True)
-    desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True)
+    essential_set = fields.ToManyField(EssentialResource, 'essential_set', full=True, null=True)
+    desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True, null=True)
 
     def get_object_list(self, request):
         query_set = super(JobResource, self).get_object_list(request)
@@ -93,8 +93,9 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
 
 
 class JobCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResource):
-    subcategories_set = fields.ToManyField('employer.api.JobSubCategoryResource', 'subcategories_set',
-                                           full=True, blank=True, null=True)
+    # subcategories_set = fields.ToManyField('employer.api.JobSubCategoryResource', 'subcategories_set',
+    #                                        full=True, blank=True, null=True)
+    #TODO fix serialization error
 
     class Meta:
         queryset = JobCategory.objects.all()
