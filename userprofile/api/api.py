@@ -10,7 +10,7 @@ from main.api import ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin
 from ..models import JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
     JobSeekerEducation, JobSeekerReferee, Employer, JobSeekerEducationType
 from main.api.authorization import AuthorizationWithObjectPermissions
-from userprofile.api.validation import EmployerResourceValidation
+from userprofile.api.validation import EmployerResourceValidation, JobSeekerInformationResourceValidation
 
 
 __author__ = 'ir4y'
@@ -107,7 +107,7 @@ class JobSeekerInformationResource(JobSeekerItemResource):
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = FormValidation(form_class=modelform_factory(JobSeekerInformation))
+        validation = JobSeekerInformationResourceValidation(form_class=modelform_factory(JobSeekerInformation))
 
 
 class JobSeekerCurrentEmploymentResource(JobSeekerItemResource):
