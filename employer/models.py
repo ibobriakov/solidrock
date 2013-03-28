@@ -67,8 +67,9 @@ class Job(models.Model):
     contact_name = models.CharField(verbose_name='Name', max_length=150,
                                     blank=True, null=True)
     contact_phone = PhoneField(verbose_name='Phone',
-                               blank=True, null=True, default='')
-    contact_email = models.EmailField(verbose_name='Email')
+                               blank=True, null=True)
+    contact_email = models.EmailField(verbose_name='Email',
+                                      blank=True, null=True)
 
     categories = models.ManyToManyField('employer.JobCategory', through='employer.JobSelectedCategory')
     sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedCategory')
