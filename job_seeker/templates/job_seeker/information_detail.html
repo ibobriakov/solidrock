@@ -7,7 +7,6 @@
         <% _.each(collection.models,function(element, index) { %>
         <div class="title">Personal Information</div>
             {% include "job_seeker/information_form_template.html" %}
-            {% include "job_seeker/field.html" with  %}
         <% }) %>
         <div class="_submit">
             <div class="exit" data-on-click="job_seeker_information_view:commit_and_exit">Save and Exit</div>

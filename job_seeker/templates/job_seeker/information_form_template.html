@@ -1,100 +1,13 @@
 {% load thumbnail %}
     <fieldset>
         <div class="left_info">
-            <div class="field fl_left">
-                <label>Last Name</label>
-                <input data-value="<%=type%>_<%=element.cid%>.last_name" class="it2" type="text">
-                <% if (element.errors['last_name']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['last_name'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>
-                        First name.
-                    </div>
-                </div>
-            </div>
-            <div class="field fl_left">
-                <label>First Name</label>
-                <input data-value="<%=type%>_<%=element.cid%>.first_name" type="text">
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text"><div class="help-tip-right"></div>First name.</div>
-                </div>
-                <% if (element.errors['last_name']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['first_name'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
+            {% include 'job_seeker/field.html' with input_class="it2" class="field fl_left" title="Last Name" field="last_name"%}
+            {% include 'job_seeker/field.html' with input_class="it2" class="field fl_left" title="First Name" field="first_name" %}
             <div class="clear" ></div>
-            <div class="field">
-                <label>Address first</label>
-                <input data-value="<%=type%>_<%=element.cid%>.address_first" class="it4" type="text">
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text"><div class="help-tip-right"></div>Address first.</div>
-                </div>
-                <% if (element.errors['address_first']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['address_first'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
-            <div class="field">
-                <label>Address second</label>
-                <input data-value="<%=type%>_<%=element.cid%>.address_second" class="it4" type="text">
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text"><div class="help-tip-right"></div>Address second.</div>
-                </div>
-                <% if (element.errors['address_second']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['address_second'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-             </div>
-            <div class="field">
-                <label>City</label>
-                <input data-value="<%=type%>_<%=element.cid%>.city" class="it4" type="text">
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip! </div>
-                    <div class="help-tip-text"><div class="help-tip-right"></div>City.</div>
-                </div>
-                <% if (element.errors['city']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['city'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
-            <div class="field">
-                <label>Postcode</label>
-                <input data-value="<%=type%>_<%=element.cid%>.postcode" class="it3" type="text">
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip! </div>
-                    <div class="help-tip-text"><div class="help-tip-right"></div>Postcode.</div>
-                </div>
-                <% if (element.errors['postcode']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['postcode'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
+            {% include 'job_seeker/field.html' with input_class="it4" title="Address first" field="address_first" %}
+            {% include 'job_seeker/field.html' with input_class="it4" title="Address second" field="address_second"%}
+            {% include 'job_seeker/field.html' with input_class="it4" title="City" field="city"%}
+            {% include 'job_seeker/field.html' with input_class="it3" title="Postcode" field="postcode"%}
         </div>
         <div class="avatar">
             <div>Profile Picture (optional)</div>
@@ -109,154 +22,16 @@
             <input class="_hide" id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}">
         </div>
         <div class="bot_info">
-            <div class="field fl_left">
-                <label>Home Phone Number</label>
-                <input data-value="<%=type%>_<%=element.cid%>.home_phone" class="it2" type="text">
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text">
-                        <div class="help-tip-right"></div>
-                        Home Phone Number.
-                    </div>
-                </div>
-                <% if (element.errors['home_phone']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['home_phone'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
-            <div class="field fl_left">
-                <label>Daytime Phone Number</label>
-                <input data-value="<%=type%>_<%=element.cid%>.daytime_phone" class="it2" type="text">
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text"><div class="help-tip-right"></div>Daytime Phone Number.</div>
-                </div>
-                <% if (element.errors['daytime_phone']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['daytime_phone'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
-            <div class="field fl_left">
-                <label>Mobile Phone Number</label>
-                <input data-value="<%=type%>_<%=element.cid%>.mobile_phone" class="it2" type="text">
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text"><div class="help-tip-right"></div>Mobile Phone Number.</div>
-                </div>
-                <% if (element.errors['mobile_phone']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['mobile_phone'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
+            {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Home Phone Number" field="home_phone" %}
+            {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Daytime Phone Number" field="daytime_phone" %}
+            {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Mobile Phone Number" field="mobile_phone" %}
             <div class="clear" ></div>
-            <div class="field">
-                <label>Email Address</label>
-                <input data-value="<%=type%>_<%=element.cid%>.email" class="it3" type="text">
-                <div class="help-tip">
-                    <div class="help-tip-title">Helpful Tip!</div>
-                    <div class="help-tip-text"><div class="help-tip-right"></div>Email address.</div>
-                </div>
-                <% if (element.errors['email']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['email'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
-            <div class="field styled">
-                <label>Can potential employers contact you at work?</label>
-                <input id="can_contact_at_work_yes_<%=element.cid%>" data-checked="<%=type%>_<%=element.cid%>.can_contact_at_work"
-                       value="true" type="radio" name="ch1">
-                <label for="can_contact_at_work_yes_<%=element.cid%>">
-                    <span></span>Yes
-                </label>
-                <input id="can_contact_at_work_no_<%=element.cid%>" class="styled"
-                       data-checked="<%=type%>_<%=element.cid%>.can_contact_at_work" value="false" type="radio"
-                       name="ch1">
-                <label for="can_contact_at_work_no_<%=element.cid%>">
-                    <span></span>No
-                </label>
-                <% if (element.errors['can_contact_at_work']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['can_contact_at_work'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
-            <div class="field fl_left styled">
-                <label>Are you an Australian Citizen / Permanent Resident?</label>
-                <input id="is_australian_yes_<%=element.cid%>" data-checked="<%=type%>_<%=element.cid%>.is_australian" value="true"
-                       type="radio" name="ch2">
-                <label for="is_australian_yes_<%=element.cid%>">
-                    <span></span>Yes
-                </label>
-                <input id="is_australian_no_<%=element.cid%>" class="styled" data-checked="<%=type%>_<%=element.cid%>.is_australian"
-                       value="false" type="radio" name="ch2">
-                <label for="is_australian_no_<%=element.cid%>">
-                    <span></span>No
-                </label>
-                <% if (element.errors['is_australian']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['is_australian'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
-            <div class="field fl_left styled">
-                <label>If no do you have a working visa?</label>
-                <input id="have_visa_yes_<%=element.cid%>" data-checked="<%=type%>_<%=element.cid%>.have_visa" value="true" type="radio"
-                       name="ch3">
-                <label for="have_visa_yes_<%=element.cid%>">
-                    <span></span>Yes
-                </label>
-                <input id="have_visa_no_<%=element.cid%>" data-checked="<%=type%>_<%=element.cid%>.have_visa" value="false" type="radio"
-                       name="ch3">
-                <label for="have_visa_no_<%=element.cid%>">
-                    <span></span>No
-                </label>
-                <% if (element.errors['have_visa']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['have_visa'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
+            {% include 'job_seeker/field.html' with class="field" input_class="it3" title="Email Address" field="email" %}
+            {% include 'job_seeker/field_checked.html' with title="Can potential employers contact you at work?" field="can_contact_at_work" input_name="ch1" %}
+            {% include 'job_seeker/field_checked.html' with class="field fl_left styled" title="Are you an Australian Citizen / Permanent Resident?" field="is_australian" input_name="ch2" %}
+            {% include 'job_seeker/field_checked.html' with class="field fl_left styled" title="If no do you have a working visa?" field="have_visa" input_name="ch3" %}
             <div class="clear"></div>
-            <div class="text">(Note: To be eligible for employment, applicants must have the appropriate work visa
-                or have permanent residency status.)
-            </div>
-            <div class="field styled">
-                <label>Do you hold a current driver’s licence?</label>
-                <input id="is_driver_yes_<%=element.cid%>" data-checked="<%=type%>_<%=element.cid%>.is_driver" value="true" type="radio"
-                       name="ch4">
-                <label for="is_driver_yes_<%=element.cid%>">
-                    <span></span>Yes
-                </label>
-                <input id="is_driver_no_<%=element.cid%>" data-checked="<%=type%>_<%=element.cid%>.is_driver" value="false" type="radio"
-                       name="ch4">
-                <label for="is_driver_no_<%=element.cid%>">
-                    <span></span>No
-                </label>
-                <% if (element.errors['is_driver']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['is_driver'],function(value){ %>
-                    <p><%=value%></p>
-                    <% }) %>
-                </div>
-                <% } %>
-            </div>
+            <div class="text">(Note: To be eligible for employment, applicants must have the appropriate work visa or have permanent residency status.)</div>
+            {% include 'job_seeker/field_checked.html' with title="Do you hold a current driver’s licence?" field="is_driver" input_name="ch4" %}
         </div>
     </fieldset>

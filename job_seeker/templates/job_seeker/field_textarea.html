@@ -1,6 +1,6 @@
 <div class="{% if class %}{{ class }}{% else %}field{% endif %}">
     <label>{{ title }}</label>
-    <input data-value="<%=type%>_<%=element.cid%>.{{ field }}" class="{{ input_class }}" type="text">
+    <textarea data-value="<%=type%>_<%=element.cid%>.{{ field }}"></textarea>
     <div class="help-tip">
         <div class="help-tip-title">Helpful Tip!</div>
         <div class="help-tip-text"><div class="help-tip-right"></div>{% if tooltip %}{{ tooltip }}{% else %}{{ title }}{% endif %}.</div>
