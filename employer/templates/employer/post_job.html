@@ -1,0 +1,98 @@
+{% extends 'userprofile/base.html' %}
+{% load flatblock_tags %}
+{% load thumbnail %}
+{% load serialize %}
+
+{% block templates %}
+    <script id="job_form_template" type="text/template">
+        <div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
+        <% _.each(collection.models,function(element, index) { %>
+            {% include "employer/job_information_form_template.html" %}
+        <% }) %>
+        <div class="_submit">
+            <div class="exit" data-on-click="job_view:commit_and_exit">Save and Exit</div>
+            <div class="cont" data-on-click="job_view:commit" >Save and Continue</div>
+        </div>
+    </script>
+
+    <script id="employer_upload_documents_form_template" type="text/template">
+        <div class="title">Upload Documents</div>
+        <p>
+            From this section you can upload documents associated with this job listing.<br/>
+            Note that only Adobe PDF or Microsoft Word Documents are allowed.
+        </p>
+        <br/>
+        <% _.each(collection.models,function(element, index) { %>
+            {% include "employer/upload_documents_form_template.html" %}
+        <% }) %>
+        <div class="_submit">
+            <div class="exit" data-on-click="job_seeker_information_view:commit_and_exit">Save and Exit</div>
+            <div class="cont" data-on-click="job_seeker_information_view:commit" >Save and Continue</div>
+        </div>
+    </script>
+
+    <script id="employer_select_category_form_template" type="text/template">
+        <div class="title">Select a Category</div>
+        <% _.each(collection.models,function(element, index) { %>
+            {% include "employer/select_category_form_template.html" %}
+        <% }) %>
+        <div class="_submit">
+            <div class="exit" data-on-click="job_seeker_information_view:commit_and_exit">Save and Exit</div>
+            <div class="cont" data-on-click="job_seeker_information_view:commit" >Save and Continue</div>
+        </div>
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="_content stages">
+        <a id="section_top"></a>
+        <h1>Post a Job Listing</h1>
+        <div class="left">
+        <ul class="sections_text">
+            <li class="section1 active"><a href="#section/1">Section 1: Job Information</a></li>
+            <li class="section2"><a href="#section/2">Section 2: Upload Documents</a></li>
+            <li class="section3"><a href="#section/3">Section 3: Select a Category</a></li>
+{#            <li><a href="#">Section 4: Payment Information</a></li>#}
+        </ul>
+    </div>
+        <div class="right">
+            <ul class="sections_tab">
+                <li class="section1 active"><a href="#section/1">Section 1</a></li>
+                <li class="section2"><a href="#section/2">Section 2</a></li>
+                <li class="section3"><a href="#section/3">Section 3</a></li>
+            </ul>
+            <div class="form sections_form">
+                <form>
+                    <div class="page section1"></div>
+                    <div class="page section2" style="display: none;"></div>
+                    <div class="page section3" style="display: none;"></div>
+                    <script>
+                        var page_dict = {
+                            'job':{
+                                'section':1,
+                                'collection': {% autoescape off %}{{ object|as_json }}{% endautoescape %}
+                            },
+{#                            'employer_upload_documents':{#}
+{#                                'section':2,#}
+{#                                'collection': [{}]#}
+{#                                {% autoescape off %}{{ profile.current_employment|as_json }}{% endautoescape %}#}
+{#                            },#}
+{#                            'employer_select_category':{#}
+{#                                'section':3,#}
+{#                                'collection': [{}]#}
+{#                                {% autoescape off %}{{ profile.previous_employments_set.all|as_json }}{% endautoescape %}#}
+{#                            }#}
+
+                        };
+                        _.each(page_dict,function(value,key) {
+                            new (profile_view_fabric(key,'/job_seeker/'))({
+                                el: $('div.page.section'+value.section),
+                                collection: new (profile_collection_fabric(key))(value.collection)
+                            });
+                        });
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

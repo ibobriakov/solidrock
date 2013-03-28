@@ -7,16 +7,6 @@ $(document).ready(function(){
         speed: 700
      });},400 );
 
-    // Сроки и политика
-//	$('.window .close').click(function (e) {
-//		e.preventDefault();
-//
-//	});
-//	$('.window.terms ._hide').click(function () {
-//		$(this).hide();
-//		$
-//	});
-
     $('.right ul li').click(function() {
         $('.right ul li').removeClass('active').css('border-right','1px solid #fff');
         $(this).addClass('active');
@@ -36,10 +26,4 @@ $(document).ready(function(){
         $('.list').css('display','none');
         $('.list.'+id).css('display','block');
     });
-    
-    $('#canvas div').hover(function() {
-        //var a = $(this).attr('id');
-        //if (a != 'paper') alert($('#'+a+' h2').text());
-    });
-    
 });

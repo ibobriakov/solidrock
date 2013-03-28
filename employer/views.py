@@ -17,7 +17,7 @@ def create_job_view(request):
 
 
 class EditJobView(DetailView):
-    template_name = "employer/main.html"
+    template_name = "employer/post_job.html"
     model = Job
 
     def get_object(self, queryset=None):

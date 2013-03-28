@@ -1103,6 +1103,7 @@ footer ._footer ._footer_nav ul li a {
     background-position: 0 -22px;
 }
 
+
 .stages .right .form ._submit {
     clear: both;
     padding: 0 172px;
@@ -1209,6 +1210,9 @@ footer ._footer ._footer_nav ul li a {
     font-size: 11px;
     margin: -7px 0 0;
 }
+
+.stages .right .form input[type='text'].it-pod {width: 215px;}
+.stages .right .form input[type='text'].it-pod2 {width: 590px;}
 
 /* Builder */
 .builder {background: #fff;}
@@ -1429,4 +1433,56 @@ div.paper-block{
 
 .paper.text.title.mini.date{
     padding-top: 50px;
+}
+
+.field.pod { width: 605px; background: url(../img/select_line.png) 16px 0 no-repeat;padding: 0 0 0 40px;margin-top: -8px;}
+.stages .right .form .field.pod2 {width: 605px;background: url(../img/select_line2.png) 16px 0 no-repeat;padding: 45px 0 0 40px;margin-top: -60px;}
+.field.pod > a, .field.pod2 > a {text-align: right;}
+.field p span {color: #d86a2b;}
+
+
+.job-information div:first-child {
+    float: left;
+    margin-right: 20px;
+}
+.job-information div:first-child img {
+    border: 1px solid #c4c4c4;
+}
+.job-information h4 {
+    font-weight: normal;
+    color:#d86a2b;
+    font-size: 16px;
+}
+.job-information {
+    min-height: 210px;
+    margin-bottom: 20px;
+}
+.job-information p {
+    color:#494949;
+}
+.required {
+    float: right;
+    font-size: 13px;
+    color:#494949;
+    font-weight: normal;
+}
+.required span {
+    color:#d86a2b;
+}
+.field.star{
+    background: url(../img/star.png) no-repeat top left;
+    padding:4px 0 20px 30px;
+    width:650px;
+
+}
+
+.field.star p {
+    font-size: 16px;
+    color:#409bcd;
+    font-family: "Myriad Pro";
+}
+.field.star label span {
+    color: #d86a2b;
+    font-weight: bold;
+    font-size: 14px ;
 }

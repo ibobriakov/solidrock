@@ -49,9 +49,17 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     background-color: #fff;
     color: #989898;font: italic 16px 'Georgia';
 }
+.field .select2-container .select2-choice {
+    width:254px;
+    margin-top: 4px;
+}
 
+.field.pod .select2-container .select2-choice {
+    width:200px;
+    margin-top: 4px;
+}
 
-.select2-container.select2-drop-above .select2-choice {
+.splect2-container.select2-drop-above .select2-choice {
     border-bottom-color: #aaa;
 }
 
@@ -79,7 +87,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     text-decoration: none;
 
     border: 0;
-    background: url('../img/select.png') right top no-repeat;
+    background: url('select2.png') right top no-repeat;
     cursor: pointer;
     outline: 0;
 }

@@ -1,0 +1,61 @@
+{% load staticfiles %}
+<fieldset>
+    <div class="job-information">
+        <div><img src="{% static 'main/img/002.jpg' %}"/></div>
+        <div>
+            <h4>Acme Insurance</h4>
+            <p>Street Address</p>
+            <p>City Address</p>
+            <br/>
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+                tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+            </p>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div>
+        <div class="field">
+            <label>Would you like to populate this listing from a previous job posting?</label>
+            <select id="e1" disabled="disabled">
+                <option>Select a Previous Job Listing</option>
+            </select>
+        </div>
+        {% include 'employer/field.html' with input_class='it3' title='Name This Job Listing*' field='name' %}
+        {% include 'employer/field.html' with input_class='it3' title='Job Title*' field='title' %}
+        {% include 'employer/field_textarea.html' with title='Job Description*' field='description' %}
+        {% include 'employer/field_select.html' with class='field fl_left' title='Job Location*' field='location' items=JobLocation %}
+        {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Applicable Award (if applicable)' field='award' %}
+        <div class="clear"></div>
+        {% include 'employer/field_select.html' with title='Salary Range' field='salary_range' items=SalaryRange %}
+        {% include 'employer/field_select.html' with class='field fl_left' title='Hours*' field='hours' items=Hour %}
+        {% include 'employer/field_select.html' with class='field fl_left' title='Type of Employment*' field='employment_type' items=EmploymentType %}
+        <div class="clear"></div>
+        {% include 'employer/field_select.html' with title='Special Conditions' field='special_conditions' items=SpecialCondition %}
+        {% include 'employer/field.html' with class='field pod' input_class='it-pod' title='If “Other” Please Indicate' field='other_conditions' %}
+        <div class="field ">
+            <label>Selection Criteria (please list one per line)*</label>
+        </div>
+        <div class="field pod">
+            Essential:
+            <input class="it-pod2" type="text"/>
+            <a href="#">Add Another Essential Criteria Item</a>
+        </div>
+        <div class="field pod2">
+            Desireable:
+            <input class="it-pod2" type="text"/>
+            <a href="#">Add Another Desireable Criteria Item</a>
+        </div>
+        {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Date Job Listing Opens' field='open_date' %}
+        {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Date Job Listing Ends' field='end_date' %}
+        <div class="clear"></div>
+        <div class="field ">
+            <label>Contact Person for This Listing*</label>
+        </div>
+        {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Name<span>*</span>' field='contact_name' %}
+        {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Phone (optional)<span>*</span>' field='contact_phone' %}
+        <div class="clear"></div>
+        {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Email Adress<span>*</span>' field='contact_email' %}
+    </div>
+</fieldset>
