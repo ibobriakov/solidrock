@@ -1,0 +1,18 @@
+[
+{
+  "pk": 1, 
+  "model": "employer.jobuploaddocumenttype", 
+  "fields": {
+    "name": "Full Position Description", 
+    "max_count": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "employer.jobuploaddocumenttype", 
+  "fields": {
+    "name": "Support Document", 
+    "max_count": -1
+  }
+}
+]

@@ -119,3 +119,28 @@ class JobSelectedCategory(models.Model):
     def clean(self):
         if self.sub_category not in self.category.jobsubcategory_set.all():
             raise  ValidationError("Category and subcategory miss match")
+
+
+class JobUploadDocumentType(models.Model):
+    name = models.CharField(verbose_name="Document Type Name", max_length=100)
+    max_count = models.IntegerField(default=-1)  # -1 for no limit
+
+    def __unicode__(self):
+        return self.name
+
+
+class JobUploadDocument(models.Model):
+    job = models.ForeignKey('employer.Job')
+    document_type = models.ForeignKey('employer.JobUploadDocumentType')
+    document = models.FileField(upload_to="job_document/%Y/%m/%d")
+
+    def __unicode__(self):
+        self.document.name
+
+    def clean(self):
+        max_count = self.document_type.max_count
+        if max_count > 0:
+            if JobUploadDocument.objects.filter(job=self.job, document_type=self.document_type).count() >= max_count:
+                raise  ValidationError("Too many Files for category {0}".format(self.document_type.__unicode__()))
+
+
