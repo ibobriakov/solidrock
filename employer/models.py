@@ -71,8 +71,10 @@ class Job(models.Model):
     contact_email = models.EmailField(verbose_name='Email',
                                       blank=True, null=True)
 
-    categories = models.ManyToManyField('employer.JobCategory', through='employer.JobSelectedCategory')
-    sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedCategory')
+    categories = models.ManyToManyField('employer.JobCategory', through='employer.JobSelectedCategory',
+                                        blank=True, null=True)
+    sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedCategory',
+                                            blank=True, null=True)
 
     def __unicode__(self):
         return "Job by {0}".format(self.owner)
