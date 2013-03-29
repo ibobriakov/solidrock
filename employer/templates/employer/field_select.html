@@ -1,9 +1,9 @@
+{% load serialize %}
 <div class="{% if class %}{{ class }}{% else %}field{% endif %}">
     <label for="{{ field }}_select">{{ title }}</label>
     <select data-value="<%=type%>_<%=element.cid%>.{{ field }}" id="{{ field }}_select">
-        <option>{{ title }}</option>
-        {% for item in items.all %}
-            <option value="{{ item.id }}">{{ item }}</option>
-        {% endfor %}
+        <% _.each({% autoescape off %}{{ items|as_json }}{% endautoescape %},function(value){ %>
+            <option value="<%= value.resource_uri %>"><%= value.name %></option>
+        <% }) %>
     </select>
 </div>
