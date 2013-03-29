@@ -24,6 +24,10 @@ class PermissionBackend(object):
             return obj.owner == user
         elif perm in ('resume.add_resumeitem', 'cover_letter.add_coverletteritem'):
             return True
+        elif perm in ('employer.change_job',):
+            return obj.owner == user
+        elif perm in ('employer.add_job',):
+            return True
         return False
 
     def authenticate(self):

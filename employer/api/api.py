@@ -11,31 +11,39 @@ from userprofile.api import AuthorizationWithObjectPermissions
 __author__ = 'ir4y'
 
 
-class LocationResource(ModelResource):
+class ModelResourceWithName(ModelResource):
+    name = fields.CharField(readonly=True)
+
+    def dehydrate_name(self, bundle):
+        return bundle.obj.__unicode__()
+
+
+class LocationResource(ModelResourceWithName):
+
     class Meta:
         queryset = JobLocation.objects.all()
         allowed_methods = ('get',)
 
 
-class SalaryRangeResource(ModelResource):
+class SalaryRangeResource(ModelResourceWithName):
     class Meta:
         queryset = SalaryRange.objects.all()
         allowed_methods = ('get',)
 
 
-class HourResource(ModelResource):
+class HourResource(ModelResourceWithName):
     class Meta:
         queryset = Hour.objects.all()
         allowed_methods = ('get',)
 
 
-class EmploymentTypeResource(ModelResource):
+class EmploymentTypeResource(ModelResourceWithName):
     class Meta:
         queryset = EmploymentType.objects.all()
         allowed_methods = ('get',)
 
 
-class SpecialConditionResource(ModelResource):
+class SpecialConditionResource(ModelResourceWithName):
     class Meta:
         queryset = SpecialCondition.objects.all()
         allowed_methods = ('get',)
@@ -92,17 +100,16 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         validation = EmployerResourceValidation(form_class=modelform_factory(Job))
 
 
-class JobCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResource):
-    # subcategories_set = fields.ToManyField('employer.api.JobSubCategoryResource', 'subcategories_set',
-    #                                        full=True, blank=True, null=True)
-    #TODO fix serialization error
+class JobCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResourceWithName):
+    subcategories_set = fields.ToManyField('employer.api.JobSubCategoryResource', 'subcategories_set',
+                                           full=True, blank=True, null=True)
 
     class Meta:
         queryset = JobCategory.objects.all()
         allowed_methods = ('get',)
 
 
-class JobSubCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResource):
+class JobSubCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResourceWithName):
     category = fields.ToOneField('employer.api.JobCategoryResource', 'category')
 
     class Meta:
