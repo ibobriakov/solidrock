@@ -85,7 +85,7 @@
 
                         };
                         _.each(page_dict,function(value,key) {
-                            new (profile_view_fabric(key,'/job_seeker/'))({
+                            window.job = new (profile_view_fabric(key,'/job_seeker/'))({
                                 el: $('div.page.section'+value.section),
                                 collection: new (profile_collection_fabric(key))(value.collection)
                             });

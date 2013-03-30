@@ -38,14 +38,23 @@
             <label>Selection Criteria (please list one per line)*</label>
         </div>
         <div class="field pod">
-            Essential:
-            <input class="it-pod2" type="text"/>
-            <a href="#">Add Another Essential Criteria Item</a>
+            <div>
+                Essential:
+                <div data-each-essential="<%=type%>_<%=element.cid%>.essential_set">
+                    <input class="it-pod2" type="text" data-value="essential.essential"/>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <a href="#" data-on-click="<%=type%>_<%=element.cid%>:essential_add">Add Another Essential Criteria Item</a>
         </div>
         <div class="field pod2">
-            Desireable:
-            <input class="it-pod2" type="text"/>
-            <a href="#">Add Another Desireable Criteria Item</a>
+            <div>
+                Desireable:
+                <div data-each-desireable="<%=type%>_<%=element.cid%>.desireable_set">
+                    <input class="it-pod2" type="text" data-value="desireable.desireable"/>
+                </div>
+            </div>
+            <a href="#" data-on-click="<%=type%>_<%=element.cid%>:desireable_add">Add Another Desireable Criteria Item</a>
         </div>
         {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Date Job Listing Opens' field='open_date' %}
         {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Date Job Listing Ends' field='end_date' %}

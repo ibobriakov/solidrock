@@ -5,4 +5,4 @@
  * Time: 20:50
  * To change this template use File | Settings | File Templates.
  */
-$('select').select2();
+//$('select').select2();
