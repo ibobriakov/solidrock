@@ -1,0 +1,28 @@
+<div class="_search_box _search_job">
+    <div class="_top">
+        <div class="_icon"></div>
+        <div class="_title">Job Search</div>
+    </div>
+    <div class="_center">
+        <form class="search_from" method="POST" action="{% url "search.search" %}">
+            {% csrf_token %}
+            <fieldset>
+                {% for filed in search_from.visible_fields %}
+                    <div class="_field {% if filed.name == "sub_category" or  filed.name == "area"%}_pod{% endif %}">
+                        <label>{{ filed.label }}</label>
+                        {{ filed }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+            <div class="_submit">
+                <div class="_more">More Options</div>
+                <input class="_search_button" type="submit" value="Search"/>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".search_from select").select2();
+    });
+</script>

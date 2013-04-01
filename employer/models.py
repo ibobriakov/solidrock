@@ -117,7 +117,7 @@ class JobSelectedCategory(models.Model):
     sub_category = models.ForeignKey('employer.JobSubCategory')
 
     def clean(self):
-        if self.sub_category not in self.category.jobsubcategory_set.all():
+        if self.sub_category not in self.category.subcategories_set.all():
             raise  ValidationError("Category and subcategory miss match")
 
 
@@ -133,9 +133,6 @@ class JobUploadDocument(models.Model):
     job = models.ForeignKey('employer.Job')
     document_type = models.ForeignKey('employer.JobUploadDocumentType')
     document = models.FileField(upload_to="job_document/%Y/%m/%d")
-
-    # def __unicode__(self):
-    #     self.document.name
 
     def clean(self):
         max_count = self.document_type.max_count

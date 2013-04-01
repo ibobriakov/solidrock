@@ -37,29 +37,7 @@
 
             </div>
         </div>
-        <div class="_search_box _search_job">
-            <div class="_top">
-                <div class="_icon"></div>
-                <div class="_title">Job Search</div>
-            </div>
-            <div class="_center">
-                <form class="search_from" method="POST" action="{% url "search.search" %}">
-                    {% csrf_token %}
-                    <fieldset>
-                        {% for filed in search_from.visible_fields %}
-                        <div class="_field {% if filed.name == "sub_category" or  filed.name == "area"%}_pod{% endif %}">
-                            <label>{{ filed.label }}</label>
-                            {{ filed }}
-                        </div>
-                        {% endfor %}
-                    </fieldset>
-                    <div class="_submit">
-                        <div class="_more">More Options</div>
-                        <input class="_search_button" type="submit" value="Search"/>
-                    </div>
-                </form>
-            </div>
-        </div>
+        {% include "search/search_form.html" %}
     </div>
     <div class="_slider_block">
         <div class="_slider">
@@ -93,9 +71,4 @@
     <script src="{% static 'main/js/src/extra/jcarousellite_1.0.1.min.js' %}"></script>
     <script src="{% static 'main/js/src/extra/map.js' %}"></script>
     <script src="{% static 'main/js/src/extra/js.js' %}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".search_from select").select2();
-        });
-    </script>
 {% endblock %}

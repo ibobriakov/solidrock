@@ -5,7 +5,7 @@ __author__ = 'ir4y'
 
 
 class SearchForm(forms.Form):
-    keywords = forms.CharField()#required=False)
+    keywords = forms.CharField(required=False)
     executive_positions = forms.ChoiceField(required=False,
                                             choices=((0, "All Executive Positions"),
                                                      (1, "All Executive Positions")))
@@ -20,7 +20,7 @@ class SearchForm(forms.Form):
                                       (1, "Any Area")))
 
     def __init__(self, *args, **kwargs):
-        super(SearchForm, self).__init__(args, kwargs)
+        super(SearchForm, self).__init__(*args, **kwargs)
         self.fields['category'].queryset = JobCategory.objects.all()
         self.fields['sub_category'].queryset = JobSubCategory.objects.all()
         self.fields['location'].queryset = JobLocation.objects.all()

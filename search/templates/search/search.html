@@ -1,8 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    </form>
+    <style>
+        ._search_job{
+            width: 100%;
+        }
+    </style>
+    {% include "search/search_form.html" with search_from=form %}
+    <table style="width: 100%;">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Title</td>
+            <td>Location</td>
+            <td>Categories</td>
+            <td>Sub Categories</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            <tr>
+                <td>{{ job.name }}</td>
+                <td>{{ job.title }}</td>
+                <td>{{ job.location }}</td>
+                <td>{{ job.categories.all }}</td>
+                <td>{{ job.sub_categories.all }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
