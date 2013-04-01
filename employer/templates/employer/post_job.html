@@ -25,7 +25,16 @@
         <fieldset>
             <div class="field">
                 <label>Upload Other Supporting Documents</label>
-
+                <% _.each(collection.where({'document_type.name':'Support Document'}),function(element,index){ %>
+                    <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
+                <% if (element.errors['value']) { %>
+                <div class="error_list">
+                    <% _.each(element.errors['value'],function(value){ %>
+                    <p><%=value%></p>
+                    <% }) %>
+                </div>
+                <% } %>
+                <% }) %>
                 <a href="#">Upload a Supporting Document</a><br/>
 
                 <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>

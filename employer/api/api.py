@@ -131,7 +131,7 @@ class JobUploadDocumentTypeResource(ModelResource):
 
 class JobUploadDocumentResource(ModelResource):
     job = fields.ToOneField('employer.api.JobResource', 'job')
-    document_type = fields.ToOneField('employer.api.JobUploadDocumentTypeResource', 'document_type')
+    document_type = fields.ToOneField('employer.api.JobUploadDocumentTypeResource', 'document_type', full=True)
 
     class Meta:
         queryset = JobUploadDocument.objects.all()
