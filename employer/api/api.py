@@ -132,6 +132,10 @@ class JobUploadDocumentTypeResource(ModelResource):
 class JobUploadDocumentResource(ModelResource):
     job = fields.ToOneField('employer.api.JobResource', 'job')
     document_type = fields.ToOneField('employer.api.JobUploadDocumentTypeResource', 'document_type', full=True)
+    document_type_name = fields.CharField(readonly=True)
+
+    def dehydrate_document_type_name(self, bundle):
+        return bundle.obj.document_type.__unicode__()
 
     class Meta:
         queryset = JobUploadDocument.objects.all()
