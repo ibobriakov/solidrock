@@ -13,7 +13,8 @@ from userprofile.api import JobSeekerInformationResource, JobSeekerCurrentEmploy
     EmployerResource
 from employer.api import JobResource, LocationResource, SalaryRangeResource, HourResource,\
     EmploymentTypeResource, SpecialConditionResource, EssentialResource, DesireableResource,\
-    JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource, JobSelectedCategoryResource
+    JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource, JobSelectedCategoryResource, \
+    JobUploadDocumentTypeResource
 
 v1_api = Api(api_name='v1')
 v1_api.register(EmployerResource())
@@ -40,6 +41,7 @@ v1_api.register(EssentialResource())
 v1_api.register(DesireableResource())
 v1_api.register(JobCategoryResource())
 v1_api.register(JobSubCategoryResource())
+v1_api.register(JobUploadDocumentTypeResource())
 v1_api.register(JobUploadDocumentResource())
 v1_api.register(JobSelectedCategoryResource())
 
@@ -56,6 +58,7 @@ urlpatterns = patterns(
     url(r'^api/', include(v1_api.urls)),
     url(r'logout/', 'registration_rest_backend.views.logout_view', name="logout"),
     url(r'^redactor/', include('redactor.urls')),
+    url(r'^search/', include('search.urls')),
     url(r'^', include('main.urls')),
 )
 

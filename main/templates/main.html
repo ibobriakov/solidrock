@@ -43,7 +43,7 @@
                 <div class="_title">Job Search</div>
             </div>
             <div class="_center">
-                <form class="search_from">
+                <form class="search_from" method="POST" action="{% url "search.search" %}">
                     {% csrf_token %}
                     <fieldset>
                         {% for filed in search_from.visible_fields %}

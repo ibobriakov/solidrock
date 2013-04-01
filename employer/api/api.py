@@ -4,8 +4,8 @@ from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
 from employer.api.validation import EmployerResourceValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
-from ..models import JobLocation, SalaryRange, Hour, EmploymentType, SpecialCondition, JobUploadDocument, JobSelectedCategory
-from ..models import Job, Essential, Desireable, JobCategory, JobSubCategory
+from ..models import JobLocation, SalaryRange, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType,\
+    Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument, JobSelectedCategory
 from userprofile.api import AuthorizationWithObjectPermissions
 
 __author__ = 'ir4y'
@@ -121,7 +121,16 @@ class JobSubCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResourceW
         allowed_methods = ('get',)
 
 
+class JobUploadDocumentTypeResource(ModelResource):
+    class Meta:
+        queryset = JobUploadDocumentType.objects.all()
+        allowed_methods = ('get',)
+
+
 class JobUploadDocumentResource(ModelResource):
+    job = fields.ToOneField('employer.api.JobResource', 'job')
+    document_type = fields.ToOneField('employer.api.JobUploadDocumentTypeResource', 'document_type')
+
     class Meta:
         queryset = JobUploadDocument.objects.all()
         allowed_methods = ('get',)
