@@ -9,11 +9,11 @@ class SearchForm(forms.Form):
     executive_positions = forms.ChoiceField(required=False,
                                             choices=((0, "All Executive Positions"),
                                                      (1, "All Executive Positions")))
-    category = forms.ModelChoiceField(queryset=JobCategory.objects.none(),
+    categories = forms.ModelChoiceField(queryset=JobCategory.objects.none(),
                                       required=False, empty_label='Any Category')
     location = forms.ModelChoiceField(queryset=JobLocation.objects.none(),
                                       required=False, empty_label='All Australia')
-    sub_category = forms.ModelChoiceField(queryset=JobSubCategory.objects.none(),
+    sub_categories = forms.ModelChoiceField(queryset=JobSubCategory.objects.none(),
                                           required=False, empty_label='Any Sub-Category')
     area = forms.ChoiceField(required=False,
                              choices=((0, "Any Area"),
@@ -21,6 +21,6 @@ class SearchForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
-        self.fields['category'].queryset = JobCategory.objects.all()
-        self.fields['sub_category'].queryset = JobSubCategory.objects.all()
+        self.fields['categories'].queryset = JobCategory.objects.all()
+        self.fields['sub_categories'].queryset = JobSubCategory.objects.all()
         self.fields['location'].queryset = JobLocation.objects.all()
