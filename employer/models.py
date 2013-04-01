@@ -134,8 +134,8 @@ class JobUploadDocument(models.Model):
     document_type = models.ForeignKey('employer.JobUploadDocumentType')
     document = models.FileField(upload_to="job_document/%Y/%m/%d")
 
-    def __unicode__(self):
-        self.document.name
+    # def __unicode__(self):
+    #     self.document.name
 
     def clean(self):
         max_count = self.document_type.max_count

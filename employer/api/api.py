@@ -127,6 +127,7 @@ class JobUploadDocumentResource(ModelResource):
     class Meta:
         queryset = JobUploadDocument.objects.all()
         allowed_methods = ('get',)
+        resource_name = 'job_upload_document'
 
 
 class JobSelectedCategoryResource(ModelResource):
