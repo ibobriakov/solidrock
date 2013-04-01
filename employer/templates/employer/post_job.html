@@ -15,19 +15,32 @@
         </div>
     </script>
 
-    <script id="employer_upload_documents_form_template" type="text/template">
+    <script id="job_upload_document_form_template" type="text/template">
         <div class="title">Upload Documents</div>
         <p>
             From this section you can upload documents associated with this job listing.<br/>
             Note that only Adobe PDF or Microsoft Word Documents are allowed.
         </p>
         <br/>
-        <% _.each(collection.models,function(element, index) { %>
-            {% include "employer/upload_documents_form_template.html" %}
-        <% }) %>
+        <fieldset>
+            <div class="field">
+                <label>Upload Other Supporting Documents</label>
+
+                <a href="#">Upload a Supporting Document</a><br/>
+
+                <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
+            </div>
+
+            <div class="field">
+                <label>School, College, or University Name</label>
+                <a href="#">Upload the Full Position Description</a><br/>
+
+                <div class="text">(Note: You may only upload one Full Position Description)</div>
+            </div>
+        </fieldset>
         <div class="_submit">
-            <div class="exit" data-on-click="job_seeker_information_view:commit_and_exit">Save and Exit</div>
-            <div class="cont" data-on-click="job_seeker_information_view:commit" >Save and Continue</div>
+            <div class="exit" data-on-click="employer_upload_documents_view:commit_and_exit">Save and Exit</div>
+            <div class="cont" data-on-click="employer_upload_documents_view:commit" >Save and Continue</div>
         </div>
     </script>
 
@@ -72,11 +85,10 @@
                                 'section':1,
                                 'collection': {% autoescape off %}{{ object|as_json }}{% endautoescape %}
                             },
-{#                            'employer_upload_documents':{#}
-{#                                'section':2,#}
-{#                                'collection': [{}]#}
-{#                                {% autoescape off %}{{ profile.current_employment|as_json }}{% endautoescape %}#}
-{#                            },#}
+                            'job_upload_document':{
+                                'section':2,
+                                'collection': {% autoescape off %}{{ object.jobuploaddocument_set.all|as_json }}{% endautoescape %}
+                            },
 {#                            'employer_select_category':{#}
 {#                                'section':3,#}
 {#                                'collection': [{}]#}

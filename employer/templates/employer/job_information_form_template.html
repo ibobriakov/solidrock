@@ -37,21 +37,21 @@
         <div class="field ">
             <label>Selection Criteria (please list one per line)*</label>
         </div>
-        <div class="field pod">
+        <div class="pod">
             <div>
                 Essential:
                 <div data-each-essential="<%=type%>_<%=element.cid%>.essential_set">
-                    <input class="it-pod2" type="text" data-value="essential.essential"/>
+                    <input class="it-pod2" type="text" data-value="essential.essential"/> <a data-on-click="<%=type%>_<%=element.cid%>:essential_del" data-number="" href="#">del</a>
                 </div>
             </div>
             <div class="clear"></div>
             <a href="#" data-on-click="<%=type%>_<%=element.cid%>:essential_add">Add Another Essential Criteria Item</a>
         </div>
-        <div class="field pod2">
+        <div class="pod2">
             <div>
                 Desireable:
                 <div data-each-desireable="<%=type%>_<%=element.cid%>.desireable_set">
-                    <input class="it-pod2" type="text" data-value="desireable.desireable"/>
+                    <input class="it-pod2" type="text" data-value="desireable.desireable"/> <a data-on-click="<%=type%>_<%=element.cid%>:desireable_del" href="#">del</a>
                 </div>
             </div>
             <a href="#" data-on-click="<%=type%>_<%=element.cid%>:desireable_add">Add Another Desireable Criteria Item</a>

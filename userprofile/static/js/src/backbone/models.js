@@ -30,6 +30,14 @@ function profile_model_fabric(type) {
             this.view.render();
             return false;
         },
+        essential_del: function(e){
+            console.log(e);
+            return false;
+        },
+        desireable_del: function(e){
+            console.log(e);
+            return false;
+        },
         commit: function() {
             this.valid = false;
             this.save([],{ wait: true,

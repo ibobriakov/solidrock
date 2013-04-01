@@ -91,6 +91,8 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
 
     def hydrate(self, bundle):
         bundle.obj.user = bundle.request.user
+        for item in bundle.data['essential_set']:
+            item['job'] = bundle.data['resource_uri']
         for item in bundle.data['desireable_set']:
             item['job'] = bundle.data['resource_uri']
         return bundle
@@ -134,6 +136,7 @@ class JobUploadDocumentResource(ModelResource):
     class Meta:
         queryset = JobUploadDocument.objects.all()
         allowed_methods = ('get',)
+        resource_name = 'job_upload_document'
 
 
 class JobSelectedCategoryResource(ModelResource):
