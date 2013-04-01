@@ -13,7 +13,7 @@ from userprofile.api import JobSeekerInformationResource, JobSeekerCurrentEmploy
     EmployerResource
 from employer.api import JobResource, LocationResource, SalaryRangeResource, HourResource,\
     EmploymentTypeResource, SpecialConditionResource, EssentialResource, DesireableResource,\
-    JobCategoryResource, JobSubCategoryResource
+    JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource, JobSelectedCategoryResource
 
 v1_api = Api(api_name='v1')
 v1_api.register(EmployerResource())
@@ -40,6 +40,8 @@ v1_api.register(EssentialResource())
 v1_api.register(DesireableResource())
 v1_api.register(JobCategoryResource())
 v1_api.register(JobSubCategoryResource())
+v1_api.register(JobUploadDocumentResource())
+v1_api.register(JobSelectedCategoryResource())
 
 
 admin.autodiscover()

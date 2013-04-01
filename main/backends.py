@@ -28,9 +28,9 @@ class PermissionBackend(object):
             return obj.owner == user
         elif perm in ('employer.add_job',):
             return True
-        elif perm in ('employer.change_desireable', 'employer.change_essential'):
+        elif perm in ('employer.change_desireable', 'employer.change_essential', 'employer.change_jobselectedcategory'):
             return obj.job.owner == user
-        elif perm in ('employer.add_desireable', 'employer.add_essential'):
+        elif perm in ('employer.add_desireable', 'employer.add_essential', 'employer.add_jobselectedcategory'):
             return True
         return False
 
