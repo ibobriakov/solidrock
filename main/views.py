@@ -25,7 +25,7 @@ class EmployerListView(ListView):
 
 
 @csrf_exempt
-def upload(request, purpose):
+def upload(request, purpose, pk=None):
     if purpose == 'job_seeker_photo':
         job_seeker_information = request.user.profile.personal_information
         job_seeker_information.photo = request.FILES['files[]']
@@ -36,13 +36,15 @@ def upload(request, purpose):
         employer_profile.logo = request.FILES['files[]']
         employer_profile.save()
         url = get_thumbnail(employer_profile.logo, '203x203', crop="center").url
+    elif purpose == 'job_support_document':
+        print(request.POST)
     else:
         raise Http404
     return HttpResponse(json.dumps({'url': url}), mimetype='application/json')
 
 
 @csrf_exempt
-def remove(request, purpose):
+def remove(request, purpose, pk=None):
     if purpose == 'job_seeker_photo':
         job_seeker_information = request.user.profile.personal_information
         job_seeker_information.photo = None
