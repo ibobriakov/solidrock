@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import json
 from constance import config
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView
 from sorl.thumbnail.shortcuts import get_thumbnail
+from employer.models import JobUploadDocument, JobUploadDocumentType
 from search.forms import SearchForm
 from userprofile.models import Employer
 
@@ -37,7 +39,13 @@ def upload(request, purpose, pk=None):
         employer_profile.save()
         url = get_thumbnail(employer_profile.logo, '203x203', crop="center").url
     elif purpose == 'job_support_document':
-        print(request.POST)
+        document_type = JobUploadDocumentType.objects.get(name="Support Document")
+        upload_document = JobUploadDocument()
+        upload_document.job_id = pk
+        upload_document.document_type_id = document_type.pk
+        upload_document.document = request.FILES['files[]']
+        upload_document.save()
+        return reverse('api_dispatch_detail', api_name='v1', resource_name='job_upload_document', pk=upload_document.pk)
     else:
         raise Http404
     return HttpResponse(json.dumps({'url': url}), mimetype='application/json')

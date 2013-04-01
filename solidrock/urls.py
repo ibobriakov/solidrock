@@ -70,6 +70,6 @@ urlpatterns += patterns('django.contrib.flatpages.views',
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += patterns('django.contrib.flatpages.views',
-                        (r'^(?P<url>.*)$', 'flatpage'),
-                        )
+#urlpatterns += patterns('django.contrib.flatpages.views',
+#                        (r'^(?P<url>.*)$', 'flatpage'),
+#                        )

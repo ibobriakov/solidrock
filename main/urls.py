@@ -7,6 +7,6 @@ urlpatterns = patterns(
     '',
     url(r'^$', MainView.as_view(), name='search'),
     url(r'^employers$', EmployerListView.as_view(), name='employers'),
-    url(r'^upload/(?P<purpose>\w+)/(?P<pk>)?$', 'main.views.upload', name='upload'),
-    url(r'^remove/(?P<purpose>\w+)/(?P<pk>)?$', 'main.views.remove', name='remove'),
+    url(r'^upload/(?P<purpose>\w+)/(?P<pk>\d+)?$', 'main.views.upload', name='upload'),
+    url(r'^remove/(?P<purpose>\w+)/(?P<pk>\d+)?$', 'main.views.remove', name='remove'),
 )

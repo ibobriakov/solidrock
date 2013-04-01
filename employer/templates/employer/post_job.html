@@ -30,7 +30,7 @@
                         <a href="<%=element.get('document')%>"><%=element.get('name')%></a> <a data-id="<%=element.get('id')%>" data-url="{% url "remove" "job_support_document" %}" id="support_document_remove_file_link"  href="#">Delete Picture</a>
                     <% }) %>
                 </div>
-                <input class="_hide" id="support_document_upload" type="file" name="files[]" data-url="{% url "upload" "job_support_document" %}">
+                <input class="_hide" id="support_document_upload" type="file" name="files[]" data-url="{% url "upload" "job_support_document" object.pk %}">
                 <a id="support_document_upload_link" href="#">Upload a Supporting Document</a><br/>
 
                 <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
