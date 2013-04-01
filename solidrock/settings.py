@@ -116,7 +116,8 @@ LOCAL_APPS = (
     'registration_rest_backend',
     'userprofile',
     'job_seeker',
-    'employer'
+    'employer',
+    'search',
 )
 
 # A sample logging configuration. The only tangible logging

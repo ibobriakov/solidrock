@@ -5,6 +5,7 @@ from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView
 from sorl.thumbnail.shortcuts import get_thumbnail
+from search.forms import SearchForm
 from userprofile.models import Employer
 
 
@@ -14,6 +15,7 @@ class MainView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MainView, self).get_context_data(**kwargs)
         context['next'] = self.request.GET['next'] if 'next' in self.request.GET else None
+        context['search_from'] = SearchForm()
         return context
 
 

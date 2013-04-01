@@ -43,65 +43,15 @@
                 <div class="_title">Job Search</div>
             </div>
             <div class="_center">
-                <form>
+                <form class="search_from">
+                    {% csrf_token %}
                     <fieldset>
-                        <div class="_field">
-                            <label>Keywords</label>
-                            <input type="text" placeholder="Enter Keywords"/>
+                        {% for filed in search_from.visible_fields %}
+                        <div class="_field {% if filed.name == "sub_category" or  filed.name == "area"%}_pod{% endif %}">
+                            <label>{{ filed.label }}</label>
+                            {{ filed }}
                         </div>
-                        <div class="_field">
-                            <label>Executive Positions</label>
-                            <select id="e1">
-                                <option>All Executive Positions</option>
-                                <option>All Executive Positions</option>
-                                <option>All Executive Positions</option>
-                                <option>All Executive Positions</option>
-                                <option>All Executive Positions</option>
-                            </select>
-                        </div>
-                        <div class="_field">
-                            <label>Category</label>
-                            <select id="e2">
-                                <option>Any Category</option>
-                                <option>Any Category</option>
-                                <option>Any Category</option>
-                                <option>Any Category</option>
-                                <option>Any Category</option>
-                            </select>
-                        </div>
-                        <div class="_field">
-                            <label>Location</label>
-                            <select id="e3">
-                                <option>Australia</option>
-                                <option>Australia</option>
-                                <option>Australia</option>
-                                <option>Australia</option>
-                                <option>Australia</option>
-                            </select>
-                        </div>
-                        <div class="_field _pod">
-                            <label>Sub-category</label>
-                            <select id="e4">
-                                <option>Any Sub-category</option>
-                                <option>Any Sub-category</option>
-                                <option>Any Sub-category</option>
-                                <option>Any Sub-category</option>
-                                <option>Any Sub-category</option>
-                            </select>
-                        </div>
-                        <div class="_field _pod">
-                            <label>Area</label>
-                            <select id="e5">
-                                <option>All Australia</option>
-                                <option>Western Australia</option>
-                                <option>Northern Territory</option>
-                                <option>Queensland</option>
-                                <option>New South Wales</option>
-                                <option>South Australia</option>
-                                <option>Victoria</option>
-                                <option>Tasmania</option>
-                            </select>
-                        </div>
+                        {% endfor %}
                     </fieldset>
                     <div class="_submit">
                         <div class="_more">More Options</div>
@@ -145,11 +95,7 @@
     <script src="{% static 'main/js/src/extra/js.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#e1").select2();
-            $("#e2").select2();
-            $("#e3").select2();
-            $("#e4").select2();
-            $("#e5").select2();
+            $(".search_from select").select2();
         });
     </script>
 {% endblock %}
