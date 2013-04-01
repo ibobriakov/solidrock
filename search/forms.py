@@ -5,7 +5,7 @@ __author__ = 'ir4y'
 
 
 class SearchForm(forms.Form):
-    keywords = forms.CharField(required=False)
+    keywords = forms.CharField()#required=False)
     executive_positions = forms.ChoiceField(required=False,
                                             choices=((0, "All Executive Positions"),
                                                      (1, "All Executive Positions")))
