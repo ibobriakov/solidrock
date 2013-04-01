@@ -25,17 +25,13 @@
         <fieldset>
             <div class="field">
                 <label>Upload Other Supporting Documents</label>
-                <% _.each(collection.where({'document_type.name':'Support Document'}),function(element,index){ %>
-                    <input data-value="<%=type%>_<%=element.cid%>.value" class="it4" type="text"> <% if (index) { %><a href="#" data-on-click="job_seeker_education_view:remove" data-cid="<%=element.cid%>">remove</a><% } %>
-                <% if (element.errors['value']) { %>
-                <div class="error_list">
-                    <% _.each(element.errors['value'],function(value){ %>
-                    <p><%=value%></p>
+                <div id="support_document_list">
+                    <% _.each(collection.where({'document_type_name':'Support Document'}),function(element,index){ %>
+                        <a href="<%=element.get('document')%>"><%=element.get('name')%></a> <a data-id="<%=element.get('id')%>" data-url="{% url "remove" "job_support_document" %}" id="support_document_remove_file_link"  href="#">Delete Picture</a>
                     <% }) %>
                 </div>
-                <% } %>
-                <% }) %>
-                <a href="#">Upload a Supporting Document</a><br/>
+                <input class="_hide" id="support_document_upload" type="file" name="files[]" data-url="{% url "upload" "job_support_document" %}">
+                <a id="support_document_upload_link" href="#">Upload a Supporting Document</a><br/>
 
                 <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
             </div>
@@ -116,4 +112,28 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block initialize-js %}
+    {{ block.super }}
+    <script>
+        $('#support_document_upload').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                $('#support_document_list').append('<a href="' + data.document + '">' + data.name + '</a>');
+            }
+        });
+        $('#support_document_upload_link').on('click',function(){
+            $('#support_document_upload').trigger('click');
+            return false;
+        });
+        $('#support_document_remove_file_link').on('click',function(){
+            $.ajax({
+                url: $(this).attr('data-url')
+            }).done(function ( data ) {
+
+                    });
+            return false;
+        })
+    </script>
 {% endblock %}
