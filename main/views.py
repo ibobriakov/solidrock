@@ -21,6 +21,7 @@ class EmployerListView(ListView):
     template_name = 'employers.html'
     model = Employer
 
+
 @csrf_exempt
 def upload(request, purpose):
     if purpose == 'job_seeker_photo':

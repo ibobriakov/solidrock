@@ -58,6 +58,7 @@ class EssentialResource(ModelResource):
 
     class Meta:
         queryset = Essential.objects.all()
+        authorization = AuthorizationWithObjectPermissions()
 
 
 class DesireableResource(ModelResource):
@@ -69,6 +70,7 @@ class DesireableResource(ModelResource):
 
     class Meta:
         queryset = Desireable.objects.all()
+        authorization = AuthorizationWithObjectPermissions()
 
 
 class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
@@ -89,6 +91,8 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
 
     def hydrate(self, bundle):
         bundle.obj.user = bundle.request.user
+        for item in bundle.data['desireable_set']:
+            item['job'] = bundle.data['resource_uri']
         return bundle
 
     class Meta:
