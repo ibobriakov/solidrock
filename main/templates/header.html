@@ -35,7 +35,7 @@
 </div>
 <div class="_navigation" style="clear:none;">
     <ul style="float:left;">
-        <li {% if url_name == "search" %}class="active"{% endif %}><a href="{% url "search" %}">SEARCH</a></li>
+        <li {% if url_name|startswith:"search" %}class="active"{% endif %}><a href="{% url "search" %}">SEARCH</a></li>
         {% if user.is_authenticated %}
             {# TODO refactor this agly if #}
             <li {% if url_name|startswith:"job_seeker" or url_name|startswith:"resume"  or url_name|startswith:"cover_letter" or url_name|startswith:"employer" and url_name != "employers"%}class="active"{% endif %}>
