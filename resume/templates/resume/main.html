@@ -1,5 +1,6 @@
 {% extends 'resume/base.html' %}
 {% load mptt_tags %}
+{% load serialize %}
 
 {% block content %}
     <div class="_content builder">
@@ -7,7 +8,7 @@
         <div class="top">
             <div class="title">Resume</div>
             <form>
-                <input type="text" value="{{ resume.name }}">
+                <input type="text" data-value="resume_name.name">
                 <div class="links">
                     <a class="link" href="#">Resume Builder Instructions</a>
 {#                    <div class="pop">Popluate</div>#}
@@ -26,7 +27,7 @@
             </div>
             <div class="info1">
                 <ul>
-                    <li>{{ resume.name }}</li>
+                    <li data-text="resume_name.name"></li>
                     <li class="sep">|</li>
                     <li class="page">Page 1</li>
                 </ul>
@@ -55,5 +56,8 @@
             {% endrecursetree %}
         ]);
         paper_view.render();
+        var paper_name_view = new (paper_name_view_factory('resume_name'))({el:$('._content.builder')});
+        paper_name_view.model.set({{ object|as_json|safe }}[0]);
+        paper_name_view.bindel();
     </script>
 {% endblock %}
