@@ -27,19 +27,27 @@
                 <label>Upload Other Supporting Documents</label>
                 <div id="support_document_list">
                     <% _.each(collection.where({'document_type_name':'Support Document'}),function(element,index){ %>
-                        <a href="<%=element.get('document')%>"><%=element.get('name')%></a> <a data-id="<%=element.get('id')%>" data-url="{% url "remove" "job_support_document" %}" id="support_document_remove_file_link"  href="#">Delete Picture</a>
+                        <a href="<%=element.get('document')%>"><%=element.get('file_name')%></a>
+                        <a data-on-click="job_upload_document_view:remove" data-cid="<%=element.cid%>" href="#">del</a>
                     <% }) %>
                 </div>
                 <input class="_hide" id="support_document_upload" type="file" name="files[]" data-url="{% url "upload" "job_support_document" object.pk %}">
                 <a id="support_document_upload_link" href="#">Upload a Supporting Document</a><br/>
-
                 <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
             </div>
 
             <div class="field">
                 <label>School, College, or University Name</label>
-                <a href="#">Upload the Full Position Description</a><br/>
-
+                <div id="full_position_description">
+                    <% _.each(collection.where({'document_type_name':'Full Position Description'}),function(element,index){ %>
+                    <a href="<%=element.get('document')%>"><%=element.get('file_name')%></a>
+                    <a data-on-click="job_upload_document_view:remove" data-cid="<%=element.cid%>" href="#">del</a>
+                    <% }) %>
+                </div>
+                <% if (!collection.where({'document_type_name':'Full Position Description'}).length) { %>
+                    <input class="_hide" id="full_position_description_upload" type="file" name="files[]" data-url="{% url "upload" "job_full_position_document" object.pk %}">
+                    <a id="full_position_description_upload_link" href="#">Upload the Full Position Description</a><br/>
+                <% } %>
                 <div class="text">(Note: You may only upload one Full Position Description)</div>
             </div>
         </fieldset>
@@ -85,27 +93,13 @@
                     <div class="page section2" style="display: none;"></div>
                     <div class="page section3" style="display: none;"></div>
                     <script>
-                        var page_dict = {
-                            'job':{
-                                'section':1,
-                                'collection': {% autoescape off %}{{ object|as_json }}{% endautoescape %}
-                            },
-                            'job_upload_document':{
-                                'section':2,
-                                'collection': {% autoescape off %}{{ object.jobuploaddocument_set.all|as_json }}{% endautoescape %}
-                            },
-{#                            'employer_select_category':{#}
-{#                                'section':3,#}
-{#                                'collection': [{}]#}
-{#                                {% autoescape off %}{{ profile.previous_employments_set.all|as_json }}{% endautoescape %}#}
-{#                            }#}
-
-                        };
-                        _.each(page_dict,function(value,key) {
-                            window.job = new (profile_view_fabric(key,'/job_seeker/'))({
-                                el: $('div.page.section'+value.section),
-                                collection: new (profile_collection_fabric(key))(value.collection)
-                            });
+                        job_view = new (profile_view_fabric('job','/'))({
+                            el: $('div.page.section1'),
+                            collection: new (profile_collection_fabric('job'))({% autoescape off %}{{ object|as_json }}{% endautoescape %})
+                        });
+                        job_upload_document_view = new (profile_view_fabric('job_upload_document','/'))({
+                            el: $('div.page.section2'),
+                            collection: new (profile_collection_fabric('job_upload_document'))({% autoescape off %}{{ object.jobuploaddocument_set.all|as_json }}{% endautoescape %})
                         });
                     </script>
                 </form>
@@ -120,20 +114,24 @@
         $('#support_document_upload').fileupload({
             dataType: 'json',
             done: function (e, data) {
-                $('#support_document_list').append('<a href="' + data.document + '">' + data.name + '</a>');
+                job_upload_document_view.collection.add(data.result);
+                job_upload_document_view.render();
             }
         });
         $('#support_document_upload_link').on('click',function(){
             $('#support_document_upload').trigger('click');
             return false;
         });
-        $('#support_document_remove_file_link').on('click',function(){
-            $.ajax({
-                url: $(this).attr('data-url')
-            }).done(function ( data ) {
-
-                    });
+        $('#full_position_description_upload').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                job_upload_document_view.collection.add(data.result);
+                job_upload_document_view.render();
+            }
+        });
+        $('#full_position_description_upload_link').on('click',function(){
+            $('#full_position_description_upload').trigger('click');
             return false;
-        })
+        });
     </script>
 {% endblock %}
