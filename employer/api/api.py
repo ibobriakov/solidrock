@@ -143,8 +143,10 @@ class JobUploadDocumentResource(ModelResource):
 
     class Meta:
         queryset = JobUploadDocument.objects.all()
-        allowed_methods = ('get',)
+        allowed_methods = ('get', 'delete')
         resource_name = 'job_upload_document'
+        authentication = SessionAuthentication()
+        authorization = AuthorizationWithObjectPermissions()
 
 
 class JobSelectedCategoryResource(ModelResource):
@@ -155,4 +157,5 @@ class JobSelectedCategoryResource(ModelResource):
 
     class Meta:
         queryset = JobSelectedCategory.objects.all()
+        authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
