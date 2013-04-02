@@ -10,6 +10,7 @@
     <table style="width: 100%;">
         <thead>
         <tr>
+            <td>Author</td>
             <td>Name</td>
             <td>Title</td>
             <td>Description</td>
@@ -21,6 +22,7 @@
         <tbody>
         {% for job in jobs %}
             <tr>
+                <td>{{ job.owner }}</td>
                 <td>{{ job.name }}</td>
                 <td>{{ job.title }}</td>
                 <td>{{ job.description }}</td>
