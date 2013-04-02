@@ -12,6 +12,8 @@ class SearchView(FormView):
         form_data = form.data
         context = self.get_context_data(form=form)
         query = Q()
+        if 'keywords' in form_data and form_data['keywords']:
+            query = Q(description__icontains=form_data['keywords'])
         for field in ('location', 'categories', 'sub_categories',):
             if field in form_data and form_data[field]:
                 query &= Q(**{field: form_data[field]})

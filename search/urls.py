@@ -7,4 +7,4 @@ __author__ = 'ir4y'
 
 urlpatterns = patterns(
     '',
-    url(r'^search/$', SearchView.as_view(), name='search.search'),)
+    url(r'^$', SearchView.as_view(), name='search.search'),)
