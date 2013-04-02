@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import DetailView, TemplateView, ListView
 from models import Job, JobLocation, SalaryRange, Hour, EmploymentType,\
     SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory
 
@@ -14,6 +14,14 @@ def create_job_view(request):
                                  contact_phone=request.user.profile.business_phone,
                                  contact_email=request.user.profile.email)
     return redirect('employer.job.edit', new_job.pk)
+
+
+class JobListView(ListView):
+    template_name = "employer/job_list.html"
+    model = Job
+
+    def get_queryset(self):
+        return super(JobListView, self).get_queryset().filter(owner=self.request.user)
 
 
 class EditJobView(DetailView):
