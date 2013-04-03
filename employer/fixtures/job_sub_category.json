@@ -1,0 +1,814 @@
+[
+{
+  "pk": 1, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Aboriginal health worker"
+  }
+},
+{
+  "pk": 2, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Aboriginal liason officer – health"
+  }
+},
+{
+  "pk": 3, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Aboriginal lison – education"
+  }
+},
+{
+  "pk": 4, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Aboriginal liaison – other"
+  }
+},
+{
+  "pk": 5, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Accounting"
+  }
+},
+{
+  "pk": 6, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Administration support"
+  }
+},
+{
+  "pk": 7, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Administration management"
+  }
+},
+{
+  "pk": 8, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Advertising"
+  }
+},
+{
+  "pk": 9, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Banking"
+  }
+},
+{
+  "pk": 10, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Bookkeeping"
+  }
+},
+{
+  "pk": 11, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Building"
+  }
+},
+{
+  "pk": 12, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Climate"
+  }
+},
+{
+  "pk": 13, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Community services"
+  }
+},
+{
+  "pk": 14, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Communcations"
+  }
+},
+{
+  "pk": 15, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Counselor"
+  }
+},
+{
+  "pk": 16, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Conservation – Parks"
+  }
+},
+{
+  "pk": 17, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Conservation – Urban"
+  }
+},
+{
+  "pk": 18, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Conservation – Other"
+  }
+},
+{
+  "pk": 19, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Construction"
+  }
+},
+{
+  "pk": 20, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Customer service"
+  }
+},
+{
+  "pk": 21, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Corporate services"
+  }
+},
+{
+  "pk": 22, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Defence"
+  }
+},
+{
+  "pk": 23, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Drug and Alcohol – counsellor"
+  }
+},
+{
+  "pk": 24, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Drug and Alcohol – detox"
+  }
+},
+{
+  "pk": 25, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Drug and Alcohol – residential rehab"
+  }
+},
+{
+  "pk": 26, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Energy"
+  }
+},
+{
+  "pk": 27, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Engineering - Civil"
+  }
+},
+{
+  "pk": 28, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Engineering - Mining"
+  }
+},
+{
+  "pk": 29, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Engineering - Electrical"
+  }
+},
+{
+  "pk": 30, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Engineering – other"
+  }
+},
+{
+  "pk": 31, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Environment"
+  }
+},
+{
+  "pk": 32, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Environmental health"
+  }
+},
+{
+  "pk": 33, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Executive – Health"
+  }
+},
+{
+  "pk": 34, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Executive – Government"
+  }
+},
+{
+  "pk": 35, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Executive – Education"
+  }
+},
+{
+  "pk": 36, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Executive - Other"
+  }
+},
+{
+  "pk": 37, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Farming"
+  }
+},
+{
+  "pk": 38, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Finance"
+  }
+},
+{
+  "pk": 39, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Food preparation"
+  }
+},
+{
+  "pk": 40, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Gardening"
+  }
+},
+{
+  "pk": 41, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Graphic design"
+  }
+},
+{
+  "pk": 42, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Health data"
+  }
+},
+{
+  "pk": 43, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Hospitality – customer service"
+  }
+},
+{
+  "pk": 44, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Hospitality - other"
+  }
+},
+{
+  "pk": 45, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Human resource – management"
+  }
+},
+{
+  "pk": 46, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Human resource – trainee"
+  }
+},
+{
+  "pk": 47, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Illustrator"
+  }
+},
+{
+  "pk": 48, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Information technology"
+  }
+},
+{
+  "pk": 49, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "IT Support"
+  }
+},
+{
+  "pk": 50, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "IT Networking"
+  }
+},
+{
+  "pk": 51, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Lawyer"
+  }
+},
+{
+  "pk": 52, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Maintenance – general"
+  }
+},
+{
+  "pk": 53, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Management"
+  }
+},
+{
+  "pk": 54, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Marketing"
+  }
+},
+{
+  "pk": 55, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Market research"
+  }
+},
+{
+  "pk": 56, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Media"
+  }
+},
+{
+  "pk": 57, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Medical Officer – Medical Director"
+  }
+},
+{
+  "pk": 58, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Medical Officer – GP"
+  }
+},
+{
+  "pk": 59, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Medical Officer – Senior Medical Officer"
+  }
+},
+{
+  "pk": 60, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Medical Officer – Specialist"
+  }
+},
+{
+  "pk": 61, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Medical receptionist"
+  }
+},
+{
+  "pk": 62, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Medical - technician"
+  }
+},
+{
+  "pk": 63, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Mining"
+  }
+},
+{
+  "pk": 64, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Multimedia"
+  }
+},
+{
+  "pk": 65, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Non-government organisation"
+  }
+},
+{
+  "pk": 66, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Nursing – aged care"
+  }
+},
+{
+  "pk": 67, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Nursing – acute"
+  }
+},
+{
+  "pk": 68, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Nursing – mental helath"
+  }
+},
+{
+  "pk": 69, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Nursing – primary health care"
+  }
+},
+{
+  "pk": 70, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Nursing – midwifery"
+  }
+},
+{
+  "pk": 71, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Nursing – child health"
+  }
+},
+{
+  "pk": 72, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Nursing – other"
+  }
+},
+{
+  "pk": 73, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Outreach"
+  }
+},
+{
+  "pk": 74, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Paralegal"
+  }
+},
+{
+  "pk": 75, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Parks"
+  }
+},
+{
+  "pk": 76, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Parole officer"
+  }
+},
+{
+  "pk": 77, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Pathology"
+  }
+},
+{
+  "pk": 78, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Photography"
+  }
+},
+{
+  "pk": 79, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Police"
+  }
+},
+{
+  "pk": 80, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Policy"
+  }
+},
+{
+  "pk": 81, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Property management"
+  }
+},
+{
+  "pk": 82, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Protection"
+  }
+},
+{
+  "pk": 83, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Public service"
+  }
+},
+{
+  "pk": 84, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Psychology"
+  }
+},
+{
+  "pk": 85, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Psychiatry"
+  }
+},
+{
+  "pk": 86, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Publications"
+  }
+},
+{
+  "pk": 87, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Receptionist"
+  }
+},
+{
+  "pk": 88, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Registered training Organsition"
+  }
+},
+{
+  "pk": 89, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Retail"
+  }
+},
+{
+  "pk": 90, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Sales- telephone"
+  }
+},
+{
+  "pk": 91, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Sales - other"
+  }
+},
+{
+  "pk": 92, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Security"
+  }
+},
+{
+  "pk": 93, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Social and emotional wellbeing"
+  }
+},
+{
+  "pk": 94, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Teacher"
+  }
+},
+{
+  "pk": 95, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Teacher’s aid"
+  }
+},
+{
+  "pk": 96, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Vetinary care"
+  }
+},
+{
+  "pk": 97, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Vetinary nurse"
+  }
+},
+{
+  "pk": 98, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Radiograpghy"
+  }
+},
+{
+  "pk": 99, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Realestate"
+  }
+},
+{
+  "pk": 100, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Research"
+  }
+},
+{
+  "pk": 101, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Resources"
+  }
+},
+{
+  "pk": 102, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Science"
+  }
+},
+{
+  "pk": 103, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Technical advice"
+  }
+},
+{
+  "pk": 104, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Technology"
+  }
+},
+{
+  "pk": 105, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Tourism – Guide"
+  }
+},
+{
+  "pk": 106, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Tourism – Sales"
+  }
+},
+{
+  "pk": 107, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Toursim - Design and tourism"
+  }
+},
+{
+  "pk": 108, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Trade – Electrician"
+  }
+},
+{
+  "pk": 109, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Trade – Plumber"
+  }
+},
+{
+  "pk": 110, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Trade – Carpenter"
+  }
+},
+{
+  "pk": 111, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Trade – Brick layer"
+  }
+},
+{
+  "pk": 112, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Trade – Mining"
+  }
+},
+{
+  "pk": 113, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Trade - Defence"
+  }
+},
+{
+  "pk": 114, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Trade - Other"
+  }
+},
+{
+  "pk": 115, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Welfare"
+  }
+},
+{
+  "pk": 116, 
+  "model": "employer.jobsubcategory", 
+  "fields": {
+    "sub_category_name": "Writing"
+  }
+}
+]
