@@ -1,5 +1,5 @@
 from django import forms
-from employer.models import JobCategory, JobSubCategory, JobLocation
+from employer.models import JobCategory, JobSubCategory, JobLocation, JobArea
 
 __author__ = 'ir4y'
 
@@ -15,12 +15,12 @@ class SearchForm(forms.Form):
                                       required=False, empty_label='All Australia')
     sub_categories = forms.ModelChoiceField(queryset=JobSubCategory.objects.none(),
                                             required=False, empty_label='Any Sub-Category')
-    area = forms.ChoiceField(required=False,
-                             choices=((0, "Any Area"),
-                                      (1, "Any Area")))
+    area = forms.ModelChoiceField(queryset=JobArea.objects.none(),
+                                  required=False, empty_label='All')
 
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
         self.fields['categories'].queryset = JobCategory.objects.all()
         self.fields['sub_categories'].queryset = JobSubCategory.objects.all()
         self.fields['location'].queryset = JobLocation.objects.all()
+        self.fields['area'].queryset = JobArea.objects.all()

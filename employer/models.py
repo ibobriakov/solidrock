@@ -10,6 +10,13 @@ class JobLocation(models.Model):
         return self.location
 
 
+class JobArea(models.Model):
+    area = models.CharField(verbose_name="Job Area", max_length=150)
+
+    def __unicode__(self):
+        return self.area
+
+
 class SalaryRange(models.Model):
     salary_range = models.CharField(verbose_name="Salary Range", max_length=100)
 
@@ -48,6 +55,8 @@ class Job(models.Model):
                                    blank=True, null=True)
     location = models.ForeignKey('employer.JobLocation', verbose_name="Job Location",
                                  blank=True, null=True)
+    area = models.ForeignKey('employer.JobArea', verbose_name="Job Area",
+                              blank=True, null=True)
     award = models.CharField(verbose_name="Applicabla Award (if applicable)", max_length=100,
                              blank=True, null=True)
     salary_range = models.ForeignKey('employer.SalaryRange', verbose_name="Salary Range",

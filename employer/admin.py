@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import JobLocation, SalaryRange, Hour, EmploymentType, SpecialCondition,\
+from models import JobLocation, JobArea,  SalaryRange, Hour, EmploymentType, SpecialCondition,\
     Job, Essential, Desireable, JobCategory, JobSubCategory, JobSelectedCategory,\
     JobUploadDocumentType, JobUploadDocument
 
@@ -27,6 +27,7 @@ class JobAdmin(admin.ModelAdmin):
 
 admin.site.register(Job, JobAdmin)
 admin.site.register(JobLocation)
+admin.site.register(JobArea)
 admin.site.register(SalaryRange)
 admin.site.register(Hour)
 admin.site.register(EmploymentType)
