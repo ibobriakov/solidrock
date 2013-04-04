@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <style>
-        ._search_job{
-            width: 100%;
-        }
-    </style>
-    {% include "search/search_form.html" with search_from=form %}
+    <div class="search_block">
+        <div class="_search_box _select_map">
+        </div>
+        {% include "search/search_form.html" with search_from=form %}
+    </div>
     <table style="width: 100%;">
         <thead>
         <tr>
