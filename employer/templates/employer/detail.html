@@ -44,11 +44,11 @@
                 var page_dict = {
                     'employer': {
                         'section': 1,
-                        'collection':{% autoescape off %}{{ user.profile|as_json }}{% endautoescape %}
+                        'collection':{{ user.profile|as_json|safe }}
                     }
                 };
                 _.each(page_dict, function (value, key) {
-                    new (profile_view_fabric(key,'/'))({
+                    new (profile_view_fabric(key,'{% url "employer.profile.base" %}'))({
                         el: $('._content.stages'),
                         collection: new (profile_collection_fabric(key))(value.collection)
                     });

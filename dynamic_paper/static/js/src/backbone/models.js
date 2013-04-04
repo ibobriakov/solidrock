@@ -69,3 +69,22 @@ function paper_model_factory (paper_type,paper,button){
         }
     });
 }
+function paper_name_model_factory (type){
+    return Backbone.Model.extend({
+        urlRoot: rest_url[type].list_endpoint,
+        defaults: {'name':''},
+        url: function(){
+            if (this.id){
+                return this.urlRoot + this.id + '/';
+            } else {
+                return this.urlRoot;
+            }
+        },
+        initialize: function(){
+            this.bind('change:name', function(){
+                this.save({},{'wait':true});
+            });
+        }
+    });
+}
+

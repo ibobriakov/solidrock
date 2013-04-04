@@ -1,51 +1,58 @@
 [
 {
-  "pk": 1,
+  "pk": 1, 
   "model": "employer.joblocation", 
   "fields": {
     "location": "Western Australia"
   }
 },
 {
-  "pk": 2,
+  "pk": 2, 
   "model": "employer.joblocation", 
   "fields": {
     "location": "Northern Territory"
   }
 },
 {
-  "pk": 3,
+  "pk": 3, 
   "model": "employer.joblocation", 
   "fields": {
     "location": "Queensland"
   }
 },
 {
-  "pk": 4,
+  "pk": 4, 
   "model": "employer.joblocation", 
   "fields": {
     "location": "New South Wales"
   }
 },
 {
-  "pk": 5,
+  "pk": 5, 
   "model": "employer.joblocation", 
   "fields": {
     "location": "South Australia"
   }
 },
 {
-  "pk": 6,
+  "pk": 6, 
   "model": "employer.joblocation", 
   "fields": {
     "location": "Victoria"
   }
 },
 {
-  "pk": 7,
+  "pk": 7, 
   "model": "employer.joblocation", 
   "fields": {
     "location": "Tasmania"
+  }
+},
+{
+  "pk": 8, 
+  "model": "employer.joblocation", 
+  "fields": {
+    "location": "Australian Capital Territory"
   }
 }
 ]

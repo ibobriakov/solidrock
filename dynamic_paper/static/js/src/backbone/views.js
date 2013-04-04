@@ -56,3 +56,15 @@ function paper_view_factory(paper_type,paper,button){
         }
     })
 }
+
+function paper_name_view_factory(type){
+    return Backbone.View.extend({
+        model: new (paper_name_model_factory(type))(),
+        bindel: function(){
+            var view_object = {};
+            view_object[type] = this.model;
+            this.rivets = rivets;
+            this.rivets.bind(this.el, view_object);
+        }
+    });
+}

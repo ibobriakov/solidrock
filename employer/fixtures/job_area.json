@@ -1,0 +1,23 @@
+[
+{
+  "pk": 1, 
+  "model": "employer.jobarea", 
+  "fields": {
+    "area": "Urban"
+  }
+},
+{
+  "pk": 2, 
+  "model": "employer.jobarea", 
+  "fields": {
+    "area": "Regional"
+  }
+},
+{
+  "pk": 3, 
+  "model": "employer.jobarea", 
+  "fields": {
+    "area": "Remote"
+  }
+}
+]

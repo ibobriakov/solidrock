@@ -1,0 +1,205 @@
+[
+{
+  "pk": 1, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Accounting, banking and finance"
+  }
+},
+{
+  "pk": 2, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Adminstration and office support "
+  }
+},
+{
+  "pk": 3, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Advertising, marketing, arts and media"
+  }
+},
+{
+  "pk": 4, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Banking, bookkeeping, finance and accounting"
+  }
+},
+{
+  "pk": 5, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Building and construction"
+  }
+},
+{
+  "pk": 6, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Climate, conservation, environment and parks"
+  }
+},
+{
+  "pk": 7, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Corrections"
+  }
+},
+{
+  "pk": 8, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Customer service, retail and sales"
+  }
+},
+{
+  "pk": 9, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Community services and NGO "
+  }
+},
+{
+  "pk": 10, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Design and multimedia"
+  }
+},
+{
+  "pk": 11, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Drug and Alcohol"
+  }
+},
+{
+  "pk": 12, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Education and training "
+  }
+},
+{
+  "pk": 13, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Engineering"
+  }
+},
+{
+  "pk": 14, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Executive positions"
+  }
+},
+{
+  "pk": 15, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Farming, Animals and Conservation"
+  }
+},
+{
+  "pk": 16, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Maintenance and gardening"
+  }
+},
+{
+  "pk": 17, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Healthcare"
+  }
+},
+{
+  "pk": 18, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Hospitality and tourism"
+  }
+},
+{
+  "pk": 19, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Human resources and management"
+  }
+},
+{
+  "pk": 20, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Information, technology and communications"
+  }
+},
+{
+  "pk": 21, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Legal"
+  }
+},
+{
+  "pk": 22, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Management"
+  }
+},
+{
+  "pk": 23, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Mining, resources and energy"
+  }
+},
+{
+  "pk": 24, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Police and Defence"
+  }
+},
+{
+  "pk": 25, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Policy, writing and technical advice"
+  }
+},
+{
+  "pk": 26, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Realestate and property management"
+  }
+},
+{
+  "pk": 27, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Research, development and science"
+  }
+},
+{
+  "pk": 28, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Social nad empotional wellbeing"
+  }
+},
+{
+  "pk": 29, 
+  "model": "employer.jobcategory", 
+  "fields": {
+    "category_name": "Trades"
+  }
+}
+]

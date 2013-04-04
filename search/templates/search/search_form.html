@@ -8,7 +8,7 @@
             {% csrf_token %}
             <fieldset>
                 {% for filed in search_from.visible_fields %}
-                    <div class="_field {% if filed.name == "sub_category" or  filed.name == "area"%}_pod{% endif %}">
+                    <div class="_field {% if filed.name == "sub_categories" or  filed.name == "area"%}_pod{% endif %}">
                         <label>{{ filed.label }}</label>
                         {{ filed }}
                     </div>
@@ -21,8 +21,3 @@
         </form>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".search_from select").select2();
-    });
-</script>

@@ -10,6 +10,13 @@ class JobLocation(models.Model):
         return self.location
 
 
+class JobArea(models.Model):
+    area = models.CharField(verbose_name="Job Area", max_length=150)
+
+    def __unicode__(self):
+        return self.area
+
+
 class SalaryRange(models.Model):
     salary_range = models.CharField(verbose_name="Salary Range", max_length=100)
 
@@ -48,10 +55,14 @@ class Job(models.Model):
                                    blank=True, null=True)
     location = models.ForeignKey('employer.JobLocation', verbose_name="Job Location",
                                  blank=True, null=True)
+    area = models.ForeignKey('employer.JobArea', verbose_name="Job Area",
+                             blank=True, null=True)
     award = models.CharField(verbose_name="Applicabla Award (if applicable)", max_length=100,
                              blank=True, null=True)
     salary_range = models.ForeignKey('employer.SalaryRange', verbose_name="Salary Range",
-                                     blank=True, null=True)
+                                     blank=True, null=True)  # depricated
+    salary_range_start = models.CharField(verbose_name="Salary Range", max_length=100,
+                                          blank=True, null=True)
     hours = models.ForeignKey('employer.Hour', verbose_name="Hours",
                               blank=True, null=True)
     employment_type = models.ForeignKey('employer.EmploymentType', verbose_name="Type of Employment",
@@ -73,7 +84,7 @@ class Job(models.Model):
 
     categories = models.ManyToManyField('employer.JobCategory', through='employer.JobSelectedCategory',
                                         blank=True, null=True)
-    sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedCategory',
+    sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedSubCategory',
                                             blank=True, null=True)
 
     def __unicode__(self):
@@ -104,7 +115,6 @@ class JobCategory(models.Model):
 
 
 class JobSubCategory(models.Model):
-    category = models.ForeignKey('employer.JobCategory', verbose_name="Category", related_name='subcategories_set')
     sub_category_name = models.CharField(verbose_name="Sub Category Name", max_length=100)
 
     def __unicode__(self):
@@ -114,11 +124,11 @@ class JobSubCategory(models.Model):
 class JobSelectedCategory(models.Model):
     job = models.ForeignKey('employer.Job')
     category = models.ForeignKey('employer.JobCategory')
-    sub_category = models.ForeignKey('employer.JobSubCategory')
 
-    def clean(self):
-        if self.sub_category not in self.category.subcategories_set.all():
-            raise  ValidationError("Category and subcategory miss match")
+
+class JobSelectedSubCategory(models.Model):
+    job = models.ForeignKey('employer.Job')
+    sub_category = models.ForeignKey('employer.JobSubCategory')
 
 
 class JobUploadDocumentType(models.Model):

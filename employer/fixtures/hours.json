@@ -1,0 +1,23 @@
+[
+{
+  "pk": 1, 
+  "model": "employer.hour", 
+  "fields": {
+    "hour": "Full Time"
+  }
+},
+{
+  "pk": 2, 
+  "model": "employer.hour", 
+  "fields": {
+    "hour": " Part Time"
+  }
+},
+{
+  "pk": 3, 
+  "model": "employer.hour", 
+  "fields": {
+    "hour": "Casual"
+  }
+}
+]
