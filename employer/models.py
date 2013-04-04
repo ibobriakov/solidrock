@@ -56,11 +56,13 @@ class Job(models.Model):
     location = models.ForeignKey('employer.JobLocation', verbose_name="Job Location",
                                  blank=True, null=True)
     area = models.ForeignKey('employer.JobArea', verbose_name="Job Area",
-                              blank=True, null=True)
+                             blank=True, null=True)
     award = models.CharField(verbose_name="Applicabla Award (if applicable)", max_length=100,
                              blank=True, null=True)
     salary_range = models.ForeignKey('employer.SalaryRange', verbose_name="Salary Range",
-                                     blank=True, null=True)
+                                     blank=True, null=True)  # depricated
+    salary_range_start = models.CharField(verbose_name="Salary Range", max_length=100,
+                                          blank=True, null=True)
     hours = models.ForeignKey('employer.Hour', verbose_name="Hours",
                               blank=True, null=True)
     employment_type = models.ForeignKey('employer.EmploymentType', verbose_name="Type of Employment",

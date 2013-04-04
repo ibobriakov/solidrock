@@ -1,3 +1,4 @@
+import datetime
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, TemplateView, ListView
@@ -11,6 +12,8 @@ class EmployerView(TemplateView):
 
 def create_job_view(request):
     new_job = Job.objects.create(owner=request.user,
+                                 open_date=datetime.datetime.now().date(),
+                                 contact_name=request.user.profile.name,
                                  contact_phone=request.user.profile.business_phone,
                                  contact_email=request.user.profile.email)
     return redirect('employer.job.edit', new_job.pk)
