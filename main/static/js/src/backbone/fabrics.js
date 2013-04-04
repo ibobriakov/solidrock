@@ -24,6 +24,11 @@ function form_model_fabric(type) {
         defaults: defaults,
         labels: labels,
         types: types,
+        keyup: function(event) {
+            if (event.keyCode == 13){
+                this.commit(event);
+            }
+        },
         commit: function(event){
             var that = this;
             var parent = event.target.parentElement;

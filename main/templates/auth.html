@@ -3,7 +3,7 @@
     <% if (model.types[key]) { %>
     <div class="field <%=model.types[key]%> <% if (errors[key]) { %>error<% } %>">
         <% if (model.types[key] != 'hidden') { %><label><%=model.labels[key]%></label><% } %>
-        <input data-value="<%=type%>.<%=key%>" type="<%=model.types[key]%>">
+        <input data-value="<%=type%>.<%=key%>" data-on-keyup="<%=type%>:keyup" type="<%=model.types[key]%>">
         <% if (errors[key]) { %>
         <div class="error_list" style="display: none">
             <% _.each(errors[key],function(value){ %>
