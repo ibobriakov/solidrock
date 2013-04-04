@@ -163,6 +163,10 @@ class JobUploadDocument(models.Model):
 def after_update(sender, **kwargs):
     if 'created' not in kwargs or not kwargs['created']:
         update_index.delay()
+    else:
+        instance = kwargs['instance']
+        Essential.objects.create(job=instance, essential=' ')
+        Desireable.objects.create(job=instance, desireable=' ')
 
 receiver(post_save, sender=Job)(after_update)
 receiver(post_delete, sender=Job)(after_update)
