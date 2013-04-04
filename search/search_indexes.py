@@ -7,9 +7,9 @@ __author__ = 'ir4y'
 
 class JobIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True)
-    name = indexes.CharField(model_attr='name')
-    title = indexes.CharField(model_attr='title')
-    description = indexes.CharField(model_attr='description')
+    name = indexes.CharField(model_attr='name', null=True)
+    title = indexes.CharField(model_attr='title', null=True)
+    description = indexes.CharField(model_attr='description', null=True)
     essential = indexes.MultiValueField()
     desireable = indexes.MultiValueField()
 
