@@ -1,5 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models.signals import post_save, post_delete, m2m_changed
+from django.dispatch import receiver
+from search.tasks import update_index
 from userprofile.models.fields import PhoneField
 
 
@@ -157,3 +160,10 @@ class JobUploadDocument(models.Model):
                 raise  ValidationError("Too many Files for category {0}".format(self.document_type.__unicode__()))
 
 
+def after_update(sender, **kwargs):
+    if 'created' not in kwargs or not kwargs['created']:
+        update_index.delay()
+
+receiver(post_save, sender=Job)(after_update)
+receiver(post_delete, sender=Job)(after_update)
+receiver(m2m_changed, sender=Job)(after_update)

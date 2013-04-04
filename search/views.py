@@ -26,5 +26,5 @@ class SearchView(FormView):
         for field in ('location', 'categories', 'sub_categories',):
             if field in form_data and form_data[field]:
                 query &= Q(**{field: form_data[field]})
-        context['jobs'] = Job.objects.filter(query)
+        context['jobs'] = Job.objects.filter(query).exclude(name=None)
         return  self.render_to_response(context)
