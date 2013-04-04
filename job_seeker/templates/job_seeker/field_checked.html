@@ -7,7 +7,7 @@
     <label for="{{ field }}_no_<%=element.cid%>"><span></span>No</label>
     {% endif %}
     <% if (element.errors['{{ field }}']) { %>
-    <div class="error_list">
+    <div class="error_list" style="display: none">
         <% _.each(element.errors['{{ field }}'],function(value){ %>
         <p><%=value%></p>
         <% }) %>

@@ -8,7 +8,7 @@
         <% }) %>
     </select>
     <% if (element.errors['{{ field }}']) { %>
-    <div class="error_list">
+    <div class="error_list" style="display: none">
         <% _.each(element.errors['{{ field }}'],function(value){ %>
         <p><%=value%></p>
         <% }) %>

@@ -50,7 +50,7 @@
                         <div class="help-tip-text"><div class="help-tip-right"></div>School, College, or University Name.</div>
                     </div>
                     <% if (element.errors['value']) { %>
-                    <div class="error_list">
+                    <div class="error_list" style="display: none">
                         <% _.each(element.errors['value'],function(value){ %>
                         <p><%=value%></p>
                         <% }) %>
@@ -68,7 +68,7 @@
                     <div class="help-tip-text"><div class="help-tip-right"></div>Major Course of Study or Classes Taken.</div>
                 </div>
                 <% if (element.errors['value']) { %>
-                <div class="error_list">
+                <div class="error_list" style="display: none">
                     <% _.each(element.errors['value'],function(value){ %>
                     <p><%=value%></p>
                     <% }) %>
@@ -86,7 +86,7 @@
                     <div class="help-tip-text"><div class="help-tip-right"></div>Degrees and/or Post-Graduate Qualifications Obtained.</div>
                 </div>
                 <% if (element.errors['value']) { %>
-                <div class="error_list">
+                <div class="error_list" style="display: none">
                     <% _.each(element.errors['value'],function(value){ %>
                     <p><%=value%></p>
                     <% }) %>
@@ -104,7 +104,7 @@
                     <div class="help-tip-text"><div class="help-tip-right"></div>Certificates and/or Diplomas Obtained</div>
                 </div>
                 <% if (element.errors['value']) { %>
-                <div class="error_list">
+                <div class="error_list" style="display: none">
                     <% _.each(element.errors['value'],function(value){ %>
                     <p><%=value%></p>
                     <% }) %>
@@ -122,7 +122,7 @@
                     <div class="help-tip-text"><div class="help-tip-right"></div>Any Other Course Currently Enrolled In.</div>
                 </div>
                 <% if (element.errors['value']) { %>
-                <div class="error_list">
+                <div class="error_list" style="display: none">
                     <% _.each(element.errors['value'],function(value){ %>
                     <p><%=value%></p>
                     <% }) %>

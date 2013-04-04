@@ -6,7 +6,7 @@
         <div class="help-tip-text"><div class="help-tip-right"></div>{% if tooltip %}{{ tooltip }}{% else %}{{ title }}{% endif %}.</div>
     </div>
     <% if (element.errors['{{ field }}']) { %>
-    <div class="error_list">
+    <div class="error_list" style="display: none">
         <% _.each(element.errors['{{ field }}'],function(value){ %>
         <p><%=value%></p>
         <% }) %>

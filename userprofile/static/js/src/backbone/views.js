@@ -82,6 +82,7 @@ function profile_view_fabric(type,redirect_url, template) {
                 element.on('sync',that.check_model_valid);
             });
             $('select').select2();
+            $('.error_list').fadeIn();
             this.trigger('end_render');
             return this;
         }

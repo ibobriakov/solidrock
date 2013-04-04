@@ -70,6 +70,7 @@ function form_view_fabric(type) {
             object[type] = this.model;
             this.rivets = rivets;
             this.rivets.bind(this.el, object);
+            $('.error_list').fadeIn();
             return this;
         }
     });
