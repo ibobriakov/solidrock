@@ -29,7 +29,7 @@ function profile_view_fabric(type,redirect_url, template) {
         },
 
         remove: function(event){
-            var model = this.collection.get($(event.toElement).attr('data-cid'));
+            var model = this.collection.get($(event.target).attr('data-cid'));
             model.destroy();
             this.render();
             return false;
@@ -41,9 +41,9 @@ function profile_view_fabric(type,redirect_url, template) {
             return false;
         },
 
-        create_by_type: function(){
+        create_by_type: function(event){
             var type_object = {};
-            type_object[$(event.toElement).attr('data-type-name')] = $(event.toElement).attr('data-type');
+            type_object[$(event.target).attr('data-type-name')] = $(event.target).attr('data-type');
             this.collection.add(type_object);
             this.render();
             return false;

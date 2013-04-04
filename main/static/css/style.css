@@ -1252,7 +1252,7 @@ footer ._footer ._footer_nav ul li a {
 ;-webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.1)
 ;box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
 }
-.builder .list .list_it a {text-decoration: underline;}
+.builder .list .list_it a {text-decoration: underline; cursor: pointer}
 .builder .list .list_it .title {font: bold 24px Helvetica;margin: 10px 0;position: relative;}
 .builder .list .list_it .title.mini {font: bold 14px Helvetica;margin: 10px 0;position: relative;}
 .builder .list .list_it .title a {font-size: 14px;}
