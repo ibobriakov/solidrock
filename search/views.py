@@ -1,7 +1,16 @@
 from django.db.models import Q
 from django.views.generic import FormView
+from haystack.query import SearchQuerySet
 from employer.models import Job
 from forms import SearchForm
+
+
+def get_search_by_keywords(keywords):
+    pk_list = list()
+    for keyword in keywords.split(","):
+        for search_field in ('name', 'title', 'description', 'essential', 'desireable',):
+            pk_list.extend(map(lambda sr: sr.pk, SearchQuerySet().filter(**{search_field: keyword})))
+    return Q(pk__in=pk_list)
 
 
 class SearchView(FormView):
@@ -13,7 +22,7 @@ class SearchView(FormView):
         context = self.get_context_data(form=form)
         query = Q()
         if 'keywords' in form_data and form_data['keywords']:
-            query = Q(description__icontains=form_data['keywords'])
+            query = get_search_by_keywords(form_data['keywords'])
         for field in ('location', 'categories', 'sub_categories',):
             if field in form_data and form_data[field]:
                 query &= Q(**{field: form_data[field]})

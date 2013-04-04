@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'constance.backends.database',
     'flatblocks',
     'redactor',
+    'haystack',
 )
 
 LOCAL_APPS = (
@@ -166,6 +167,12 @@ ACCOUNT_ACTIVATION_DAYS = 7
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 
 FLATBLOCKS_AUTOCREATE_STATIC_BLOCKS = True
+
+HAYSTACK_CONNECTIONS = {  # Should be changed at production
+    'default': {
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    },
+}
 
 from local import *
 

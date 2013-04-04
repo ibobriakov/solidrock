@@ -11,6 +11,7 @@ distribute==0.6.35
 django-celery==3.0.11
 django-constance==0.5
 django-flatblocks==0.6.0
+-e git+https://github.com/toastdriven/django-haystack.git@f349b5eebbf6763bb2bde074e6ebd06b6ceeb3f4#egg=django_haystack-dev
 django-mptt==0.5.5
 django-picklefield==0.3.0
 -e git://github.com/ir4y/django-redactorjs.git@6fb3315d50dbc663b0beac2d1c9821f078225091#egg=django_redactorjs-dev
