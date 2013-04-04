@@ -111,23 +111,13 @@
 {% block initialize-js %}
     {{ block.super }}
     <script>
-        job_view.bind('end_render',function(){
-            $('#support_document_upload').fileupload({
-                dataType: 'json',
-                done: function (e, data) {
-                    job_upload_document_view.collection.add(data.result);
-                    job_upload_document_view.render();
-                }
-            });
+        job_upload_document_view.bind('end_render',document_upload);
+        function document_upload (){
             $('#support_document_upload_link').on('click',function(){
                 $('#support_document_upload').trigger('click');
                 return false;
             });
-        });
-        job_view.render();
-
-        job_upload_document_view.bind('end_render',function(){
-            $('#full_position_description_upload').fileupload({
+            $('#support_document_upload').fileupload({
                 dataType: 'json',
                 done: function (e, data) {
                     job_upload_document_view.collection.add(data.result);
@@ -138,8 +128,14 @@
                 $('#full_position_description_upload').trigger('click');
                 return false;
             });
-        });
-        job_upload_document_view.render();
-
+            $('#full_position_description_upload').fileupload({
+                dataType: 'json',
+                done: function (e, data) {
+                    job_upload_document_view.collection.add(data.result);
+                    job_upload_document_view.render();
+                }
+            });
+        }
+        document_upload();
     </script>
 {% endblock %}

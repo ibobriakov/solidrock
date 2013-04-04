@@ -81,8 +81,9 @@ function profile_view_fabric(type,redirect_url, template) {
                 element.view = that;
                 element.on('sync',that.check_model_valid);
             });
-            this.trigger('end_render');
             $('select').select2();
+            this.trigger('end_render');
+            return this;
         }
     });
 }
