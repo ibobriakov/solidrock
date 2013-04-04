@@ -1,17 +1,53 @@
 {% extends 'base.html' %}
-
 {% load staticfiles %}
-{% load serialize %}
+{% load thumbnail %}
+{% load flatblock_tags %}
 
 {% block content %}
-{#    {{ object|as_json }}<br>#}
-{#    {{ JobLocation|as_json }}<br>#}
-{#    {{ SalaryRange|as_json }}<br>#}
-{#    {{ Hour|as_json }}<br>#}
-{#    {{ EmploymentType|as_json }}<br>#}
-{#    {{ SpecialCondition|as_json }}<br>#}
-{#    {{ Essential|as_json }}<br>#}
-{#    {{ Desireable|as_json }}<br>#}
-{#    {{ JobCategory|as_json }}<br>#}
-{#    {{ JobSubCategory|as_json }}<br>#}
+    <div class="_content job_seeker">
+
+        <h1>{{ user.profile.company }}’s Account Home Page</h1>
+
+        <div class="user_info">
+            <div class="avatar">
+                {% thumbnail user.profile.logo "137x137" crop="center" as im %}
+                    <img src="{{ im.url }}">
+                {% empty %}
+                    <img width="137" height="137" src="{{ profile.personal_information.get_photo_url }}">
+                {% endthumbnail %}
+            </div>
+            <div class="hello">Hi {{ user.profile.company }}!</div>
+            <div class="desc">{% flatblock "employer.hello" %}</div>
+        </div>
+
+        <div class="app_info">
+            <div class="title">Your Company Information</div>
+            <div class="center">
+                <ul>
+                    <li><a href="{% url "employer.profile.edit" %}">Edit Your Company Information</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="res_info_block">
+            <div class="res_info">
+                <div class="title">Jobs You’ve Posted</div>
+                <div class="table">
+                    <table>
+                        <tbody>
+                        {% for job in posted_jobs %}
+                            <tr>
+                                <td class="col-1">{{ job.name }}</td>
+                                <td class="col-2"><a href="{% url "employer.job.edit" job.pk %}">view</a></td>
+                                <td class="col-3"><a href="{% url "employer.job.edit" job.pk %}">edit</a></td>
+                                <td class="col-4"><a href="{% url "employer.job.delete" job.pk %}">delete</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add"><a href="{% url "employer.job.create" %}">Post a job</a></div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

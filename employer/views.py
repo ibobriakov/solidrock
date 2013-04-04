@@ -7,6 +7,15 @@ from models import Job, JobLocation, SalaryRange, Hour, EmploymentType,\
 
 
 class EmployerView(TemplateView):
+    template_name = "employer/main.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployerView, self).get_context_data(**kwargs)
+        context['posted_jobs'] = Job.objects.filter(owner=self.request.user)
+        return context
+
+
+class EmployerEditView(TemplateView):
     template_name = "employer/detail.html"
 
 
