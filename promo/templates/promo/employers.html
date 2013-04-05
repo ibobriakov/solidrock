@@ -23,14 +23,13 @@
     </div>
     <% } %>
     <% }) %>
+
     <% if (errors['__all__']) { %>
-    <div class="field error">
-        <ul>
+        <div class="field error">
             <% _.each(errors['__all__'],function(value){ %>
-            <li><%=value%></li>
+                <p><%=value%></p>
             <% }) %>
-        </ul>
-    </div>
+        </div>
     <% } %>
     <div class="_submit" id="emp">
         <div class="exit" data-on-click="<%=type%>:commit">Continue</div>

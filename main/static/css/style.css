@@ -369,8 +369,8 @@ footer ._footer ._footer_nav ul li a {
 ._search_job ._center form fieldset ._field._pod label {
     margin: 7px 0 5px;
 }
-
-._search_job ._center form fieldset ._field._pod #s2id_e4 .select2-choice, ._search_job ._center form fieldset ._field._pod #s2id_e5 .select2-choice {
+._search_job ._center form fieldset ._field._pod #s2id_id_sub_categories .select2-choice,
+._search_job ._center form fieldset ._field._pod #s2id_id_area .select2-choice {
     width: 184px !important;
 }
 
@@ -1129,20 +1129,14 @@ footer ._footer ._footer_nav ul li a {
     display: inline;
 }
 
-.stages .right .form ._submit input {
-    width: 150px;
-    border: none;
-    color: #fff;
-    padding: 7px 0;
-    cursor: pointer;
-}
+.stages .right .form ._submit input {width: 150px;border: none;color: #fff;padding: 7px 0;cursor: pointer;}
 
 @-moz-document url-prefix() {.stages .right .form ._submit input {padding: 6px 0;}}
-@media all and (-webkit-min-device-pixel-ratio:0) {
-    .stages .right .form ._submit .cont, .stages .right .form ._submit input {
-        margin-top: -30px
-    }
-}
+/*@media all and (-webkit-min-device-pixel-ratio:0) {*/
+    /*.stages .right .form ._submit .cont, .stages .right .form ._submit input {*/
+        /*margin-top: -30px*/
+    /*}*/
+/*}*/
 
 /* Personal Information */
 .stages .right .form .section1 {
@@ -1520,7 +1514,7 @@ div.paper-block{
     font-weight: bold;
 }
 .register-post-job p{color:#e4732b; font-size: 18px; text-align: center;}
-.employer  .right .form {border: none; height: 359px;}
+.employer  .right .form {border: none;}
 .employer .right .form ._submit {overflow: visible;}
 .employer .right .form .it3 {width: 282px !important;}
 .employer .right .form .it1,
@@ -1534,7 +1528,7 @@ div.paper-block{
 }
 .employer #emp{padding: 0;margin:10px 0 0 0;}
 .employer #emp .exit {margin-left:80px;}
-.employer .right .form {padding: 1px;}
+.employer .right .form {padding: 1px; border: none;}
 .employer .right .form form {margin:30px 0 0 50px;}
 .employer .right p:first-child {
     font-size: 30px;
@@ -1543,6 +1537,7 @@ div.paper-block{
     margin: 30px 0;
     text-align: center;
 }
+
 .employer .right p:first-child span {font-weight: bold;}
 .left-pricing {float: left; width: 450px;}
 .right-contact {float: right; width: 480px;}
