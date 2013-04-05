@@ -18,16 +18,11 @@ class UserOverride:
     email = models.EmailField(verbose_name=_('e-mail address'), unique=True)
     is_email_active = models.BooleanField(verbose_name=_('is e-mail active'), default=False)
 
-    def save(self, *args, **kwargs):
-        if self.username != self.email:
-            self.username = self.email
-        return self.save__overridden(*args, **kwargs)
-
     class Meta:
         app_label = 'userprofile'
 
-
 patch_model(User, UserOverride)
+User._meta.get_field('username').max_length = 255
 
 
 class Employer(AddressMixin, models.Model):

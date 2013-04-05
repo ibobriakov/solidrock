@@ -115,7 +115,7 @@ class LoginResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
             raise ImmediateHttpResponse(response=self.error_response(bundle.request, bundle.errors))
 
         bundle = self.full_hydrate(bundle)
-        user = authenticate(username=bundle.obj.username, password=bundle.obj.password)
+        user = authenticate(email=bundle.obj.username, password=bundle.obj.password)
         if user is not None:
             login(bundle.request, user)
         return bundle

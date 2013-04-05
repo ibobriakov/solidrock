@@ -62,7 +62,7 @@ MIDDLEWARE_CLASSES = (
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'main.backends.PermissionBackend'
+    'main.backends.EmailWithPermissionBackend'
 )
 
 ANONYMOUS_USER_ID = -1
@@ -172,6 +172,10 @@ HAYSTACK_CONNECTIONS = {  # Should be changed at production
     'default': {
         'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
     },
+}
+
+SOUTH_MIGRATION_MODULES = {
+    'auth': 'userprofile.auth_migrations',
 }
 
 from local import *

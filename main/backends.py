@@ -1,7 +1,9 @@
+from email_auth.backends import EmailBackend
+
 __author__ = 'ir4y'
 
 
-class PermissionBackend(object):
+class EmailWithPermissionBackend(EmailBackend):
     def has_perm(self, user, perm, obj=None):
         if obj is None:
             return False
@@ -33,7 +35,4 @@ class PermissionBackend(object):
             return obj.job.owner == user
         elif perm in ('employer.add_desireable', 'employer.add_essential', 'employer.add_jobselectedcategory'):
             return True
-        return False
-
-    def authenticate(self):
         return False

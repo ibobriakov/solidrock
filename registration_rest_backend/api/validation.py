@@ -49,7 +49,7 @@ class LoginValidation(Validation):
         for key, value in bundle.data.items():
             if not value:
                 errors[key].append('Field required')
-        user = authenticate(username=username, password=password)
+        user = authenticate(email=username, password=password)
         if user is None:
             errors['username'].append("User password miss match")
         return errors
