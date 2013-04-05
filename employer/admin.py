@@ -28,7 +28,6 @@ class JobAdmin(admin.ModelAdmin):
 admin.site.register(Job, JobAdmin)
 admin.site.register(JobLocation)
 admin.site.register(JobArea)
-# admin.site.register(SalaryRange) depricated
 admin.site.register(Hour)
 admin.site.register(EmploymentType)
 admin.site.register(SpecialCondition)

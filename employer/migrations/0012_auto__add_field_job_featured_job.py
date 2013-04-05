@@ -8,16 +8,28 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Job.salary_range_min'
-        db.add_column(u'employer_job', 'salary_range_min',
-                      self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True),
+        # Adding field 'Job.featured_job'
+        db.add_column(u'employer_job', 'featured_job',
+                      self.gf('django.db.models.fields.BooleanField')(default=False),
                       keep_default=False)
 
 
-    def backwards(self, orm):
-        # Deleting field 'Job.salary_range_min'
-        db.delete_column(u'employer_job', 'salary_range_min')
+        # Changing field 'Job.salary_range_max'
+        db.alter_column(u'employer_job', 'salary_range_max', self.gf('django.db.models.fields.IntegerField')(max_length=100, null=True))
 
+        # Changing field 'Job.salary_range_min'
+        db.alter_column(u'employer_job', 'salary_range_min', self.gf('django.db.models.fields.IntegerField')(max_length=100, null=True))
+
+    def backwards(self, orm):
+        # Deleting field 'Job.featured_job'
+        db.delete_column(u'employer_job', 'featured_job')
+
+
+        # Changing field 'Job.salary_range_max'
+        db.alter_column(u'employer_job', 'salary_range_max', self.gf('django.db.models.fields.CharField')(max_length=100, null=True))
+
+        # Changing field 'Job.salary_range_min'
+        db.alter_column(u'employer_job', 'salary_range_min', self.gf('django.db.models.fields.CharField')(max_length=100, null=True))
 
     models = {
         u'auth.group': {
@@ -91,6 +103,7 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'employment_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employer.EmploymentType']", 'null': 'True', 'blank': 'True'}),
             'end_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
+            'featured_job': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'hours': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employer.Hour']", 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'location': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employer.JobLocation']", 'null': 'True', 'blank': 'True'}),
@@ -98,8 +111,8 @@ class Migration(SchemaMigration):
             'open_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'other_conditions': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
-            'salary_range': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employer.SalaryRange']", 'null': 'True', 'blank': 'True'}),
-            'salary_range_min': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'salary_range_max': ('django.db.models.fields.IntegerField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'salary_range_min': ('django.db.models.fields.IntegerField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'special_conditions': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employer.SpecialCondition']", 'null': 'True', 'blank': 'True'}),
             'sub_categories': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['employer.JobSubCategory']", 'null': 'True', 'through': u"orm['employer.JobSelectedSubCategory']", 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'})
@@ -148,11 +161,6 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'max_count': ('django.db.models.fields.IntegerField', [], {'default': '-1'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        u'employer.salaryrange': {
-            'Meta': {'object_name': 'SalaryRange'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'salary_range': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         u'employer.specialcondition': {
             'Meta': {'object_name': 'SpecialCondition'},

@@ -11,7 +11,7 @@ from resume.api import ResumeItemResource, ResumeResource
 from userprofile.api import JobSeekerInformationResource, JobSeekerCurrentEmploymentResource,\
     JobSeekerPreviousEmploymentResource, JobSeekerEducationResource, JobSeekerRefereeResource, \
     EmployerResource
-from employer.api import JobResource, LocationResource, SalaryRangeResource, HourResource,\
+from employer.api import JobResource, LocationResource, HourResource,\
     EmploymentTypeResource, SpecialConditionResource, EssentialResource, DesireableResource,\
     JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource, JobSelectedCategoryResource, \
     JobUploadDocumentTypeResource
@@ -33,7 +33,6 @@ v1_api.register(ActivationResource())
 v1_api.register(LoginResource())
 v1_api.register(JobResource())
 v1_api.register(LocationResource())
-v1_api.register(SalaryRangeResource())
 v1_api.register(HourResource())
 v1_api.register(EmploymentTypeResource())
 v1_api.register(SpecialConditionResource())
