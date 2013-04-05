@@ -12,6 +12,9 @@ class Resume(models.Model):
     name = models.CharField(verbose_name=_('Resume name'), max_length=100)
     owner = models.ForeignKey('auth.User')
 
+    def __unicode__(self):
+        return self.name
+
     class Meta:
         app_label = 'resume'
 

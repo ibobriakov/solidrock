@@ -26,7 +26,7 @@ class ResumeView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ResumeView, self).get_context_data(**kwargs)
         resume_select_form = ResumeSelectForm()
-        resume_select_form.queryset = Resume.objects.filter(owner=self.request.user)
+        resume_select_form.fields['resume'].queryset = Resume.objects.filter(owner=self.request.user)
         context['resume_select'] = resume_select_form
         return context
 
