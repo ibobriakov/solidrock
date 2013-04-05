@@ -6,6 +6,13 @@ from search.tasks import update_index
 from userprofile.models.fields import PhoneField
 
 
+class JobExecutivePositions(models.Model):
+    position_name = models.CharField(verbose_name="Executive Position", max_length=150)
+
+    def __unicode__(self):
+        return self.position_name
+
+
 class JobLocation(models.Model):
     location = models.CharField(verbose_name="Job Location", max_length=150)
 
@@ -18,13 +25,6 @@ class JobArea(models.Model):
 
     def __unicode__(self):
         return self.area
-
-
-class SalaryRange(models.Model):
-    salary_range = models.CharField(verbose_name="Salary Range", max_length=100)
-
-    def __unicode__(self):
-        return self.salary_range
 
 
 class Hour(models.Model):
@@ -62,10 +62,10 @@ class Job(models.Model):
                              blank=True, null=True)
     award = models.CharField(verbose_name="Applicabla Award (if applicable)", max_length=100,
                              blank=True, null=True)
-    salary_range = models.ForeignKey('employer.SalaryRange', verbose_name="Salary Range",
-                                     blank=True, null=True)  # depricated
-    salary_range_start = models.CharField(verbose_name="Salary Range", max_length=100,
-                                          blank=True, null=True)
+    salary_range_min = models.IntegerField(verbose_name="Salary Range Min", max_length=100,
+                                           blank=True, null=True)
+    salary_range_max = models.IntegerField(verbose_name="Salary Range Max", max_length=100,
+                                           blank=True, null=True)
     hours = models.ForeignKey('employer.Hour', verbose_name="Hours",
                               blank=True, null=True)
     employment_type = models.ForeignKey('employer.EmploymentType', verbose_name="Type of Employment",
@@ -84,6 +84,10 @@ class Job(models.Model):
                                blank=True, null=True)
     contact_email = models.EmailField(verbose_name='Email',
                                       blank=True, null=True)
+    featured_job = models.BooleanField(verbose_name="Mark as Featured Job", default=False)
+
+    executive_positions = models.ForeignKey('employer.JobExecutivePositions', verbose_name='Executive Positions',
+                                            blank=True, null=True)
 
     categories = models.ManyToManyField('employer.JobCategory', through='employer.JobSelectedCategory',
                                         blank=True, null=True)

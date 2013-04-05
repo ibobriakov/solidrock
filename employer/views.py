@@ -2,7 +2,7 @@ import datetime
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, TemplateView, ListView
-from models import Job, JobLocation, SalaryRange, Hour, EmploymentType,\
+from models import Job, JobLocation, Hour, EmploymentType,\
     SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory
 
 
@@ -49,7 +49,6 @@ class EditJobView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(EditJobView, self).get_context_data(**kwargs)
         context["JobLocation"] = JobLocation.objects.all()
-        context["SalaryRange"] = SalaryRange.objects.all()
         context["Hour"] = Hour.objects.all()
         context["EmploymentType"] = EmploymentType.objects.all()
         context["SpecialCondition"] = SpecialCondition.objects.all()

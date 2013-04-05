@@ -4,7 +4,7 @@ from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
 from employer.api.validation import EmployerResourceValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
-from ..models import JobLocation, SalaryRange, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType,\
+from ..models import JobLocation, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType,\
     Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument, JobSelectedCategory
 from userprofile.api import AuthorizationWithObjectPermissions
 
@@ -22,12 +22,6 @@ class LocationResource(ModelResourceWithName):
 
     class Meta:
         queryset = JobLocation.objects.all()
-        allowed_methods = ('get',)
-
-
-class SalaryRangeResource(ModelResourceWithName):
-    class Meta:
-        queryset = SalaryRange.objects.all()
         allowed_methods = ('get',)
 
 
@@ -76,7 +70,6 @@ class DesireableResource(ModelResource):
 class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
                   ResourceRelatedFieldsUrlSchemaMixin, ModelResource):
     location = fields.ToOneField(LocationResource, 'location', blank=True, null=True)
-    salary_range = fields.ToOneField(SalaryRangeResource, 'salary_range', blank=True, null=True)
     hours = fields.ToOneField(HourResource, 'hours', blank=True, null=True)
     employment_type = fields.ToOneField(EmploymentTypeResource, 'employment_type', blank=True, null=True)
     special_conditions = fields.ToOneField(SpecialConditionResource, 'special_conditions',

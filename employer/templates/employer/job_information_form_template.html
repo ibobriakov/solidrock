@@ -42,7 +42,8 @@
         {% include 'employer/field_select.html' with class='field fl_left' title='Job Location*' field='location' items=JobLocation %}
         {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Applicable Award (if applicable)' field='award' %}
         <div class="clear"></div>
-        {% include 'employer/field.html' with input_class='it3' title='Salary Range' field='salary_range_start' %}
+        {% include 'employer/field.html' with input_class='it3' title='Salary Range Min' field='salary_range_min' %}
+        {% include 'employer/field.html' with input_class='it3' title='Salary Range Max' field='salary_range_max' %}
         {% include 'employer/field_select.html' with class='field fl_left' title='Hours*' field='hours' items=Hour %}
         {% include 'employer/field_select.html' with class='field fl_left' title='Type of Employment*' field='employment_type' items=EmploymentType %}
         <div class="clear"></div>
