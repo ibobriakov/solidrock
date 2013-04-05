@@ -1,5 +1,8 @@
 {% extends "base.html" %}
+{% load main_tags %}
 
 {% block content %}
-    {{ form.as_p }}
+    {% for field in form.visible_fields %}
+        {{ field|add_class:"it3" }}
+    {% endfor %}
 {% endblock %}
