@@ -119,7 +119,8 @@ LOCAL_APPS = (
     'job_seeker',
     'employer',
     'search',
-    'promo'
+    'promo',
+    'contactus',
 )
 
 # A sample logging configuration. The only tangible logging

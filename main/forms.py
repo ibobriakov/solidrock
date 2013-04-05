@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.flatpages.forms import FlatpageForm
 from django.contrib.flatpages.models import FlatPage
 from flatblocks.forms import FlatBlockForm
@@ -15,3 +16,12 @@ class WysiwygFlatpageForm(FlatpageForm):
 class WysiwygFlatBlockForm(FlatBlockForm):
     class Meta:
         widgets = {'content': RedactorEditor}
+
+
+def rivet_modelform_factory(base_name):
+    class RivetModelForm(forms.ModelForm):
+        def __init__(self, *agrs, **kwargs):
+            super(RivetModelForm, self).__init__(*agrs, **kwargs)
+            for name, field in self.fields.iteritems():
+                field.widget.attrs['data-value'] = base_name + "." + name
+    return RivetModelForm

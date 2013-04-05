@@ -35,4 +35,6 @@ class EmailWithPermissionBackend(EmailBackend):
             return obj.job.owner == user
         elif perm in ('employer.add_desireable', 'employer.add_essential', 'employer.add_jobselectedcategory'):
             return True
+        elif perm == 'feedback.add':
+            return True
         return False

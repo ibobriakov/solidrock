@@ -60,6 +60,7 @@ urlpatterns = patterns(
     url(r'^redactor/', include('redactor.urls')),
     url(r'^search/', include('search.urls')),
     url(r'^promo/', include('promo.urls')),
+    url(r'^contact_us/', include('contactus.urls')),
     url(r'^', include('main.urls')),
 )
 
