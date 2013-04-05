@@ -22,9 +22,7 @@
 {#            </ul>#}
             <div class="info2">
                 <div class="title">Jump to Another Cover Letter</div>
-                <select data-placeholder="Select Another Cover Letter">
-                    <option></option>
-                </select>
+                {{ cover_letter_select.cover_letter }}
             </div>
             <div class="info1">
                 <ul>
@@ -61,6 +59,8 @@
         var paper_name_view = new (paper_name_view_factory('cover_letter_name'))({el:$('._content.builder')});
         paper_name_view.model.set({{ object|as_json|safe }}[0]);
         paper_name_view.bindel();
-        $('select').select2();
+        $('#id_cover_letter').change(function(){
+            document.location = $('#id_cover_letter').val();
+        });
     </script>
 {% endblock %}

@@ -4,6 +4,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from models import CoverLetter
+from forms import CoverLetterSelectForm
 
 @login_required(login_url='/#login')
 def create_cover_letter_view(request):
@@ -21,6 +22,13 @@ class CoverLetterView(DetailView):
         if object.owner != self.request.user:
             raise Http404
         return  object
+
+    def get_context_data(self, **kwargs):
+        context = super(CoverLetterView, self).get_context_data(**kwargs)
+        resume_select_form = CoverLetterSelectForm()
+        resume_select_form.fields['cover_letter'].queryset = CoverLetter.objects.filter(owner=self.request.user)
+        context['cover_letter_select'] = resume_select_form
+        return context
 
     @method_decorator(login_required(login_url='/#login'))
     def dispatch(self, request, *args, **kwargs):
