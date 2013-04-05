@@ -1126,7 +1126,7 @@ footer ._footer ._footer_nav ul li a {
 
 .stages .right .form ._submit .cont, .stages .right .form ._submit input {
     background: #e4732b;
-    display: inline;
+    float: right;
 }
 
 .stages .right .form ._submit input {width: 150px;border: none;color: #fff;padding: 7px 0;cursor: pointer;}
