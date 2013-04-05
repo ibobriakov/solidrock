@@ -1495,7 +1495,10 @@ div.paper-block{
 /*EMPLOYER*/
 
 .employer .left {width: 510px; height: 450px; background: #f2fbff;}
-.employer .right { width:420px; height: 450px;}
+.employer .right {
+    width: 420px;
+    min-height: 450px;
+}
 .register-post-job div:first-child {
     padding-top: 1px;
     width:210px;
