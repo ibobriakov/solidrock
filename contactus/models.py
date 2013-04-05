@@ -9,7 +9,7 @@ class Feedback(models.Model):
     name = models.CharField(verbose_name="Name", max_length=255)
     email = models.EmailField(verbose_name="Email")
     subject = models.CharField(verbose_name="Subject", max_length=100)
-    priority = models.IntegerField(verbose_name="Priority", choices=PRIORITY_CHOICES)
+    priority = models.IntegerField(verbose_name="Priority", choices=PRIORITY_CHOICES, default=0)
     message = models.TextField(verbose_name="Message")
 
     def __unicode__(self):
