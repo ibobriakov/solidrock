@@ -59,6 +59,7 @@ urlpatterns = patterns(
     url(r'logout/', 'registration_rest_backend.views.logout_view', name="logout"),
     url(r'^redactor/', include('redactor.urls')),
     url(r'^search/', include('search.urls')),
+    url(r'^promo/', include('promo.urls')),
     url(r'^', include('main.urls')),
 )
 

@@ -11,4 +11,4 @@ urlpatterns = patterns(
     url(r'^job/list', JobListView.as_view(), name='employer.job.list'),
     url(r'^job/(?P<pk>\d+)/edit$', EditJobView.as_view(), name='employer.job.edit'),
     url(r'^job/(?P<pk>\d+)/delete$', delete_job_view, name='employer.job.delete'),
-    )
+)

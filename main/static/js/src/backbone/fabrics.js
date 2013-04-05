@@ -56,10 +56,11 @@ function form_model_fabric(type) {
     return new Model();
 }
 
-function form_view_fabric(type) {
+function form_view_fabric(type, template) {
+    template = template || "#form-template";
     return Backbone.View.extend ({
         model: form_model_fabric(type),
-        template: _.template($("#form-template").html()),
+        template: _.template($(template).html()),
         errors: [],
         initialize: function(){
             this.model.view = this;
