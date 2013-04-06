@@ -3,7 +3,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, TemplateView, ListView
 from models import Job, JobLocation, Hour, EmploymentType,\
-    SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory
+    SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory, JobExecutivePositions
 
 
 class EmployerView(TemplateView):
@@ -56,6 +56,7 @@ class EditJobView(DetailView):
         context["Desireable"] = Desireable.objects.all()
         context["JobCategory"] = JobCategory.objects.all()
         context["JobSubCategory"] = JobSubCategory.objects.all()
+        context["JobExecutivePositions"] = JobExecutivePositions.objects.all()
         return context
 
 

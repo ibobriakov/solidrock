@@ -1,7 +1,7 @@
 from django.contrib import admin
 from models import JobLocation, JobArea,  Hour, EmploymentType, SpecialCondition,\
     Job, Essential, Desireable, JobCategory, JobSubCategory, JobSelectedCategory,\
-    JobUploadDocumentType, JobUploadDocument
+    JobUploadDocumentType, JobUploadDocument, JobExecutivePositions
 
 __author__ = 'ir4y'
 
@@ -34,4 +34,5 @@ admin.site.register(SpecialCondition)
 admin.site.register(JobCategory)
 admin.site.register(JobSubCategory)
 admin.site.register(JobUploadDocumentType)
+admin.site.register(JobExecutivePositions)
 

@@ -1,0 +1,30 @@
+[
+{
+  "pk": 1, 
+  "model": "employer.jobexecutivepositions", 
+  "fields": {
+    "position_name": "CEO"
+  }
+},
+{
+  "pk": 2, 
+  "model": "employer.jobexecutivepositions", 
+  "fields": {
+    "position_name": "CTO"
+  }
+},
+{
+  "pk": 3, 
+  "model": "employer.jobexecutivepositions", 
+  "fields": {
+    "position_name": "CFO"
+  }
+},
+{
+  "pk": 4, 
+  "model": "employer.jobexecutivepositions", 
+  "fields": {
+    "position_name": "COO"
+  }
+}
+]
