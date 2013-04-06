@@ -49,6 +49,24 @@
                 </div>
                 <div class="add"><a href="{% url "employer.job.create" %}">Post a job</a></div>
             </div>
+            <div class="res_info">
+                <div class="title">Users have applied for your job</div>
+                <div class="table">
+                    <table>
+                        <tbody>
+                        {% for job in profile.user.job_set.all %}
+                        {% for apllication in job.applytojob_set.all %}
+                            <tr>
+                                <td class="col-1"><a href="{% url "employer.job.view" job.pk %}">{{ job.name }}</a></td>
+                                <td class="col-2"><a href="{% url "job_seeker.profile.information.public" apllication.job_seeker.profile.pk %}">{{ apllication.job_seeker }}</a></td>
+                            </tr>
+                        {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add"><a href="{% url "employer.job.create" %}">Post a job</a></div>
+            </div>
         </div>
     </div>
 {% endblock %}

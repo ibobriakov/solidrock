@@ -12,18 +12,18 @@ class Migration(SchemaMigration):
         db.create_table(u'job_seeker_applytojob', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('datetime', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('job_seek', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('job_seeker', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('job', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['employer.Job'])),
         ))
         db.send_create_signal(u'job_seeker', ['ApplyToJob'])
 
-        # Adding unique constraint on 'ApplyToJob', fields ['job_seek', 'job']
-        db.create_unique(u'job_seeker_applytojob', ['job_seek_id', 'job_id'])
+        # Adding unique constraint on 'ApplyToJob', fields ['job_seeker', 'job']
+        db.create_unique(u'job_seeker_applytojob', ['job_seeker_id', 'job_id'])
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'ApplyToJob', fields ['job_seek', 'job']
-        db.delete_unique(u'job_seeker_applytojob', ['job_seek_id', 'job_id'])
+        # Removing unique constraint on 'ApplyToJob', fields ['job_seeker', 'job']
+        db.delete_unique(u'job_seeker_applytojob', ['job_seeker_id', 'job_id'])
 
         # Deleting model 'ApplyToJob'
         db.delete_table(u'job_seeker_applytojob')
@@ -147,11 +147,11 @@ class Migration(SchemaMigration):
             'special_condition': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         u'job_seeker.applytojob': {
-            'Meta': {'unique_together': "(('job_seek', 'job'),)", 'object_name': 'ApplyToJob'},
+            'Meta': {'unique_together': "(('job_seeker', 'job'),)", 'object_name': 'ApplyToJob'},
             'datetime': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'job': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['employer.Job']"}),
-            'job_seek': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
+            'job_seeker': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
     }
 

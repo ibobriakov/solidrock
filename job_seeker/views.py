@@ -40,5 +40,5 @@ class JobSeekerInformationPublicView(DetailView):
 
 def apply_for(request, job_id):
     #todo reafctor over rest api
-    ApplyToJob.objects.create(job_seek=request.user, job_id=job_id)
+    ApplyToJob.objects.create(job_seeker=request.user, job_id=job_id)
     return redirect("/")
