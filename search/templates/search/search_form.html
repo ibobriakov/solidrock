@@ -7,15 +7,27 @@
         <form class="search_from" method="POST" action="{% url "search.search" %}">
             {% csrf_token %}
             <fieldset>
-                {% for filed in search_from.visible_fields %}
+                {% for filed in search_from.default_fields %}
                     <div class="_field {% if filed.name == "sub_categories" or  filed.name == "area"%}_pod{% endif %}">
                         <label>{{ filed.label }}</label>
                         {{ filed }}
                     </div>
                 {% endfor %}
             </fieldset>
+            {% if full_search_from %}
+            <fieldset>
+                {% for filed in search_from.more_options_fileds %}
+                    <div class="_field {% if filed.name == "sub_categories" or  filed.name == "area"%}_pod{% endif %}">
+                        <label>{{ filed.label }}</label>
+                        {{ filed }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+            {% endif %}
             <div class="_submit">
-                <div class="_more">More Options</div>
+                {% if not full_search_from %}
+                    <div class="_more">More Options</div>
+                {% endif %}
                 <input class="_search_button" type="submit" value="Search"/>
             </div>
         </form>
