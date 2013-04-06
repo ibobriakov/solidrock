@@ -21,6 +21,7 @@ def get_resource_fabric(model_class):
 
     class ModelGetResource(ModelResourceWithName):
         class Meta:
+            resource_name = model_class.__name__.lower()
             queryset = model_class.objects.all()
             allowed_methods = ('get',)
     return ModelGetResource
@@ -66,9 +67,13 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
     employment_type = fields.ToOneField(EmploymentTypeResource, 'employment_type', blank=True, null=True)
     special_conditions = fields.ToOneField(SpecialConditionResource, 'special_conditions',
                                            blank=True, null=True)
+    executive_positions = fields.ToOneField(JobExecutivePositionsResource, 'executive_positions',
+                                            blank=True, null=True)
 
     essential_set = fields.ToManyField(EssentialResource, 'essential_set', full=True, null=True)
     desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True, null=True)
+    categories = fields.ToManyField(JobCategoryResource, 'categories', null=True)
+    sub_categories = fields.ToManyField(JobSubCategoryResource, 'sub_categories', null=True)
 
     def get_object_list(self, request):
         query_set = super(JobResource, self).get_object_list(request)
@@ -113,6 +118,7 @@ class JobUploadDocumentResource(ModelResource):
 
 class JobSelectedCategoryResource(ModelResource):
     job = fields.ToOneField('employer.api.JobResource', 'job')
+    category = fields.ToOneField(JobCategoryResource, 'category')
 
     class Meta:
         queryset = JobSelectedCategory.objects.all()
@@ -122,6 +128,7 @@ class JobSelectedCategoryResource(ModelResource):
 
 class JobSelectedSubCategoryResource(ModelResource):
     job = fields.ToOneField('employer.api.JobResource', 'job')
+    subcategory = fields.ToOneField(JobSubCategoryResource, 'subcategory')
 
     class Meta:
         queryset = JobSelectedSubCategory.objects.all()
