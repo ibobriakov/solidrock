@@ -1,4 +1,5 @@
 from constance import config
+from django.contrib.auth.forms import UserChangeForm
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
@@ -23,6 +24,7 @@ class UserOverride:
 
 patch_model(User, UserOverride)
 User._meta.get_field('username').max_length = 255
+UserChangeForm.declared_fields['username'].max_length = 255
 
 
 class Employer(AddressMixin, models.Model):
