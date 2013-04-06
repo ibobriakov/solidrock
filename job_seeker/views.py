@@ -1,9 +1,10 @@
 # Create your views here.
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from userprofile.models import JobSeeker
+from models import ApplyToJob
 
 
 class JobSeekerBaseDetailView(DetailView):
@@ -35,3 +36,9 @@ class JobSeekerInformationDetailView(DetailView):
 class JobSeekerInformationPublicView(DetailView):
     model = JobSeeker
     template_name = 'job_seeker/information_public.html'
+
+
+def apply_for(request, job_id):
+    #todo reafctor over rest api
+    ApplyToJob.objects.create(job_seek=request.user, job_id=job_id)
+    return redirect("/")
