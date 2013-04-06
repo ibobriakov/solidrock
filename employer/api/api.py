@@ -32,6 +32,7 @@ SpecialConditionResource = get_resource_fabric(SpecialCondition)
 JobCategoryResource = get_resource_fabric(JobCategory)
 JobSubCategoryResource = get_resource_fabric(JobSubCategory)
 JobUploadDocumentTypeResource = get_resource_fabric(JobUploadDocumentType)
+JobExecutivePositionsResource = get_resource_fabric(JobExecutivePositions)
 
 
 class EssentialResource(ModelResource):
