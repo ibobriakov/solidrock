@@ -43,3 +43,11 @@ rivets.configure({
         }
     }
 });
+
+rivets.binders.error = function(el, value) {
+    $(el).fadeOut();
+    if (value){
+        $(el).html(value);
+        $(el).fadeIn();
+    }
+};

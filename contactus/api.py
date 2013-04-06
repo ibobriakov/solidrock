@@ -16,4 +16,4 @@ class FeedbackResource(ModelResource):
         allowed_methods = ('post',)
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = FormValidation(FeedbackForm)
+        validation = FormValidation(form_class=FeedbackForm)

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load main_tags %}
 
+{% load staticfiles %}
+
 {% block content %}
     <div class="_content stages contact">
         <h1>Contact the cpd helpdesk</h1>
@@ -8,8 +10,9 @@
             <div class="form" id="contact-form">
                 {% for field in form.visible_fields %}
                 <div class="field">
-                    <label>{{ field.name }}</label>
+                    <label>{{ field.label }}</label>
                     {{ field|add_class:"it3" }}
+                    <div class="error" data-error="contactus_errors.{{ field.name }}"></div>
                 </div>
                 {% endfor %}
                 <div class="_submit">
@@ -18,4 +21,10 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block initialize-js %}
+    {{ block.super }}
+    <script src="{% static 'contactus/js/backbone/models.js' %}" type="text/javascript"></script>
+    <script src="{% static 'contactus/js/backbone/views.js' %}" type="text/javascript"></script>
 {% endblock %}

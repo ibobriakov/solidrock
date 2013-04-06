@@ -7,7 +7,7 @@
  */
 
 var ContactModel = Backbone.Model.extend({
-    urlRoot: rest_url[type].list_endpoint,
+    //urlRoot: rest_url['contactus'].list_endpoint,
     keyup: function(event) {
         if (event.keyCode == 13){
             this.commit(event);
@@ -37,3 +37,5 @@ var ContactModel = Backbone.Model.extend({
         return this.error;
     }
 });
+
+var ContactErrorModel = Backbone.Model.extend({});

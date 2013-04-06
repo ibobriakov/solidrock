@@ -7,16 +7,13 @@
  */
 
 var ContactView = Backbone.View.extend ({
-    model: ContactModel,
-    errors: [],
-    initialize: function(){
+    model: new ContactModel(),
+    errors: new ContactErrorModel(),
+    initialize: function() {
         this.model.view = this;
-    },
-    render: function() {
-        var object = {};
         this.rivets = rivets;
-        this.rivets.bind(this.el, {'contactus':this.model});
-        $('.error_list').fadeIn();
-        return this;
+        this.rivets.bind(this.el, {'contactus': this.model, 'contactus_errors': this.errors});
     }
 });
+
+var contact_view = new ContactView({el: $('#contact-form')});
