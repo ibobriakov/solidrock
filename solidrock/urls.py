@@ -13,8 +13,8 @@ from userprofile.api import JobSeekerInformationResource, JobSeekerCurrentEmploy
     EmployerResource
 from employer.api import JobResource, LocationResource, HourResource,\
     EmploymentTypeResource, SpecialConditionResource, EssentialResource, DesireableResource,\
-    JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource, JobSelectedCategoryResource, \
-    JobUploadDocumentTypeResource
+    JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource,\
+    JobUploadDocumentTypeResource, JobSelectedCategoryResource, JobSelectedSubCategoryResource
 from contactus.api import FeedbackResource
 
 
@@ -45,6 +45,7 @@ v1_api.register(JobSubCategoryResource())
 v1_api.register(JobUploadDocumentTypeResource())
 v1_api.register(JobUploadDocumentResource())
 v1_api.register(JobSelectedCategoryResource())
+v1_api.register(JobSelectedSubCategoryResource())
 v1_api.register(FeedbackResource())
 
 admin.autodiscover()

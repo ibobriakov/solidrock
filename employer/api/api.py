@@ -5,42 +5,33 @@ from tastypie.resources import ModelResource
 from employer.api.validation import EmployerResourceValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
 from ..models import JobLocation, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType,\
-    Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument, JobSelectedCategory
+    Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument,\
+    JobSelectedCategory, JobSelectedSubCategory
 from userprofile.api import AuthorizationWithObjectPermissions
 
 __author__ = 'ir4y'
 
 
-class ModelResourceWithName(ModelResource):
-    name = fields.CharField(readonly=True)
+def get_resource_fabric(model_class):
+    class ModelResourceWithName(ModelResource):
+        name = fields.CharField(readonly=True)
 
-    def dehydrate_name(self, bundle):
-        return bundle.obj.__unicode__()
+        def dehydrate_name(self, bundle):
+            return bundle.obj.__unicode__()
 
+    class ModelGetResource(ModelResourceWithName):
+        class Meta:
+            queryset = model_class.objects.all()
+            allowed_methods = ('get',)
+    return ModelGetResource
 
-class LocationResource(ModelResourceWithName):
-
-    class Meta:
-        queryset = JobLocation.objects.all()
-        allowed_methods = ('get',)
-
-
-class HourResource(ModelResourceWithName):
-    class Meta:
-        queryset = Hour.objects.all()
-        allowed_methods = ('get',)
-
-
-class EmploymentTypeResource(ModelResourceWithName):
-    class Meta:
-        queryset = EmploymentType.objects.all()
-        allowed_methods = ('get',)
-
-
-class SpecialConditionResource(ModelResourceWithName):
-    class Meta:
-        queryset = SpecialCondition.objects.all()
-        allowed_methods = ('get',)
+LocationResource = get_resource_fabric(JobLocation)
+HourResource = get_resource_fabric(Hour)
+EmploymentTypeResource = get_resource_fabric(EmploymentType)
+SpecialConditionResource = get_resource_fabric(SpecialCondition)
+JobCategoryResource = get_resource_fabric(JobCategory)
+JobSubCategoryResource = get_resource_fabric(JobSubCategory)
+JobUploadDocumentTypeResource = get_resource_fabric(JobUploadDocumentType)
 
 
 class EssentialResource(ModelResource):
@@ -99,29 +90,6 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         validation = EmployerResourceValidation(form_class=modelform_factory(Job))
 
 
-class JobCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResourceWithName):
-    subcategories_set = fields.ToManyField('employer.api.JobSubCategoryResource', 'subcategories_set',
-                                           full=True, blank=True, null=True)
-
-    class Meta:
-        queryset = JobCategory.objects.all()
-        allowed_methods = ('get',)
-
-
-class JobSubCategoryResource(ResourceRelatedFieldsUrlSchemaMixin, ModelResourceWithName):
-    category = fields.ToOneField('employer.api.JobCategoryResource', 'category')
-
-    class Meta:
-        queryset = JobSubCategory.objects.all()
-        allowed_methods = ('get',)
-
-
-class JobUploadDocumentTypeResource(ModelResource):
-    class Meta:
-        queryset = JobUploadDocumentType.objects.all()
-        allowed_methods = ('get',)
-
-
 class JobUploadDocumentResource(ModelResource):
     job = fields.ToOneField('employer.api.JobResource', 'job')
     document_type = fields.ToOneField('employer.api.JobUploadDocumentTypeResource', 'document_type', full=True)
@@ -144,11 +112,17 @@ class JobUploadDocumentResource(ModelResource):
 
 class JobSelectedCategoryResource(ModelResource):
     job = fields.ToOneField('employer.api.JobResource', 'job')
-    category = fields.ToOneField('employer.api.JobCategoryResource', 'category')
-    subcategories_set = fields.ToManyField('employer.api.JobSubCategoryResource', 'subcategories_set',
-                                           full=True, blank=True, null=True)
 
     class Meta:
         queryset = JobSelectedCategory.objects.all()
+        authentication = SessionAuthentication()
+        authorization = AuthorizationWithObjectPermissions()
+
+
+class JobSelectedSubCategoryResource(ModelResource):
+    job = fields.ToOneField('employer.api.JobResource', 'job')
+
+    class Meta:
+        queryset = JobSelectedSubCategory.objects.all()
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
