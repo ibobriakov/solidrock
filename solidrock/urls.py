@@ -15,6 +15,8 @@ from employer.api import JobResource, LocationResource, HourResource,\
     EmploymentTypeResource, SpecialConditionResource, EssentialResource, DesireableResource,\
     JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource, JobSelectedCategoryResource, \
     JobUploadDocumentTypeResource
+from contactus.api import FeedbackResource
+
 
 v1_api = Api(api_name='v1')
 v1_api.register(EmployerResource())
@@ -43,7 +45,7 @@ v1_api.register(JobSubCategoryResource())
 v1_api.register(JobUploadDocumentTypeResource())
 v1_api.register(JobUploadDocumentResource())
 v1_api.register(JobSelectedCategoryResource())
-
+v1_api.register(FeedbackResource())
 
 admin.autodiscover()
 
