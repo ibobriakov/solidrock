@@ -6,7 +6,7 @@ from employer.api.validation import EmployerResourceValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
 from ..models import JobLocation, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType,\
     Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument,\
-    JobSelectedCategory, JobSelectedSubCategory
+    JobSelectedCategory, JobSelectedSubCategory, JobExecutivePositions
 from userprofile.api import AuthorizationWithObjectPermissions
 
 __author__ = 'ir4y'
