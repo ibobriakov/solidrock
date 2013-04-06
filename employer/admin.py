@@ -1,7 +1,7 @@
 from django.contrib import admin
 from models import JobLocation, JobArea,  Hour, EmploymentType, SpecialCondition,\
     Job, Essential, Desireable, JobCategory, JobSubCategory, JobSelectedCategory,\
-    JobUploadDocumentType, JobUploadDocument, JobExecutivePositions
+    JobUploadDocumentType, JobUploadDocument, JobExecutivePositions, JobSelectedSubCategory
 
 __author__ = 'ir4y'
 
@@ -22,8 +22,13 @@ class JobSelectedCategoryTabInline(admin.TabularInline):
     model = JobSelectedCategory
 
 
+class JobSelectedSubCategoryTabInline(admin.TabularInline):
+    model = JobSelectedSubCategory
+
+
 class JobAdmin(admin.ModelAdmin):
-    inlines = (EssentialTabInline, DesireableTabInline, JobSelectedCategoryTabInline, JobUploadDocumentTabInline)
+    inlines = (EssentialTabInline, DesireableTabInline,
+               JobSelectedCategoryTabInline, JobSelectedSubCategoryTabInline, JobUploadDocumentTabInline)
 
 admin.site.register(Job, JobAdmin)
 admin.site.register(JobLocation)
