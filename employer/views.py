@@ -63,3 +63,8 @@ class EditJobView(DetailView):
 def delete_job_view(request, pk):
     get_object_or_404(Job, pk=pk, owner=request.user).delete()
     return redirect('employer.profile.base')
+
+
+class JobPublicView(DetailView):
+    template_name = "employer/public_job.html"
+    model = Job

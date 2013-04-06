@@ -24,6 +24,7 @@
             <div class="title">Your Company Information</div>
             <div class="center">
                 <ul>
+                    <li><a href="{% url "employer.profile.public" profile.pk %}">View Your Company Information</a></li>
                     <li><a href="{% url "employer.profile.edit" %}">Edit Your Company Information</a></li>
                 </ul>
             </div>
@@ -38,7 +39,7 @@
                         {% for job in posted_jobs %}
                             <tr>
                                 <td class="col-1">{{ job.name }}</td>
-                                <td class="col-2"><a href="{% url "employer.job.edit" job.pk %}">view</a></td>
+                                <td class="col-2"><a href="{% url "employer.job.view" job.pk %}">view</a></td>
                                 <td class="col-3"><a href="{% url "employer.job.edit" job.pk %}">edit</a></td>
                                 <td class="col-4"><a href="{% url "employer.job.delete" job.pk %}">delete</a></td>
                             </tr>
