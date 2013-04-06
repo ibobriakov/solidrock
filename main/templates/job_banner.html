@@ -11,6 +11,6 @@
     </div>
     <div class="view-featured">
         <span>{{ job.location }}<br /> Salary:{{ job.salary_range_min }}</span>
-        <a href="" ></a>
+        <a href="{% url "employer.job.view" job.pk %}" ></a>
     </div>
 </li>
