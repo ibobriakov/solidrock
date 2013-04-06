@@ -1,0 +1,16 @@
+{% load thumbnail %}
+<li>
+    <div class="head-featured">
+        <p>{{ job.name }}</p>
+        <a href="#"></a>
+    </div>
+    <div class="logo-featured">
+         {% thumbnail job.owner.profile.avatar "81x81" crop="center" as im %}
+             <img src="{{ im.url }}" />
+         {% endthumbnail %}
+    </div>
+    <div class="view-featured">
+        <span>{{ job.location }}<br /> Salary:{{ job.salary_range_min }}</span>
+        <a href="" ></a>
+    </div>
+</li>

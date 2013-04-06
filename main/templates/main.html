@@ -46,62 +46,9 @@
                 <div class="_sl_prev"></div>
                 <div class="VjCarouselLite">
                     <ul>
-                        <li>
-                            <div class="head-featured">
-                                <p>CFO - Grubhub</p>
-                                <a href="#"></a>
-                            </div>
-                            <div class="logo-featured"><img src="http://lorempixel.com/output/abstract-q-c-137-81-10.jpg" /></div>
-                            <div class="view-featured">
-                                <span>Victoria<br /> Salary:$275,000</span>
-                                <a href="" ></a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="head-featured">
-                                <p>CFO - Grubhub</p>
-                                <a href="#"></a>
-                            </div>
-                            <div class="logo-featured"><img src="http://lorempixel.com/output/abstract-q-c-137-81-10.jpg" /></div>
-                            <div class="view-featured">
-                                <span>Victoria<br /> Salary:$275,000</span>
-                                <a href="" ></a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="head-featured">
-                                <p>CFO - Grubhub</p>
-                                <a href="#"></a>
-                            </div>
-                            <div class="logo-featured"><img src="http://lorempixel.com/output/abstract-q-c-137-81-10.jpg" /></div>
-                            <div class="view-featured">
-                                <span>Victoria<br /> Salary:$275,000</span>
-                                <a href="" ></a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="head-featured">
-                                <p>CFO - Grubhub</p>
-                                <a href="#"></a>
-                            </div>
-                            <div class="logo-featured"><img src="http://lorempixel.com/output/abstract-q-c-137-81-10.jpg" /></div>
-                            <div class="view-featured">
-                                <span>Victoria<br /> Salary:$275,000</span>
-                                <a href="" ></a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="head-featured">
-                                <p>CFO - Grubhub</p>
-                                <a href="#"></a>
-                            </div>
-                            <div class="logo-featured"><img src="http://lorempixel.com/output/abstract-q-c-137-81-10.jpg" /></div>
-                            <div class="view-featured">
-                                <span>Victoria<br /> Salary:$275,000</span>
-                                <a href="" ></a>
-                            </div>
-                        </li>
-
+                        {% for job in featured_jobs %}
+                            {% include "job_banner.html" %}
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="_sl_next"></div>

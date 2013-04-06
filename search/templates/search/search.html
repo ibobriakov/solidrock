@@ -6,30 +6,9 @@
         </div>
         {% include "search/search_form.html" with search_from=form %}
     </div>
-    <table style="width: 100%;">
-        <thead>
-        <tr>
-            <td>Author</td>
-            <td>Name</td>
-            <td>Title</td>
-            <td>Description</td>
-            <td>Location</td>
-            <td>Categories</td>
-            <td>Sub Categories</td>
-        </tr>
-        </thead>
-        <tbody>
+    <ul>
         {% for job in jobs %}
-            <tr>
-                <td>{{ job.owner }}</td>
-                <td>{{ job.name }}</td>
-                <td>{{ job.title }}</td>
-                <td>{{ job.description }}</td>
-                <td>{{ job.location }}</td>
-                <td>{{ job.categories.all }}</td>
-                <td>{{ job.sub_categories.all }}</td>
-            </tr>
+            {% include "job_banner.html" %}
         {% endfor %}
-        </tbody>
-    </table>
+    </ul>
 {% endblock %}
