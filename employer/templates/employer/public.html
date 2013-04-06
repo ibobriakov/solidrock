@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>{{ employer }} - object</h2>
+    Jobs:<br>
+    <ul>
+    {% for job in employer.user.job_set.all %}
+        {% include "job_banner.html" %}
+    {% endfor %}
+    </ul>
+{% endblock %}

@@ -6,11 +6,11 @@
 {% block content %}
     <div class="_content job_seeker">
 
-        <h1>{{ user.profile.company }}’s Account Home Page</h1>
+        <h1>{{ profile.company }}’s Account Home Page</h1>
 
         <div class="user_info">
             <div class="avatar">
-                {% thumbnail user.profile.logo "137x137" crop="center" as im %}
+                {% thumbnail profile.logo "137x137" crop="center" as im %}
                     <img src="{{ im.url }}">
                 {% empty %}
                     <img width="137" height="137" src="{{ profile.personal_information.get_photo_url }}">
@@ -36,7 +36,7 @@
                 <div class="table">
                     <table>
                         <tbody>
-                        {% for job in posted_jobs %}
+                        {% for job in profile.user.job_set.all %}
                             <tr>
                                 <td class="col-1">{{ job.name }}</td>
                                 <td class="col-2"><a href="{% url "employer.job.view" job.pk %}">view</a></td>
