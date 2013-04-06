@@ -2,7 +2,20 @@
 {% load main_tags %}
 
 {% block content %}
-    {% for field in form.visible_fields %}
-        {{ field|add_class:"it3" }}
-    {% endfor %}
+    <div class="_content stages contact">
+        <h1>Contact the cpd helpdesk</h1>
+        <div class="right">
+            <div class="form" id="contact-form">
+                {% for field in form.visible_fields %}
+                <div class="field">
+                    <label>{{ field.name }}</label>
+                    {{ field|add_class:"it3" }}
+                </div>
+                {% endfor %}
+                <div class="_submit">
+                    <div class="exit">Continue</div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

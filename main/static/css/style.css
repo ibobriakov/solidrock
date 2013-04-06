@@ -158,9 +158,9 @@ footer ._footer ._footer_nav ul li a {
 /* Логотип */
 ._logo {
     display: block;
-    width: 188px;
+    width: 200px;
     height: 56px;
-    background: url(../img/logo.png) no-repeat;
+    background: url(../img/logo-beta.png) no-repeat;
     clear: both;
     position: relative;
     top: 20px;
