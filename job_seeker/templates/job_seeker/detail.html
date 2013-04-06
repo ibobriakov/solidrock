@@ -22,7 +22,7 @@
         <div class="title">Your Application Information</div>
         <div class="center">
             <ul>
-{#                <li><a href="#">View Your Application Information</a></li>#}
+                <li><a href="{% url "job_seeker.profile.information.public" profile.pk %}">View Your Application Information</a></li>
                 <li><a href="{% url "job_seeker.profile.information" %}">Edit Your Application Information</a></li>
             </ul>
         </div>

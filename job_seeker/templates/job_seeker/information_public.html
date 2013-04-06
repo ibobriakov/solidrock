@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>{{ jobseeker }} - object</h2>
+    Resumes:<br>
+    {% for resume in jobseeker.user.resume_set.all %}
+        <a href="{% url "resume.view" resume.pk %}">{{ resume }}</a><br>
+    {% endfor %}
+    <br>
+    Cover Letters:<br>
+    {% for cover_letter in jobseeker.user.coverletter_set.all %}
+        <a href="{% url "cover_letter.view" cover_letter.pk %}">{{ cover_letter }}</a><br>
+    {% endfor %}
+{% endblock %}

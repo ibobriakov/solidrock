@@ -30,3 +30,8 @@ class JobSeekerInformationDetailView(DetailView):
     @method_decorator(login_required(login_url='/#login'))
     def dispatch(self, request, *args, **kwargs):
         return super(JobSeekerInformationDetailView, self).dispatch(request, *args, **kwargs)
+
+
+class JobSeekerInformationPublicView(DetailView):
+    model = JobSeeker
+    template_name = 'job_seeker/information_public.html'
