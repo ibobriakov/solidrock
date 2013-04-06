@@ -1,5 +1,7 @@
 {% load staticfiles %}
 {% load thumbnail %}
+<div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
+<% _.each(collection.models,function(element, index) { %>
 <fieldset>
     <div class="job-information">
         <div>
@@ -12,19 +14,19 @@
         <div>
             <h4>{{ user.profile.company }}</h4>
             {% if user.profile.address_first %}
-            <p>{{ user.profile.address_first }}</p>
+                <p>{{ user.profile.address_first }}</p>
             {% endif %}
             {% if user.profile.address_second %}
-            <p>{{ user.profile.address_second }}</p>
+                <p>{{ user.profile.address_second }}</p>
             {% endif %}
             {% if user.profile.city %}
-            <p>{{ user.profile.city }}</p>
+                <p>{{ user.profile.city }}</p>
             {% endif %}
             <br/>
             {% if user.profile.brief %}
-            <p>
-               {{ user.profile.brief }}
-            </p>
+                <p>
+                    {{ user.profile.brief }}
+                </p>
             {% endif %}
         </div>
     </div>
@@ -80,3 +82,8 @@
         {% include 'employer/field.html' with class='field fl_left' input_class='it3' title='Email Adress<span>*</span>' field='contact_email' %}
     </div>
 </fieldset>
+<% }) %>
+<div class="_submit">
+    <div class="exit" data-on-click="job_view:commit_and_exit">Save and Exit</div>
+    <div class="cont" data-on-click="job_view:commit" >Save and Continue</div>
+</div>

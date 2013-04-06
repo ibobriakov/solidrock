@@ -5,68 +5,15 @@
 
 {% block templates %}
     <script id="job_form_template" type="text/template">
-        <div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
-        <% _.each(collection.models,function(element, index) { %>
-            {% include "employer/job_information_form_template.html" %}
-        <% }) %>
-        <div class="_submit">
-            <div class="exit" data-on-click="job_view:commit_and_exit">Save and Exit</div>
-            <div class="cont" data-on-click="job_view:commit" >Save and Continue</div>
-        </div>
+        {% include "employer/form_template/job_information.html" %}
     </script>
 
     <script id="job_upload_document_form_template" type="text/template">
-        <div class="title">Upload Documents</div>
-        <p>
-            From this section you can upload documents associated with this job listing.<br/>
-            Note that only Adobe PDF or Microsoft Word Documents are allowed.
-        </p>
-        <br/>
-        <fieldset>
-            <div class="field">
-                <label>Upload Other Supporting Documents</label>
-                <div id="support_document_list">
-                    <% _.each(collection.where({'document_type_name':'Support Document'}),function(element,index){ %>
-                        <a href="<%=element.get('document')%>"><%=element.get('file_name')%></a>
-                        <a data-on-click="job_upload_document_view:remove" data-cid="<%=element.cid%>" href="#">del</a>
-                    <% }) %>
-                </div>
-                <input class="_hide" id="support_document_upload" type="file" name="files[]" data-url="{% url "upload" "job_support_document" object.pk %}">
-                <a id="support_document_upload_link" href="#">Upload a Supporting Document</a><br/>
-                <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
-            </div>
-
-            <div class="field">
-                <label>School, College, or University Name</label>
-                <div id="full_position_description">
-                    <% _.each(collection.where({'document_type_name':'Full Position Description'}),function(element,index){ %>
-                    <a href="<%=element.get('document')%>"><%=element.get('file_name')%></a>
-                    <a data-on-click="job_upload_document_view:remove" data-cid="<%=element.cid%>" href="#">del</a>
-                    <% }) %>
-                </div>
-                <% if (!collection.where({'document_type_name':'Full Position Description'}).length) { %>
-                    <input class="_hide" id="full_position_description_upload" type="file" name="files[]" data-url="{% url "upload" "job_full_position_document" object.pk %}">
-                    <a id="full_position_description_upload_link" href="#">Upload the Full Position Description</a><br/>
-                <% } %>
-                <div class="text">(Note: You may only upload one Full Position Description)</div>
-            </div>
-        </fieldset>
-        <div class="_submit">
-            <div class="exit" data-on-click="employer_upload_documents_view:commit_and_exit">Save and Exit</div>
-            <div class="cont" data-on-click="employer_upload_documents_view:commit" >Save and Continue</div>
-        </div>
+        {% include "employer/form_template/upload_documents.html" %}
     </script>
 
-    <script id="employer_select_category_form_template" type="text/template">
-        <div class="title">Select a Category</div>
-        <% _.each(collection.models,function(element, index) { %>
-            {% include "employer/select_category_form_template.html" %}
-        <% }) %>
-        <div class="_submit">
-            <div class="exit" data-on-click="job_seeker_information_view:commit_and_exit">Save and Exit</div>
-            <div class="cont" data-on-click="job_seeker_information_view:commit" >Save and Continue</div>
-        </div>
-    </script>
+    {% include "employer/form_template/select_category.html" %}
+
 {% endblock %}
 
 {% block content %}
@@ -78,7 +25,6 @@
             <li class="section1 active"><a href="#section/1">Section 1: Job Information</a></li>
             <li class="section2"><a href="#section/2">Section 2: Upload Documents</a></li>
             <li class="section3"><a href="#section/3">Section 3: Select a Category</a></li>
-{#            <li><a href="#">Section 4: Payment Information</a></li>#}
         </ul>
     </div>
         <div class="right">
@@ -101,6 +47,7 @@
                             el: $('div.page.section2'),
                             collection: new (profile_collection_fabric('job_upload_document'))({% autoescape off %}{{ object.jobuploaddocument_set.all|as_json }}{% endautoescape %})
                         });
+
                     </script>
                 </form>
             </div>

@@ -39,7 +39,12 @@ var BaseCollection = Backbone.Collection.extend({
 });
 
 var BaseItemView = Marionette.ItemView.extend({
+    data_binding: function() {
 
+    },
+    render: function(){
+
+    }
 });
 
 var BaseCollectionView = Marionette.CollectionView.extend({

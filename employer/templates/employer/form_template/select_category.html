@@ -1,0 +1,29 @@
+<script id="main_select_category_template" type="text/template">
+    <div class="title">Select a Category</div>
+    <fieldset>
+        <div class="category_set"></div>
+        {% include 'employer/field_checked.html' with title="Would you like to <span>add another Categeory AND Sub-Category </span> for only $30?" field="add_sub_category" input_name="ch5" %}
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <div class="cont">Save and Continue</div>
+        </div>
+    </fieldset>
+</script>
+
+
+<script id="category_item_template" type="text/template">
+    <div class="category">
+        <div class="field">
+            <label for="e7">Category</label>
+            <select id="e7"></select>
+        </div>
+        <div class="subcategory_set"></div>
+    </div>
+</script>
+
+<script id="subcategory_item_template" type="text/template">
+    <div class="field pod">
+        <label for="e8">Sub-category</label>
+        <select id="e8"></select>
+    </div>
+</script>
