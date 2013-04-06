@@ -72,8 +72,8 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
 
     essential_set = fields.ToManyField(EssentialResource, 'essential_set', full=True, null=True)
     desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True, null=True)
-    categories = fields.ToManyField(JobCategoryResource, 'categories', null=True)
-    sub_categories = fields.ToManyField(JobSubCategoryResource, 'sub_categories', null=True)
+    categories = fields.ToManyField(JobCategoryResource, 'categories', full=True, null=True)
+    sub_categories = fields.ToManyField(JobSubCategoryResource, 'sub_categories', full=True, null=True)
 
     def get_object_list(self, request):
         query_set = super(JobResource, self).get_object_list(request)
