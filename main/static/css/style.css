@@ -324,7 +324,7 @@ footer ._footer ._footer_nav ul li a {
 }
 
 ._search_job ._center {
-    height: 262px;
+    min-height: 262px;
     padding: 25px 18px 23px;
 }
 
