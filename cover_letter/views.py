@@ -34,6 +34,10 @@ class CoverLetterView(DetailView):
     def dispatch(self, request, *args, **kwargs):
         return super(CoverLetterView, self).dispatch(request, *args, **kwargs)
 
+class CoverLetterViewPublic(DetailView):
+    template_name = 'cover_letter/public.html'
+    model = CoverLetter
+    context_object_name = 'cover_letter'
 
 @login_required(login_url='/#login')
 def delete_cover_letter_view(request, resume_pk):
