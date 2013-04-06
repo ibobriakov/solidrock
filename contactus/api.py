@@ -1,4 +1,3 @@
-from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
 from tastypie.validation import FormValidation
 from main.api import AuthorizationWithObjectPermissions
@@ -14,6 +13,5 @@ class FeedbackResource(ModelResource):
         resource_name = 'contactus'
         always_return_data = True
         allowed_methods = ('post',)
-        authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
         validation = FormValidation(form_class=FeedbackForm)

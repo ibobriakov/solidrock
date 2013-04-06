@@ -30,11 +30,13 @@ class EmailWithPermissionBackend(EmailBackend):
             return obj.owner == user
         elif perm in ('employer.add_job',):
             return True
-        elif perm in ('employer.change_desireable', 'employer.change_essential', 'employer.change_jobselectedcategory',
-                      'employer.delete_jobuploaddocument'):
+        elif perm in ('employer.change_desireable', 'employer.change_essential', 'employer.delete_jobuploaddocument',
+                      'employer.change_jobselectedcategory', 'employer.change_jobselectedsubcategory',
+                      'employer.add_jobselectedcategory', 'employer.add_jobselectedsubcategory',
+                      'employer.delete_jobselectedcategory', 'employer.delete_jobselectedsubcategory', ):
             return obj.job.owner == user
-        elif perm in ('employer.add_desireable', 'employer.add_essential', 'employer.add_jobselectedcategory'):
+        elif perm in ('employer.add_desireable', 'employer.add_essential',):
             return True
-        elif perm == 'feedback.add':
+        elif perm == 'contactus.add_feedback':
             return True
         return False
