@@ -12,7 +12,14 @@ var ContactView = Backbone.View.extend ({
     initialize: function() {
         this.model.view = this;
         this.rivets = rivets;
-        this.rivets.bind(this.el, {'contactus': this.model, 'contactus_errors': this.errors});
+        this.rivets.bind(this.el, {
+            'contactus': this.model,
+            'contactus_errors': this.errors,
+            'contactus_view': this
+        });
+    },
+    save: function() {
+        this.model.commit();
     }
 });
 

@@ -7,7 +7,7 @@
     <div class="_content stages contact">
         <h1>Contact the cpd helpdesk</h1>
         <div class="right">
-            <div class="form" id="contact-form">
+            <div class="form" id="contact-form" data-next-url="/contact_us/">
                 {% for field in form.visible_fields %}
                 <div class="field">
                     <label>{{ field.label }}</label>
@@ -16,7 +16,7 @@
                 </div>
                 {% endfor %}
                 <div class="_submit">
-                    <div class="exit">Continue</div>
+                    <div class="exit" data-on-click="contactus:commit">Continue</div>
                 </div>
             </div>
         </div>

@@ -24,4 +24,5 @@ def rivet_modelform_factory(base_name):
             super(RivetModelForm, self).__init__(*agrs, **kwargs)
             for name, field in self.fields.iteritems():
                 field.widget.attrs['data-value'] = base_name + "." + name
+                field.widget.attrs['data-on-keyup'] = base_name + ":keyup"
     return RivetModelForm

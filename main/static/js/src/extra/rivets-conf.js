@@ -45,9 +45,12 @@ rivets.configure({
 });
 
 rivets.binders.error = function(el, value) {
-    $(el).fadeOut();
     if (value){
-        $(el).html(value);
-        $(el).fadeIn();
+        $(el).fadeOut(function(){
+            $(el).html(value);
+            $(el).fadeIn();
+        });
+    } else {
+        $(el).fadeOut();
     }
 };

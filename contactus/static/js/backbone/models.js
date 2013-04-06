@@ -7,34 +7,36 @@
  */
 
 var ContactModel = Backbone.Model.extend({
-    //urlRoot: rest_url['contactus'].list_endpoint,
+    urlRoot: rest_url['contactus'].list_endpoint,
+    url: function(){
+        if (this.id){
+            return this.urlRoot + this.id + '/';
+        } else {
+            return this.urlRoot;
+        }
+    },
     keyup: function(event) {
         if (event.keyCode == 13){
             this.commit(event);
         }
     },
-    commit: function(event){
+    commit: function(event) {
         var that = this;
-        var parent = event.target.parentElement;
-        var next = $(parent).attr('data-next-url');
         this.save({},{ wait: true,
             error: function(model,response) {
-                that.view.errors = JSON.parse(response.responseText)[type];
+                that.view.errors.clear();
+                that.view.errors.set(JSON.parse(response.responseText)['contactus']);
                 that.view.render();
             },
             success: function(){
-                that.view.errors = [];
-                that.view.render();
-                if (next) {
-                    window.location.replace(next);
+                that.view.errors.clear();
+                if (that.view.$el.attr('data-next-url')) {
+                    window.location.replace(that.view.$el.attr('data-next-url'));
                 } else {
                     window.location.replace('/');
                 }
             }
         });
-    },
-    get_errors: function(){
-        return this.error;
     }
 });
 
