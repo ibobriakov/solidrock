@@ -17,7 +17,13 @@ class SearchView(FormView):
     template_name = "search/search.html"
     form_class = SearchForm
 
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        context['full_search_from'] = True
+        return context
+
     def form_valid(self, form):
+        #todo add more-options filter logic
         form_data = form.data
         context = self.get_context_data(form=form)
         query = Q()

@@ -6,11 +6,11 @@
 {% block content %}
     <div class="_content job_seeker">
 
-        <h1>{{ user.profile.company }}’s Account Home Page</h1>
+        <h1>{{ profile.company }}’s Account Home Page</h1>
 
         <div class="user_info">
             <div class="avatar">
-                {% thumbnail user.profile.logo "137x137" crop="center" as im %}
+                {% thumbnail profile.logo "137x137" crop="center" as im %}
                     <img src="{{ im.url }}">
                 {% empty %}
                     <img width="137" height="137" src="{{ profile.personal_information.get_photo_url }}">
@@ -24,6 +24,7 @@
             <div class="title">Your Company Information</div>
             <div class="center">
                 <ul>
+                    <li><a href="{% url "employer.profile.public" profile.pk %}">View Your Company Information</a></li>
                     <li><a href="{% url "employer.profile.edit" %}">Edit Your Company Information</a></li>
                 </ul>
             </div>
@@ -35,13 +36,31 @@
                 <div class="table">
                     <table>
                         <tbody>
-                        {% for job in posted_jobs %}
+                        {% for job in profile.user.job_set.all %}
                             <tr>
                                 <td class="col-1">{{ job.name }}</td>
-                                <td class="col-2"><a href="{% url "employer.job.edit" job.pk %}">view</a></td>
+                                <td class="col-2"><a href="{% url "employer.job.view" job.pk %}">view</a></td>
                                 <td class="col-3"><a href="{% url "employer.job.edit" job.pk %}">edit</a></td>
                                 <td class="col-4"><a href="{% url "employer.job.delete" job.pk %}">delete</a></td>
                             </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add"><a href="{% url "employer.job.create" %}">Post a job</a></div>
+            </div>
+            <div class="res_info">
+                <div class="title">Users have applied for your job</div>
+                <div class="table">
+                    <table>
+                        <tbody>
+                        {% for job in profile.user.job_set.all %}
+                        {% for apllication in job.applytojob_set.all %}
+                            <tr>
+                                <td class="col-1"><a href="{% url "employer.job.view" job.pk %}">{{ job.name }}</a></td>
+                                <td class="col-2"><a href="{% url "job_seeker.profile.information.public" apllication.job_seeker.profile.pk %}">{{ apllication.job_seeker }}</a></td>
+                            </tr>
+                        {% endfor %}
                         {% endfor %}
                         </tbody>
                     </table>

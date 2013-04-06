@@ -35,6 +35,10 @@ class ResumeView(DetailView):
         return super(ResumeView, self).dispatch(request, *args, **kwargs)
 
 
+class ResumePublicView(DetailView):
+    template_name = 'resume/public.html'
+    model = Resume
+
 @login_required(login_url='/#login')
 def delete_resume_view(request, resume_pk):
     get_object_or_404(Resume, pk=resume_pk, owner=request.user).delete()

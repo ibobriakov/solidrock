@@ -1,18 +1,25 @@
 import datetime
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, TemplateView, ListView
 from models import Job, JobLocation, Hour, EmploymentType,\
     SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory, JobExecutivePositions
+from userprofile.models import Employer
 
 
-class EmployerView(TemplateView):
+class EmployerView(DetailView):
+    model = Employer
+    context_object_name = 'profile'
     template_name = "employer/main.html"
 
-    def get_context_data(self, **kwargs):
-        context = super(EmployerView, self).get_context_data(**kwargs)
-        context['posted_jobs'] = Job.objects.filter(owner=self.request.user)
-        return context
+    def get_object(self, queryset=None):
+        return get_object_or_404(self.model, user=self.request.user)
+
+    @method_decorator(login_required(login_url='/#login'))
+    def dispatch(self, request, *args, **kwargs):
+        return super(EmployerView, self).dispatch(request, *args, **kwargs)
 
 
 class EmployerEditView(TemplateView):
@@ -63,3 +70,13 @@ class EditJobView(DetailView):
 def delete_job_view(request, pk):
     get_object_or_404(Job, pk=pk, owner=request.user).delete()
     return redirect('employer.profile.base')
+
+
+class JobPublicView(DetailView):
+    template_name = "employer/public_job.html"
+    model = Job
+
+
+class EmployerPublicView(DetailView):
+    template_name = "employer/public.html"
+    model = Employer
