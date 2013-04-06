@@ -1,47 +1,47 @@
-/**
- * User: jackdevil
- */
 
-var Section = new Marionette.Application();
+var BaseError = Backbone.Model.extend({});
 
-App.module("Default", function(Mod, App, Backbone, Marionette, $, _){
-    var SectionModel = Backbone.Model.extend({
-        url: function() {
-            if (!this.urlRoot) return false;
-            if (this.id) {
-                return this.urlRoot + this.id + '/';
-            } else {
-                return this.urlRoot;
-            }
-        },
-        commit: function() {
-            this.save();
+var BaseModel = Backbone.Model.extend({
+    errors: new BaseError(),
+    type: false,
+    urlRoot: function(){
+        if (this.type) {
+            return rest_url[this.type]['list_endpoint'];
+        } else {
+            console.log('Type not set', this);
+            return false;
         }
-    });
+    },
+    url: function() {
+        if (this.id) { return this.urlRoot + this.id + '/';}
+        else { return this.urlRoot; }
+    },
+    commit: function() {
+        if (this.type) {
+            this.save([],{
+                error: function(model, response) {
+                    model.errors.clear();
+                    model.errors.set(JSON.parse(response.responseText)[model.type]);
+                    model.trigger('error');
+                }
+            })
+        } else {
+            console.log('Type not set', this);
+        }
+    }
 });
 
-App.module("Multi", function(Mod, App, Backbone, Marionette, $, _){
-    var MainView = Marionette.ItemView.extend({
-        template: "#sample-template"
-    });
-    var Controller = Marionette.Controller.extend({
-        initialize: function(options){
-            this.region = options.region
-        },
-        show: function(){
-            var model = new Backbone.Model({
-                contentPlacement: "here"
-            });
-            var view = new MainView({
-                model: model
-            });
-            this.region.show(view);
-        }
-    });
-    Mod.addInitializer(function(){
-        Mod.controller = new Controller({
-            region: App.mainRegion
-        });
-        Mod.controller.show();
-    });
+var BaseCollection = Backbone.Collection.extend({
+    append_first_item: true,
+    initialize: function() {
+        if (this.append_first_item && !this.models) this.add({});
+    }
+});
+
+var BaseItemView = Marionette.ItemView.extend({
+
+});
+
+var BaseCollectionView = Marionette.CollectionView.extend({
+
 });
