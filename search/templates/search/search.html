@@ -6,7 +6,8 @@
         </div>
         {% include "search/search_form.html" with search_from=form %}
     </div>
-    <div>
+    <div class="clear"></div>
+    <div class="search-result">
         {% for job in jobs %}
             {% include "job_banner.html" %}
         {% endfor %}
