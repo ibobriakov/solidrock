@@ -1,7 +1,9 @@
 
 var BaseError = Backbone.Model.extend({});
 
-var BaseModel = Backbone.Model.extend({
+var BaseModel = Backbone.Model.extend({});
+
+var BaseRESTModel = Backbone.Model.extend({
     errors: new BaseError(),
     type: false,
     urlRoot: function(){
@@ -38,14 +40,6 @@ var BaseCollection = Backbone.Collection.extend({
     }
 });
 
-var BaseItemView = Marionette.ItemView.extend({
-    data_binding: function() {
-
-    },
-    render: function(){
-
-    }
-});
 
 var BaseCollectionView = Marionette.CollectionView.extend({
 

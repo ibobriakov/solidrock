@@ -23,14 +23,21 @@ class SearchView(FormView):
         return context
 
     def form_valid(self, form):
-        #todo add more-options filter logic
         form_data = form.data
         context = self.get_context_data(form=form)
         query = Q()
         if 'keywords' in form_data and form_data['keywords']:
             query = get_search_by_keywords(form_data['keywords'])
-        for field in ('location', 'categories', 'sub_categories',):
+        for field in ('location', 'categories', 'sub_categories', 'hours', 'employment_type'):
             if field in form_data and form_data[field]:
                 query &= Q(**{field: form_data[field]})
+        if 'featured' in form_data:
+            query &= Q(featured_job=True)
+        if 'salary_min' in form_data and form_data['salary_min'] != '':
+            query &= Q(salary_range_min__gte=form_data['salary_min'])
+        if 'salary_max' in form_data and form_data['salary_max'] != '':
+            query &= Q(salary_range_max__lte=form_data['salary_max'])
         context['jobs'] = Job.objects.filter(query).exclude(name=None)
+        if 'executive_positions' in form_data:
+            context['jobs'] = context['jobs'].exclude(executive_positions=None)
         return  self.render_to_response(context)

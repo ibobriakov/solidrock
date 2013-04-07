@@ -2,7 +2,8 @@
  * User: jackdevil
  */
 
-function profile_view_fabric(type,redirect_url, template) {
+function profile_view_fabric(type, redirect_url, template, view_type) {
+    view_type = view_type || type + '_view';
     template = template || $('#'+type+'_form_template');
     return Backbone.View.extend ({
         template: _.template(template.html()),
@@ -69,7 +70,7 @@ function profile_view_fabric(type,redirect_url, template) {
         render: function() {
             this.$el.html(this.template({'collection':this.collection,'type':type}));
             var view_object = {};
-            view_object[type+'_view'] = this;
+            view_object[view_type] = this;
             this.rivets = rivets;
             this.rivets.bind(this.el, view_object);
             var that = this;

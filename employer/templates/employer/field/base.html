@@ -1,9 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<div class="{% if class %}{{ class }}{% else %}field{% endif %}">
+    <label for="{{ id }}">{{ title }}</label>
 
-</body>
-</html>
+    {% block field %}{% endblock %}
+
+    {% block tooltip %}
+    <div class="help-tip">
+        <div class="help-tip-title">Helpful Tip!</div>
+        <div class="help-tip-text">
+            <div class="help-tip-right"></div>
+            {% if tooltip %}{{ tooltip }}{% else %}{{ title }}{% endif %}.
+        </div>
+    </div>
+    {% endblock %}
+
+    <div class="error_list" data-error="{{ type }}.error.{{ field }}"></div>
+</div>

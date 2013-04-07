@@ -44,7 +44,7 @@ class JobListView(ListView):
 
 
 class EditJobView(DetailView):
-    template_name = "employer/post_job.html"
+    template_name = "employer/main/post_job.html"
     model = Job
 
     def get_object(self, queryset=None):

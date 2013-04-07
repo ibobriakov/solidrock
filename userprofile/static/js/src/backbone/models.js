@@ -30,6 +30,20 @@ function profile_model_fabric(type) {
             this.view.render();
             return false;
         },
+        categories_add: function(){
+            var categories = this.get('categories');
+            categories.push({});
+            this.set('categories',categories);
+            this.view.render();
+            return false;
+        },
+        sub_categories_add: function(){
+            var sub_categories = this.get('sub_categories');
+            sub_categories.push({});
+            this.set('sub_categories',sub_categories);
+            this.view.render();
+            return false;
+        },
         essential_del: function(e){
             console.log(e);
             return false;

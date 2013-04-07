@@ -1,92 +1,287 @@
-{% extends 'userprofile/base.html' %}
+{% extends 'base.html' %}
+{% load staticfiles %}
 {% load serialize %}
 
-{% block templates %}
-    <script id="job_form_template" type="text/template">
-        {% include "employer/form_template/job_information.html" %}
-    </script>
-
-    <script id="job_upload_document_form_template" type="text/template">
-        {% include "employer/form_template/upload_documents.html" %}
-    </script>
-
-    <script id="job_select_category_template" type="text/template">
-        {% include "employer/form_template/select_category.html" %}
-    </script>
-
+{% block library-js %}
+    {{ block.super }}
+    <script src="{% static 'employer/js/src/backbone/models.js' %}" type="text/javascript"></script>
+    <script src="{% static 'employer/js/src/backbone/views.js' %}" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
     <div class="_content stages">
-        <a id="section_top"></a>
-        <h1>Post a Job Listing</h1>
-        <div class="left">
-        <ul class="sections_text">
-            <li class="section1 active"><a href="#section/1">Section 1: Job Information</a></li>
-            <li class="section2"><a href="#section/2">Section 2: Upload Documents</a></li>
-            <li class="section3"><a href="#section/3">Section 3: Select a Category</a></li>
+
+    <h1>Post a Job Listing</h1>
+
+    <div class="left">
+        <ul>
+            <li class="active"><a href="#">Section 1: Job Information</a></li>
+            <li><a href="#">Section 2: Upload Documents</a></li>
+            <li><a href="#">Section 3: Select a Category</a></li>
+            <li><a href="#">Section 4: Payment Information</a></li>
         </ul>
     </div>
-        <div class="right">
-            <ul class="sections_tab">
-                <li class="section1 active"><a href="#section/1">Section 1</a></li>
-                <li class="section2"><a href="#section/2">Section 2</a></li>
-                <li class="section3"><a href="#section/3">Section 3</a></li>
-            </ul>
-            <div class="form sections_form">
-                <form>
-                    <div class="page section1"></div>
-                    <div class="page section2" style="display: none;"></div>
-                    <div class="page section3" style="display: none;"></div>
-                    <script>
-                        var job_collection = new (profile_collection_fabric('job'))({% autoescape off %}{{ object|as_json }}{% endautoescape %});
-                        job_view = new (profile_view_fabric('job','/'))({
-                            el: $('div.page.section1'),
-                            collection: job_collection
-                        });
-                        job_upload_document_view = new (profile_view_fabric('job_upload_document','/'))({
-                            el: $('div.page.section2'),
-                            collection: new (profile_collection_fabric('job_upload_document'))({% autoescape off %}{{ object.jobuploaddocument_set.all|as_json }}{% endautoescape %})
-                        });
-                        job_category_view = new (profile_view_fabric('job','/', $('#job_select_category_template'), 'select_category_view'))({
-                            el: $('div.page.section3'),
-                            collection: job_collection
-                        });
-                    </script>
-                </form>
+
+    <div class="right">
+    <ul>
+        <li class="active" id="s1">Section 1</li>
+        <li id="s2">Section 2</li>
+        <li id="s3">Section 3</li>
+        <li id="s4">Section 4</li>
+
+    </ul>
+    <div class="form">
+    <form>
+    <div class="s1">
+        <div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
+
+        <fieldset>
+            <div class="job-information">
+                <div>
+                    <h4>Acme Insurance</h4>
+
+                    <p>Street Address</p>
+
+                    <p>City Address</p>
+                    <br/>
+
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                        ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+                        tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+
+                </div>
             </div>
-        </div>
+
+            <div class="clear"></div>
+            <div>
+                <div class="field">
+                    <label for="e1">Would you like to populate this listing from a previous job posting?</label>
+                    <select id="e1">
+                        <option>Select a Previous Job Listing</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                {% include 'employer/field/input.html' with type="job" id="name_job_input" input_class='it3' title='Name This Job Listing*' field='name' %}
+                {% include 'employer/field/input.html' with type="job" id="job_title_input" input_class='it3' title='Job Title*' field='title' %}
+                {% include 'employer/field/textarea.html' with type="job" id="job_description_textarea" title='Job Description*' field='description' %}
+                {% include 'employer/field/select.html' with type="job" id="job_location_select" class='field fl_left' title='Job Location*' field='location' items=JobLocation %}
+                {% include 'employer/field/input.html' with type="job" id="applicable_award_input" class='field fl_left' input_class='it3' title='Applicable Award (if applicable)' field='award' %}
+
+
+                <div class="field fl_left">
+                    <label>Job Location*</label>
+                    <select id="e2">
+                        <option>Select a Location</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+
+                <div class="clear"></div>
+                <div class="field">
+                    <label>Salary Range</label>
+                    <select id="e3">
+                        <option>Select a Salary Range</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                <div class="field fl_left">
+                    <label>Hours*</label>
+                    <select id="e4">
+                        <option>Select Hours Type</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                <div class="field fl_left">
+                    <label>Type of Employment*</label>
+                    <select id="e5">
+                        <option>Select Employment Type</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                <div class="clear"></div>
+                <div class="field">
+                    <label>Special Conditions</label>
+                    <select id="e6">
+                        <option>Any Special Conditions?</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                <div class="field pod">
+                    <label>If “Other” Please Indicate</label>
+                    <input class="it-pod" type="text"/>
+                </div>
+                <div class="field ">
+                    <label>Selection Criteria (please list one per line)*</label>
+                </div>
+                <div class="field pod">
+                    Essential:
+                    <input class="it-pod2" type="text"/>
+                    <a href="df">Add Another Essential Criteria Item</a>
+                </div>
+                <div class="field pod2">
+                    Desireable:
+                    <input class="it-pod2" type="text"/>
+                    <a href="df">Add Another Desireable Criteria Item</a>
+                </div>
+                <div class="field fl_left">
+                    <label>Date Job Listing Opens</label>
+                    <input class="it3" type="text"/>
+                </div>
+                <div class="field fl_left">
+                    <label>Date Job Listing Ends</label>
+                    <input class="it3" type="text"/>
+                </div>
+                <div class="clear"></div>
+                <div class="field ">
+                    <label>Contact Person for This Listing*</label>
+                </div>
+                <div class="field fl_left">
+                    <p>Name<span>*</span></p>
+                    <input class="it3" type="text"/>
+                </div>
+                <div class="field fl_left">
+                    <p>Phone (optional)<span>*</span></p>
+                    <input class="it3" type="text"/>
+                </div>
+                <div class="clear"></div>
+                <div class="field fl_left">
+                    <p>Email Adress<span>*</span></p>
+                    <input class="it3" type="text"/>
+                </div>
+
+                <div class="_submit">
+                    <div class="exit">Save and Exit</div>
+                    <div class="cont">Save and Continue</div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="s2">
+        <div class="title">Upload Documents</div>
+        <p>
+            From this section you can upload documents associated with this job listing.<br/>
+            Note that only Adobe PDF or Microsoft Word Documents are allowed.
+        </p>
+        <br/>
+        <fieldset>
+            <div class="field">
+                <label>Upload Other Supporting Documents</label>
+                <a href="#">Upload a Supporting Document</a><br/>
+
+                <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
+            </div>
+
+            <div class="field">
+                <label>School, College, or University Name</label>
+                <a href="#">Upload the Full Position Description</a><br/>
+
+                <div class="text">(Note: You may only upload one Full Position Description)</div>
+            </div>
+
+
+            <div class="_submit">
+                <div class="exit">Save and Exit</div>
+                <div class="cont">Save and Continue</div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="s3">
+        <div class="title">Select a Category</div>
+        <fieldset>
+            <div class="field">
+                <label>Category</label>
+                <select id="e7">
+                    <option>Category</option>
+                    <option>Category</option>
+                    <option>Category</option>
+                    <option>Category</option>
+                </select>
+            </div>
+            <div class="field pod">
+                <label>Sub-category</label>
+                <select id="e8">
+                    <option>Sub-category</option>
+                    <option>Sub-category</option>
+                    <option>Sub-category</option>
+                    <option>Sub-category</option>
+                </select>
+            </div>
+            <br/>
+
+            <div class="field star">
+                <p>Would you like to <span>  add another Sub-Category </span>for only $25? </p>
+                <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
+                                                                                                type="radio"
+                                                                                                name="ch5"/>No
+                Thanks</label>
+            </div>
+
+            <div class="field star">
+                <p>Would you like to <span>add another Categeory AND Sub-Category </span> for only $30? </p>
+                <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
+                                                                                                type="radio"
+                                                                                                name="ch5"/>No
+                Thanks</label>
+            </div>
+            <div class="field star">
+                <p>Would you like to make this an <span>exclusive Executive Position </span> for only $25?</p>
+                <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
+                                                                                                type="radio"
+                                                                                                name="ch5"/>No
+                Thanks</label>
+            </div>
+            <div class="field star">
+                <p>Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for
+                    only $100?</p>
+                <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
+                                                                                                type="radio"
+                                                                                                name="ch5"/>No
+                Thanks</label>
+            </div>
+            <div class="_submit">
+                <div class="exit">Save and Exit</div>
+                <div class="cont">Save and Continue</div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="s4">
+        <div class="title">Контента нет</div>
+
+        <fieldset>
+
+        </fieldset>
+    </div>
+
+    </form>
+    </div>
+    </div>
     </div>
 {% endblock %}
 
 {% block initialize-js %}
     {{ block.super }}
     <script>
-        job_upload_document_view.bind('end_render',document_upload);
-        function document_upload (){
-            $('#support_document_upload_link').on('click',function(){
-                $('#support_document_upload').trigger('click');
-                return false;
-            });
-            $('#support_document_upload').fileupload({
-                dataType: 'json',
-                done: function (e, data) {
-                    job_upload_document_view.collection.add(data.result);
-                    job_upload_document_view.render();
-                }
-            });
-            $('#full_position_description_upload_link').on('click',function(){
-                $('#full_position_description_upload').trigger('click');
-                return false;
-            });
-            $('#full_position_description_upload').fileupload({
-                dataType: 'json',
-                done: function (e, data) {
-                    job_upload_document_view.collection.add(data.result);
-                    job_upload_document_view.render();
-                }
-            });
-        }
-        document_upload();
+        var post_job_initial = {{ object|as_json|safe }}[0];
+        var post_job_view = new PostJobView({ el: $('._content.stages'), type: 'job' });
+        post_job_view.model.set(post_job_initial);
     </script>
 {% endblock %}
