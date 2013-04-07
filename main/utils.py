@@ -1,4 +1,5 @@
-from django.db.models.fields import Field
+from django.db.models import OneToOneField, ForeignKey
+from django.db.models.fields import Field, BooleanField, AutoField
 import types
 
 
@@ -76,3 +77,13 @@ def patch_model(model_to_patch, class_to_patch_with):
 
         # Add the new field/method name and object to the model.
         model_to_patch.add_to_class(name, obj)
+
+
+def get_model_values(item, exclude=('id',)):
+    def get_from(item):
+        return lambda field: getattr(item, field)
+    return map(get_from(item),
+               filter(lambda u: u not in exclude,
+                      map(lambda u: u.name,
+                          filter(lambda u:not isinstance(u,(BooleanField, AutoField, OneToOneField, ForeignKey)),
+                                 item._meta.fields))))
