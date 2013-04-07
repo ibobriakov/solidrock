@@ -2,7 +2,7 @@ from django.forms.models import modelform_factory
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
-from employer.api.validation import EmployerResourceValidation
+from employer.api.validation import JobResourceValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
 from ..models import JobLocation, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType,\
     Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument,\
@@ -72,8 +72,10 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
 
     essential_set = fields.ToManyField(EssentialResource, 'essential_set', full=True, null=True)
     desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True, null=True)
-    categories = fields.ToManyField(JobCategoryResource, 'categories', full=True, null=True)
-    sub_categories = fields.ToManyField(JobSubCategoryResource, 'sub_categories', full=True, null=True)
+
+    # TODO fix append error or remove permanently if is doesn't need any more
+    # categories = fields.ToManyField(JobCategoryResource, 'categories', full=True, null=True)
+    # sub_categories = fields.ToManyField(JobSubCategoryResource, 'sub_categories', full=True, null=True)
 
     def get_object_list(self, request):
         query_set = super(JobResource, self).get_object_list(request)
@@ -93,7 +95,7 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = EmployerResourceValidation(form_class=modelform_factory(Job))
+        validation = JobResourceValidation(form_class=modelform_factory(Job))
 
 
 class JobUploadDocumentResource(ModelResource):
