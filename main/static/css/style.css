@@ -324,7 +324,7 @@ footer ._footer ._footer_nav ul li a {
 }
 
 ._search_job ._center {
-    height: 262px;
+    min-height: 262px;
     padding: 25px 18px 23px;
 }
 
@@ -380,14 +380,17 @@ footer ._footer ._footer_nav ul li a {
 }
 
 ._search_job ._center form ._submit ._more {
+    border: none;
     width: 125px;
     text-align: center;
+    font-size: 14px;
     color: #fff;
     background: #409bcd;
     padding: 5px 0;
     cursor: pointer;
     float: left;
 }
+
 
 ._search_job ._center form ._submit ._search_button {
     border: none;
@@ -1562,6 +1565,7 @@ div.paper-block{
 .contact ._submit {margin: 0 0 30px 0 !important; padding: 0px !important;}
 
 /*Featured Jobs*/
+.Job {border: 1px #dbdddd solid; height: 113px; width: 275px; float: left; background: #f2fbff;}
 ._slider_block  .VjCarouselLite ul li {border: 1px #dbdddd solid; height: 113px; width: 275px;}
 .head-featured {height: 32px;background: #409bcd;padding: 0 5px;}
 .head-featured a {
@@ -1589,3 +1593,11 @@ div.paper-block{
     margin: 5px auto;
 }
 .field.pod input, .field.pod2 input {position: relative; z-index: 2;}
+
+/*Job search more options*/
+.search-result {
+    margin-top: 30px;
+}
+.search-result .Job {
+    margin:0 30px 20px 0;
+}

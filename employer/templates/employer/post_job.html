@@ -1,5 +1,6 @@
 {% extends 'userprofile/base.html' %}
 {% load serialize %}
+{% load employer_post_job %}
 
 {% block templates %}
     <script id="job_form_template" type="text/template">
@@ -20,9 +21,10 @@
         <h1>Post a Job Listing</h1>
         <div class="left">
         <ul class="sections_text">
-            <li class="section1 active"><a href="#section/1">Section 1: Job Information</a></li>
-            <li class="section2"><a href="#section/2">Section 2: Upload Documents</a></li>
-            <li class="section3"><a href="#section/3">Section 3: Select a Category</a></li>
+            <li class="{% if object|section1_complete %}checked {% endif %}section1 active"><a href="#section/1">Section 1: Job Information</a></li>
+            <li class="{% if object|section2_complete %}checked {% endif %}section2"><a href="#section/2">Section 2: Upload Documents</a></li>
+            <li class="{% if object|section3_complete %}checked {% endif %}section3"><a href="#section/3">Section 3: Select a Category</a></li>
+    {#            <li><a href="#">Section 4: Payment Information</a></li>#}
         </ul>
     </div>
         <div class="right">

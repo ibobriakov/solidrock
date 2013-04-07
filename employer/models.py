@@ -49,6 +49,9 @@ class SpecialCondition(models.Model):
 
 
 class Job(models.Model):
+    REQUIRED_FIELDS = ('name', 'title', 'description', 'location', 'hours', 'employment_type', 'contact_name')
+    # Because we need all information about hob preloaded
+    # We need this tuple of required fields for validation
     owner = models.ForeignKey('auth.User')
     name = models.CharField(verbose_name="Name This Job Posting", max_length=100,
                             blank=True, null=True)
