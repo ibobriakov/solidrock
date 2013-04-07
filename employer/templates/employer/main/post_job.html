@@ -10,7 +10,9 @@
         {% include "employer/form_template/upload_documents.html" %}
     </script>
 
-    {% include "employer/form_template/select_category.html" %}
+    <script id="job_select_category_template" type="text/template">
+        {% include "employer/form_template/select_category.html" %}
+    </script>
 
 {% endblock %}
 
@@ -37,15 +39,19 @@
                     <div class="page section2" style="display: none;"></div>
                     <div class="page section3" style="display: none;"></div>
                     <script>
+                        var job_collection = new (profile_collection_fabric('job'))({% autoescape off %}{{ object|as_json }}{% endautoescape %});
                         job_view = new (profile_view_fabric('job','/'))({
                             el: $('div.page.section1'),
-                            collection: new (profile_collection_fabric('job'))({% autoescape off %}{{ object|as_json }}{% endautoescape %})
+                            collection: job_collection
                         });
                         job_upload_document_view = new (profile_view_fabric('job_upload_document','/'))({
                             el: $('div.page.section2'),
                             collection: new (profile_collection_fabric('job_upload_document'))({% autoescape off %}{{ object.jobuploaddocument_set.all|as_json }}{% endautoescape %})
                         });
-
+                        job_category_view = new (profile_view_fabric('job','/', $('#job_select_category_template'), 'select_category_view'))({
+                            el: $('div.page.section3'),
+                            collection: job_collection
+                        });
                     </script>
                 </form>
             </div>

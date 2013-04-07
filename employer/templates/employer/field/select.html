@@ -1,0 +1,17 @@
+{% load serialize %}
+<div class="{% if class %}{{ class }}{% else %}field{% endif %}">
+    <label for="{{ field }}_select">{{ title }}</label>
+    <select data-placeholder="{{ title }}" data-value="{% if full_field %}{{ full_field }}{% else %}<%=type%>_<%=element.cid%>.{{ field }}{% endif %}" id="{{ field }}_select">
+        <option></option>
+        <% _.each({% autoescape off %}{{ items|as_json }}{% endautoescape %},function(value){ %>
+            <option value="<%= value.resource_uri %>"><%= value.name %></option>
+        <% }) %>
+    </select>
+    <% if (element.errors['{{ field }}']) { %>
+    <div class="error_list" style="display: none">
+        <% _.each(element.errors['{{ field }}'],function(value){ %>
+        <p><%=value%></p>
+        <% }) %>
+    </div>
+    <% } %>
+</div>

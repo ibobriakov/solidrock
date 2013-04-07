@@ -1,7 +1,7 @@
 {% load serialize %}
 <div class="{% if class %}{{ class }}{% else %}field{% endif %}">
     <label for="{{ field }}_select">{{ title }}</label>
-    <select data-placeholder="{{ title }}" data-value="<%=type%>_<%=element.cid%>.{{ field }}" id="{{ field }}_select">
+    <select data-placeholder="{{ title }}" data-value="{% if full_field %}{{ full_field }}{% else %}<%=type%>_<%=element.cid%>.{{ field }}{% endif %}" id="{{ field }}_select">
         <option></option>
         <% _.each({% autoescape off %}{{ items|as_json }}{% endautoescape %},function(value){ %>
             <option value="<%= value.resource_uri %>"><%= value.name %></option>

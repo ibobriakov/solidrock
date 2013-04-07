@@ -1,0 +1,12 @@
+<div class="{% if class %}{{ class }}{% else %}field{% endif %}">
+    <label>{{ title }}</label>
+    <input data-value="{{ type }}.{{ field }}" class="{{ input_class }}" type="text">
+    <div class="help-tip">
+        <div class="help-tip-title">Helpful Tip!</div>
+        <div class="help-tip-text">
+            <div class="help-tip-right"></div>
+            {% if tooltip %}{{ tooltip }}{% else %}{{ title }}{% endif %}.
+        </div>
+    </div>
+    <div class="error_list" data-error="{{ type }}.error.{{ field }}"></div>
+</div>
