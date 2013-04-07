@@ -1,5 +1,5 @@
 <div class="{% if class %}{{ class }}{% else %}field{% endif %}">
-    <label for="{{ id }}">{{ title }}</label>
+    <label for="{{ field.id }}">{{ field.label }}</label>
 
     {% block field %}{% endblock %}
 
@@ -8,10 +8,10 @@
         <div class="help-tip-title">Helpful Tip!</div>
         <div class="help-tip-text">
             <div class="help-tip-right"></div>
-            {% if tooltip %}{{ tooltip }}{% else %}{{ title }}{% endif %}.
+            {% if tooltip %}{{ tooltip }}{% else %}{{ field.label }}{% endif %}.
         </div>
     </div>
     {% endblock %}
 
-    <div class="error_list" data-error="{{ type }}.error.{{ field }}"></div>
+    <div class="error_list" data-error="{{ field.field.type }}.error.{{ field.name }}"></div>
 </div>

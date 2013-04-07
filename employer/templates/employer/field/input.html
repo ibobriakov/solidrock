@@ -1,5 +1,10 @@
 {% extends 'employer/field/base.html' %}
+{% load main_tags %}
+
 {% block field %}
-    <input id="{{ id }}" data-value="{{ type }}.{{ field }}" class="{{ input_class }}"
-           type="{% if input_type %}{{ input_type }}{% else %}text{% endif %}">
+    {% if input_class %}
+        {{ field|add_class:input_class }}
+    {% else %}
+        {{ field|add_class:"it3" }}
+    {% endif %}
 {% endblock %}

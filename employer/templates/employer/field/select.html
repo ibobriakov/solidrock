@@ -1,10 +1,9 @@
 {% extends 'employer/field/base.html' %}
 {% load serialize %}
+
 {% block field %}
-    <select data-placeholder="{{ title }}" data-value="{{ type }}.{{ field }}" id="{{ id }}">
-        <option></option>
-        {% for item in items %}
-            <option value="<%=value.resource_uri%>"><%=value.name%></option>
-        {% endfor %}
-    </select>
+    {{ field }}
+{% endblock %}
+
+{% block tooltip %}
 {% endblock %}
