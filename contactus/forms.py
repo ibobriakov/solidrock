@@ -6,4 +6,4 @@ from models import Feedback
 __author__ = 'ir4y'
 
 FeedbackForm = modelform_factory(Feedback,form=rivet_modelform_factory('contactus'),
-                                 widgets={'priority':Select2Widget()})
+                                 widgets={'priority':Select2Widget(select2_options={'placeholder':'Select Priority'})})

@@ -43,22 +43,10 @@
         <div class="_slider">
             <div class="_slider_title">Featured Jobs</div>
             <div class="_sl_block">
-                <div class="_sl_prev"></div>
-                <div class="VjCarouselLite">
-                    <ul>
-                        {% for job in featured_jobs %}
-                            <li>{% include "job_banner.html" %}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="_sl_next"></div>
+                <p style="margin-top: 75px;background: none;color: #BDE1F4;text-align: center;font-size: 3em;">
+                    Be the <b>first</b> to post a featured job!
+                </p>
             </div>
-        </div>
-    </div>
-    <div class="_banners_block">
-        <div class="_banners">
-            <a href="#"><img src="{% static 'main/img/banner1.jpg' %}"/></a>
-            <a href="#"><img src="{% static 'main/img/banner2.jpg' %}"/></a>
         </div>
     </div>
 {% endblock %}

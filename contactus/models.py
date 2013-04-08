@@ -3,6 +3,7 @@ from django.db import models
 
 class Feedback(models.Model):
     PRIORITY_CHOICES = (
+        ('', '',),
         (0, 'Cannot proceed without assistance'),
         (1, 'Can proceed and require assistance within 48 hours'),
     )
