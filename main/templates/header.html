@@ -42,7 +42,7 @@
                 <a href="{{ user.profile.url }}">MY ACCOUNT</a>
             </li>
         {% endif %}
-        <li {% if url_name == "employers" %}class="active"{% endif %}><a href="{% url "promo.employers" %}">EMPLOYERS</a></li>
+        <li {% if url_name == "promo.employers" %}class="active"{% endif %}><a href="{% url "promo.employers" %}">EMPLOYERS</a></li>
         <li {% if url_name == "explore" %}class="active"{% endif %}><a href="{% url "explore" %}">EXPLORE SOLID ROCK RECRUITMENT</a></li>
         <li style="margin:0;" {% if url_name == "contact_us" %}class="active"{% endif %}><a href="{% url "contact_us" %}">CONTACT US</a></li>
 
