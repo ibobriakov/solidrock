@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db.models import OneToOneField, ForeignKey
 from django.db.models.fields import Field, BooleanField, AutoField
 import types
@@ -90,3 +91,9 @@ def get_model_values(item, exclude=('id',), fileds=None):
                       map(lambda u: u.name,
                           filter(lambda u:not isinstance(u,(BooleanField, AutoField, OneToOneField, ForeignKey)),
                                  item._meta.fields))))
+
+
+def get_api_url_fabric(resource_name):
+    return lambda obj: reverse('api_dispatch_detail', kwargs={'api_name': 'v1',
+                                                              'resource_name': resource_name,
+                                                              'pk': obj.pk})
