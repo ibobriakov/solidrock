@@ -10,7 +10,8 @@ register = template.Library()
 
 @register.filter()
 def startswith(string, startswith):
-    return string.startswith(startswith)
+    if string:
+        return string.startswith(startswith)
 
 
 @register.filter()

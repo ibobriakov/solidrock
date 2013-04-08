@@ -1,1 +1,6 @@
-Email verification email for {{ site }}
+Hi {{ user.profile }}
+Welcome to Solid Rock Rectuitment!
+Please click the link below to access your account.
+http://solidrockrecruitment.com.au/{{ user.profile.url }}
+Regards,
+Solid Rock Recruitment Support
