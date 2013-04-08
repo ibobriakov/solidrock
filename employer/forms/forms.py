@@ -1,7 +1,7 @@
 from django_select2 import Select2Widget
-from main.forms import rivet_modelform_factory
 from ..models import Job, JobLocation, Hour, EmploymentType, SpecialCondition, JobArea
-from fields import ResourceSelect
+from tastypie_rivets.forms import rivet_modelform_factory, ResourceSelect
+
 __author__ = 'jackdevil'
 
 
