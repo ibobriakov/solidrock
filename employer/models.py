@@ -100,6 +100,12 @@ class Job(models.Model):
     def __unicode__(self):
         return "Job by {0}".format(self.owner)
 
+    def get_salary(self):
+        if self.salary_range_min > 0 and self.salary_range_max:
+            return "${0} - ${1}".format(self.salary_range_min, self.salary_range_max)
+        else:
+            return ("$%d" % self.salary_range_min) if self.salary_range_min else ("$%d" % self.salary_range_max)
+
 
 class Essential(models.Model):
     job = models.ForeignKey('employer.Job')

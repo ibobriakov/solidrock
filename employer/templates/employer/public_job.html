@@ -1,5 +1,130 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 {% block content %}
-    <h2>{{ job }} - object</h2>
-    <a href="{% url "job_seeker.apply_for" job.pk %}">Apply</a>
+{% with profile=job.owner.profile %}
+    <div class="_content stages">
+        <h1>Employer information</h1>
+        <div class="employer-logo">
+            {% thumbnail profile.logo "103x103" crop="center" as im %}
+            <img src="{{ img.url }}">
+            {%  endthumbnail %}
+        </div>
+        <div class="employer-name">
+            <p>{{ profile.company }}</p>
+            <p>
+                {{ profile.brief|linebreaksbr }}
+            </p>
+
+        </div>
+        <div class="clear"></div>
+
+        <h3>Job information</h3>
+        <div class="job-title">
+            <p>{{ job.title }}</p>
+            <p>
+                {{ job.description|linebreaksbr }}
+            </p>
+        </div>
+        <div class="job-info">
+            <h3></h3>
+            <div class="properties">
+                <p>Location: <span>{{ job.location }}</span></p>
+                <p>Hours: <span>{{ job.hours }}</span></p>
+                <p>Salary Range: <span>{{ job.get_salary }}</span></p>
+                <p>Type of Employment: <span>{{ job.employment_type }}</span></p>
+                <div class="clear"></div>
+            </div>
+        </div>
+        {% if job.special_conditions %}
+        <div class="specical-conditions">
+            <p>Specical Conditions</p>
+            <p>
+                {{ job.special_conditions }}<br>
+                {% if job.other_conditions %}
+                    {{ job.other_conditions }}
+                {% endif %}
+            </p>
+        </div>
+        {% endif %}
+        <div class="selection-criteria">
+            <p>Selection Criteria</p>
+            <div class="essential">
+                <p>Essential</p>
+                <ul>
+                    {% for item in job.essential_set.all %}
+                    <li>{{ item }}</li>
+                    {% empty %}
+                        <li>Not select</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="desireable">
+                <p>Desireable</p>
+                <ul>
+                    {% for item in job.desireable_set.all %}
+                        <li>{{ item }}</li>
+                    {% empty %}
+                        <li>Not select</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="supportiong-document">
+            <p>Supportiong Document</p>
+            <p>
+                {% for document in job.jobuploaddocument_set.all %}
+                    <p><a href="{{ document.document.url }}">{{ document }}</a></p>
+                {% empty %}
+                    <p>No document upload yet</p>
+                {% endfor %}
+            </p>
+        </div>
+        <div class="job-contact-info" style="height: 40px;">
+            <a href="#">
+                Job Contact Information
+            </a>
+            <div>
+                <p>text text text text text text</p>
+                <p>text text text text text text</p>
+                <p>text text text text text text</p>
+                <p>text text text text text text</p>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="click-apply-now" style="height: 40px;">
+            <a href="#">
+                Click here to <span>Apply Now</span>
+            </a>
+            <div>
+                <form>
+
+                    <div class="field ">
+                        <div class="select2-container" id="s2id_e5"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span>Select Employment Type</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a><input class="select2-focusser select2-offscreen" type="text"><div class="select2-drop select2-with-searchbox" style="display:none">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><select id="e5" class="select2-offscreen" tabindex="-1">
+                        <option>Select Employment Type</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                    </div>
+                    <div class="field">
+                        <div class="select2-container" id="s2id_e6"><a href="javascript:void(0)" onclick="return false;" class="select2-choice" tabindex="-1">   <span>Any Special Conditions?</span><abbr class="select2-search-choice-close" style="display:none;"></abbr>   <div><b></b></div></a><input class="select2-focusser select2-offscreen" type="text"><div class="select2-drop select2-with-searchbox" style="display:none">   <div class="select2-search">       <input type="text" autocomplete="off" class="select2-input">   </div>   <ul class="select2-results">   </ul></div></div><select id="e6" class="select2-offscreen" tabindex="-1">
+                        <option>Any Special Conditions?</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                    </div>
+                    <div class="_submit">
+                        <a class="cont" href="{% url "job_seeker.apply_for" job.pk %}">Apply</a>
+                    </div>
+                </form>
+                <div class="clear"></div>
+            </div>
+
+        </div>
+    </div>
+{% endwith %}
 {% endblock %}
