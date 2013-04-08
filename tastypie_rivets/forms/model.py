@@ -1,14 +1,13 @@
-from django.core.urlresolvers import reverse
-from django.forms.fields import ChoiceField
-from django.forms.models import ModelChoiceIterator, ModelChoiceField
+from django.forms.models import ModelChoiceIterator, ModelChoiceField, ChoiceField
+
 
 __author__ = 'ir4y'
 
 
-def url_choice_field_fabric(model_edit_view):
+def url_choice_field_fabric(get_url_fun):
     class UrlModelChoiceIterator(ModelChoiceIterator):
         def choice(self, obj):
-            url = reverse(model_edit_view, args=[obj.pk])
+            url = get_url_fun(obj)
             return (url, self.field.label_from_instance(obj))
 
     class UrlModelChoiceField(ModelChoiceField):

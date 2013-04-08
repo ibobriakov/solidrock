@@ -6,7 +6,7 @@ from employer.api.validation import JobResourceValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
 from ..models import JobLocation, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType,\
     Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument,\
-    JobSelectedCategory, JobSelectedSubCategory, JobExecutivePositions
+    JobSelectedCategory, JobSelectedSubCategory, JobExecutivePositions, JobArea
 from userprofile.api import AuthorizationWithObjectPermissions
 
 __author__ = 'ir4y'
@@ -27,6 +27,7 @@ def get_resource_fabric(model_class):
     return ModelGetResource
 
 LocationResource = get_resource_fabric(JobLocation)
+JobAreaResource = get_resource_fabric(JobArea)
 HourResource = get_resource_fabric(Hour)
 EmploymentTypeResource = get_resource_fabric(EmploymentType)
 SpecialConditionResource = get_resource_fabric(SpecialCondition)

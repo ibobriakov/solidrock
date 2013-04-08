@@ -15,7 +15,7 @@ from employer.api import JobResource, LocationResource, HourResource,\
     EmploymentTypeResource, SpecialConditionResource, EssentialResource, DesireableResource,\
     JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource,\
     JobUploadDocumentTypeResource, JobSelectedCategoryResource, JobSelectedSubCategoryResource,\
-    JobExecutivePositionsResource
+    JobExecutivePositionsResource, JobAreaResource
 from contactus.api import FeedbackResource
 
 
@@ -36,6 +36,7 @@ v1_api.register(ActivationResource())
 v1_api.register(LoginResource())
 v1_api.register(JobResource())
 v1_api.register(LocationResource())
+v1_api.register(JobAreaResource())
 v1_api.register(HourResource())
 v1_api.register(EmploymentTypeResource())
 v1_api.register(SpecialConditionResource())
@@ -76,6 +77,6 @@ urlpatterns += patterns('django.contrib.flatpages.views',
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += patterns('django.contrib.flatpages.views',
-                       (r'^(?P<url>.*)$', 'flatpage'),
-                       )
+# urlpatterns += patterns('django.contrib.flatpages.views',
+#                        (r'^(?P<url>.*)$', 'flatpage'),
+#                        )
