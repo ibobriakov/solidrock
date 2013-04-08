@@ -2,7 +2,7 @@ from django import forms
 from django.core.urlresolvers import reverse
 from django_select2 import Select2Widget
 from models import Resume
-from tastypie_rivets.forms import url_choice_field_fabric
+from tastypie_rivets.forms.model import url_choice_field_fabric
 
 __author__ = 'ir4y'
 
