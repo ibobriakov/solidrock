@@ -1,4 +1,1 @@
-Email verification
-You should follow link to verify your email.
-{{ site }}/accounts/activate/{{ activation_key }}/
-Thankyou!
+Welcome To Solid Rock Recruitment!
