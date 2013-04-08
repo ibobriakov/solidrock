@@ -128,3 +128,22 @@
     </div>
 {% endwith %}
 {% endblock %}
+
+{% block initialize-js %}
+    {{ block.super }}
+    <script>
+        $('.job-contact-info a, .click-apply-now a').toggle(function(e){
+                    e.preventDefault();
+                    var heightDiv = $(this).next().height() + 80;
+                    $(this).parent().animate({
+                        "height":heightDiv
+                    });
+                },
+                function(e){
+                    $(this).parent().animate({
+                        "height":"40px"
+                    });
+                }
+        );
+    </script>
+{% endblock %}

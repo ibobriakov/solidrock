@@ -1,13 +1,289 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>{{ jobseeker }} - object</h2>
-    Resumes:<br>
-    {% for resume in jobseeker.user.resume_set.all %}
-        <a href="{% url "resume.view" resume.pk %}">{{ resume }}</a><br>
-    {% endfor %}
-    <br>
-    Cover Letters:<br>
-    {% for cover_letter in jobseeker.user.coverletter_set.all %}
-        <a href="{% url "cover_letter.view" cover_letter.pk %}">{{ cover_letter }}</a><br>
-    {% endfor %}
+    <div class="_content stages">
+
+<h1>Your Application Information</h1>
+
+<div class="left">
+    <ul>
+        <li class="active"><a href="#">Section 1: Personal Information</a></li>
+        <li><a href="#">Section 2: Current Employment</a></li>
+        <li><a href="#">Section 3: Previous Employment</a></li>
+        <li><a href="#">Section 4: Education</a></li>
+        <li><a href="#">Section 5: References</a></li>
+        <li><a href="#">Submit and Terms</a></li>
+    </ul>
+</div>
+
+<div class="right">
+<ul>
+    <li class="active" id="s1">Section 1</li>
+    <li id="s2">Section 2</li>
+    <li id="s3">Section 3</li>
+    <li id="s4">Section 4</li>
+    <li id="s5">Section 5</li>
+</ul>
+<div class="form">
+<form>
+<div class="s1">
+    <div class="title">Personal Information</div>
+    <fieldset>
+        <div class="left_info">
+            <div class="field fl_left">
+                <label>Last Name</label>
+                <input class="it2" type="text" />
+                <div class="help-tip" >
+                    <div class="help-tip-title">
+                        Helpful Tip!
+                    </div>
+                    <div class="help-tip-text">
+                        <div class="help-tip-right"></div>
+                        Any helpful tips can go here if needed, just like “Employer” sections.
+                    </div>
+                </div>
+            </div>
+            <div class="field fl_left">
+                <label>First Name</label>
+                <input type="text" />
+                <div class="help-tip" >
+                    <div class="help-tip-title">
+                        Helpful Tip!
+                    </div>
+                    <div class="help-tip-text">
+                        <div class="help-tip-right"></div>
+                        Any helpful tips can go here if needed, just like “Employer” sections.
+                    </div>
+                </div>
+            </div>
+            <div class="clear" ></div>
+            <div class="field">
+                <label>Address</label>
+                <input class="it4" type="text" />
+                <input class="it4" type="text" />
+                <input class="it4" type="text" />
+            </div>
+            <div class="field">
+                <label>Postcode</label>
+                <input class="it3" type="text" />
+            </div>
+        </div>
+        <div class="avatar">
+            <div>Profile Picture (optional)</div>
+            <div class="img"><img src="img/002.jpg" /></div>
+            <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
+        </div>
+        <div class="bot_info">
+            <div class="field fl_left">
+                <label>Home Phone Number</label>
+                <input class="it2" type="text" />
+            </div>
+            <div class="field fl_left">
+                <label>Daytime Phone Number</label>
+                <input class="it2" type="text" />
+            </div>
+            <div class="field fl_left">
+                <label>Mobile Phone Number</label>
+                <input class="it2" type="text" />
+            </div>
+            <div class="clear" ></div>
+            <div class="field">
+                <label>Email Address</label>
+                <input class="it3" type="text" />
+            </div>
+            <div class="field">
+                <label>Can potential employers contact you at work?</label>
+                <label><input class="styled" type="radio" name="ch1" />Yes</label><label><input class="styled" type="radio" name="ch1" />No</label>
+            </div>
+            <div class="field fl_left">
+                <label>Are you an Australian Citizen / Permanent Resident?</label>
+                <label><input class="styled" type="radio" name="ch2" />Yes</label><label><input class="styled" type="radio" name="ch2" />No</label>
+            </div>
+            <div class="field">
+                <label>If no do you have a working visa?</label>
+                <label><input class="styled" type="radio" name="ch3" />Yes</label><label><input class="styled" type="radio" name="ch3" />No</label>
+            </div>
+            <div class="text">(Note: To be eligible for employment, applicants must have the appropriate work visa or have permanent residency status.)</div>
+            <div class="field">
+                <label>Do you hold a current driver’s licence?</label>
+                <label><input class="styled" type="radio" name="ch4" />Yes</label><label><input class="styled" type="radio" name="ch4" />No</label>
+            </div>
+            <div class="_submit">
+                <div class="exit">Save and Exit</div>
+                <div class="cont">Save and Continue</div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<div class="s2">
+    <div class="title">Current Employment</div>
+    <div class="text">(If now unemployed give details of last employer)</div>
+    <fieldset>
+        <div class="field">
+            <label>Name of Employer</label>
+            <input class="it4" type="text" />
+        </div>
+        <div class="field">
+            <label>Address</label>
+            <input class="it4" type="text" />
+            <input class="it4" type="text" />
+            <input class="it4" type="text" />
+        </div>
+        <div class="field">
+            <label>Postcode</label>
+            <input class="it3" type="text" />
+        </div>
+        <div class="field">
+            <label>Position Title</label>
+            <input class="it3" type="text" />
+        </div>
+        <div class="field date">
+            <label>Date Commenced</label>
+            <div><input type="text" /><p>dd</p></div>
+            <div><input type="text" /><p>mm</p></div>
+            <div><input class="l" type="text" /><p>yyyy</p></div>
+        </div>
+        <div class="field">
+            <label>Department/Section</label>
+            <input class="it4" type="text" />
+        </div>
+        <div class="field">
+            <label>Brief Description of Duties</label>
+            <textarea></textarea>
+        </div>
+        <div class="field fl_left">
+            <label>Fulltime, Parttime or Casual</label>
+            <input class="it2" type="text" />
+        </div>
+        <div class="field fl_left">
+            <label>Last Day of Service <span>(if no longer employed)</span></label>
+            <input class="it2" type="text" />
+        </div>
+        <div class="field fl_clear">
+            <label>Reason for Leaving <span>(if no longer employed)</span></label>
+            <textarea></textarea>
+        </div>
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <div class="cont">Save and Continue</div>
+        </div>
+    </fieldset>
+</div>
+<div class="s3">
+    <div class="title">Previous Employment</div>
+    <div class="text">(Most recent Employer first. Please cover you last three positions if applicable)</div>
+    <fieldset>
+        <div class="field">
+            <label>Name of Employer</label>
+            <input class="it4" type="text" />
+        </div>
+        <div class="field">
+            <label>Address</label>
+            <input class="it4" type="text" />
+            <input class="it4" type="text" />
+            <input class="it4" type="text" />
+        </div>
+        <div class="field">
+            <label>Postcode</label>
+            <input class="it3" type="text" />
+        </div>
+        <div class="field">
+            <label>Position Title</label>
+            <input class="it3" type="text" />
+        </div>
+        <div class="field">
+            <label>Brief Description of Duties</label>
+            <textarea></textarea>
+        </div>
+        <div class="field">
+            <label>Reason for Leaving</label>
+            <textarea></textarea>
+        </div>
+        <a href="#">Add Another Position</a>
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <div class="cont">Save and Continue</div>
+        </div>
+    </fieldset>
+</div>
+<div class="s4">
+    <div class="title">Education</div>
+    <div class="text">(Qualifications from Schools, Colleges and Universities. Please list your highest qualification first.)</div>
+    <fieldset>
+        <div class="field">
+            <label>School, College, or University Name</label>
+            <input class="it4" type="text" />
+            <a href="#">Add another School, College or University</a>
+        </div>
+        <div class="field">
+            <label>Major Course of Study or Classes Taken</label>
+            <input class="it4" type="text" />
+            <a href="#">Add another Major Course of Study or Class Taken</a>
+        </div>
+        <div class="field">
+            <label>Degrees and/or Post-Graduate Qualifications Obtained</label>
+            <input class="it4" type="text" />
+            <a href="#">Add another Degree and/or Post-Graduate Qualification Obtained</a>
+        </div>
+        <div class="field">
+            <label>Certificates and/or Diplomas Obtained</label>
+            <input class="it4" type="text" />
+            <a href="#">Add another Certificate and/or Diploma Obtained</a>
+        </div>
+        <div class="field">
+            <label>Any Other Course Currently Enrolled In</label>
+            <input class="it4" type="text" />
+        </div>
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <div class="cont">Save and Continue</div>
+        </div>
+    </fieldset>
+</div>
+<div class="s5">
+    <div class="title">Referees</div>
+    <div class="text">(Please give the names and addresses of your two most recent employers or other work related referees.)</div>
+    <fieldset>
+        <div class="field">
+            <label>Name</label>
+            <input class="it3" type="text" />
+        </div>
+        <div class="field">
+            <label>Position Title or Relationship</label>
+            <input class="it3" type="text" />
+        </div>
+        <div class="field">
+            <label>Address</label>
+            <input class="it4" type="text" />
+            <input class="it4" type="text" />
+            <input class="it4" type="text" />
+        </div>
+        <div class="field">
+            <label>Postcode</label>
+            <input class="it3" type="text" />
+        </div>
+        <div class="field">
+            <label>Phone Number</label>
+            <input class="it2" type="text" />
+        </div>
+        <div class="field">
+            <label>Email Address</label>
+            <input class="it3" type="text" />
+        </div>
+        <div class="field">
+            <label>Are you willing for this referee to be approached prior to an interview?</label>
+            <label><input class="styled" type="radio" name="ch5" />Yes</label><label><input class="styled" type="radio" name="ch5" />No</label>
+        </div>
+        <a href="#">Add Another Referee</a>
+        <div class="_submit">
+            <div class="exit">Save and Exit</div>
+            <input type="submit" value="Submit and Terms" />
+        </div>
+    </fieldset>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+
 {% endblock %}
