@@ -53,7 +53,7 @@
         {% endif %}
         {% if not user.is_authenticated %}
             <li class="_post"><a href="/#register/employer">POST A JOB</a></li>
-        {% elif user|is_employer %}
+        {% elif user|is_employer %}git 
             <li class="_post"><a href="{% url "promo.coming_soon" %}">POST A JOB</a></li>
         {% endif %}
     </ul>
