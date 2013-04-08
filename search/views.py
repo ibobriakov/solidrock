@@ -14,7 +14,7 @@ def get_search_by_keywords(keywords):
 
 
 class SearchView(FormView):
-    template_name = "search/search.html"
+    template_name = "landing/comming_soon.html"
     form_class = SearchForm
 
     def get_context_data(self, **kwargs):
