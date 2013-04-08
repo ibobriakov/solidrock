@@ -6,6 +6,7 @@
 {% block library-js %}
     {{ block.super }}
     <script src="{% static 'employer/js/src/backbone/models.js' %}" type="text/javascript"></script>
+    <script src="{% static 'employer/js/src/backbone/collections.js' %}" type="text/javascript"></script>
     <script src="{% static 'employer/js/src/backbone/views.js' %}" type="text/javascript"></script>
 {% endblock %}
 
@@ -91,11 +92,10 @@
                 <div class="field ">
                     <label>Selection Criteria (please list one per line)*</label>
                 </div>
-                <div class="field pod">
-                    Essential:
-                    <input class="it-pod2" type="text"/>
-                    <a href="df">Add Another Essential Criteria Item</a>
+                <div class="essential_list">
+                    {% include 'employer/field/criteria.html' with field=essential_form.essential items_set='models' %}
                 </div>
+                <div class="clear"></div>
                 <div class="field pod2">
                     Desireable:
                     <input class="it-pod2" type="text"/>
@@ -225,10 +225,15 @@
 {% block initialize-js %}
     {{ block.super }}
     <script>
+{#        var desireable_job_initial = {{ object.desireable_set.all|as_json|safe }};#}
+
         var post_job_initial = {{ object|as_json|safe }}[0];
-        var desireable_job_initial = {{ object.desireable_set.all|as_json|safe }};
-        var essential_job_initial = {{ object.essential_set.all|as_json|safe }};
-        var post_job_view = new PostJobView({ el: $('._content.stages'), type: 'job' });
+        var post_job_view = new PostJobView({ el: $('._content.stages'), resource: 'job' });
         post_job_view.model.set(post_job_initial);
+
+        var essential_job_initial = {{ object.essential_set.all|as_json|safe }};
+        var essential_view = new EssentialView({ el: $('.essential_list'), resource: 'essential' });
+        essential_view.collection.reset(essential_job_initial);
+
     </script>
 {% endblock %}

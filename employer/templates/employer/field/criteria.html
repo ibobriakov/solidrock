@@ -1,0 +1,6 @@
+<a href="#">Add Another {{ field.label }} Criteria Item</a>
+<div class="field pod">{{ field.label }}:
+    <div data-each-{{ field.name }}="{{ field.field.type }}.{% if items_set %}{{ items_set }}{% else %}{% endif %}">
+        {{ field }}
+    </div>
+</div>

@@ -4,7 +4,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, TemplateView, ListView
-from employer.forms import JobForm
+from employer.forms import JobForm, EssentialForm, DesireableForm
 from models import Job, JobLocation, Hour, EmploymentType,\
     SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory, JobExecutivePositions
 from userprofile.models import Employer
@@ -57,6 +57,8 @@ class EditJobView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(EditJobView, self).get_context_data(**kwargs)
         context["job_form"] = JobForm()
+        context["essential_form"] = EssentialForm()
+        context["desireable_form"] = DesireableForm()
         return context
 
 

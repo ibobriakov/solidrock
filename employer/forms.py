@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.forms.models import modelform_factory
 from django_select2 import Select2Widget
 from main.forms import rivet_modelform_factory, url_choice_field_fabric
-from models import Job, JobLocation, Hour, EmploymentType, SpecialCondition, JobArea
+from models import Job, JobLocation, Hour, EmploymentType, SpecialCondition, JobArea, Essential, Desireable
 
 __author__ = 'jackdevil'
 
@@ -34,8 +34,13 @@ class JobForm(rivet_modelform_factory('job')):
 
     class Meta:
         model = Job
-        widgets = {
-            # 'location': Select2Widget(),
-            'area': Select2Widget(),
-            'hours': Select2Widget()
-        }
+
+
+class EssentialForm (rivet_modelform_factory('essential')):
+    class Meta:
+        model = Essential
+
+
+class DesireableForm (rivet_modelform_factory('desireable')):
+    class Meta:
+        model = Desireable
