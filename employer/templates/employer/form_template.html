@@ -20,7 +20,7 @@
         {% include 'employer/field.html' with input_class="it2" title="Phone Number" field="phone"%}
         {% include 'employer/field.html' with input_class="it3" title="Email Address" field="email"%}
         <div class="title">Terms and Conditions</div>
-        <div class="text2">{% flatblock 'employer.terms_conditions' %}</div>
+        <div class="text2"><a href="#terms_conditions">Please click here to read the full document</a></div>
         {% include 'employer/field_checked.html' with only_yes="True" title="Do you agree to the Terms and Conditions?" field="agree" input_name="ch4" %}
     </div>
 </fieldset>
