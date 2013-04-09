@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.views.generic import TemplateView
 from tastypie.api import Api
 from cover_letter.api import CoverLetterResource, CoverLetterItemResource
 from registration_rest_backend.api import JobSeekerRegistrationResource, EmployerRegistrationResource,\
@@ -64,13 +65,13 @@ urlpatterns = patterns(
     url(r'^redactor/', include('redactor.urls')),
     url(r'^search/', include('search.urls')),
     url(r'^promo/', include('promo.urls')),
-    url(r'^contact_us/', include('contactus.urls')),
+    url(r'^contacts/', include('contactus.urls')),
+    url(r'^success/contacts', TemplateView.as_view(template_name='contactus/success.html')),
     url(r'^', include('main.urls')),
 )
 
 urlpatterns += patterns('django.contrib.flatpages.views',
                         url(r'^explore/$', 'flatpage', {'url': '/explore/'}, name='explore'),
-                        url(r'^contact_us/$', 'flatpage', {'url': '/contact_us/'}, name='contact_us'),
                         url(r'^pricing/$', 'flatpage', {'url': '/pricing/'}, name='pricing'),
                         url(r'^job_seekers/$', 'flatpage', {'url': '/job_seekers/'}, name='job_seekers'),
                         )

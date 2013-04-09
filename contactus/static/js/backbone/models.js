@@ -30,11 +30,7 @@ var ContactModel = Backbone.Model.extend({
             },
             success: function(){
                 that.view.errors.clear();
-                if (that.view.$el.attr('data-next-url')) {
-                    window.location.replace(that.view.$el.attr('data-next-url'));
-                } else {
-                    window.location.replace('/');
-                }
+                    window.location.replace('/success/contacts');
             }
         });
     }
