@@ -37,6 +37,6 @@ def section4_complete(user):
 
 @register.filter()
 def section5_complete(user):
-    return any(map(lambda u: any_not_None(get_model_values(u, ('id', 'is_for_interview',))),
+    return any(map(lambda u: any_not_None(get_model_values(u, ('id', 'is_for_interview', 'phone_number'))),
                    user.profile.referees_set.all()))
 
