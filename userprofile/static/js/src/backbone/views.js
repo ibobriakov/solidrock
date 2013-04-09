@@ -56,6 +56,7 @@ function profile_view_fabric(type,redirect_url, template) {
                 }
             }
             if (this.view.action['section']) {
+                $('.sections_text li.active').addClass('checked');
                 section_route.next_section(this.view.action['section']);
                 this.view.render();
                 this.view.action['section'] = false;

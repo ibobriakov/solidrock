@@ -2,7 +2,9 @@
     <% _.each(fields,function(value,key) { %>
     <% if (model.types[key]) { %>
     <div class="field <%=model.types[key]%> <% if (errors[key]) { %>error<% } %>">
-        <% if (model.types[key] != 'hidden') { %><label><%=model.labels[key]%></label><% } %>
+        <% if (model.types[key] != 'hidden') { %>
+        <label><% if (model.labels[key] == 'Re Password') { %> Re-Enter Password <% } else if (model.labels[key] == 'Username') { %> Email Address <% } else { %> <%=model.labels[key]%> <% } %></label>
+        <% } %>
         <input data-value="<%=type%>.<%=key%>" data-on-keyup="<%=type%>:keyup" type="<%=model.types[key]%>">
         <% if (errors[key]) { %>
         <div class="error_list" style="display: none">
