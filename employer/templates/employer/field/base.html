@@ -1,4 +1,5 @@
-<div class="{% if class %}{{ class }}{% else %}field{% endif %}">
+{% load main_tags %}
+<div class="{{ class|if_value:'field' }}">
     <label for="{{ field.id }}">{{ field.label }}</label>
 
     {% block field %}{% endblock %}
@@ -8,7 +9,7 @@
         <div class="help-tip-title">Helpful Tip!</div>
         <div class="help-tip-text">
             <div class="help-tip-right"></div>
-            {% if tooltip %}{{ tooltip }}{% else %}{{ field.label }}{% endif %}.
+            {{ toolpit|if_value:field.label }}
         </div>
     </div>
     {% endblock %}

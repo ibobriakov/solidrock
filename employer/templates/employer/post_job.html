@@ -68,12 +68,6 @@
 
             <div class="clear"></div>
             <div>
-{#                <div class="field">#}
-{#                    <label for="e1">Would you like to populate this listing from a previous job posting?</label>#}
-{#                    <select id="e1">#}
-{#                        <option>Select a Previous Job Listing</option>#}
-{#                    </select>#}
-{#                </div>#}
                 {% include 'employer/field/input.html' with field=job_form.name %}
                 {% include 'employer/field/input.html' with field=job_form.title %}
                 {% include 'employer/field/textarea.html' with field=job_form.description %}
@@ -93,13 +87,10 @@
                     <label>Selection Criteria (please list one per line)*</label>
                 </div>
                 <div class="essential_list">
-                    {% include 'employer/field/criteria.html' with field=essential_form.essential items_set='models' %}
+                    {% include 'employer/field/criteria.html' with field=essential_form.essential %}
                 </div>
-                <div class="clear"></div>
-                <div class="field pod2">
-                    Desireable:
-                    <input class="it-pod2" type="text"/>
-                    <a href="df">Add Another Desireable Criteria Item</a>
+                <div class="desireable_list">
+                    {% include 'employer/field/criteria.html' with field=desireable_form.desireable %}
                 </div>
                 {% include 'employer/field/input.html' with class='field fl_left' field=job_form.open_date %}
                 {% include 'employer/field/input.html' with class='field fl_left' field=job_form.end_date %}
@@ -225,15 +216,17 @@
 {% block initialize-js %}
     {{ block.super }}
     <script>
-{#        var desireable_job_initial = {{ object.desireable_set.all|as_json|safe }};#}
-
-        var post_job_initial = {{ object|as_json|safe }}[0];
+        // First section View
         var post_job_view = new PostJobView({ el: $('._content.stages'), resource: 'job' });
-        post_job_view.model.set(post_job_initial);
+        post_job_view.model.set({{ object|as_json|safe }}[0]);
 
-        var essential_job_initial = {{ object.essential_set.all|as_json|safe }};
         var essential_view = new EssentialView({ el: $('.essential_list'), resource: 'essential' });
-        essential_view.collection.reset(essential_job_initial);
+        essential_view.collection.reset({{ object.essential_set.all|as_json|safe }});
+
+        var desireable_view = new DesireableView({ el: $('.desireable_list'), resource: 'desireable' });
+        desireable_view.collection.reset({{ object.desireable_set.all|as_json|safe }});
+        // --------------------
+
 
     </script>
 {% endblock %}

@@ -1,6 +1,7 @@
-<a href="#">Add Another {{ field.label }} Criteria Item</a>
+{% load main_tags %}
+<a href="#" data-on-click="{{ field.field.type }}:append">Add Another {{ field.label }} Criteria Item</a>
 <div class="field pod">{{ field.label }}:
-    <div data-each-{{ field.name }}="{{ field.field.type }}.{% if items_set %}{{ items_set }}{% else %}{% endif %}">
-        {{ field }}
+    <div data-each-{{ field.name }}="{{ field.field.type }}.{{ list_item|if_value:"models" }}">
+        {{ field }}<a href="#" data-on-click="{{ field.name }}:remove">-</a>
     </div>
 </div>

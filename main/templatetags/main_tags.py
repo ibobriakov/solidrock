@@ -24,6 +24,7 @@ def is_employer(user):
 
 class_re = re.compile(r'(?<=class=["\'])(.*)(?=["\'])')
 
+
 @register.filter
 def add_class(value, css_class):
     string = unicode(value)
@@ -38,3 +39,8 @@ def add_class(value, css_class):
     else:
         return mark_safe(string.replace('>', ' class="%s">' % css_class))
     return value
+
+
+@register.filter
+def if_value(value, else_value):
+    return value if value else else_value

@@ -7,6 +7,19 @@ var BaseView = Backbone.View.extend({
     resource: false, // Rest api resource
     list_endpoint_key: 'list_endpoint', // List_endpoint key in resource JSON
     schema_key: 'schema', // Schema key in resource JSON
+    data_prototype: false,
+
+    bind_item: function() { return this.collection ? this.collection : this.model },
+
+    append_variables_to_prototype: function(prototype) {
+        prototype = prototype || _.result(this, 'bind_item');
+        prototype.view = this;
+        prototype.defaults = _.result(this, 'schema');
+        prototype.resource = this.resource;
+        prototype.urlRoot = this.get_resource_url(this.list_endpoint_key);
+    },
+
+    custom_data_initialize: function(){},
 
     // Get resource url by resource name and key name
     get_resource_url: function(key) {
@@ -29,37 +42,29 @@ var BaseView = Backbone.View.extend({
     binding: function(bindName) {
         if (bindName) {
             var options = {};
-            options[bindName] = this;
+            options[bindName] = _.result(this, 'bind_item');
             this.rivets = rivets;
             this.rivets.bind(this.el, options);
         }
+    },
+    initialize: function(attributes) {
+        this.resource = attributes.resource || false; // Get resource name
+        this.bindName = attributes.bindName || false; // Get rivets binding name
+        this.append_variables_to_prototype();
+        this.custom_data_initialize();
+        this.binding(this.bindName || this.resource);
     }
 });
 
 var BaseCollectionView = BaseView.extend({
-    // Model initialize
-    initialize: function(attributes) {
-        this.resource = attributes.resource || false; // Get resource name
-        this.bindName = attributes.bindName || false; // Get rivets binding name
-
-        this.collection.model.prototype.defaults = _.result(this, 'schema');
-        this.collection.model.prototype.urlRoot = this.get_resource_url(this.list_endpoint_key); // Set model urlRoot
-
-        this.binding(this.bindName || this.resource);
+    custom_data_initialize: function(){
+        this.collection.url = this.get_resource_url(this.list_endpoint_key);
     }
 });
 
 var BaseItemView = BaseView.extend({
-    // Model initialize
-    initialize: function(attributes) {
-        this.resource = attributes.resource || false; // Get resource name
-        this.bindName = attributes.bindName || false; // Get rivets binding name
-
-        this.model.prototype.defaults = _.result(this, 'schema');
-        this.model.prototype.urlRoot = this.get_resource_url(this.list_endpoint_key); // Set model urlRoot
+    custom_data_initialize: function(){
         this.model = new this.model();
-
-        this.binding(this.bindName || this.resource);
     }
 });
 
@@ -70,4 +75,8 @@ var PostJobView = BaseItemView.extend({
 
 var EssentialView = BaseCollectionView.extend({
     collection: new EssentialCollection
+});
+
+var DesireableView = BaseCollectionView.extend({
+    collection: new DesireableCollection
 });
