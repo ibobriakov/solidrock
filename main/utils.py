@@ -81,7 +81,7 @@ def patch_model(model_to_patch, class_to_patch_with):
 
 def get_model_values(item, exclude=('id',), fileds=None):
     def get_filter_function(exclude, fileds):
-        return lambda u: u in fileds if fileds else lambda u: u not in exclude
+        return (lambda u: u in fileds) if fileds else (lambda u: u not in exclude)
 
     def get_from(item):
         return lambda field: getattr(item, field)
