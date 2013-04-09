@@ -44,7 +44,7 @@
             <div class="_slider_title">Featured Jobs</div>
             <div class="_sl_block">
                 <p style="margin-top: 75px; text-align: center;">
-                <a style="margin-top: 75px;background: none;color: #BDE1F4;font-size: 3em;" href="{% url "promo.employers" %}">
+                <a style="margin-top: 75px;background: none;color: #BDE1F4;font-size: 3em;" href="{%  if not user.is_authenticated %}{% url "promo.employers" %}{% else %}{% url "promo.coming_soon" %}{% endif %}">
                     Be the <b>first</b> to post a featured job!
                 </a>
                 </p>
