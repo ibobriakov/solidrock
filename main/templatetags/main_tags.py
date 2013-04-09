@@ -1,3 +1,4 @@
+import copy
 import re
 from django import template
 from django.utils.safestring import mark_safe
@@ -7,6 +8,13 @@ __author__ = 'ir4y'
 
 register = template.Library()
 
+
+@register.filter()
+def as_title(string):
+    title = copy.copy(string)
+    if '.' in title:
+        title = title.split('.')[0]
+    return " ".join(map(lambda u: u.capitalize(), title.split('_')))
 
 @register.filter()
 def startswith(string, startswith):
