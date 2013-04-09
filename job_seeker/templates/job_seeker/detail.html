@@ -8,11 +8,13 @@
 
     <div class="user_info">
         <div class="avatar">
+        <a href="{% url "job_seeker.profile.information" %}">
             {% thumbnail profile.personal_information.photo "137x137" crop="center" as im %}
                 <img src="{{ im.url }}">
             {% empty %}
                 <img width="137" height="137" src="{{ profile.personal_information.get_photo_url }}">
             {% endthumbnail %}
+        </a>
         </div>
         <div class="hello">Hi {{ profile.user.first_name }} {{ profile.user.last_name }}!</div>
         <div class="desc">{% flatblock "job_seeker.hello" %}</div>
