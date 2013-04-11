@@ -94,6 +94,7 @@
                 <li><b>Contact Email </b> {{ job.contact_email }}</li>
             </ul>
         </div>
+        {% if not user.is_anonymous %}
         {% if user.user_type == 0 %} {# Job seeker #}
         <div class="click-apply-now" style="height: auto;">
             <a href="#">
@@ -131,6 +132,7 @@
                 {% endif %}
             {% endfor %}
             </ul>
+        {% endif %}
         {% endif %}
     </div>
 {% endwith %}

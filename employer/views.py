@@ -80,13 +80,14 @@ class JobPublicView(DetailView):
 
     def get_context_data(self, **kwargs):
         contex = super(JobPublicView, self).get_context_data(**kwargs)
-        try:
-            form = ApplyToJobForm(instance=self.request.user.applytojob_set.get(job=self.object))
-        except ApplyToJob.DoesNotExist:
-            form = ApplyToJobForm(initial={'job': self.object})
-        form.fields['resume'].queryset = self.request.user.resume_set.all()
-        form.fields['cover_letter'].queryset = self.request.user.coverletter_set.all()
-        contex['apply_job_form'] = form
+        if not self.request.user.is_anonymous():
+            try:
+                form = ApplyToJobForm(instance=self.request.user.applytojob_set.get(job=self.object))
+            except ApplyToJob.DoesNotExist:
+                form = ApplyToJobForm(initial={'job': self.object})
+            form.fields['resume'].queryset = self.request.user.resume_set.all()
+            form.fields['cover_letter'].queryset = self.request.user.coverletter_set.all()
+            contex['apply_job_form'] = form
         return contex
 
 
