@@ -4,13 +4,16 @@
 {% with profile=job.owner.profile %}
     <div class="_content stages">
         <h1>Employer information</h1>
+        {% thumbnail profile.logo "103x103" crop="center" as im %}
         <div class="employer-logo">
-            {% thumbnail profile.logo "103x103" crop="center" as im %}
-            <img src="{{ img.url }}">
-            {%  endthumbnail %}
+            <a href="{% url "employer.profile.public" profile.pk %}"><img src="{{ im.url }}"></a>
         </div>
+        {% empty %}
+        {%  endthumbnail %}
         <div class="employer-name">
-            <p>{{ profile.company }}</p>
+            <p>
+                <a href="{% url "employer.profile.public" profile.pk %}">{{ profile.company }}</a>
+            </p>
             <p>
                 {{ profile.brief|linebreaksbr }}
             </p>
