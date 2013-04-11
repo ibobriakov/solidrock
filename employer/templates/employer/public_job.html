@@ -94,6 +94,7 @@
                 <li><b>Contact Email </b> {{ job.contact_email }}</li>
             </ul>
         </div>
+        {% if user.user_type == 0 %} {# Job seeker #}
         <div class="click-apply-now" style="height: auto;">
             <a href="#">
                 Click here to <span>Apply Now</span>
@@ -116,8 +117,21 @@
                 </form>
                 <div class="clear"></div>
             </div>
-
         </div>
+        {% else %}
+            <ul>
+            {% for application in job.applytojob_set.all %}
+                <li>
+                {{ application.job_seeker }}
+                {% if application.resume %}
+                    <a href="{% url "resume.view" application.resume_id %}">{{ application.resume }}</a>
+                {% endif %}
+                {% if application.cover_letter %}
+                    <a href="{% url "cover_letter.view" application.cover_letter_id %}">{{ application.cover_letter }}</a>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 {% endwith %}
 {% endblock %}
