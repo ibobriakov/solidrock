@@ -4,6 +4,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, TemplateView, ListView
+from job_seeker.forms import ApplyToJobForm
 from models import Job, JobLocation, Hour, EmploymentType,\
     SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory, JobExecutivePositions
 from userprofile.models import Employer
@@ -75,6 +76,14 @@ def delete_job_view(request, pk):
 class JobPublicView(DetailView):
     template_name = "employer/public_job.html"
     model = Job
+
+    def get_context_data(self, **kwargs):
+        contex = super(JobPublicView, self).get_context_data(**kwargs)
+        form = ApplyToJobForm()
+        form.fields['resume'].queryset = self.request.user.resume_set.all()
+        form.fields['cover_letter'].queryset = self.request.user.coverletter_set.all()
+        contex['apply_job_form'] = form
+        return contex
 
 
 class EmployerPublicView(DetailView):
