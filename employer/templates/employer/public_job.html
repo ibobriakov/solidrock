@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+{% load static %}
+{% block library-js %}
+    {{ block.super }}
+    <script src="{% static 'main/js/src/extra/js.js' %}" type="text/javascript"></script>
+{% endblock %}
 {% block content %}
 {% with profile=job.owner.profile %}
     <div class="_content stages">
@@ -130,23 +135,4 @@
         </div>
     </div>
 {% endwith %}
-{% endblock %}
-
-{% block initialize-js %}
-    {{ block.super }}
-    <script>
-        $('.job-contact-info a, .click-apply-now a').toggle(function(e){
-                    e.preventDefault();
-                    var heightDiv = $(this).next().height() + 80;
-                    $(this).parent().animate({
-                        "height":heightDiv
-                    });
-                },
-                function(e){
-                    $(this).parent().animate({
-                        "height":"40px"
-                    });
-                }
-        );
-    </script>
 {% endblock %}
