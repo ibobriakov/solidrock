@@ -3,23 +3,25 @@ from fabric.api import env, cd, run, prefix
 from fabric.operations import local
 from solidrock.settings import LOCAL_APPS
 
-env.hosts = ['solidrock@allsol.ru:7624']
-prefix = prefix('source /home/solidrock/bin/activate')
+env.hosts = ['dev_solidrock@solidrockrecruitment.com.au']
+prefix = prefix('source /home/dev_solidrock/bin/activate')
+
 
 def deploy():
-    with cd('/home/solidrock/site/solidrock'):
+    with cd('/home/dev_solidrock/site/solidrock'):
         with prefix:
             run('git pull')
             run('python ./manage.py syncdb')
             run('python ./manage.py migrate')
             run('python ./manage.py collectstatic --noinput')
-            run(' supervisorctl -c /home/solidrock/etc/supervisor/supervisord.conf  restart celeryd')
-            run(' supervisorctl -c /home/solidrock/etc/supervisor/supervisord.conf  restart gunicorn')
+    run('./restart.sh')
+
 
 def manage(command='help'):
-    with cd('/home/solidrock/site/solidrock'):
+    with cd('/home/dev_solidrock/site/solidrock'):
         with prefix:
             run('python ./manage.py %s' % command)
+
 
 def migrate():
     for app in LOCAL_APPS:
@@ -28,6 +30,7 @@ def migrate():
         except :
             pass
     local('python manage.py migrate', capture=False)
+
 
 def syncdb():
     local('python manage.py syncdb --noinput --migrate')
