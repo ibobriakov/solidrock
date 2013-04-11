@@ -75,6 +75,16 @@ class JobSeeker(models.Model):
     def avatar(self):
         return self.personal_information.photo
 
+    @property
+    def educations(self):
+        result = []
+        my_educations = self.educations_set.all().values()
+        for education_type in JobSeekerEducationType.objects.all():
+            this_type_educations = filter(lambda e: e['education_type_id'] == education_type.id, my_educations)
+            if len(this_type_educations):
+                result.append({'name': education_type.type_name, 'educations': this_type_educations})
+        return result
+
     class Meta:
         app_label = 'userprofile'
 
