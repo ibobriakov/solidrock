@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import HiddenInput
 from django_select2 import Select2Widget
 from models import ApplyToJob
 
@@ -14,7 +15,8 @@ class ApplyToJobForm(forms.ModelForm):
     class Meta:
         model = ApplyToJob
         widgets = {
+            'job': HiddenInput(),
             'resume': Select2Widget(select2_options={'placeholder': 'No Resume'}),
             'cover_letter': Select2Widget(select2_options={'placeholder': 'No Cover Letter'}),
         }
-        exclude = ('job_seeker','job', )
+        exclude = ('job_seeker', )

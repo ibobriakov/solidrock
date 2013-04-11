@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, TemplateView, ListView
 from job_seeker.forms import ApplyToJobForm
+from job_seeker.models import ApplyToJob
 from models import Job, JobLocation, Hour, EmploymentType,\
     SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory, JobExecutivePositions
 from userprofile.models import Employer
@@ -79,7 +80,10 @@ class JobPublicView(DetailView):
 
     def get_context_data(self, **kwargs):
         contex = super(JobPublicView, self).get_context_data(**kwargs)
-        form = ApplyToJobForm()
+        try:
+            form = ApplyToJobForm(instance=self.request.user.applytojob_set.get(job=self.object))
+        except ApplyToJob.DoesNotExist:
+            form = ApplyToJobForm(initial={'job': self.object})
         form.fields['resume'].queryset = self.request.user.resume_set.all()
         form.fields['cover_letter'].queryset = self.request.user.coverletter_set.all()
         contex['apply_job_form'] = form

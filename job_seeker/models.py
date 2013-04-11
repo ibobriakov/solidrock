@@ -10,7 +10,7 @@ class ApplyToJob(models.Model):
     cover_letter = models.ForeignKey('cover_letter.CoverLetter', blank=True, null=True)
 
     def __unicode__(self):
-        return "User {0} applied for job {1}".format(self.job_seek, self.job)
+        return "User {0} applied for job {1}".format(self.job_seeker, self.job)
 
     def save(self, **kwargs):
         if self.job_seeker.user_type != 0:  # Job Seeker
