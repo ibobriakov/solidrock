@@ -72,6 +72,14 @@
             <div class="table">
                 <table>
                     <tbody>
+                    {% for application in profile.user.applytojob_set.all %}
+                        <tr>
+                            <td class="col-1">{{ application.job.name }}</td>
+                            <td class="col-2"></td>
+                            <td class="col-3"></td>
+                            <td class="col-4"><a href="{% url "employer.job.view" application.job.pk %}">view</a></td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
