@@ -43,15 +43,23 @@
         <div class="_slider">
             <div class="_slider_title">Featured Jobs</div>
             <div class="_sl_block">
-                <div class="_sl_prev"></div>
-                <div class="VjCarouselLite">
-                    <ul>
-                        {% for job in featured_jobs %}
-                            <li>{% include "job_banner.html" %}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="_sl_next"></div>
+                {% if featured_jobs.count %}
+                    <div class="_sl_prev"></div>
+                    <div class="VjCarouselLite">
+                        <ul>
+                            {% for job in featured_jobs %}
+                                <li>{% include "job_banner.html" %}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="_sl_next"></div>
+                {% else %}
+                    <p style="margin-top: 75px; text-align: center;">
+                        <a style="margin-top: 75px;background: none;color: #BDE1F4;font-size: 3em;" href="{% url "promo.employers" %}">
+                            Be the <b>first</b> to post a featured job!
+                        </a>
+                    </p>
+                {% endif %}
             </div>
         </div>
     </div>

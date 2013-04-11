@@ -71,11 +71,13 @@ urlpatterns = patterns(
 urlpatterns += patterns('django.contrib.flatpages.views',
                         url(r'^explore/$', 'flatpage', {'url': '/explore/'}, name='explore'),
                         url(r'^contact_us/$', 'flatpage', {'url': '/contact_us/'}, name='contact_us'),
+                        url(r'^pricing/$', 'flatpage', {'url': '/pricing/'}, name='pricing'),
+                        url(r'^job_seekers/$', 'flatpage', {'url': '/job_seekers/'}, name='job_seekers'),
                         )
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += patterns('django.contrib.flatpages.views',
-                       (r'^(?P<url>.*)$', 'flatpage'),
-                       )
+                        (r'^(?P<url>.*)$', 'flatpage'),
+                        )
