@@ -5,6 +5,6 @@ __author__ = 'ir4y'
 
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('owner', 'amount', 'approved', 'operation_result')
+    list_display = ('datetime', 'owner', 'amount', 'approved', 'operation_result')
 
 admin.site.register(Transaction, TransactionAdmin)
