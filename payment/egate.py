@@ -25,7 +25,7 @@ except AttributeError:
                                "to use the egate payment processor.")
 
 
-def process(request, amount):
+def process(amount, card_number, card_exp, card_sec_code, order_info="", merch_ref=""):
     """
     Payment handler for the eGate payment gateway.
     """
@@ -37,12 +37,11 @@ def process(request, amount):
         "vpc_AccessCode": EGATE_ACCESS_CODE,
         "vpc_Merchant": EGATE_MERCHANT_ID,
         "vpc_Amount": amount,
-        "vpc_CardNum": request.POST["card_number"].strip(),
-        "vpc_CardExp": (request.POST["card_expiry_year"][2:].strip() +
-                        request.POST["card_expiry_month"].strip()),
-        "vpc_CardSecurityCode": request.POST["card_ccv"].strip(),
-        "vpc_OrderInfo": u"12345",
-        "vpc_MerchTxnRef": u"12345",
+        "vpc_CardNum": card_number,
+        "vpc_CardExp": card_exp,
+        "vpc_CardSecurityCode": card_sec_code,
+        "vpc_OrderInfo": order_info,
+        "vpc_MerchTxnRef": merch_ref,
     }
 
     # Post the data and retrieve the response code. If any exception is
@@ -53,8 +52,4 @@ def process(request, amount):
     except Exception, e:
         raise CheckoutError(_("A general error occured: ") + e)
     else:
-        if response["vpc_TxnResponseCode"] != "0":
-            raise CheckoutError(_("Transaction declined: ") +
-                                response["vpc_Message"])
-        else:
-            return response["vpc_TransactionNo"]
+        return response
