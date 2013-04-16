@@ -18,3 +18,46 @@ class Transaction(models.Model):
 
     class Meta:
         ordering = ("-datetime", )
+
+
+class SubscriptionType(models.Model):
+    name = models.CharField(max_length=50)
+    prolongation = models.PositiveIntegerField()
+    cost = models.PositiveIntegerField()
+    promo = models.TextField()
+
+    def __unicode__(self):
+        return self.name
+
+
+class Subscription(models.Model):
+    owner = models.ForeignKey('auth.User')
+    start_date = models.DateTimeField(auto_now_add=True)
+    finish_date = models.DateTimeField()
+
+    def __unicode__(self):
+        return "{0}-{1} for {3}".format(self.start_date,self.finish_date,self.owner)
+
+
+class AdPackageType(models.Model):
+    name = models.CharField(max_length=50)
+    ad_count = models.PositiveIntegerField()
+    cost = models.PositiveIntegerField()
+    promo = models.TextField()
+
+    def __unicode__(self):
+        return self.name
+
+
+class AdPackageHistory(models.Model):
+    ACTION_CHOICES = (
+        (0, "purchase"),
+        (1, "post job"),
+    )
+    datetime = models.DateTimeField(auto_now_add=True)
+    owner = models.OneToOneField('auth.User')
+    ad_count = models.PositiveIntegerField()
+    action = models.PositiveIntegerField(choices=ACTION_CHOICES)
+
+    class Meta:
+        ordering = ("-datetime", )
