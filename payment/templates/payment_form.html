@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load main_tags %}
+
+{% load staticfiles %}
+{% block title %}
+    <title>Contact Us :: Simple pay form</title>
+{% endblock %}
+
+{% block content %}
+    <div class="_content stages contact">
+        <h1>Contact Us</h1>
+        <div class="right">
+            <h2>{{ result }}</h2>
+            <form method="POST">
+            {% csrf_token %}
+            <div class="form" id="contact-form" data-next-url="/contact_us/">
+                {% for field in form.visible_fields %}
+                <div class="field">
+                    <label>{{ field.label }}</label>
+                    {{ field|add_class:"it3" }}
+                    <div class="error" data-error="contactus_errors.{{ field.name }}"></div>
+                </div>
+                {% endfor %}
+                <div class="_submit">
+                    <input type="submit" class="exit">
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
