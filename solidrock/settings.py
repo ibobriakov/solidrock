@@ -121,6 +121,7 @@ LOCAL_APPS = (
     'search',
     'promo',
     'contactus',
+    'payment',
 )
 
 # A sample logging configuration. The only tangible logging
