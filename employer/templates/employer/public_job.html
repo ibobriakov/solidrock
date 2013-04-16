@@ -75,12 +75,12 @@
             <div class="clear"></div>
         </div>
         <div class="supportiong-document">
-            <p>Supportiong Document</p>
+            <p>Supportiong Documents</p>
             <p>
                 {% for document in job.jobuploaddocument_set.all %}
                     <p><a href="{{ document.document.url }}">{{ document }}</a></p>
                 {% empty %}
-                    <p>No document upload yet</p>
+                    <p>No document has been uploaded yet</p>
                 {% endfor %}
             </p>
         </div>
@@ -88,11 +88,11 @@
             <a href="#">
                 Job Contact Information
             </a>
-            <ul>
-                <li><b>Contact Name </b> {{ job.contact_name }}</li>
-                <li><b>Contact Phone </b> {{ job.contact_phone }}</li>
-                <li><b>Contact Email </b> {{ job.contact_email }}</li>
-            </ul>
+            <div>
+                    <p><b>Contact Name </b> {{ job.contact_name }}</p>
+                    <p><b>Contact Phone </b> {{ job.contact_phone }}</p>
+                    <p><b>Contact Email </b> {{ job.contact_email }}</p>
+            </div>
         </div>
         {% if not user.is_anonymous %}
         {% if user.user_type == 0 %} {# Job seeker #}
@@ -120,18 +120,26 @@
             </div>
         </div>
         {% else %}
-            <ul>
-            {% for application in job.applytojob_set.all %}
-                <li>
-                {{ application.job_seeker }}
+        <div class="job-contact-info" style="height: auto;">
+            <a href="#">
+                JobSeeker's applications
+            </a>
+            <div>
+                {% for application in job.applytojob_set.all %}
+                <p>
+                <a href="{% url "job_seeker.profile.information.public" application.job_seeker.profile.id %}">
+                    {{ application.job_seeker }}
+                </a>
                 {% if application.resume %}
                     <a href="{% url "resume.view" application.resume_id %}">{{ application.resume }}</a>
                 {% endif %}
                 {% if application.cover_letter %}
                     <a href="{% url "cover_letter.view" application.cover_letter_id %}">{{ application.cover_letter }}</a>
                 {% endif %}
-            {% endfor %}
-            </ul>
+                {% endfor %}
+                </p>
+            </div>
+        </div>
         {% endif %}
         {% endif %}
     </div>
