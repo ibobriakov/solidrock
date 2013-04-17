@@ -5,7 +5,7 @@
 {% with profile=job.owner.profile %}
     <div class="_content stages">
         <h1>Employer information</h1>
-        {% thumbnail profile.logo "103x103" crop="center" as im %}
+        {% thumbnail profile.logo "170x170" crop="center" as im %}
         <div class="employer-logo">
             <a href="{% url "employer.profile.public" profile.pk %}"><img src="{{ im.url }}"></a>
         </div>
