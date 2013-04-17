@@ -9,7 +9,7 @@ from job_seeker.models import ApplyToJob
 from models import Job, JobLocation, Hour, EmploymentType,\
     SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory, JobExecutivePositions
 from userprofile.models import Employer
-
+from employer.forms import JobForm
 
 class EmployerView(DetailView):
     model = Employer
@@ -57,15 +57,7 @@ class EditJobView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(EditJobView, self).get_context_data(**kwargs)
-        context["JobLocation"] = JobLocation.objects.all()
-        context["Hour"] = Hour.objects.all()
-        context["EmploymentType"] = EmploymentType.objects.all()
-        context["SpecialCondition"] = SpecialCondition.objects.all()
-        context["Essential"] = Essential.objects.all()
-        context["Desireable"] = Desireable.objects.all()
-        context["JobCategory"] = JobCategory.objects.all()
-        context["JobSubCategory"] = JobSubCategory.objects.all()
-        context["JobExecutivePositions"] = JobExecutivePositions.objects.all()
+        context["job_form"] = JobForm()
         return context
 
 

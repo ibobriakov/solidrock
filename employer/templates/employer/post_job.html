@@ -1,88 +1,449 @@
 {% extends 'userprofile/base.html' %}
 {% load serialize %}
 {% load employer_post_job %}
-
-{% block templates %}
-    <script id="job_form_template" type="text/template">
-        {% include "employer/form_template/job_information.html" %}
-    </script>
-
-    <script id="job_upload_document_form_template" type="text/template">
-        {% include "employer/form_template/upload_documents.html" %}
-    </script>
-
-    {% include "employer/form_template/select_category.html" %}
-
-{% endblock %}
+{% load thumbnail %}
+{% load staticfiles %}
 
 {% block content %}
-    <div class="_content stages">
-        <a id="section_top"></a>
-        <h1>Post a Job Listing</h1>
-        <div class="left">
-        <ul class="sections_text">
-            <li class="{% if object|section1_complete %}checked {% endif %}section1 active"><a href="#section/1">Section 1: Job Information</a></li>
-            <li class="{% if object|section2_complete %}checked {% endif %}section2"><a href="#section/2">Section 2: Upload Documents</a></li>
-            <li class="{% if object|section3_complete %}checked {% endif %}section3"><a href="#section/3">Section 3: Select a Category</a></li>
-    {#            <li><a href="#">Section 4: Payment Information</a></li>#}
+    <div class="_content stages" ng-app="PostJobApp">
+    <h1>Post a Job Listing</h1>
+
+    <div ng-controller="JobInfoCtrl" ng-init='job={{ object|as_json|safe }}[0]'>
+    <div class="left">
+        <ul>
+            <section>Section 1: Job Information</section>
+            <section>Section 2: Upload Documents</section>
+            <section>Section 3: Select a Category</section>
+            <section>Section 4: Payment Information</section>
         </ul>
     </div>
-        <div class="right">
-            <ul class="sections_tab">
-                <li class="section1 active"><a href="#section/1">Section 1</a></li>
-                <li class="section2"><a href="#section/2">Section 2</a></li>
-                <li class="section3"><a href="#section/3">Section 3</a></li>
-            </ul>
-            <div class="form sections_form">
-                <form>
-                    <div class="page section1"></div>
-                    <div class="page section2" style="display: none;"></div>
-                    <div class="page section3" style="display: none;"></div>
-                    <script>
-                        job_view = new (profile_view_fabric('job','/'))({
-                            el: $('div.page.section1'),
-                            collection: new (profile_collection_fabric('job'))({% autoescape off %}{{ object|as_json }}{% endautoescape %})
-                        });
-                        job_upload_document_view = new (profile_view_fabric('job_upload_document','/'))({
-                            el: $('div.page.section2'),
-                            collection: new (profile_collection_fabric('job_upload_document'))({% autoescape off %}{{ object.jobuploaddocument_set.all|as_json }}{% endautoescape %})
-                        });
-
-                    </script>
-                </form>
+    <div class="right">
+    <ul>
+        <section>Section 1</section>
+        <section>Section 2</section>
+        <section>Section 3</section>
+        <section>Section 4</section>
+    </ul>
+    <div class="form">
+    <form>
+    <div class="s1">
+        <div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
+        <fieldset>
+            <div class="job-information">
+                <div>
+                    {% thumbnail user.profile.logo "205x205" crop="center" as im %}
+                        <img src="{{ im.url }}"/>
+                    {% empty %}
+                        <img src="{% static 'main/img/002.jpg' %}"/>
+                    {% endthumbnail %}
+                </div>
+                <div>
+                    <h4>{{ user.profile.company }}</h4>
+                    {% if user.profile.address_first %}
+                        <p>{{ user.profile.address_first }}</p>
+                    {% endif %}
+                    {% if user.profile.address_second %}
+                        <p>{{ user.profile.address_second }}</p>
+                    {% endif %}
+                    {% if user.profile.city %}
+                        <p>{{ user.profile.city }}</p>
+                    {% endif %}
+                    <br/>
+                    {% if user.profile.brief %}
+                        <p>
+                            {{ user.profile.brief }}
+                        </p>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+            <div class="clear"></div>
+            <div>
+                <field title="{{ job_form.name.label }}">{{ job_form.name }}</field>
+{#                <div class="field">#}
+{#                    <label>Name This Job Listing*</label>#}
+{#                    <input class="it3" type="text" ng-model="job.name"/>#}
+{#                </div>#}
+                <div class="field">
+                    <label>Job Title*</label>
+                    <input class="it3" type="text" ng-model="job.title"/>
+                </div>
+                <div class="field">
+                    <label>Job Description*</label>
+                    <textarea></textarea>
+                </div>
+
+                <div class="field fl_left">
+                    <label>Job Location*</label>
+                    <select id="e2">
+                        <option>Select a Location</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                <div class="field fl_left">
+                    <label>Applicable Award (if applicable) </label>
+                    <input class="it3" type="text"/>
+                </div>
+                <div class="clear"></div>
+                <div class="field">
+                    <label>Salary Range</label>
+                    <select id="e3">
+                        <option>Select a Salary Range</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                <div class="field fl_left">
+                    <label>Hours*</label>
+                    <select id="e4">
+                        <option>Select Hours Type</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                <div class="field fl_left">
+                    <label>Type of Employment*</label>
+                    <select id="e5">
+                        <option>Select Employment Type</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                <div class="clear"></div>
+                <div class="field">
+                    <label>Special Conditions</label>
+                    <select id="e6">
+                        <option>Any Special Conditions?</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                        <option>All Executive Positions</option>
+                    </select>
+                </div>
+                <div class="field pod">
+                    <label>If “Other” Please Indicate</label>
+                    <input class="it-pod" type="text"/>
+                </div>
+                <div class="field ">
+                    <label>Selection Criteria (please list one per line)*</label>
+                </div>
+                <div class="clear"></div>
+                <div>
+                    <div class="criteria">
+                        <label>Essential:</label>
+
+                        <div class="fields">
+                            <div class="pod" ng-repeat="essential in job.essential_set">
+                                <input class="it-pod2" type="text" ng-model="essential.essential"/>
+                                <a href="" ng-click="remove(job.essential_set, $index)">Remove</a>
+                            </div>
+                        </div>
+                        <a ng-click="append(job.essential_set)" href="">Add Another Essential Criteria Item</a>
+                    </div>
+                    <div class="criteria">
+                        <label>Desireable:</label>
+
+                        <div class="fields">
+                            <div class="pod" ng-repeat="desireable in job.desireable_set">
+                                <input class="it-pod2" type="text" ng-model="desireable.desireable"/>
+                                <a href="" ng-click="remove(job.desireable_set, $index)">Remove</a>
+                            </div>
+                        </div>
+                        <a ng-click="append(job.desireable_set)" href="">Add Another Desireable Criteria Item</a>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+                <div class="field fl_left">
+                    <label>Date Job Listing Opens</label>
+                    <input class="it3" type="text"/>
+                </div>
+                <div class="field fl_left">
+                    <label>Date Job Listing Ends</label>
+                    <input class="it3" type="text"/>
+                </div>
+                <div class="clear"></div>
+                <div class="field ">
+                    <label>Contact Person for This Listing*</label>
+                </div>
+                <div class="field fl_left">
+                    <p>Name<span>*</span></p>
+                    <input class="it3" type="text"/>
+                </div>
+                <div class="field">
+                    <p>Phone (optional)<span>*</span></p>
+                    <input class="it3" type="text"/>
+                </div>
+                <div class="clear"></div>
+                <div class="field">
+                    <p>Email Adress<span>*</span></p>
+                    <input class="it3" type="text"/>
+                </div>
+
+
+                <div class="_submit">
+                    <div class="exit">Save and Exit</div>
+                    <div class="cont" ng-click="save()">Save and Continue</div>
+                </div>
+
+            </div>
+        </fieldset>
+    </div>
+    <div class="s2">
+        <div class="title">Upload Documents</div>
+        <p>
+            From this section you can upload documents associated with this job listing.<br/>
+            Note that only Adobe PDF or Microsoft Word Documents are allowed.
+        </p>
+        <br/>
+        <fieldset>
+            <div class="field">
+                <label>Upload Other Supporting Documents</label>
+                <a href="#">Upload a Supporting Document</a><br/>
+
+                <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
+            </div>
+
+            <div class="field">
+                <label>School, College, or University Name</label>
+                <a href="#">Upload the Full Position Description</a><br/>
+
+                <div class="text">(Note: You may only upload one Full Position Description)</div>
+            </div>
+
+
+            <div class="_submit">
+                <div class="exit">Save and Exit</div>
+                <div class="cont">Save and Continue</div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="s3">
+        <div class="title">Select a Category</div>
+        <fieldset>
+            <div class="field">
+                <label>Category</label>
+                <select id="e7">
+                    <option>Category</option>
+                    <option>Category</option>
+                    <option>Category</option>
+                    <option>Category</option>
+                </select>
+            </div>
+            <div class="field pod">
+                <label>Sub-category</label>
+                <select id="e8">
+                    <option>Sub-category</option>
+                    <option>Sub-category</option>
+                    <option>Sub-category</option>
+                    <option>Sub-category</option>
+                </select>
+            </div>
+            <br/>
+
+            <div class="field star">
+                <p>Would you like to <span>  add another Sub-Category </span>for only $25? </p>
+                <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
+                                                                                                type="radio"
+                                                                                                name="ch5"/>No
+                Thanks</label>
+            </div>
+
+            <div class="field star">
+                <p>Would you like to <span>add another Categeory AND Sub-Category </span> for only $30? </p>
+                <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
+                                                                                                type="radio"
+                                                                                                name="ch5"/>No
+                Thanks</label>
+            </div>
+            <div class="field star">
+                <p>Would you like to make this an <span>exclusive Executive Position </span> for only $25?</p>
+                <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
+                                                                                                type="radio"
+                                                                                                name="ch5"/>No
+                Thanks</label>
+            </div>
+            <div class="field star">
+                <p>Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for
+                    only $100?</p>
+                <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
+                                                                                                type="radio"
+                                                                                                name="ch5"/>No
+                Thanks</label>
+            </div>
+            <div class="_submit">
+                <div class="exit">Save and Exit</div>
+                <div class="cont">Save and Continue</div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="s4">
+        <div class="title"></div>
+
+        <fieldset>
+            <p>Buy now and save!</p>
+
+            <div class="row-bv subscription">
+                <div class="name-desc-bv">
+                    <span>Best Value</span>
+
+                    <p>Subscription</p>
+                                                <span>
+                                                    Post an ultimited<br/>
+                                                    amount of ads
+                                                </span>
+                </div>
+                <div class="span-bv-group">
+                    <div class="span-bv">
+                        <div>
+                            <p>6 Months</p>
+                            <span>AU $3300</span>
+                        </div>
+                    </div>
+                    <div class="span-bv">
+                        <div>
+                            <p>12 Months</p>
+                            <span>AU $5500</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            <div class="row-bv bulk">
+                <div class="name-desc-bv">
+                    <p>Bulk Ad Packs</p>
+                                                <span>
+                                                    Buy ads in bulk and <br/>
+                                                    save. Bulk packs <br/>
+                                                    do notexpire<br/>
+                                                </span>
+                </div>
+                <div class="span-bv-group">
+                    <div class="span-bv">
+                        <div>
+                            <p>3 Ads</p>
+                            <span>AU $590</span>
+
+                            <div class="save">
+                                <p>SAVE</p>
+                                <span>10%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span-bv active">
+                        <div>
+
+                            <p>10 Ads</p>
+                            <span>AU $590</span>
+
+                            <div class="save">
+                                <p>SAVE</p>
+                                <span>20%</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="span-bv">
+                        <div>
+                            <p>20 Ads</p>
+                            <span>AU $590</span>
+
+                            <div class="save">
+                                <p>SAVE</p>
+                                <span>30%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <p>Use my current package</p>
+
+            <div class="clear"></div>
+            <div class="row-bv mini ">
+                <div class="span-bv string">
+                    <p>10</p>
+                    <span>Bulk Ad Pack</span>
+                </div>
+                <div class="span-bv-group">
+                    <div class="span-bv">
+                        <p>3</p>
+                        <span>Ramaining</span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="row-bv mini">
+                <div class="span-bv string">
+                    <p>6 Month</p>
+                    <span>Subscription</span>
+                </div>
+                <div class="span-bv-group">
+                    <div class="span-bv">
+                        <p>28 Days</p>
+                        <span>Ramaining</span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <p>Post only this ad</p>
+
+            <div class="row-bv">
+                <p>AU $220</p>
+            </div>
+            <div class="_submit confirm">
+                <div class="cont">Confirm Order</div>
+            </div>
+        </fieldset>
+
+    </div>
+
+    </form>
+    </div>
+    </div>
+    </div>
     </div>
 {% endblock %}
 
 {% block initialize-js %}
-    {{ block.super }}
-    <script>
-        job_upload_document_view.bind('end_render',document_upload);
-        function document_upload (){
-            $('#support_document_upload_link').on('click',function(){
-                $('#support_document_upload').trigger('click');
-                return false;
-            });
-            $('#support_document_upload').fileupload({
-                dataType: 'json',
-                done: function (e, data) {
-                    job_upload_document_view.collection.add(data.result);
-                    job_upload_document_view.render();
-                }
-            });
-            $('#full_position_description_upload_link').on('click',function(){
-                $('#full_position_description_upload').trigger('click');
-                return false;
-            });
-            $('#full_position_description_upload').fileupload({
-                dataType: 'json',
-                done: function (e, data) {
-                    job_upload_document_view.collection.add(data.result);
-                    job_upload_document_view.render();
-                }
-            });
-        }
-        document_upload();
-    </script>
+    {#    {{ block.super }}#}
+    {#    <script>#}
+    {#        job_upload_document_view.bind('end_render', document_upload);#}
+    {#        function document_upload() {#}
+    {#            $('#support_document_upload_link').on('click', function () {#}
+    {#                $('#support_document_upload').trigger('click');#}
+    {#                return false;#}
+    {#            });#}
+    {#            $('#support_document_upload').fileupload({#}
+    {#                dataType: 'json',#}
+    {#                done: function (e, data) {#}
+    {#                    job_upload_document_view.collection.add(data.result);#}
+    {#                    job_upload_document_view.render();#}
+    {#                }#}
+    {#            });#}
+    {#            $('#full_position_description_upload_link').on('click', function () {#}
+    {#                $('#full_position_description_upload').trigger('click');#}
+    {#                return false;#}
+    {#            });#}
+    {#            $('#full_position_description_upload').fileupload({#}
+    {#                dataType: 'json',#}
+    {#                done: function (e, data) {#}
+    {#                    job_upload_document_view.collection.add(data.result);#}
+    {#                    job_upload_document_view.render();#}
+    {#                }#}
+    {#            });#}
+    {#        }#}
+    {#        document_upload();#}
+    {#    </script>#}
 {% endblock %}

@@ -82,7 +82,7 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         return query_set.filter(owner=request.user)
 
     def hydrate(self, bundle):
-        bundle.obj.user = bundle.request.user
+        bundle.obj.owner = bundle.request.user
         for item in bundle.data['essential_set']:
             item['job'] = bundle.data['resource_uri']
         for item in bundle.data['desireable_set']:
@@ -95,7 +95,7 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = JobResourceValidation(form_class=modelform_factory(Job))
+        validation = JobResourceValidation(form_class=modelform_factory(Job, exclude=('owner', )))
 
 
 class JobUploadDocumentResource(ModelResource):
