@@ -21,6 +21,6 @@ def rivet_modelform_factory(base_name):
                     if name in widgets:
                         kwargs['widget'] = widgets[name]
                     self.fields[name] = ResourceSelect(**kwargs)
-                self.fields[name].widget.attrs['data-value'] = base_name + "." + name
+                self.fields[name].widget.attrs['ng-model'] = base_name + "." + name
                 setattr(self.fields[name], 'type', base_name)
     return RivetModelForm

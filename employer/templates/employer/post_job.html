@@ -58,20 +58,9 @@
             </div>
             <div class="clear"></div>
             <div>
-                <field title="{{ job_form.name.label }}">{{ job_form.name }}</field>
-{#                <div class="field">#}
-{#                    <label>Name This Job Listing*</label>#}
-{#                    <input class="it3" type="text" ng-model="job.name"/>#}
-{#                </div>#}
-                <div class="field">
-                    <label>Job Title*</label>
-                    <input class="it3" type="text" ng-model="job.title"/>
-                </div>
-                <div class="field">
-                    <label>Job Description*</label>
-                    <textarea></textarea>
-                </div>
-
+                {% include 'employer/field/input.html' with field=job_form.name %}
+                {% include 'employer/field/input.html' with field=job_form.title %}
+                {% include 'employer/field/textarea.html' with field=job_form.description %}
                 <div class="field fl_left">
                     <label>Job Location*</label>
                     <select id="e2">

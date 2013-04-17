@@ -2,57 +2,60 @@
  * User: jackdevil
  */
 
+
 var app = angular.module('PostJobApp', []);
 
-app.config(["$httpProvider", function(provider) {
+app.config(["$httpProvider", function (provider) {
     provider.defaults.headers.common['X-CSRFToken'] = getCookie('csrftoken');
 }]);
 
-var directives = {}
+function $appendClassCtrl($scope, $element, $transclude, $compile){
+    $transclude(function(clone) {
+        $element.replaceWith(clone.addClass($element.attr('input_class')));
+    })
+};
 
-directives.section = function() {
+var directives = {};
+
+directives.section = function () {
     return {
         restrict: "E",
         replace: true,
         transclude: true,
-        template: '<li><a href="" ng-transclude></a></li>'
+        template: '<li> <a href="" ng-transclude></a> </li>'
     }
 }
 
-directives.field = function() {
-        return {
-        restrict: "E",
+//directives.styled = function () {
+//    return {
+//        restrict: 'E',
+//        transclude: true,
+//        controller: $appendClassCtrl
+//    }
+//}
+
+directives.field = function () {
+    return {
+        restrict: 'E',
+        scope: {
+            title: '@title'
+        },
         replace: true,
         transclude: true,
-        scope: {
-            title: "@"
-        },
-        template: '<div class="field"><label>{{title}}</label><div ng-transclude></div></div>',
-        link: function(scope, element){
-            scope.addClass('it3');
-        }
-
-    }
+        template: '' +
+            '<div class="field">' +
+                '<label>{{title}}</label>' +
+                '<div ng-transclude></div>' +
+                '<div class="help-tip">' +
+                    '<div class="help-tip-title">Helpful Tip</div>' +
+                    '<div class="help-tip-text">' +
+                        '<div class="help-tip-right"></div>TEXT' +
+                    '</div>' +
+            '</div>',
+    };
 }
 
-//app.directive('field', function() {
-//    return {
-//        restrict: "E",
-////        replace: true,
-//        transclude: true,
-//        scope: {
-//            title: "@"
-//        }
-//        template: '' +
-//            '<div class="field">' +
-//                '<label>{{title}}</label>' +
-//                '<div ng-transclude></div>' +
-//            '</div>'
-//    }
-//});
-
-
-app.controller('JobInfoCtrl',function($scope, $http){
+app.controller('JobInfoCtrl', function ($scope, $http) {
     $scope.job = [];
 
     $scope.save = function () {
@@ -65,7 +68,7 @@ app.controller('JobInfoCtrl',function($scope, $http){
 
     $scope.remove = function (container, index) {
         if (container[index].resource_uri) $http.delete(container[index].resource_uri);
-        container.splice(index,1);
+        container.splice(index, 1);
     };
 });
 
