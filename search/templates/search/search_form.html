@@ -1,4 +1,4 @@
-<div class="_search_box _search_job">
+<div class="_search_box _search_job{% if full_search_from %}  more-options{% endif %}">
     <div class="_top">
         <div class="_icon"></div>
         <div class="_title">Job Search</div>
@@ -11,13 +11,19 @@
                     <div class="_field {% if filed.name == "sub_categories" or  filed.name == "area"%}_pod{% endif %}">
                         <label>{{ filed.label }}</label>
                         {{ filed }}
+                    {# bad html hack for inset sub_categories and area #}
+                    {% if filed.name != "categories" and filed.name != "location" %}
                     </div>
+                    {% endif %}
+                    {% if filed.name == "sub_categories" or  filed.name == "area" %}
+                    </div>
+                    {% endif %}
                 {% endfor %}
             </fieldset>
             {% if full_search_from %}
             <fieldset>
                 {% for filed in search_from.more_options_fileds %}
-                    <div class="_field {% if filed.name == "sub_categories" or  filed.name == "area"%}_pod{% endif %}">
+                    <div class="_field">
                         <label>{{ filed.label }}</label>
                         {{ filed }}
                     </div>

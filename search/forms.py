@@ -13,14 +13,15 @@ class SearchForm(forms.Form):
                                         required=False, empty_label='',
                                         widget=Select2Widget(select2_options={'placeholder': 'Any Category',
                                                                               'allowClear': True}))
-    location = forms.ModelChoiceField(queryset=JobLocation.objects.none(),
-                                      required=False, empty_label='',
-                                      widget=Select2Widget(select2_options={'placeholder': 'All Australia',
-                                                                            'allowClear': True}))
+
     sub_categories = forms.ModelChoiceField(queryset=JobSubCategory.objects.none(),
                                             required=False, empty_label='',
                                             widget=Select2Widget(select2_options={'placeholder': 'All',
                                                                                   'allowClear': True}))
+    location = forms.ModelChoiceField(queryset=JobLocation.objects.none(),
+                                      required=False, empty_label='',
+                                      widget=Select2Widget(select2_options={'placeholder': 'All Australia',
+                                                                            'allowClear': True}))
     area = forms.ModelChoiceField(queryset=JobArea.objects.none(),
                                   required=False, empty_label='',
                                   widget=Select2Widget(select2_options={'placeholder': 'All',
