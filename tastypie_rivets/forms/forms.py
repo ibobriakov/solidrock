@@ -15,7 +15,8 @@ def rivet_modelform_factory(base_name):
                 if isinstance(field, ModelChoiceField):
                     required = field.required | (name in getattr(self.Meta.model, 'REQUIRED_FIELDS', []))
                     # REQUIRED_FIELDS dog-nail see employer/models.py:54: %-)
-                    kwargs = {'resource_name': field.queryset.model.__name__.lower(),
+                    resource_name_map = getattr(self.Meta, 'resource_names', {})
+                    kwargs = {'resource_name':  resource_name_map.get(name,field.queryset.model.__name__.lower()),
                               'queryset': field.queryset,
                               'empty_label': '',
                               'required': required}
