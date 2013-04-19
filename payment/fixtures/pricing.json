@@ -1,0 +1,66 @@
+[
+{
+  "pk": 1, 
+  "model": "payment.adpackagetype", 
+  "fields": {
+    "promo": "SAVE 10%", 
+    "default": false, 
+    "cost": 590, 
+    "name": "3 ADS", 
+    "ad_count": 3
+  }
+},
+{
+  "pk": 2, 
+  "model": "payment.adpackagetype", 
+  "fields": {
+    "promo": "SAVE 20%", 
+    "default": false, 
+    "cost": 1750, 
+    "name": "10 ADS", 
+    "ad_count": 10
+  }
+},
+{
+  "pk": 3, 
+  "model": "payment.adpackagetype", 
+  "fields": {
+    "promo": "SAVE 30%", 
+    "default": false, 
+    "cost": 3000, 
+    "name": "20 ADS", 
+    "ad_count": 20
+  }
+},
+{
+  "pk": 4, 
+  "model": "payment.adpackagetype", 
+  "fields": {
+    "promo": "PURCHASE A SINGLE AD", 
+    "default": true, 
+    "cost": 220, 
+    "name": "1 AD", 
+    "ad_count": 1
+  }
+},
+{
+  "pk": 1, 
+  "model": "payment.subscriptiontype", 
+  "fields": {
+    "promo": " 6 MONTHS", 
+    "cost": 3300, 
+    "name": " 6 MONTHS", 
+    "prolongation": 180
+  }
+},
+{
+  "pk": 2, 
+  "model": "payment.subscriptiontype", 
+  "fields": {
+    "promo": "12 MONTHS", 
+    "cost": 5500, 
+    "name": "12 MONTHS", 
+    "prolongation": 365
+  }
+}
+]
