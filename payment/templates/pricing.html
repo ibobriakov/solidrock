@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="_content stages contact">
+        <h1>Pricing</h1>
+        <div class="pricings">
+            <div class="pricing subscriptions">
+                <p>Subscriptions</p>
+                <span>Post an unlimited amount of ads. Paid up-front.</span>
+                {% for subscript in subscriptions %}
+                <div class="pricing-block">
+                    <p>{{ subscript.promo }}</p>
+                    <span>Au ${{ subscript.cost }}</span>
+                </div>
+                {% endfor %}
+                <div class="clear"></div>
+            </div>
+
+            <div class="pricing bulk">
+                <p>Bulk ad packages</p>
+                <span>Buy ads in bulk save. Bulk packs do not expire.</span>
+                {% for package in packages %}
+                <div class="pricing-block">
+                    <p>{{ package.name }}</p>
+                    <span>Au ${{ package.cost }}</span>
+                    <p>{{ package.promo }}</p>
+                </div>
+                {% endfor %}
+                <div class="clear"></div>
+            </div>
+                <div class="pricing">
+                    <p>{{ default.promo }}: <span>au ${{ default.cost }}</span><p>
+                </div>
+                <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

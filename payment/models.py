@@ -44,6 +44,7 @@ class AdPackageType(models.Model):
     ad_count = models.PositiveIntegerField()
     cost = models.PositiveIntegerField()
     promo = models.TextField()
+    default = models.BooleanField(verbose_name='Offer default', default=False)
 
     def __unicode__(self):
         return self.name
