@@ -10,8 +10,8 @@ __all__ = ['ApplyToJobResource']
 
 
 class ApplyToJobResource(ModelResource):
-    resume = fields.ToOneField('resume.ResumeResource', 'resume', blank=True, null=True)
-    cover_letter = fields.ToOneField('cover_letter.CoverLetterResource', 'cover_letter', blank=True, null=True)
+    resume = fields.ToOneField('resume.api.ResumeResource', 'resume', blank=True, null=True)
+    cover_letter = fields.ToOneField('cover_letter.api.CoverLetterResource', 'cover_letter', blank=True, null=True)
 
     def hydrate(self, bundle):
         bundle.obj.job_seeker = bundle.request.user
