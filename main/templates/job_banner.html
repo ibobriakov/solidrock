@@ -2,7 +2,9 @@
 <div class="Job">
     <div class="head-featured">
         <p>{{ job.name }}</p>
-        <a href="#"></a>
+        {% if job.owner_id == user.id %}
+        <a style="background: none; color: white;" href="{% url 'employer.job.edit' job.pk %}">Edit</a>
+        {% endif %}
     </div>
     <div class="logo-featured">
          {% thumbnail job.owner.profile.avatar "81x81" crop="center" as im %}
