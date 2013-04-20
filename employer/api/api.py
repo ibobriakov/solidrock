@@ -75,8 +75,8 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
     desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True, null=True)
 
     # TODO fix append error or remove permanently if is doesn't need any more
-    categories_set = fields.ToManyField(JobCategoryResource, 'categories', full=True, null=True)
-    sub_categories_set = fields.ToManyField(JobSubCategoryResource, 'sub_categories', full=True, null=True)
+    categories_set = fields.ToManyField('employer.api.JobSelectedCategoryResource', 'categories', full=True, null=True)
+    sub_categories_set = fields.ToManyField('employer.api.JobSelectedSubCategoryResource', 'sub_categories', full=True, null=True)
 
 
     def get_object_list(self, request):
