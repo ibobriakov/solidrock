@@ -74,8 +74,14 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
     essential_set = fields.ToManyField(EssentialResource, 'essential_set', full=True, null=True)
     desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True, null=True)
 
-    categories_set = fields.ToManyField('employer.api.JobSelectedCategoryResource', 'jobselectedcategory_set', full=True, null=True)
-    sub_categories_set = fields.ToManyField('employer.api.JobSelectedSubCategoryResource', 'jobselectedsubcategory_set', full=True, null=True)
+    categories_set = fields.ToManyField('employer.api.JobSelectedCategoryResource',
+                                        'jobselectedcategory_set', full=True, null=True)
+    sub_categories_set = fields.ToManyField('employer.api.JobSelectedSubCategoryResource',
+                                            'jobselectedsubcategory_set', full=True, null=True)
+
+    jobuploaddocument_set = fields.ToManyField('employer.api.JobUploadDocumentResource',
+                                               'jobuploaddocument_set', readonly=True, full=True)
+
 
 
     def get_object_list(self, request):
