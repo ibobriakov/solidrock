@@ -151,12 +151,7 @@
                         <br/>
                         <div class="field star">
                             <p>Would you like to make this an <span>exclusive Executive Position </span> for only $25?</p>
-                            <label>
-                                <input class="styled" type="radio" name="ch5"/>Yes!
-                            </label>
-                            <label>
-                                <input class="styled" type="radio" name="ch5"/>No Thanks
-                            </label>
+                            {% include 'employer/field/input.html' with field=job_form.executive_positions %}
                         </div>
                         <div class="field star">
                             <p>Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for
