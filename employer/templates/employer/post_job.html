@@ -135,7 +135,7 @@
                         <div class="field">
                             <label>Category</label>
                             <div ng-repeat="categories in job.categories_set">
-                                {{ job_form.categories|attr:'ng-model:categories.resource_uri' }}
+                                {{ job_form.categories|attr:'ng-model:categories.category' }}
                                 <a href="" ng-click="remove(job.categories_set, $index)">Remove</a>
                             </div>
                             <a ng-click="append(job.categories_set)" href="">Add Categories</a>
@@ -143,7 +143,7 @@
                         <div class="field pod">
                             <label>Sub-Category</label>
                             <div ng-repeat="sub_categories in job.sub_categories_set">
-                                {{ job_form.sub_categories|attr:'ng-model:sub_categories.resource_uri' }}
+                                {{ job_form.sub_categories|attr:'ng-model:sub_categories.subcategory' }}
                                 <a href="" ng-click="remove(job.sub_categories_set, $index)">Remove</a>
                             </div>
                             <a ng-click="append(job.sub_categories_set)" href="">Add Sub-Categories</a>
