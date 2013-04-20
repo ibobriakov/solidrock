@@ -2,64 +2,84 @@
  * User: jackdevil
  */
 
-
 var app = angular.module('PostJobApp', []);
 
+function get_cookie (name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+app.config( function ($routeProvider) {
+    $routeProvider
+        .when('/section/:section/', { controller: 'JobInfoCtrl', templateUrl: 'post-job.html' }  )
+        .otherwise({ redirectTo: '/section/1/' })
+});
+
 app.config(["$httpProvider", function (provider) {
-    provider.defaults.headers.common['X-CSRFToken'] = getCookie('csrftoken');
+    provider.defaults.headers.common['X-CSRFToken'] = get_cookie('csrftoken');
 }]);
 
-function $appendClassCtrl($scope, $element, $transclude, $compile){
-    $transclude(function(clone) {
-        $element.replaceWith(clone.addClass($element.attr('input_class')));
-    })
-};
+app.config(function($interpolateProvider){
+    $interpolateProvider.startSymbol('{[{');
+    $interpolateProvider.endSymbol('}]}');
+});
 
 var directives = {};
 
-directives.section = function () {
+directives.activated = function() {
     return {
-        restrict: "E",
-        replace: true,
-        transclude: true,
-        template: '<li> <a href="" ng-transclude></a> </li>'
+        restrict: "A",
+        link: function($scope, element, attr) {
+            element.children().each(function(index,item) {
+                if (attr.activated == "block") {
+                   if (parseInt($scope.section) == parseInt(index+1)) {
+                        $(item).show();
+                    } else {
+                       $(item).hide();
+                   }
+                } else {
+                    if (parseInt($scope.section) == parseInt(index+1)) {
+                        $(item).addClass('active');
+                    }
+                }
+            })
+        }
     }
 }
 
-//directives.styled = function () {
-//    return {
-//        restrict: 'E',
-//        transclude: true,
-//        controller: $appendClassCtrl
-//    }
-//}
 
-directives.field = function () {
-    return {
-        restrict: 'E',
-        scope: {
-            title: '@title'
-        },
-        replace: true,
-        transclude: true,
-        template: '' +
-            '<div class="field">' +
-                '<label>{{title}}</label>' +
-                '<div ng-transclude></div>' +
-                '<div class="help-tip">' +
-                    '<div class="help-tip-title">Helpful Tip</div>' +
-                    '<div class="help-tip-text">' +
-                        '<div class="help-tip-right"></div>TEXT' +
-                    '</div>' +
-            '</div>',
-    };
-}
+app.directive(directives);
 
-app.controller('JobInfoCtrl', function ($scope, $http) {
+app.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams) {
     $scope.job = [];
+    $scope.error = [];
+    $scope.section = $routeParams.section
+
+    $scope.checkActive = function(section) {
+        return true ? parseInt(section) === parseInt($scope.section) : false;
+    };
+
+    var success_callback = function (data, status, headers, config) {
+    };
+
+    var error_callback = function (data, status, headers, config) {
+        $scope.error = data.job;
+    };
 
     $scope.save = function () {
-        $http.put($scope.job.resource_uri, $scope.job);
+        $http.put($scope.job.resource_uri, $scope.job)
+            .success(success_callback)
+            .error(error_callback);
     };
 
     $scope.append = function (container) {
@@ -71,5 +91,3 @@ app.controller('JobInfoCtrl', function ($scope, $http) {
         container.splice(index, 1);
     };
 });
-
-app.directive(directives);

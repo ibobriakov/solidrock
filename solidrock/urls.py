@@ -15,7 +15,7 @@ from employer.api import JobResource, LocationResource, HourResource,\
     EmploymentTypeResource, SpecialConditionResource, EssentialResource, DesireableResource,\
     JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource,\
     JobUploadDocumentTypeResource, JobSelectedCategoryResource, JobSelectedSubCategoryResource,\
-    JobExecutivePositionsResource
+    JobExecutivePositionsResource,JobAreaResource
 from contactus.api import FeedbackResource
 
 
@@ -35,6 +35,7 @@ v1_api.register(JobSeekerRefereeResource())
 v1_api.register(ActivationResource())
 v1_api.register(LoginResource())
 v1_api.register(JobResource())
+v1_api.register(JobAreaResource())
 v1_api.register(LocationResource())
 v1_api.register(HourResource())
 v1_api.register(EmploymentTypeResource())

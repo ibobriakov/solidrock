@@ -10,6 +10,8 @@ PROJECT_NAME = basename(PROJECT_PATH)
 
 FILE_UPLOAD_PERMISSIONS = 0o644
 
+AUTO_RENDER_SELECT2_STATICS = False
+
 THUMBNAIL_FORMAT = "PNG"
 
 DEBUG = True
@@ -81,7 +83,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.request',
     'django.core.context_processors.csrf',
-    'main.context_processors.url_name',
+    'main.context_processors.url_name'
 )
 
 
@@ -107,6 +109,7 @@ INSTALLED_APPS = (
     'flatblocks',
     'redactor',
     'haystack',
+    'widget_tweaks',
 )
 
 LOCAL_APPS = (

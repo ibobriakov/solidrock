@@ -11,7 +11,7 @@ urlpatterns = patterns(
     url(r'^edit/$', EmployerEditView.as_view(), name='employer.profile.edit'),
     url(r'^job/create$', create_job_view, name='employer.job.create'),
     url(r'^job/list', JobListView.as_view(), name='employer.job.list'),
-    url(r'^job/(?P<pk>\d+)/edit$', EditJobView.as_view(), name='employer.job.edit'),
-    url(r'^job/(?P<pk>\d+)/view', JobPublicView.as_view(), name='employer.job.view'),
-    url(r'^job/(?P<pk>\d+)/delete$', delete_job_view, name='employer.job.delete'),
+    url(r'^job/(?P<pk>\d+)/edit/$', EditJobView.as_view(), name='employer.job.edit'),
+    url(r'^job/(?P<pk>\d+)/view/$', JobPublicView.as_view(), name='employer.job.view'),
+    url(r'^job/(?P<pk>\d+)/delete/$', delete_job_view, name='employer.job.delete'),
 )
