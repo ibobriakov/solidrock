@@ -3,6 +3,7 @@
 {% load employer_post_job %}
 {% load thumbnail %}
 {% load staticfiles %}
+{% load widget_tweaks %}
 
 {% block content %}
     <div class="_content stages" ng-app="PostJobApp">
@@ -92,7 +93,7 @@
                             <div class="clear"></div>
                             {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_email %}
                             <div class="_submit">
-                                <div class="exit">Save and Exit</div>
+                                <div class="exit" ng-click="save()">Save and Exit</div>
                                 <div class="cont" ng-click="save()">Save and Continue</div>
                             </div>
 
@@ -133,46 +134,29 @@
                     <fieldset>
                         <div class="field">
                             <label>Category</label>
-                            <select id="e7">
-                                <option>Category</option>
-                                <option>Category</option>
-                                <option>Category</option>
-                                <option>Category</option>
-                            </select>
+                            <div ng-repeat="categories in job.categories_set">
+                                {{ job_form.categories|attr:'ng-model:categories.resource_uri' }}
+                                <a href="" ng-click="remove(job.categories_set, $index)">Remove</a>
+                            </div>
+                            <a ng-click="append(job.categories_set)" href="">Add Categories</a>
                         </div>
                         <div class="field pod">
-                            <label>Sub-category</label>
-                            <select id="e8">
-                                <option>Sub-category</option>
-                                <option>Sub-category</option>
-                                <option>Sub-category</option>
-                                <option>Sub-category</option>
-                            </select>
+                            <label>Sub-Category</label>
+                            <div ng-repeat="sub_categories in job.sub_categories_set">
+                                {{ job_form.sub_categories|attr:'ng-model:sub_categories.resource_uri' }}
+                                <a href="" ng-click="remove(job.sub_categories_set, $index)">Remove</a>
+                            </div>
+                            <a ng-click="append(job.sub_categories_set)" href="">Add Sub-Categories</a>
                         </div>
                         <br/>
-
-                        <div class="field star">
-                            <p>Would you like to <span>  add another Sub-Category </span>for only $25? </p>
-                            <label><input class="styled" type="radio" name="ch5"/>Yes!</label>
-                            <label><input class="styled"
-                                          type="radio"
-                                          name="ch5"/>No
-                                Thanks</label>
-                        </div>
-
-                        <div class="field star">
-                            <p>Would you like to <span>add another Categeory AND Sub-Category </span> for only $30? </p>
-                            <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
-                                                                                                            type="radio"
-                                                                                                            name="ch5"/>No
-                            Thanks</label>
-                        </div>
                         <div class="field star">
                             <p>Would you like to make this an <span>exclusive Executive Position </span> for only $25?</p>
-                            <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
-                                                                                                            type="radio"
-                                                                                                            name="ch5"/>No
-                            Thanks</label>
+                            <label>
+                                <input class="styled" type="radio" name="ch5"/>Yes!
+                            </label>
+                            <label>
+                                <input class="styled" type="radio" name="ch5"/>No Thanks
+                            </label>
                         </div>
                         <div class="field star">
                             <p>Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for
@@ -183,8 +167,8 @@
                             Thanks</label>
                         </div>
                         <div class="_submit">
-                            <div class="exit">Save and Exit</div>
-                            <div class="cont">Save and Continue</div>
+                            <div class="exit" ng-click="save()">Save and Exit</div>
+                            <div class="cont" ng-click="save()">Save and Continue</div>
                         </div>
                     </fieldset>
                 </div>

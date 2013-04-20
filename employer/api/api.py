@@ -4,8 +4,8 @@ from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
 from employer.api.validation import JobResourceValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
-from ..models import JobLocation, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType,\
-    Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument,\
+from ..models import JobLocation, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType, \
+    Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument, \
     JobSelectedCategory, JobSelectedSubCategory, JobExecutivePositions, JobArea
 from userprofile.api import AuthorizationWithObjectPermissions
 
@@ -75,8 +75,9 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
     desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True, null=True)
 
     # TODO fix append error or remove permanently if is doesn't need any more
-    # categories = fields.ToManyField(JobCategoryResource, 'categories', full=True, null=True)
-    # sub_categories = fields.ToManyField(JobSubCategoryResource, 'sub_categories', full=True, null=True)
+    categories_set = fields.ToManyField(JobCategoryResource, 'categories', full=True, null=True)
+    sub_categories_set = fields.ToManyField(JobSubCategoryResource, 'sub_categories', full=True, null=True)
+
 
     def get_object_list(self, request):
         query_set = super(JobResource, self).get_object_list(request)
