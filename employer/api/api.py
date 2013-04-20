@@ -74,7 +74,6 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
     essential_set = fields.ToManyField(EssentialResource, 'essential_set', full=True, null=True)
     desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True, null=True)
 
-    # TODO fix append error or remove permanently if is doesn't need any more
     categories_set = fields.ToManyField('employer.api.JobSelectedCategoryResource', 'jobselectedcategory_set', full=True, null=True)
     sub_categories_set = fields.ToManyField('employer.api.JobSelectedSubCategoryResource', 'jobselectedsubcategory_set', full=True, null=True)
 
@@ -85,10 +84,6 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
 
     def hydrate(self, bundle):
         bundle.obj.owner = bundle.request.user
-        for item in bundle.data['essential_set']:
-            item['job'] = bundle.data['resource_uri']
-        for item in bundle.data['desireable_set']:
-            item['job'] = bundle.data['resource_uri']
         return bundle
 
     class Meta:
