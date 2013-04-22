@@ -1,5 +1,3 @@
-__author__ = 'jackdevil'
-
 from django_select2 import Select2Widget
 from tastypie_rivets import rivet_modelform_factory
 from employer.models import Job
