@@ -1,0 +1,10 @@
+{% load widget_tweaks %}
+<div class="field {{ class }}">
+    <label>{{ label|default:field.label }}</label>
+
+    <div ng-repeat="{{ field.name }} in job.{{ field.name }}_set">
+        {{ field|attr:bind|attr:"id" }}
+        <a href="" ng-click="remove(job.{{ field.name }}_set, $index)">Remove</a>
+    </div>
+    <a ng-click="append(job.{{ field.name }}_set)" href="">Add Categories</a>
+</div>
