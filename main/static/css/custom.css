@@ -101,3 +101,8 @@
     float:left !important;
     margin-right:20px !important;
 }
+
+.select2-choice {
+  min-height: 20px;
+  overflow-y: auto;
+}
