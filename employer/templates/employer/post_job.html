@@ -5,328 +5,280 @@
 {% load staticfiles %}
 {% load widget_tweaks %}
 
-{% block content %}
-    <div class="_content stages" ng-app="PostJobApp">
-    <script type="text/ng-template" id="post-job.html">
-        <div ng-init='job={{ object|as_json|safe }}[0]'>
-        <h1>Post a Job Listing</h1>
+{% block library-js %}
+    <script src="{% static 'main/js/lib/jquery-latest.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/lib/underscore-min.js' %}" type="text/javascript"></script>
 
-        <div class="left">
-            <ul activated>
-                <li><a href="#/section/1/">Section 1: Job Information</a></li>
-                <li><a href="#/section/2/">Section 2: Upload Documents</a></li>
-                <li><a href="#/section/3/">Section 3: Select a Category</a></li>
-                <li><a href="#/section/4/">Section 4: Payment Information</a></li>
-            </ul>
-        </div>
-        <div class="right">
-            <ul activated>
-                <li><a href="#/section/1/">Section 1</a></li>
-                <li><a href="#/section/2/">Section 2</a></li>
-                <li><a href="#/section/3/">Section 3</a></li>
-                <li><a href="#/section/4/">Section 4</a></li>
-            </ul>
-            <div class="form">
-            <form activated="block">
-                  <div>
-                    <div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
-                    <fieldset>
-                        <div class="job-information">
-                            <div>
-                                {% thumbnail user.profile.logo "205x205" crop="center" as im %}
-                                    <img src="{{ im.url }}"/>
-                                {% empty %}
-                                    <img src="{% static 'main/img/002.jpg' %}"/>
-                                {% endthumbnail %}
-                            </div>
-                            <div>
-                                <h4>{{ user.profile.company }}</h4>
-                                {% if user.profile.address_first %}
-                                    <p>{{ user.profile.address_first }}</p>
-                                {% endif %}
-                                {% if user.profile.address_second %}
-                                    <p>{{ user.profile.address_second }}</p>
-                                {% endif %}
-                                {% if user.profile.city %}
-                                    <p>{{ user.profile.city }}</p>
-                                {% endif %}
-                                <br/>
-                                {% if user.profile.brief %}
-                                    <p>
-                                        {{ user.profile.brief }}
-                                    </p>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                        <div>
-                            {% include 'employer/field/input.html' with field=job_form.name %}
-                            {% include 'employer/field/input.html' with field=job_form.title %}
-                            {% include 'employer/field/input.html' with field=job_form.description %}
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.location %}
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.area %}
-                            <div class="clear"></div>
-                            {% include 'employer/field/input.html' with field=job_form.award %}
-                            <div class="clear"></div>
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.salary_range_min %}
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.salary_range_max %}
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.hours %}
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.employment_type %}
-                            <div class="clear"></div>
-                            {% include 'employer/field/input.html' with field=job_form.special_conditions %}
-                            {% include 'employer/field/input.html' with class='pod' input_class='it-pod' field=job_form.other_conditions %}
-                            <div class="field ">
-                                <label>Selection Criteria (please list one per line)*</label>
-                            </div>
-                            <div class="clear"></div>
-                            {% include 'employer/field/criteria.html' with label="Essential" field="essential" %}
-                            {% include 'employer/field/criteria.html' with label="Desireable" field="desireable" %}
-                            <div class="clear"></div>
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.open_date %}
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.end_date %}
-                            <div class="clear"></div>
-                            <div class="field ">
-                                <label>Contact Person for This Listing*</label>
-                            </div>
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_name %}
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_phone %}
-                            <div class="clear"></div>
-                            {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_email %}
-                            <div class="_submit">
-                                <div class="exit" ng-click="save()">Save and Exit</div>
-                                <div class="cont" ng-click="save()">Save and Continue</div>
-                            </div>
+    <script src="{% static 'main/js/src/extra/select2.js' %}" type="text/javascript"></script>
 
-                        </div>
-                    </fieldset>
-                </div>
-                <div>
-                    <div class="title">Upload Documents</div>
-                    <p>
-                        From this section you can upload documents associated with this job listing.<br/>
-                        Note that only Adobe PDF or Microsoft Word Documents are allowed.
-                    </p>
-                    <br/>
-                    <fieldset>
-                        <div class="field">
-                            <label>Upload Other Supporting Documents</label>
-                            <a href="#">Upload a Supporting Document</a><br/>
+    <script src="{% static 'main/js/lib/fileupload/vendor/jquery.ui.widget.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/lib/fileupload/jquery.iframe-transport.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/lib/fileupload/jquery.fileupload.js' %}" type="text/javascript"></script>
 
-                            <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
-                        </div>
-
-                        <div class="field">
-                            <label>School, College, or University Name</label>
-                            <a href="#">Upload the Full Position Description</a><br/>
-
-                            <div class="text">(Note: You may only upload one Full Position Description)</div>
-                        </div>
-
-
-                        <div class="_submit">
-                            <div class="exit">Save and Exit</div>
-                            <div class="cont">Save and Continue</div>
-                        </div>
-                    </fieldset>
-                </div>
-                <div>
-                    <div class="title">Select a Category</div>
-                    <fieldset>
-                        <div class="field">
-                            <label>Category</label>
-                            <div ng-repeat="categories in job.categories_set">
-                                {{ job_form.categories|attr:'ng-model:categories.category' }}
-                                <a href="" ng-click="remove(job.categories_set, $index)">Remove</a>
-                            </div>
-                            <a ng-click="append(job.categories_set)" href="">Add Categories</a>
-                        </div>
-                        <div class="field pod">
-                            <label>Sub-Category</label>
-                            <div ng-repeat="sub_categories in job.sub_categories_set">
-                                {{ job_form.sub_categories|attr:'ng-model:sub_categories.subcategory' }}
-                                <a href="" ng-click="remove(job.sub_categories_set, $index)">Remove</a>
-                            </div>
-                            <a ng-click="append(job.sub_categories_set)" href="">Add Sub-Categories</a>
-                        </div>
-                        <br/>
-                        <div class="field star">
-                            <p>Would you like to make this an <span>exclusive Executive Position </span> for only $25?</p>
-                            {% include 'employer/field/input.html' with field=job_form.executive_positions %}
-                        </div>
-                        <div class="field star">
-                            <p>Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for
-                                only $100?</p>
-                            <label><input class="styled" type="radio" name="ch5"/>Yes!</label><label><input class="styled"
-                                                                                                            type="radio"
-                                                                                                            name="ch5"/>No
-                            Thanks</label>
-                        </div>
-                        <div class="_submit">
-                            <div class="exit" ng-click="save()">Save and Exit</div>
-                            <div class="cont" ng-click="save()">Save and Continue</div>
-                        </div>
-                    </fieldset>
-                </div>
-                <div>
-                    <div class="title"></div>
-
-                    <fieldset>
-                        <p>Buy now and save!</p>
-
-                        <div class="row-bv subscription">
-                            <div class="name-desc-bv">
-                                <span>Best Value</span>
-
-                                <p>Subscription</p>
-                                                                    <span>
-                                                                        Post an ultimited<br/>
-                                                                        amount of ads
-                                                                    </span>
-                            </div>
-                            <div class="span-bv-group">
-                                <div class="span-bv">
-                                    <div>
-                                        <p>6 Months</p>
-                                        <span>AU $3300</span>
-                                    </div>
-                                </div>
-                                <div class="span-bv">
-                                    <div>
-                                        <p>12 Months</p>
-                                        <span>AU $5500</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="clear"></div>
-                        </div>
-                        <div class="row-bv bulk">
-                            <div class="name-desc-bv">
-                                <p>Bulk Ad Packs</p>
-                                    <span>
-                                        Buy ads in bulk and <br/>
-                                        save. Bulk packs <br/>
-                                        do notexpire<br/>
-                                    </span>
-                            </div>
-                            <div class="span-bv-group">
-                                <div class="span-bv">
-                                    <div>
-                                        <p>3 Ads</p>
-                                        <span>AU $590</span>
-
-                                        <div class="save">
-                                            <p>SAVE</p>
-                                            <span>10%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="span-bv active">
-                                    <div>
-
-                                        <p>10 Ads</p>
-                                        <span>AU $590</span>
-
-                                        <div class="save">
-                                            <p>SAVE</p>
-                                            <span>20%</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="span-bv">
-                                    <div>
-                                        <p>20 Ads</p>
-                                        <span>AU $590</span>
-
-                                        <div class="save">
-                                            <p>SAVE</p>
-                                            <span>30%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <p>Use my current package</p>
-
-                        <div class="clear"></div>
-                        <div class="row-bv mini ">
-                            <div class="span-bv string">
-                                <p>10</p>
-                                <span>Bulk Ad Pack</span>
-                            </div>
-                            <div class="span-bv-group">
-                                <div class="span-bv">
-                                    <p>3</p>
-                                    <span>Ramaining</span>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="row-bv mini">
-                            <div class="span-bv string">
-                                <p>6 Month</p>
-                                <span>Subscription</span>
-                            </div>
-                            <div class="span-bv-group">
-                                <div class="span-bv">
-                                    <p>28 Days</p>
-                                    <span>Ramaining</span>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="clear"></div>
-                        <p>Post only this ad</p>
-
-                        <div class="row-bv">
-                            <p>AU $220</p>
-                        </div>
-                        <div class="_submit confirm">
-                            <div class="cont">Confirm Order</div>
-                        </div>
-                    </fieldset>
-
-                </div>
-            </form>
-            </div>
-        </div>
-        </div>
-    </script>
-    <ng-view>
-    </ng-view>
-    </div>
+    <script src="{% static 'employer/js/src/angular/extra.js' %}" type="text/javascript"></script>
+    <script src="{% static 'employer/js/src/angular/application.js' %}" type="text/javascript"></script>
+    <script src="{% static 'employer/js/src/angular/services.js' %}" type="text/javascript"></script>
+    <script src="{% static 'employer/js/src/angular/directives.js' %}" type="text/javascript"></script>
+    <script src="{% static 'employer/js/src/angular/controllers.js' %}" type="text/javascript"></script>
 {% endblock %}
 
-{% block initialize-js %}
-    {#    {{ block.super }}#}
-    {#    <script>#}
-    {#        job_upload_document_view.bind('end_render', document_upload);#}
-    {#        function document_upload() {#}
-    {#            $('#support_document_upload_link').on('click', function () {#}
-    {#                $('#support_document_upload').trigger('click');#}
-    {#                return false;#}
-    {#            });#}
-    {#            $('#support_document_upload').fileupload({#}
-    {#                dataType: 'json',#}
-    {#                done: function (e, data) {#}
-    {#                    job_upload_document_view.collection.add(data.result);#}
-    {#                    job_upload_document_view.render();#}
-    {#                }#}
-    {#            });#}
-    {#            $('#full_position_description_upload_link').on('click', function () {#}
-    {#                $('#full_position_description_upload').trigger('click');#}
-    {#                return false;#}
-    {#            });#}
-    {#            $('#full_position_description_upload').fileupload({#}
-    {#                dataType: 'json',#}
-    {#                done: function (e, data) {#}
-    {#                    job_upload_document_view.collection.add(data.result);#}
-    {#                    job_upload_document_view.render();#}
-    {#                }#}
-    {#            });#}
-    {#        }#}
-    {#        document_upload();#}
-    {#    </script>#}
+{% block content %}
+    <div class="_content stages" ng-app="PostJobApp">
+
+        <div ng-controller="JobData" ng-init='set_data({{ object|as_json|safe }}[0])'></div>
+
+        <script type="text/ng-template" id="post-job.html">
+            <div>
+            <h1>Post a Job Listing</h1>
+
+            <div class="left">
+                <ul activated>
+                    <li><a href="#/section/1/">Section 1: Job Information</a></li>
+                    <li><a href="#/section/2/">Section 2: Upload Documents</a></li>
+                    <li><a href="#/section/3/">Section 3: Select a Category</a></li>
+                    <li><a href="#/section/4/">Section 4: Payment Information</a></li>
+                </ul>
+            </div>
+            <div class="right">
+                <ul activated>
+                    <li><a href="#/section/1/">Section 1</a></li>
+                    <li><a href="#/section/2/">Section 2</a></li>
+                    <li><a href="#/section/3/">Section 3</a></li>
+                    <li><a href="#/section/4/">Section 4</a></li>
+                </ul>
+                <div class="form">
+                <form activated="block">
+                      <div>
+                        <div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
+                        <fieldset>
+                            <div class="job-information">
+                                <div>
+                                    {% thumbnail user.profile.logo "205x205" crop="center" as im %}
+                                        <img src="{{ im.url }}"/>
+                                    {% empty %}
+                                        <img src="{% static 'main/img/002.jpg' %}"/>
+                                    {% endthumbnail %}
+                                </div>
+                                <div>
+                                    <h4>{{ user.profile.company }}</h4>
+                                    {% if user.profile.address_first %}
+                                        <p>{{ user.profile.address_first }}</p>
+                                    {% endif %}
+                                    {% if user.profile.address_second %}
+                                        <p>{{ user.profile.address_second }}</p>
+                                    {% endif %}
+                                    {% if user.profile.city %}
+                                        <p>{{ user.profile.city }}</p>
+                                    {% endif %}
+                                    <br/>
+                                    {% if user.profile.brief %}
+                                        <p>
+                                            {{ user.profile.brief }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div>
+                                {% include 'employer/field/input.html' with field=job_form.name %}
+                                {% include 'employer/field/input.html' with field=job_form.title %}
+                                {% include 'employer/field/input.html' with field=job_form.description %}
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.location %}
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.area %}
+                                <div class="clear"></div>
+                                {% include 'employer/field/input.html' with field=job_form.award %}
+                                <div class="clear"></div>
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.salary_range_min %}
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.salary_range_max %}
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.hours %}
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.employment_type %}
+                                <div class="clear"></div>
+                                {% include 'employer/field/input.html' with field=job_form.special_conditions %}
+                                {% include 'employer/field/input.html' with class='pod' input_class='it-pod' field=job_form.other_conditions %}
+                                <div class="field ">
+                                    <label>Selection Criteria (please list one per line)*</label>
+                                </div>
+                                <div class="clear"></div>
+                                {% include 'employer/field/criteria.html' with label="Essential" field="essential" %}
+                                {% include 'employer/field/criteria.html' with label="Desireable" field="desireable" %}
+                                <div class="clear"></div>
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.open_date %}
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.end_date %}
+                                <div class="clear"></div>
+                                <div class="field ">
+                                    <label>Contact Person for This Listing*</label>
+                                </div>
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_name %}
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_phone %}
+                                <div class="clear"></div>
+                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_email %}
+
+                                <div class="_submit">
+                                    <img style="display: none;" class="footer_loader" src="{% static 'main/img/preloader.gif' %}">
+                                    <div class="exit" ng-click="save_exit()">Save and Exit</div>
+                                    <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <div class="title">Upload Documents</div>
+                        <p>
+                            From this section you can upload documents associated with this job listing.<br/>
+                            Note that only Adobe PDF or Microsoft Word Documents are allowed.
+                        </p>
+                        <br/>
+                        <fieldset>
+                            <div class="field">
+                                <label>Upload Other Supporting Documents</label>
+                                <supportdocument></supportdocument><br/>
+                                <upload url="{% url "upload" "job_support_document" object.pk %}">Upload a Supporting Document</upload>
+                                <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
+                            </div>
+                            <div class="field">
+                                <label>School, College, or University Name</label>
+                                <fullpositiondocument></fullpositiondocument><br/>
+                                <upload url="{% url "upload" "job_full_position_document" object.pk %}">Upload the Full Position Description</upload>
+                                <div class="text">(Note: You may only upload one Full Position Description)</div>
+                            </div>
+                            <div class="_submit">
+                                <img style="display: none;" class="footer_loader" src="{% static 'main/img/preloader.gif' %}">
+                                    <div class="exit" ng-click="save_exit()">Save and Exit</div>
+                                    <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <div class="title">Select a Category</div>
+                        <fieldset>
+                            {% include 'employer/field/category.html' with bind='ng-model:categories.category' field=job_form.categories %}
+                            {% include 'employer/field/category.html' with class='pod' bind='ng-model:sub_categories.subcategory' field=job_form.sub_categories %}
+                            <br/>
+                            {% include 'employer/field/input.html' with class='star' field=job_form.executive_positions title='Would you like to make this an <span>exclusive Executive Position </span> for only $25?' %}
+                            {% include 'employer/field/select.html' with title='Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for only $100?' %}
+                            <div class="_submit">
+                                <img style="display: none;" class="footer_loader" src="{% static 'main/img/preloader.gif' %}">
+                                    <div class="exit" ng-click="save_exit()">Save and Exit</div>
+                                    <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <div class="title"></div>
+                        <fieldset>
+                            <p>Buy now and save!</p>
+                            <div class="row-bv subscription">
+                                <div class="name-desc-bv">
+                                    <span>Best Value</span>
+                                    <p>Subscription</p>
+                                    <span>
+                                        Post an ultimited<br/>
+                                        amount of ads
+                                    </span>
+                                </div>
+                                <div class="span-bv-group">
+                                    <div class="span-bv">
+                                        <div>
+                                            <p>6 Months</p>
+                                            <span>AU $3300</span>
+                                        </div>
+                                    </div>
+                                    <div class="span-bv">
+                                        <div>
+                                            <p>12 Months</p>
+                                            <span>AU $5500</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="row-bv bulk">
+                                <div class="name-desc-bv">
+                                    <p>Bulk Ad Packs</p>
+                                        <span>
+                                            Buy ads in bulk and <br/>
+                                            save. Bulk packs <br/>
+                                            do notexpire<br/>
+                                        </span>
+                                </div>
+                                <div class="span-bv-group">
+                                    <div class="span-bv">
+                                        <div>
+                                            <p>3 Ads</p>
+                                            <span>AU $590</span>
+                                            <div class="save">
+                                                <p>SAVE</p>
+                                                <span>10%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span-bv active">
+                                        <div>
+                                            <p>10 Ads</p>
+                                            <span>AU $590</span>
+                                            <div class="save">
+                                                <p>SAVE</p>
+                                                <span>20%</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="span-bv">
+                                        <div>
+                                            <p>20 Ads</p>
+                                            <span>AU $590</span>
+                                            <div class="save">
+                                                <p>SAVE</p>
+                                                <span>30%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <p>Use my current package</p>
+                            <div class="clear"></div>
+                            <div class="row-bv mini ">
+                                <div class="span-bv string">
+                                    <p>10</p>
+                                    <span>Bulk Ad Pack</span>
+                                </div>
+                                <div class="span-bv-group">
+                                    <div class="span-bv">
+                                        <p>3</p>
+                                        <span>Ramaining</span>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="row-bv mini">
+                                <div class="span-bv string">
+                                    <p>6 Month</p>
+                                    <span>Subscription</span>
+                                </div>
+                                <div class="span-bv-group">
+                                    <div class="span-bv">
+                                        <p>28 Days</p>
+                                        <span>Ramaining</span>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>
+                            <p>Post only this ad</p>
+                            <div class="row-bv">
+                                <p>AU $220</p>
+                            </div>
+                            <div class="_submit confirm">
+                                <div class="cont">Confirm Order</div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </form>
+                </div>
+            </div>
+            </div>
+        </script>
+        <ng-view></ng-view>
+    </div>
 {% endblock %}
