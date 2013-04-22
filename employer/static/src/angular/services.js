@@ -1,9 +1,12 @@
 /**
  * Created with PyCharm.
  * User: jackdevil
- * Date: 06.04.13
- * Time: 14:17
+ * Date: 22.04.13
+ * Time: 15:13
  * To change this template use File | Settings | File Templates.
  */
 
-var PostJobSelectCategoryModel = BaseModel.extend({});
+app.factory ('share',function() {
+    var job = [];
+    return { job: job };
+});
