@@ -4,9 +4,9 @@ from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
 from employer.api.validation import JobResourceValidation
 from main.api import ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ResourceRelatedFieldsUrlSchemaMixin
-from ..models import JobLocation, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType,\
-    Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument,\
-    JobSelectedCategory, JobSelectedSubCategory, JobExecutivePositions
+from ..models import JobLocation, Hour, EmploymentType, SpecialCondition, JobUploadDocumentType, \
+    Job, Essential, Desireable, JobCategory, JobSubCategory, JobUploadDocument, \
+    JobSelectedCategory, JobSelectedSubCategory, JobExecutivePositions, JobArea
 from userprofile.api import AuthorizationWithObjectPermissions
 
 __author__ = 'ir4y'
@@ -30,6 +30,7 @@ LocationResource = get_resource_fabric(JobLocation)
 HourResource = get_resource_fabric(Hour)
 EmploymentTypeResource = get_resource_fabric(EmploymentType)
 SpecialConditionResource = get_resource_fabric(SpecialCondition)
+JobAreaResource = get_resource_fabric(JobArea)
 JobCategoryResource = get_resource_fabric(JobCategory)
 JobSubCategoryResource = get_resource_fabric(JobSubCategory)
 JobUploadDocumentTypeResource = get_resource_fabric(JobUploadDocumentType)
@@ -73,20 +74,22 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
     essential_set = fields.ToManyField(EssentialResource, 'essential_set', full=True, null=True)
     desireable_set = fields.ToManyField(DesireableResource, 'desireable_set', full=True, null=True)
 
-    # TODO fix append error or remove permanently if is doesn't need any more
-    # categories = fields.ToManyField(JobCategoryResource, 'categories', full=True, null=True)
-    # sub_categories = fields.ToManyField(JobSubCategoryResource, 'sub_categories', full=True, null=True)
+    categories_set = fields.ToManyField('employer.api.JobSelectedCategoryResource',
+                                        'jobselectedcategory_set', full=True, null=True)
+    sub_categories_set = fields.ToManyField('employer.api.JobSelectedSubCategoryResource',
+                                            'jobselectedsubcategory_set', full=True, null=True)
+
+    jobuploaddocument_set = fields.ToManyField('employer.api.JobUploadDocumentResource',
+                                               'jobuploaddocument_set', readonly=True, full=True)
+
+
 
     def get_object_list(self, request):
         query_set = super(JobResource, self).get_object_list(request)
         return query_set.filter(owner=request.user)
 
     def hydrate(self, bundle):
-        bundle.obj.user = bundle.request.user
-        for item in bundle.data['essential_set']:
-            item['job'] = bundle.data['resource_uri']
-        for item in bundle.data['desireable_set']:
-            item['job'] = bundle.data['resource_uri']
+        bundle.obj.owner = bundle.request.user
         return bundle
 
     class Meta:
@@ -95,7 +98,7 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = JobResourceValidation(form_class=modelform_factory(Job))
+        validation = JobResourceValidation(form_class=modelform_factory(Job, exclude=('owner', )))
 
 
 class JobUploadDocumentResource(ModelResource):
@@ -130,7 +133,7 @@ class JobSelectedCategoryResource(ModelResource):
 
 class JobSelectedSubCategoryResource(ModelResource):
     job = fields.ToOneField('employer.api.JobResource', 'job')
-    subcategory = fields.ToOneField(JobSubCategoryResource, 'subcategory')
+    subcategory = fields.ToOneField(JobSubCategoryResource, 'sub_category')
 
     class Meta:
         queryset = JobSelectedSubCategory.objects.all()

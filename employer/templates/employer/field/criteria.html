@@ -1,0 +1,10 @@
+<div class="criteria">
+    <label>{{ label }}:</label>
+    <div class="fields">
+        <div class="pod" ng-repeat="{{ field }} in job.{{ field }}_set">
+            <input class="it-pod2" type="text" ng-model="{{ field }}.{{ field }}"/>
+            <a href="" ng-click="remove(job.{{ field }}_set, $index)">Remove</a>
+        </div>
+    </div>
+    <a ng-click="append(job.{{ field }}_set)" href="">Add Another {{ label }} Criteria Item</a>
+</div>

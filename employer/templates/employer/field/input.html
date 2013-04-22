@@ -1,0 +1,13 @@
+{% load widget_tweaks %}
+
+<div class="field {{ class }}">
+    <label>{{ field.label }}</label>
+    {{ field }}
+    <div class="help-tip">
+        <div class="help-tip-title">Helpful Tip</div>
+        <div class="help-tip-text"><div class="help-tip-right"></div>{{ tooltip|default:field.label }}</div>
+    </div>
+    <div class='error'>
+        <p ng-repeat="error in error.{{ field.name }}">{[{ error }]}</p>
+    </div>
+</div>

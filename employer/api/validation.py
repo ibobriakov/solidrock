@@ -7,7 +7,8 @@ from employer.models import Job
 class JobResourceValidation(FormValidation):
     def fix_pk_in_bundle(self, bundle):
         fixed_bundle = copy.copy(bundle)
-        for field in ('location', 'salary_range', 'hours', 'employment_type', 'special_conditions'):
+        for field in ('location', 'salary_range', 'hours', 'employment_type',
+                      'special_conditions', 'executive_positions'):
             if field in fixed_bundle.data and fixed_bundle.data[field]:
                 fixed_bundle.data[field] = fixed_bundle.data[field].split("/")[-2]  # Get pk from uri
         return fixed_bundle

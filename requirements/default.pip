@@ -26,3 +26,5 @@ pytz==2013b
 six==1.2.0
 sorl-thumbnail==11.12
 wsgiref==0.1.2
+django-widget-tweaks==1.3
+

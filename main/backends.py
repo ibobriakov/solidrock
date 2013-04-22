@@ -33,7 +33,8 @@ class EmailWithPermissionBackend(EmailBackend):
         elif perm in ('employer.change_desireable', 'employer.change_essential', 'employer.delete_jobuploaddocument',
                       'employer.change_jobselectedcategory', 'employer.change_jobselectedsubcategory',
                       'employer.add_jobselectedcategory', 'employer.add_jobselectedsubcategory',
-                      'employer.delete_jobselectedcategory', 'employer.delete_jobselectedsubcategory', ):
+                      'employer.delete_jobselectedcategory', 'employer.delete_jobselectedsubcategory',
+                      'employer.delete_desireable', 'employer.delete_essential' ):
             return obj.job.owner == user
         elif perm in ('employer.add_desireable', 'employer.add_essential',):
             return True
