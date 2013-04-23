@@ -60,15 +60,22 @@ directives.upload = function(){
 
             a.bind('click',function(event) {
                 event.preventDefault();
+                input.bind('fileuploadstart', function (e) {$('.preloader').show();});
                 input.fileupload({
                     dataType: 'json',
                     done: function (e, data) {
                         $scope.$apply( function () {
                             $scope.job.jobuploaddocument_set.push(data.result);
+                            $('.preloader').hide();
                         });
+                    },
+                    error: function(e, data){
+                        $('.preloader').hide();
                     }
                 });
+
                 input.trigger('click');
+
             });
         }
     }
