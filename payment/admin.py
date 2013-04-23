@@ -14,7 +14,7 @@ class TransactionAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('datetime', 'owner', 'order_object', )
+    list_display = ('datetime', 'owner', 'order_object', 'approved', )
 
 
 class AdPackageHistoryAdmin(admin.ModelAdmin):
@@ -26,5 +26,5 @@ admin.site.register(SubscriptionType)
 admin.site.register(AdPackageType)
 admin.site.register(AdPackage)
 admin.site.register(Transaction, TransactionAdmin)
-admin.site.register(Order,OrderAdmin)
+admin.site.register(Order, OrderAdmin)
 admin.site.register(AdPackageHistory, AdPackageHistoryAdmin)

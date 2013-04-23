@@ -117,6 +117,7 @@ def pay_callback(request):
         transaction.result = int(request.GET["vpc_TransactionNo"])
         for order in transaction.order_set.all():
             order.approved = True
+            order.save()
     transaction.save()
     return HttpResponseRedirect("/")
 
