@@ -96,6 +96,7 @@ class Job(models.Model):
                                         blank=True, null=True)
     sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedSubCategory',
                                             blank=True, null=True)
+    approved = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "Job by {0}".format(self.owner)
