@@ -100,6 +100,22 @@ class Job(models.Model):
     def __unicode__(self):
         return "Job by {0}".format(self.owner)
 
+    def get_cost(self):
+        cost = 0
+        if self.executive_positions_id:
+            cost += 25
+        if self.featured_job:
+            cost += 100
+        categories_cost = 15*(self.categories.count()-1)
+        if categories_cost > 0:
+            cost += categories_cost
+        subcategories_cost = 15*(self.sub_categories.count()-1)
+        if subcategories_cost > 0:
+            cost += subcategories_cost
+        return cost
+
+
+
     def get_salary(self):
         if self.salary_range_min > 0 and self.salary_range_max:
             return "${0} - ${1}".format(self.salary_range_min, self.salary_range_max)

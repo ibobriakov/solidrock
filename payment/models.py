@@ -27,7 +27,6 @@ class Order(models.Model):
     amount = models.PositiveIntegerField()
     transaction = models.ForeignKey('payment.Transaction')
     owner = models.ForeignKey('auth.User')
-    amount = models.PositiveIntegerField()
     approved = models.BooleanField(default=False)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
