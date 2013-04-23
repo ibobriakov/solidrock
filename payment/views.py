@@ -2,7 +2,7 @@ import copy
 import json
 from hashlib import md5
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.http import HttpResponseRedirect, Http404, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
 from django.views.generic import FormView, TemplateView
 from django.conf import settings
@@ -47,14 +47,14 @@ def pay_redirect(request):
     amount = 0
     query = json.loads(request.body)
     if 'job' not in query:
-        return HttpResponse(json.dumps({'success': False, 'error': 'No job specfied'}))
+        return HttpResponseBadRequest(json.dumps({'success': False, 'error': 'No job specfied'}))
     job_pk = query['job'].split('/')[-2]
     job = get_object_or_404(Job, pk=job_pk)
     amount += job.get_cost()
     ad_object = None
     if 'item' in query:
-        if not is_ads_already_paid(request.user):
-            return HttpResponse(json.dumps({'success': False, 'error': 'You already has ads'}))
+        if is_ads_already_paid(request.user):
+            return HttpResponseBadRequest(json.dumps({'success': False, 'error': 'You already has ads'}))
         uri = query['item'].split('/')
         model = uri[3]
         pk = uri[4]
@@ -66,8 +66,8 @@ def pay_redirect(request):
             raise Http404
         amount += ad_object.cost
     else:
-        if is_ads_already_paid(request.user):
-            return HttpResponse(json.dumps({'success': False, 'error': 'You should buy ads'}))
+        if not is_ads_already_paid(request.user):
+            return HttpResponseBadRequest(json.dumps({'success': False, 'error': 'You should buy ads'}))
 
     amount *= 100
     transaction = Transaction.objects.create(owner=request.user, amount=amount)
