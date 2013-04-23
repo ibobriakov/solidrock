@@ -8,7 +8,7 @@ from django.views.generic import FormView, TemplateView
 from django.conf import settings
 from employer.models import Job
 from forms import PaymentForm
-from models import AdPackageType, SubscriptionType, Transaction, Order
+from models import AdPackageType, SubscriptionType, Transaction, Order, Subscription, AdPackage
 from tasks import process_payment
 
 
@@ -38,6 +38,10 @@ class PricingView(TemplateView):
         return super(PricingView, self).get_context_data(**custom_contex)
 
 
+def is_ads_already_paid(user):
+    return (Subscription.objects.filter(owner=user).count() + AdPackage.objects.filter(owner=user).count()) > 0
+
+
 def pay_redirect(request):
     secure_secret = copy.copy(settings.SECURE_SECRET)
     amount = 0
@@ -45,10 +49,12 @@ def pay_redirect(request):
     if 'job' not in query:
         return HttpResponse(json.dumps({'success': False, 'error': 'No job specfied'}))
     job_pk = query['job'].split('/')[-2]
-    job = get_object_or_404(Job, job_pk=job_pk)
+    job = get_object_or_404(Job, pk=job_pk)
     amount += job.get_cost()
     ad_object = None
     if 'item' in query:
+        if not is_ads_already_paid(request.user):
+            return HttpResponse(json.dumps({'success': False, 'error': 'You already has ads'}))
         uri = query['item'].split('/')
         model = uri[3]
         pk = uri[4]
@@ -59,6 +65,10 @@ def pay_redirect(request):
         else:
             raise Http404
         amount += ad_object.cost
+    else:
+        if is_ads_already_paid(request.user):
+            return HttpResponse(json.dumps({'success': False, 'error': 'You should buy ads'}))
+
     amount *= 100
     transaction = Transaction.objects.create(owner=request.user, amount=amount)
     Order.objects.create(amount=job.get_cost(),
