@@ -101,7 +101,7 @@ def pay_redirect(request):
         'vpc_Merchant': 'TESTSOLROCCOM01',
         'vpc_OrderInfo': 'VPC Example',
         'vpc_Amount': '{0}'.format(amount),
-        'vpc_ReturnURL': 'http://localhost:8000'+reverse('pay_callback'),
+        'vpc_ReturnURL': settings.BASE_HOSTNAME+reverse('pay_callback'),
         'vpc_Locale': 'en',
     }
     for key in sorted(POST_DATA.keys()):
