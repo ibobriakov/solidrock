@@ -5,7 +5,7 @@ __author__ = 'ir4y'
 
 def has_subscription(user):
     from payment.models import Subscription
-    return Subscription.objects.filter(owner=user, finish_date__lte=datetime.datetime.now()).count()>0
+    return Subscription.objects.filter(owner=user, finish_date__gte=datetime.datetime.now()).count()>0
 
 
 def has_ads_package(user):
@@ -24,11 +24,11 @@ def buy_job(job, user):
             #todo handle error cant post job, but post
             pass
         package = AdPackage.objects.filter(owner=user).exclude(count=0)[0]
-        package.ad_count -= 1
+        package.count -= 1
         package.save()
         AdPackageHistory.objects.create(owner=user,
-                                        ad_count=package.ad_count,
-                                        action=0)  # post job
+                                        ad_count=package.count,
+                                        action=1)  # post job
 
     job.approved = True
     job.save()

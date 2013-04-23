@@ -8,7 +8,7 @@ from django.views.generic import FormView, TemplateView
 from django.conf import settings
 from employer.models import Job
 from forms import PaymentForm
-from models import AdPackageType, SubscriptionType, Transaction, Order, Subscription, AdPackage
+from models import AdPackageType, SubscriptionType, Transaction, Order, Subscription, AdPackage, subscribe_content_type, ad_package_content_type, job_content_type
 from utils import is_ads_already_paid
 from tasks import process_payment
 
@@ -69,7 +69,21 @@ def pay_redirect(request):
             return HttpResponseBadRequest(json.dumps({'success': False, 'error': 'You should buy ads'}))
 
     amount *= 100
+
+
     transaction = Transaction.objects.create(owner=request.user, amount=amount)
+    if amount == 0:
+        transaction.approved = True
+        transaction.save()
+        order = Order.objects.create(amount=job.get_cost(),
+                                     transaction=transaction,
+                                     owner=request.user,
+                                     order_object=job)
+        order.save()
+        order.approved = True
+        order.save()
+        return HttpResponse(json.dumps({'success': True, 'redirect_url': "/"}))
+
     Order.objects.create(amount=job.get_cost(),
                          transaction=transaction,
                          owner=request.user,
@@ -114,9 +128,17 @@ def pay_callback(request):
         # todo fix it
         transaction.approved = True
         transaction.result = int(request.GET["vpc_TransactionNo"])
-        for order in transaction.order_set.all():
+        # todo refactor it
+        for order in transaction.order_set.filter(content_type=subscribe_content_type):
             order.approved = True
             order.save()
+        for order in transaction.order_set.filter(content_type=ad_package_content_type):
+            order.approved = True
+            order.save()
+        for order in transaction.order_set.filter(content_type=job_content_type):
+            order.approved = True
+            order.save()
+
     transaction.save()
     return HttpResponseRedirect("/")
 

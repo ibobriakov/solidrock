@@ -83,7 +83,7 @@ class AdPackageHistory(models.Model):
         (1, "post job"),
     )
     datetime = models.DateTimeField(auto_now_add=True)
-    owner = models.OneToOneField('auth.User')
+    owner = models.ForeignKey('auth.User')
     ad_count = models.PositiveIntegerField()
     action = models.PositiveIntegerField(choices=ACTION_CHOICES)
 
@@ -92,11 +92,12 @@ class AdPackageHistory(models.Model):
 
 
 job_content_type = ContentType.objects.get_for_model(Job)
-ad_package_content_type = ContentType.objects.get_for_model(AdPackage)
-subscribe_content_type = ContentType.objects.get_for_model(Subscription)
+ad_package_content_type = ContentType.objects.get_for_model(AdPackageType)
+subscribe_content_type = ContentType.objects.get_for_model(SubscriptionType)
 
 
 def after_order_save(instance, created, **kwargs):
+    # todo check if it has already approved
     if not created and instance.approved:
         if instance.content_type == ad_package_content_type:
             buy_ad_package(instance.order_object, instance.owner)

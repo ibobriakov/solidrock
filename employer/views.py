@@ -64,13 +64,15 @@ class EditJobView(DetailView):
         context['packages'] = AdPackageType.objects.exclude(default=True)
         context['default'] = AdPackageType.objects.get(default=True)
         try:
-            context['user_subscription'] = Subscription.objects.get(owner=self.request.user)
-        except Subscription.DoesNotExist:
+            context['user_subscription'] = Subscription.objects.filter(owner=self.request.user,
+                                                                       finish_date__gte=datetime.datetime.now())[0]
+        except IndexError:
             context['user_subscription'] = False
         try:
-            context['user_package'] = AdPackage.objects.get(owner=self.request.user)
-        except AdPackage.DoesNotExist:
+            context['user_package'] = AdPackage.objects.filter(owner=self.request.user).exclude(count=0)[0]
+        except IndexError:
             context['user_package'] = False
+
         return context
 
 
