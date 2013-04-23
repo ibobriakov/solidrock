@@ -1,0 +1,104 @@
+diff --git a/payment/forms.py b/payment/forms.py
+index 1d3554a..a2d6a76 100644
+--- a/payment/forms.py
++++ b/payment/forms.py
+@@ -8,4 +8,8 @@ class PaymentForm(forms.Form):
+     card_number = forms.IntegerField(initial="5123456789012346")
+     card_expiry_year = forms.IntegerField(initial="2013")
+     card_expiry_month = forms.IntegerField(initial="05")
+-    card_ccv = forms.IntegerField(initial="111")
+\ No newline at end of file
++    card_ccv = forms.IntegerField(initial="111")
++
++
++class ExternalPaymentForm(forms.Form):
++    pass
+\ No newline at end of file
+diff --git a/payment/tasks.py b/payment/tasks.py
+index 333e870..d22bf76 100644
+--- a/payment/tasks.py
++++ b/payment/tasks.py
+@@ -10,7 +10,7 @@ def process_payment(user, amount, card_number, card_exp, card_sec_code):
+                                              amount=amount)
+     order = "order:{0}".format(transaction.pk)
+     try:
+-        result = process(amount, card_number, card_exp, card_sec_code,order_info=order, merch_ref=order)
++        result = process(amount, card_number, card_exp, card_sec_code, order_info=order, merch_ref=order)
+         if result["vpc_TxnResponseCode"] != "0":
+             transaction.error_code = int(result["vpc_TxnResponseCode"])
+             transaction.error = result["vpc_Message"]
+diff --git a/payment/urls.py b/payment/urls.py
+index dab6e8a..f29826b 100644
+--- a/payment/urls.py
++++ b/payment/urls.py
+@@ -4,7 +4,9 @@ from views import PaymentView, PricingView
+ 
+ __author__ = 'ir4y'
+ 
+-urlpatterns = patterns('',
++urlpatterns = patterns('payment.views',
+                        url(r'^$', PaymentView.as_view(), name='payment'),
++                       url(r'^pay_redirect/$','pay_redirect', name='pay_redirect'),
++                       url(r'^pay_callback$','pay_callback', name='pay_callback'),
+                        url(r'^pricing/$', PricingView.as_view(), name='pricing'),
+ )
+\ No newline at end of file
+diff --git a/payment/views.py b/payment/views.py
+index e986f20..10b2672 100644
+--- a/payment/views.py
++++ b/payment/views.py
+@@ -1,6 +1,12 @@
++import copy
++from hashlib import md5
++from django.core.urlresolvers import reverse
++from django.http import HttpResponseRedirect
++from django.shortcuts import get_object_or_404
+ from django.views.generic import FormView, TemplateView
++from django.conf import settings
+ from forms import PaymentForm
+-from models import AdPackageType, SubscriptionType
++from models import AdPackageType, SubscriptionType, Transaction
+ from tasks import process_payment
+ 
+ 
+@@ -28,3 +34,40 @@ class PricingView(TemplateView):
+         custom_contex['packages'] = AdPackageType.objects.exclude(default=True)
+         custom_contex['default'] = AdPackageType.objects.get(default=True)
+         return super(PricingView, self).get_context_data(**custom_contex)
++
++
++def pay_redirect(request):
++    secure_secret = copy.copy(settings.SECURE_SECRET)
++    transaction = Transaction.objects.create(owner=request.user,
++                                             amount=request.GET['amount'])
++    POST_DATA = {
++        'vpc_Version': '1',
++        'vpc_Command': 'pay',
++        'vpc_AccessCode': '9F3486FE',
++        'vpc_MerchTxnRef': '{0}'.format(transaction.id),
++        'vpc_Merchant': 'TESTSOLROCCOM01',
++        'vpc_OrderInfo': 'VPC Example',
++        'vpc_Amount': request.GET['amount'],
++        'vpc_ReturnURL': 'http://localhost:8000'+reverse('pay_callback'),
++        'vpc_Locale': 'en',
++    }
++    for key in sorted(POST_DATA.keys()):
++        secure_secret += POST_DATA[key]
++    POST_DATA['vpc_SecureHash'] = md5(secure_secret).hexdigest().upper()
++    tail = "&".join(["%s=%s" % (key, value) for key, value in POST_DATA.iteritems()])
++    return HttpResponseRedirect("https://migs.mastercard.com.au/vpcpay?"+tail)
++
++
++def pay_callback(request):
++    #todo check secure hash
++    transaction = get_object_or_404(Transaction, pk=request.GET['vpc_MerchTxnRef'])
++    response_code = request.GET.get('vpc_TxnResponseCode', "9999")
++    if response_code != '0':
++        transaction.error_code = int(response_code)
++        transaction.error = request.GET.get("vpc_Message", 'Unknown error')
++    else:
++        transaction.approved = True
++        transaction.result = int(request.GET["vpc_TransactionNo"])
++    transaction.save()
++    return HttpResponseRedirect("/")
++
