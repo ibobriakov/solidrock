@@ -134,6 +134,12 @@ directives.advpayment = function(){
             if ($scope.job.executive_positions) {
                 html += "<p> Executive positions - $25 <p>";
             }
+            if ($scope.job.categories_set.length > 1) {
+                html += "<p> Advanced category - $15 <p>";
+            }
+            if ($scope.job.sub_categories_set.length > 1) {
+                html += "<p> Advanced sub-category - $15 <p>";
+            }
             html+="</div>";
             element.replaceWith(html);
         }

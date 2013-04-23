@@ -153,3 +153,7 @@ a.remove {
 .row-bv.bulk, .row-bv.subscription {
     cursor: auto;
 }
+
+.advanced_payment{
+    margin-top: 20px;
+}
