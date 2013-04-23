@@ -32,7 +32,16 @@
 {% block content %}
     <div class="_content stages" ng-app="PostJobApp">
         <div ng-controller="JobData" ng-init='set_data({{ object|as_json|safe }}[0])'></div>
-        <div ng-controller="JobPaymentData" ng-init='set_data({ subscriptions:{{ subscriptions|as_json|safe }}, packages:{{ packages|as_json|safe }} })'></div>
+
+        <div ng-controller="JobPaymentData"
+             ng-init='set_data({
+                subscriptions: {{ subscriptions|as_json|safe }},
+                packages: {{ packages|as_json|safe }}
+                {% if user_subscription %},current_subscription: {{ user_subscription|as_json|safe }}[0]{% endif %}
+                {% if user_package %},current_package: {{ user_package|as_json|safe }}[0]{% endif %}
+             })'>
+        </div>
+
         <script type="text/ng-template" id="post-job.html">
             <div>
             <h1>Post a Job Listing</h1>
@@ -179,9 +188,11 @@
             </div>
             </div>
         </script>
+
         <script type="text/ng-template" id="payment-job.html">
             <div class="title"></div>
             <fieldset>
+                {% if not user_subscription and not user_package %}
                 <p>Buy now and save!</p>
                 <div class="row-bv subscription">
                     <div class="name-desc-bv">
@@ -222,39 +233,47 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-                <p>Use my current package</p>
+                {% endif %}
                 <div class="clear"></div>
-                <div class="row-bv mini ">
+                {% if user_package %}
+                    <p>Use my current package</p>
+                    <div class="row-bv mini" ng-class="{active: current_package.active}" ng-click="select(current_package)">
                     <div class="span-bv string">
-                        <p>10</p>
+                        <p>{[{ current_package.type.ad_count }]}</p>
                         <span>Bulk Ad Pack</span>
                     </div>
                     <div class="span-bv-group">
                         <div class="span-bv">
-                            <p>3</p>
-                            <span>Ramaining</span>
+                            <p>{[{ current_package.count }]}</p>
+                            <span>Remaining</span>
                         </div>
                     </div>
                     <div class="clear"></div>
                 </div>
-                <div class="row-bv mini">
+                {% endif %}
+                {% if user_subscription %}
+                    <p>Use my current subscription</p>
+                    <div class="row-bv mini" ng-class="{active: current_subscription.active}" ng-click="select(current_subscription)">
                     <div class="span-bv string">
-                        <p>6 Month</p>
+                        <p>{[{ current_subscription.type.name }]}</p>
                         <span>Subscription</span>
                     </div>
                     <div class="span-bv-group">
                         <div class="span-bv">
-                            <p>28 Days</p>
-                            <span>Ramaining</span>
+                            <p>{[{ current_subscription.remaining }]} Days</p>
+                            <span>Remaining</span>
                         </div>
                     </div>
                     <div class="clear"></div>
                 </div>
+                {% endif %}
                 <div class="clear"></div>
+                {% if not user_subscription and not user_package %}
                 <p>Post only this ad</p>
                 <div class="row-bv">
                     <p>AU $220</p>
                 </div>
+                {% endif %}
                 <div class="_submit confirm">
                     <div class="cont">Confirm Order</div>
                 </div>

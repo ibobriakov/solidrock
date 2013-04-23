@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Transaction, AdPackageHistory, Subscription, SubscriptionType, AdPackageType
+from models import Transaction, AdPackageHistory, Subscription, SubscriptionType, AdPackageType, AdPackage
 
 __author__ = 'ir4y'
 
@@ -15,5 +15,6 @@ class AdPackageHistoryAdmin(admin.ModelAdmin):
 admin.site.register(Subscription)
 admin.site.register(SubscriptionType)
 admin.site.register(AdPackageType)
+admin.site.register(AdPackage)
 admin.site.register(Transaction, TransactionAdmin)
 admin.site.register(AdPackageHistory, AdPackageHistoryAdmin)

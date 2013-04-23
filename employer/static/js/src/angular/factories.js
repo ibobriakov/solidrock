@@ -1,9 +1,5 @@
 /**
- * Created with PyCharm.
  * User: jackdevil
- * Date: 22.04.13
- * Time: 15:13
- * To change this template use File | Settings | File Templates.
  */
 
 PostJobApp.factory ('share',function() {
@@ -12,6 +8,17 @@ PostJobApp.factory ('share',function() {
 });
 
 PostJobApp.factory ('sharePayment', function(){
-    var subscriptions = [], packages = [];
-    return { subscriptions: subscriptions, packages: packages };
+    var subscriptions = [],
+        packages = [],
+        current_package = false,
+        current_subscription = false,
+        select = false;
+
+    return {
+        subscriptions: subscriptions,
+        packages: packages,
+        current_package: current_package,
+        current_subscription: current_subscription,
+        select: select
+    };
 });

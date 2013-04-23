@@ -37,7 +37,7 @@ class Subscription(models.Model):
     type = models.ForeignKey('payment.SubscriptionType')
 
     def __unicode__(self):
-        return "{0}-{1} for {3}".format(self.start_date, self.finish_date, self.owner)
+        return "{0}".format(self.owner)
 
 
 class AdPackageType(models.Model):
@@ -58,7 +58,7 @@ class AdPackage(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return "{0}-{1} for {3}".format(self.type, self.count, self.owner)
+        return "{0}".format(self.owner)
 
 
 class AdPackageHistory(models.Model):

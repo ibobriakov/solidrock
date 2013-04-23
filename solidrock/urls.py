@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from tastypie.api import Api
 from cover_letter.api import CoverLetterResource, CoverLetterItemResource
-from payment.api import SubscriptionTypeResource, AdPackageTypeResource
+from payment.api import SubscriptionTypeResource, AdPackageTypeResource, AdPackageResource, SubscriptionResource
 from registration_rest_backend.api import JobSeekerRegistrationResource, EmployerRegistrationResource,\
     ActivationResource, LoginResource
 from resume.api import ResumeItemResource, ResumeResource
@@ -53,6 +53,8 @@ v1_api.register(JobExecutivePositionsResource())
 v1_api.register(FeedbackResource())
 v1_api.register(SubscriptionTypeResource())
 v1_api.register(AdPackageTypeResource())
+v1_api.register(AdPackageResource())
+v1_api.register(SubscriptionResource())
 
 admin.autodiscover()
 

@@ -1,10 +1,6 @@
 /**
- * Created with PyCharm.
  * User: jackdevil
- * Date: 22.04.13
- * Time: 14:36
- * To change this template use File | Settings | File Templates.
- */
+**/
 
 var directives = {};
 
@@ -84,7 +80,13 @@ directives.payment = function() {
         controller: function($scope, sharePayment){
             $scope.subscriptions = sharePayment.subscriptions;
             $scope.packages = sharePayment.packages;
-
+            $scope.current_subscription = sharePayment.current_subscription;
+            $scope.current_package = sharePayment.current_package;
+            if ($scope.current_subscription) {
+                var start_date = new Date();
+                var finish_date = new Date($scope.current_subscription.finish_date);
+                $scope.current_subscription.remaining = parseInt((finish_date-start_date)/(1000*60*60*24));
+            }
             var set_active = function(item) {
                 _.map($scope.subscriptions,function(value){ value.active=false });
                 _.map($scope.packages,function(value){ value.active=false });
@@ -93,6 +95,7 @@ directives.payment = function() {
 
             $scope.select = function(item){
                 set_active(item);
+                console.log(item);
             }
         },
         templateUrl: "payment-job.html"

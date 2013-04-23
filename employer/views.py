@@ -8,7 +8,7 @@ from job_seeker.forms import ApplyToJobForm
 from job_seeker.models import ApplyToJob
 from models import Job, JobLocation, Hour, EmploymentType,\
     SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory, JobExecutivePositions
-from payment.models import SubscriptionType, AdPackageType, Subscription, AdPackageHistory
+from payment.models import SubscriptionType, AdPackageType, Subscription, AdPackageHistory, AdPackage
 from userprofile.models import Employer
 from employer.forms import JobForm
 
@@ -63,8 +63,14 @@ class EditJobView(DetailView):
         context['subscriptions'] = SubscriptionType.objects.all()
         context['packages'] = AdPackageType.objects.exclude(default=True)
         context['default'] = AdPackageType.objects.get(default=True)
-        context['user_subscription'] = Subscription.objects.filter(owner=self.request.user)
-        context['user_package'] = AdPackageHistory.objects.filter(owner=self.request.user)
+        try:
+            context['user_subscription'] = Subscription.objects.get(owner=self.request.user)
+        except Subscription.DoesNotExist:
+            context['user_subscription'] = False
+        try:
+            context['user_package'] = AdPackage.objects.get(owner=self.request.user)
+        except AdPackage.DoesNotExist:
+            context['user_package'] = False
         return context
 
 

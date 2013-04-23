@@ -146,6 +146,6 @@ a.remove {
     text-align: left !important;
 }
 
-.span-bv {
+.span-bv, .row-bv {
     cursor: pointer;
 }
