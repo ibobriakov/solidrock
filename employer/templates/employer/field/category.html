@@ -1,10 +1,11 @@
 {% load widget_tweaks %}
+{% load staticfiles %}
 <div class="field {{ class }}">
     <label>{{ label|default:field.label }}</label>
 
-    <div ng-repeat="{{ field.name }} in job.{{ field.name }}_set">
+    <div class="category" ng-repeat="{{ field.name }} in job.{{ field.name }}_set">
         {{ field|attr:bind|attr:"id" }}
-        <a href="" ng-click="remove(job.{{ field.name }}_set, $index)">Remove</a>
+        <a class="remove" href="" ng-click="remove(job.{{ field.name }}_set, $index)"><img src="{% static 'main/img/icon_remove.png' %}"></a>
     </div>
-    <a ng-click="append(job.{{ field.name }}_set)" href="">Add Categories</a>
+    <a class="category_append" ng-click="append(job.{{ field.name }}_set)" href="">Add {{ label|default:field.label }}</a>
 </div>

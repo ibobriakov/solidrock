@@ -33,9 +33,9 @@ directives.supportdocument = function(){
     return {
         restrict: "E",
         template: "" +
-            "<div ng-repeat='document in job.jobuploaddocument_set | filter:{document_type.id:2}'>" +
-                "<a href='{[{ document.document }]}'>{[{ document.file_name }]}</a>" +
-                "<a href='' ng-click='document_remove(document)'>x</a>" +
+            "<div class='document' ng-repeat='document in job.jobuploaddocument_set | filter:{document_type.id:2}'>" +
+                "<a class='link' href='{[{ document.document }]}'>{[{ document.file_name }]}</a>" +
+                "<a class='remove' href='' ng-click='document_remove(document)'><img src='/static/main/img/icon_remove.png'></a>" +
             "</div>"
     }
 };
@@ -45,9 +45,9 @@ directives.fullpositiondocument = function(){
     return {
         restrict: "E",
         template: "" +
-            "<div ng-repeat='document in job.jobuploaddocument_set | filter:{document_type.id:1}'>" +
-                "<a href='{[{ document.document }]}'>{[{ document.file_name }]}</a>" +
-                "<a href='' ng-click='document_remove(document)'>x</a>" +
+            "<div class='document' ng-repeat='document in job.jobuploaddocument_set | filter:{document_type.id:1}'>" +
+                "<a class='link' href='{[{ document.document }]}'>{[{ document.file_name }]}</a>" +
+                "<a class='remove' href='' ng-click='document_remove(document)'><img src='/static/main/img/icon_remove.png'></a></a>" +
             "</div>"
     }
 };
@@ -57,7 +57,7 @@ directives.upload = function(){
         restrict: "E",
         link: function($scope, element, attrs) {
             var text = element.html();
-            var htmlText = '<div><input class="_hide" type="file" name="files[]" data-url="' + attrs.url + '">\n';
+            var htmlText = '<div class="upload_document_block"><input class="_hide" type="file" name="files[]" data-url="' + attrs.url + '">\n';
             htmlText += '<a href="">' + text + '</a></div>';
             var new_element = element.replaceWithPush(htmlText);
             var input = new_element.find('input'), a = new_element.find('a');

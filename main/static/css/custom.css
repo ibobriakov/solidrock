@@ -106,3 +106,42 @@
   min-height: 20px;
   overflow-y: auto;
 }
+
+.stages .right .form input[type=text].it-pod2 {
+    width: 560px !important;
+}
+
+.pod a img{
+    vertical-align: middle;
+}
+
+.document, .document a {
+    display: inline-block !important;
+}
+
+.document .remove img {
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.upload_document_block{
+    padding-top: 10px;
+}
+
+div.document {
+    margin-left: 20px;
+}
+
+div.document:first-child {
+    margin-left: 0px;
+}
+
+a.remove {
+    display: inline-block !important;
+    vertical-align: middle;
+}
+
+.category_append {
+    padding-top: 10px !important;
+    text-align: left !important;
+}

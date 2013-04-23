@@ -61,5 +61,5 @@ PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routePara
         $scope.error = data.job;
     };
 
-    $('select').select2();
+    //$('select').select2();
 });
