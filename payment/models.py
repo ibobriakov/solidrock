@@ -98,12 +98,12 @@ subscribe_content_type = ContentType.objects.get_for_model(Subscription)
 
 def after_order_save(instance, created, **kwargs):
     if not created and instance.approved:
-        if instance.content_type == job_content_type:
-            buy_job(instance.order_object, instance.owner)
-        elif instance.content_type == ad_package_content_type:
+        if instance.content_type == ad_package_content_type:
             buy_ad_package(instance.order_object, instance.owner)
         elif instance.content_type == subscribe_content_type:
-            buy_subcription(instance.order_object,instance.owner)
+            buy_subcription(instance.order_object, instance.owner)
+        elif instance.content_type == job_content_type:
+            buy_job(instance.order_object, instance.owner)
 
 
 post_save.connect(after_order_save,Order)

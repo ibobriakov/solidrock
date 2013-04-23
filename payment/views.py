@@ -47,6 +47,8 @@ def pay_redirect(request):
         return HttpResponseBadRequest(json.dumps({'success': False, 'error': 'No job specfied'}))
     job_pk = query['job'].split('/')[-2]
     job = get_object_or_404(Job, pk=job_pk)
+    if job.approved:
+        return HttpResponseBadRequest(json.dumps({'success': False, 'error': 'You has already buy this job'}))
     amount += job.get_cost()
     ad_object = None
     if 'item' in query:
