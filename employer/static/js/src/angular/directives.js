@@ -88,8 +88,12 @@ directives.payment = function() {
 
             $scope.confirm = function() {
                 $http.post('/payment/payment_redirect/', {job: $scope.job.resource_uri, item: $scope.select_item.resource_uri})
-                    .success(function(){})
-                    .error(function(){});
+                    .success(function(data, status, headers, config){
+                        window.location.href = data.redirect_url;
+                    })
+                    .error(function(data, status, headers, config){
+                        console.log(data);
+                    });
             };
 
             if ($scope.user_subscription) {
