@@ -2,6 +2,25 @@
  * User: jackdevil
  */
 
+// Job payment controller
+
+PostJobApp.controller ('JobPaymentData', function($scope, sharePayment) {
+    $scope.set_data = function(data){
+        _.each(data,function(value, key){
+            $scope[key] = value;
+        });
+        sharePayment.subscriptions = $scope.subscriptions;
+        sharePayment.packages = $scope.packages;
+    }
+});
+
+PostJobApp.controller('JobPayment',function($scope, sharePayment) {
+    $scope.subscriptions = sharePayment.subscriptions;
+    $scope.packages = sharePayment.packages;
+});
+
+// Main post job controller
+
 PostJobApp.controller ('JobData', function($scope, share) {
     $scope.set_data = function(data){
         $scope.job = data;
@@ -61,5 +80,4 @@ PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routePara
         $scope.error = data.job;
     };
 
-    //$('select').select2();
 });

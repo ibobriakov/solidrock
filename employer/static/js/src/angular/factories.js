@@ -10,3 +10,8 @@ PostJobApp.factory ('share',function() {
     var job = [];
     return { job: job };
 });
+
+PostJobApp.factory ('sharePayment', function(){
+    var subscriptions = [], packages = [];
+    return { subscriptions: subscriptions, packages: packages };
+});

@@ -78,4 +78,25 @@ directives.upload = function(){
     }
 };
 
+directives.payment = function() {
+    return {
+        restrict: "E",
+        controller: function($scope, sharePayment){
+            $scope.subscriptions = sharePayment.subscriptions;
+            $scope.packages = sharePayment.packages;
+
+            var set_active = function(item) {
+                _.map($scope.subscriptions,function(value){ value.active=false });
+                _.map($scope.packages,function(value){ value.active=false });
+                item.active = true;
+            };
+
+            $scope.select = function(item){
+                set_active(item);
+            }
+        },
+        templateUrl: "payment-job.html"
+    }
+};
+
 PostJobApp.directive(directives);

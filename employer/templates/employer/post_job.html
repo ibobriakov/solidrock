@@ -31,9 +31,8 @@
 
 {% block content %}
     <div class="_content stages" ng-app="PostJobApp">
-
         <div ng-controller="JobData" ng-init='set_data({{ object|as_json|safe }}[0])'></div>
-
+        <div ng-controller="JobPaymentData" ng-init='set_data({ subscriptions:{{ subscriptions|as_json|safe }}, packages:{{ packages|as_json|safe }} })'></div>
         <script type="text/ng-template" id="post-job.html">
             <div>
             <h1>Post a Job Listing</h1>
@@ -171,120 +170,95 @@
                         </fieldset>
                     </div>
                     <div>
-                        <div class="title"></div>
-                        <fieldset>
-                            <p>Buy now and save!</p>
-                            <div class="row-bv subscription">
-                                <div class="name-desc-bv">
-                                    <span>Best Value</span>
-                                    <p>Subscription</p>
-                                    <span>
-                                        Post an ultimited<br/>
-                                        amount of ads
-                                    </span>
-                                </div>
-                                <div class="span-bv-group">
-                                    <div class="span-bv">
-                                        <div>
-                                            <p>6 Months</p>
-                                            <span>AU $3300</span>
-                                        </div>
-                                    </div>
-                                    <div class="span-bv">
-                                        <div>
-                                            <p>12 Months</p>
-                                            <span>AU $5500</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="row-bv bulk">
-                                <div class="name-desc-bv">
-                                    <p>Bulk Ad Packs</p>
-                                        <span>
-                                            Buy ads in bulk and <br/>
-                                            save. Bulk packs <br/>
-                                            do notexpire<br/>
-                                        </span>
-                                </div>
-                                <div class="span-bv-group">
-                                    <div class="span-bv">
-                                        <div>
-                                            <p>3 Ads</p>
-                                            <span>AU $590</span>
-                                            <div class="save">
-                                                <p>SAVE</p>
-                                                <span>10%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span-bv active">
-                                        <div>
-                                            <p>10 Ads</p>
-                                            <span>AU $590</span>
-                                            <div class="save">
-                                                <p>SAVE</p>
-                                                <span>20%</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="span-bv">
-                                        <div>
-                                            <p>20 Ads</p>
-                                            <span>AU $590</span>
-                                            <div class="save">
-                                                <p>SAVE</p>
-                                                <span>30%</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <p>Use my current package</p>
-                            <div class="clear"></div>
-                            <div class="row-bv mini ">
-                                <div class="span-bv string">
-                                    <p>10</p>
-                                    <span>Bulk Ad Pack</span>
-                                </div>
-                                <div class="span-bv-group">
-                                    <div class="span-bv">
-                                        <p>3</p>
-                                        <span>Ramaining</span>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="row-bv mini">
-                                <div class="span-bv string">
-                                    <p>6 Month</p>
-                                    <span>Subscription</span>
-                                </div>
-                                <div class="span-bv-group">
-                                    <div class="span-bv">
-                                        <p>28 Days</p>
-                                        <span>Ramaining</span>
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="clear"></div>
-                            <p>Post only this ad</p>
-                            <div class="row-bv">
-                                <p>AU $220</p>
-                            </div>
-                            <div class="_submit confirm">
-                                <div class="cont">Confirm Order</div>
-                            </div>
-                        </fieldset>
+                    <div ng-controller="JobPayment">
+                        <payment></payment>
+                    </div>
                     </div>
                 </form>
                 </div>
             </div>
             </div>
+        </script>
+        <script type="text/ng-template" id="payment-job.html">
+            <div class="title"></div>
+            <fieldset>
+                <p>Buy now and save!</p>
+                <div class="row-bv subscription">
+                    <div class="name-desc-bv">
+                        <span>Best Value</span>
+                        <p>Subscription</p>
+                        <span>Post an ultimited<br/>amount of ads</span>
+                    </div>
+                    <div class="span-bv-group">
+                        <div class="span-bv" ng-repeat="subscription in subscriptions" ng-class="{active: subscription.active}">
+                            <div ng-click="select(subscription)">
+                                <p>{[{ subscription.promo }]}</p>
+                                <span>AU ${[{ subscription.cost }]}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="row-bv bulk">
+                    <div class="name-desc-bv">
+                        <p>Bulk Ad Packs</p>
+                            <span>
+                                Buy ads in bulk and <br/>
+                                save. Bulk packs <br/>
+                                do notexpire<br/>
+                            </span>
+                    </div>
+                    <div class="span-bv-group">
+                        <div class="span-bv" ng-repeat="package in packages" ng-class="{active: package.active}">
+                            <div ng-click="select(package)">
+                                <p>{[{ package.name }]}</p>
+                                <span>AU ${[{ package.cost }]}</span>
+                                <div class="save">
+                                    <p>SAVE</p>
+                                    <span>10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <p>Use my current package</p>
+                <div class="clear"></div>
+                <div class="row-bv mini ">
+                    <div class="span-bv string">
+                        <p>10</p>
+                        <span>Bulk Ad Pack</span>
+                    </div>
+                    <div class="span-bv-group">
+                        <div class="span-bv">
+                            <p>3</p>
+                            <span>Ramaining</span>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="row-bv mini">
+                    <div class="span-bv string">
+                        <p>6 Month</p>
+                        <span>Subscription</span>
+                    </div>
+                    <div class="span-bv-group">
+                        <div class="span-bv">
+                            <p>28 Days</p>
+                            <span>Ramaining</span>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+                <p>Post only this ad</p>
+                <div class="row-bv">
+                    <p>AU $220</p>
+                </div>
+                <div class="_submit confirm">
+                    <div class="cont">Confirm Order</div>
+                </div>
+            </fieldset>
         </script>
         <ng-view></ng-view>
     </div>

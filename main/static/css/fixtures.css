@@ -1,3 +1,7 @@
 .employer-name{
     margin-bottom: 15px;
 }
+
+.stages .right ul li {
+    padding: 0;
+}

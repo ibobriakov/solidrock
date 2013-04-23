@@ -34,9 +34,10 @@ class Subscription(models.Model):
     owner = models.ForeignKey('auth.User')
     start_date = models.DateTimeField(auto_now_add=True)
     finish_date = models.DateTimeField()
+    type = models.ForeignKey('payment.SubscriptionType')
 
     def __unicode__(self):
-        return "{0}-{1} for {3}".format(self.start_date,self.finish_date,self.owner)
+        return "{0}-{1} for {3}".format(self.start_date, self.finish_date, self.owner)
 
 
 class AdPackageType(models.Model):
@@ -48,6 +49,16 @@ class AdPackageType(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class AdPackage(models.Model):
+    owner = models.ForeignKey('auth.User')
+    count = models.PositiveIntegerField()
+    type = models.ForeignKey('payment.AdPackageType')
+    start_date = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return "{0}-{1} for {3}".format(self.type, self.count, self.owner)
 
 
 class AdPackageHistory(models.Model):

@@ -8,8 +8,10 @@ from job_seeker.forms import ApplyToJobForm
 from job_seeker.models import ApplyToJob
 from models import Job, JobLocation, Hour, EmploymentType,\
     SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory, JobExecutivePositions
+from payment.models import SubscriptionType, AdPackageType, Subscription, AdPackageHistory
 from userprofile.models import Employer
 from employer.forms import JobForm
+
 
 class EmployerView(DetailView):
     model = Employer
@@ -53,11 +55,16 @@ class EditJobView(DetailView):
         object = super(EditJobView, self).get_object(queryset)
         if object.owner != self.request.user:
             raise Http404
-        return  object
+        return object
 
     def get_context_data(self, **kwargs):
         context = super(EditJobView, self).get_context_data(**kwargs)
         context["job_form"] = JobForm()
+        context['subscriptions'] = SubscriptionType.objects.all()
+        context['packages'] = AdPackageType.objects.exclude(default=True)
+        context['default'] = AdPackageType.objects.get(default=True)
+        context['user_subscription'] = Subscription.objects.filter(owner=self.request.user)
+        context['user_package'] = AdPackageHistory.objects.filter(owner=self.request.user)
         return context
 
 
