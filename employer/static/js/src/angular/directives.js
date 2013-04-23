@@ -85,14 +85,15 @@ directives.payment = function() {
             $scope.default_package = sharePayment.default_package;
             $scope.job = share.job;
             $scope.select_item = sharePayment.select_item;
+            $scope.service_cost = sharePayment.service_cost;
 
             $scope.confirm = function() {
                 $http.post('/payment/payment_redirect/', {job: $scope.job.resource_uri, item: $scope.select_item.resource_uri})
-                    .success(function(data, status, headers, config){
+                    .success(function(data, status, headers, config) {
                         window.location.href = data.redirect_url;
                     })
                     .error(function(data, status, headers, config){
-                        console.log(data);
+                        $scope.payment_error = data.error;
                     });
             };
 
@@ -118,6 +119,9 @@ directives.payment = function() {
             $scope.select = function(item){
                 set_active(item);
                 $scope.select_item = item;
+                if (item.cost) {
+                    $scope.service_cost = item.cost;
+                }
             }
         },
         templateUrl: "payment-job.html"
@@ -127,27 +131,53 @@ directives.payment = function() {
 directives.advpayment = function(){
     return {
         restrict: "E",
-        controller: function($scope, share){
+        controller: function($scope, share, sharePayment){
             $scope.job = share.job;
+            $scope.advanced_total = sharePayment.advanced_total;
+            $scope.select_item = sharePayment.select_item;
+
         },
         link: function($scope, element, attrs){
+            var advanced_total = 0;
             var html = "<div class='advanced_payment'>";
             if ($scope.job.featured_job) {
                 html += "<p> Featured Job - $100 </p>";
+                advanced_total += 100;
             }
             if ($scope.job.executive_positions) {
                 html += "<p> Executive positions - $25 <p>";
+                advanced_total += 25;
             }
             if ($scope.job.categories_set.length > 1) {
                 html += "<p> Advanced category - $15 <p>";
+                advanced_total += 15;
             }
             if ($scope.job.sub_categories_set.length > 1) {
                 html += "<p> Advanced sub-category - $15 <p>";
+                advanced_total += 15;
             }
+            $scope.advanced_total = advanced_total;
             html+="</div>";
             element.replaceWith(html);
         }
     }
 };
+
+directives.total = function(){
+    return {
+        restrict: "E",
+        controller: function($scope, sharePayment){
+            $scope.service_cost = sharePayment.service_cost;
+
+            $scope.select_text = function() {
+                if ($scope.service_cost) {
+                    return 'Service cost - $' + $scope.service_cost;
+                }
+            }
+
+        },
+        template: "<p>{[{ select_text() }]}</p><br/><p>Total - ${[{service_cost + advanced_total}]}<p>"
+    }
+}
 
 PostJobApp.directive(directives);

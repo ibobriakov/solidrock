@@ -235,7 +235,8 @@
                 <div class="clear"></div>
                 {% if user_package %}
                     <p>Use my current package</p>
-                    <div class="row-bv mini" ng-class="{active: user_package.active}" ng-click="select(user_package)">
+                    <div class="row-bv mini" >
+{#                    ng-class="{active: user_package.active}" ng-click="select(user_package)"#}
                     <div class="span-bv string">
                         <p>{[{ user_package.type.ad_count }]}</p>
                         <span>Bulk Ad Pack</span>
@@ -251,7 +252,8 @@
                 {% endif %}
                 {% if user_subscription %}
                     <p>Use my current subscription</p>
-                    <div class="row-bv mini" ng-class="{active: user_subscription.active}" ng-click="select(user_subscription)">
+                    <div class="row-bv mini">
+{#                    ng-class="{active: user_subscription.active}" ng-click="select(user_subscription)"#}
                     <div class="span-bv string">
                         <p>{[{ user_subscription.type.name }]}</p>
                         <span>Subscription</span>
@@ -273,7 +275,9 @@
                 </div>
                 {% endif %}
                 <advpayment></advpayment>
+                <total></total>
                 <div class="_submit confirm">
+                    <div class="error">{[{ payment_error }]}</div>
                     <div class="cont" ng-click="confirm()">Confirm Order</div>
                 </div>
             </fieldset>

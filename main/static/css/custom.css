@@ -156,4 +156,9 @@ a.remove {
 
 .advanced_payment{
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.error {
+    color: red;
 }

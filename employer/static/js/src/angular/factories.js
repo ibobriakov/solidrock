@@ -13,7 +13,9 @@ PostJobApp.factory ('sharePayment', function(){
         user_package = false,
         user_subscription = false,
         default_package = false,
-        select_item = false;
+        select_item = false,
+        service_cost = 0,
+        advanced_total = 0;
 
     return {
         subscriptions: subscriptions,
@@ -21,6 +23,8 @@ PostJobApp.factory ('sharePayment', function(){
         user_package: user_package,
         user_subscription: user_subscription,
         default_package: default_package,
-        select_item: select_item
+        select_item: select_item,
+        service_cost:service_cost,
+        advanced_total:advanced_total
     };
 });
