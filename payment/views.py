@@ -87,7 +87,7 @@ def pay_redirect(request):
         'vpc_MerchTxnRef': '{0}'.format(transaction.id),
         'vpc_Merchant': 'TESTSOLROCCOM01',
         'vpc_OrderInfo': 'VPC Example',
-        'vpc_Amount': request.GET['amount'],
+        'vpc_Amount': '{0}'.format(amount),
         'vpc_ReturnURL': 'http://localhost:8000'+reverse('pay_callback'),
         'vpc_Locale': 'en',
     }
