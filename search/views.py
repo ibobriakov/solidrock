@@ -40,4 +40,5 @@ class SearchView(FormView):
         context['jobs'] = Job.objects.filter(query).exclude(name=None)
         if 'executive_positions' in form_data:
             context['jobs'] = context['jobs'].exclude(executive_positions=None)
+        context['jobs'] = context['jobs'].exclude(approved=False)
         return  self.render_to_response(context)
