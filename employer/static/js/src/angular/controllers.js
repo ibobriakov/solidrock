@@ -52,7 +52,7 @@ PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routePara
 
     $scope.save_exit = function (exit) {
         exit = typeof (exit) == 'boolean' ? exit : true;
-        $('.footer_loader').show();
+        $('.preloader').show();
         $http.put($scope.job.resource_uri, $scope.job)
             .success(exit ? success_exit_callback : success_callback)
             .error(error_callback);
@@ -82,17 +82,17 @@ PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routePara
     };
 
     var success_callback = function (data, status, headers, config) {
-        $('.footer_loader').hide();
+        $('.preloader').hide();
         $location.path('/section/'+parseInt($scope.section+1)+'/');
     };
 
     var success_exit_callback = function (data, status, headers, config) {
-        $('.footer_loader').hide();
+        $('.preloader').hide();
         document.location.href="/employer/";
     };
 
     var error_callback = function (data, status, headers, config) {
-        $('.footer_loader').hide();
+        $('.preloader').hide();
         $scope.error = data.job;
     };
 

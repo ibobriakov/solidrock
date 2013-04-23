@@ -1786,6 +1786,10 @@ div.paper-block {
     top: 15px;
     position: relative;
 }
+.row-bv.active {
+    background: #f4f4f4;
+}
+
 .row-bv.bulk .span-bv:nth-last-child(1) {
     border-left:1px solid #d86a2b;
 }
@@ -2176,8 +2180,8 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e17129', endColorstr='#9d4b23',GradientType=0 ); /* IE6-9 */
 }
 .gradient {
-       filter: none;
-    }
+    filter: none;
+}
 .pricing:last-child {
     margin-bottom: 0;
 }
@@ -2223,4 +2227,14 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 .pricing.bulk .pricing-block{
     margin:0 0px 0 80px;
+}
+/*Preloader*/
+.preloader {
+    background:url(../img/spinner.gif) no-repeat center black; 
+    width:100%; 
+    height: 100%; 
+    position: fixed;
+    z-index:9999;
+    opacity:0.5;
+   
 }

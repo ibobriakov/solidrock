@@ -130,7 +130,6 @@
                                 {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_email %}
 
                                 <div class="_submit">
-                                    <img style="display: none;" class="footer_loader" src="{% static 'main/img/preloader.gif' %}">
                                     <div class="exit" ng-click="save_exit()">Save and Exit</div>
                                     <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
                                 </div>
@@ -158,7 +157,6 @@
                                 <div class="text">(Note: You may only upload one Full Position Description)</div>
                             </div>
                             <div class="_submit">
-                                <img style="display: none;" class="footer_loader" src="{% static 'main/img/preloader.gif' %}">
                                     <div class="exit" ng-click="save_exit()">Save and Exit</div>
                                     <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
                             </div>
@@ -173,7 +171,6 @@
                             {% include 'employer/field/input.html' with class='star' field=job_form.executive_positions title='Would you like to make this an <span>exclusive Executive Position </span> for only $25?' %}
                             {% include 'employer/field/select.html' with title='Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for only $100?' %}
                             <div class="_submit">
-                                <img style="display: none;" class="footer_loader" src="{% static 'main/img/preloader.gif' %}">
                                     <div class="exit" ng-click="save_exit()">Save and Exit</div>
                                     <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
                             </div>
