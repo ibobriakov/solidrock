@@ -10,15 +10,17 @@ PostJobApp.factory ('share',function() {
 PostJobApp.factory ('sharePayment', function(){
     var subscriptions = [],
         packages = [],
-        current_package = false,
-        current_subscription = false,
+        user_package = false,
+        user_subscription = false,
+        default_package = false,
         select = false;
 
     return {
         subscriptions: subscriptions,
         packages: packages,
-        current_package: current_package,
-        current_subscription: current_subscription,
+        user_package: user_package,
+        user_subscription: user_subscription,
+        default_package: default_package,
         select: select
     };
 });

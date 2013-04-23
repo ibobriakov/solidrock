@@ -11,16 +11,22 @@ PostJobApp.controller ('JobPaymentData', function($scope, sharePayment) {
         });
         sharePayment.subscriptions = $scope.subscriptions;
         sharePayment.packages = $scope.packages;
-        sharePayment.current_subscription = $scope.current_subscription ? $scope.current_subscription : false;
-        sharePayment.current_package = $scope.current_package ? $scope.current_package : false;
+        
+        sharePayment.user_subscription = $scope.user_subscription ? $scope.user_subscription : false;
+        sharePayment.user_package = $scope.user_package ? $scope.user_package : false;
+        
+        sharePayment.default_package = $scope.default_package;
     }
 });
 
 PostJobApp.controller('JobPayment',function($scope, sharePayment) {
     $scope.subscriptions = sharePayment.subscriptions;
     $scope.packages = sharePayment.packages;
-    $scope.current_subscription = sharePayment.current_subscription;
-    $scope.current_package = sharePayment.current_package;
+    
+    $scope.user_subscription = sharePayment.user_subscription;
+    $scope.user_package = sharePayment.user_package;
+    
+    $scope.default_package = sharePayment.default_package;
 });
 
 // Main post job controller

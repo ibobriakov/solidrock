@@ -80,16 +80,26 @@ directives.payment = function() {
         controller: function($scope, sharePayment){
             $scope.subscriptions = sharePayment.subscriptions;
             $scope.packages = sharePayment.packages;
-            $scope.current_subscription = sharePayment.current_subscription;
-            $scope.current_package = sharePayment.current_package;
-            if ($scope.current_subscription) {
+            $scope.user_subscription = sharePayment.user_subscription;
+            $scope.user_package = sharePayment.user_package;
+            $scope.default_package = sharePayment.default_package;
+
+            if ($scope.user_subscription) {
                 var start_date = new Date();
-                var finish_date = new Date($scope.current_subscription.finish_date);
-                $scope.current_subscription.remaining = parseInt((finish_date-start_date)/(1000*60*60*24));
+                var finish_date = new Date($scope.user_subscription.finish_date);
+                $scope.user_subscription.remaining = parseInt((finish_date-start_date)/(1000*60*60*24));
             }
             var set_active = function(item) {
                 _.map($scope.subscriptions,function(value){ value.active=false });
                 _.map($scope.packages,function(value){ value.active=false });
+                if ($scope.user_subscription) {
+                    $scope.user_subscription.active = false;
+                }
+                if ($scope.user_package) {
+                    $scope.user_package.active = false;
+                }
+                $scope.default_package.active = false;
+
                 item.active = true;
             };
 
