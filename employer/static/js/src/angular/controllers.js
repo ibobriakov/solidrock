@@ -2,16 +2,15 @@
  * User: jackdevil
  */
 
-app.controller ('JobData', function($scope, share) {
+PostJobApp.controller ('JobData', function($scope, share) {
     $scope.set_data = function(data){
         $scope.job = data;
         share.job = $scope.job;
     };
 });
 
-app.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams, $location, share) {
+PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams, $location, share) {
     $scope.job = share.job;
-    $scope.test = 0;
 
     $scope.error = [];
     $scope.section = parseInt($routeParams.section);
@@ -35,6 +34,16 @@ app.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams, $lo
     $scope.remove = function (container, index) {
         if (container[index].resource_uri) $http.delete(container[index].resource_uri);
         container.splice(index, 1);
+    };
+
+    $scope.document_remove = function(document){
+        _.each($scope.job.jobuploaddocument_set, function(item,index){
+            if (item.resource_uri == document.resource_uri) {
+                if ($scope.job.jobuploaddocument_set[index].resource_uri)
+                    $http.delete($scope.job.jobuploaddocument_set[index].resource_uri);
+                $scope.job.jobuploaddocument_set.splice(index, 1);
+            }
+        });
     };
 
     var success_callback = function (data, status, headers, config) {

@@ -35,7 +35,7 @@ directives.supportdocument = function(){
         template: "" +
             "<div ng-repeat='document in job.jobuploaddocument_set | filter:{document_type.id:2}'>" +
                 "<a href='{[{ document.document }]}'>{[{ document.file_name }]}</a>" +
-                "<a href='' ng-click='remove(job.jobuploaddocument_set, $index)'>x</a>" +
+                "<a href='' ng-click='document_remove(document)'>x</a>" +
             "</div>"
     }
 };
@@ -47,7 +47,7 @@ directives.fullpositiondocument = function(){
         template: "" +
             "<div ng-repeat='document in job.jobuploaddocument_set | filter:{document_type.id:1}'>" +
                 "<a href='{[{ document.document }]}'>{[{ document.file_name }]}</a>" +
-                "<a href='' ng-click='remove(job.jobuploaddocument_set, $index)'>x</a>" +
+                "<a href='' ng-click='document_remove(document)'>x</a>" +
             "</div>"
     }
 };
@@ -78,4 +78,4 @@ directives.upload = function(){
     }
 };
 
-app.directive(directives);
+PostJobApp.directive(directives);

@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-app.factory ('share',function() {
+PostJobApp.factory ('share',function() {
     var job = [];
     return { job: job };
 });
