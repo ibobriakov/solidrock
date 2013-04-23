@@ -7,5 +7,7 @@
         {{ field|attr:bind|attr:"id" }}
         <a class="remove" href="" ng-click="remove(job.{{ field.name }}_set, $index)"><img src="{% static 'main/img/icon_remove.png' %}"></a>
     </div>
-    <a class="category_append" ng-click="append(job.{{ field.name }}_set)" href="">Add {{ label|default:field.label }}</a>
+    <a class="category_append" ng-click="append(job.{{ field.name }}_set)"
+       ng-hide="upload_add_btn_hide(job.{{ field.name }}_set)"
+       href="">Add {{ label|default:field.label }}</a>
 </div>
