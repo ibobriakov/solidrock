@@ -15,6 +15,8 @@ def as_json(data):
         data_resource = get_resource_class(type(data))
         bundle = data_resource.build_bundle(obj=data, request=None)
         bundle.request.path = "/"
-        return Serializer().serialize(data_resource.full_dehydrate(bundle).data)
+        serialized = Serializer().serialize(data_resource.full_dehydrate(bundle).data)
+        serialized = serialized.replace("'", '\\"')
+        return serialized
     return "[" + ",".join(map(tastypie_resource_serialize, data if type(data) is QuerySet else [data])) + "]"
 
