@@ -1,7 +1,9 @@
 {% load widget_tweaks %}
 
 <div class="field {{ class }}">
-    <label>{{ field.label }}</label>
+    {% if styled_title %}{{ styled_title }}{% else %}
+    <label>{{ title|default:field.label }}</label>
+    {% endif %}
     {{ field }}
     <div class="help-tip">
         <div class="help-tip-title">Helpful Tip</div>

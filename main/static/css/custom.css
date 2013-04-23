@@ -141,6 +141,10 @@ a.remove {
     vertical-align: middle;
 }
 
+.category a.remove {
+    margin-top: 5px;
+}
+
 .category_append {
     padding-top: 10px !important;
     text-align: left !important;

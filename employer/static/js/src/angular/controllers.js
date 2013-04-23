@@ -96,4 +96,8 @@ PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routePara
         $scope.error = data.job;
     };
 
+    angular.element(this).ready(function() {
+        //$('select').select2();
+    });
+
 });

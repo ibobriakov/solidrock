@@ -16,6 +16,7 @@
     <script src="{% static 'main/js/lib/fileupload/jquery.fileupload.js' %}" type="text/javascript"></script>
 
     <script src="{% static 'employer/js/lib/angular.js' %}" type="text/javascript"></script>
+    <script src="{% static 'employer/js/lib/angular-ui.js' %}" type="text/javascript"></script>
 
     <script src="{% static 'employer/js/src/angular/extra.js' %}" type="text/javascript"></script>
     <script src="{% static 'employer/js/src/angular/application.js' %}" type="text/javascript"></script>
@@ -27,6 +28,7 @@
 {% block stylesheet %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'main/css/custom.css' %}" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="{% static 'main/css/angular-ui.css' %}" type="text/css" media="screen"/>
 {% endblock %}
 
 {% block content %}
@@ -168,8 +170,8 @@
                             {% include 'employer/field/category.html' with bind='ng-model:categories.category' field=job_form.categories %}
                             {% include 'employer/field/category.html' with class='pod' bind='ng-model:sub_categories.subcategory' field=job_form.sub_categories %}
                             <br/>
-                            {% include 'employer/field/input.html' with class='star' field=job_form.executive_positions title='Would you like to make this an <span>exclusive Executive Position </span> for only $25?' %}
-                            {% include 'employer/field/select.html' with title='Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for only $100?' %}
+                            {% include 'employer/field/input.html' with class='star' field=job_form.executive_positions styled_title='<p>Would you like to make this an <span>exclusive Executive Position </span> for only $25?</p>' %}
+                            {% include 'employer/field/select.html' with styled_title='<p>Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for only $100?</p>' %}
                             <div class="_submit">
                                     <div class="exit" ng-click="save_exit()">Save and Exit</div>
                                     <div class="cont" ng-click="save_exit(false)">Save and Continue</div>

@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var PostJobApp = angular.module('PostJobApp', []);
+var PostJobApp = angular.module('PostJobApp', ['ui']);
 
 PostJobApp.config( function ( $routeProvider) {
     $routeProvider

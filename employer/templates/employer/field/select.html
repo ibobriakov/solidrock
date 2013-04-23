@@ -1,5 +1,7 @@
 <div class="field star">
-    <p>{{ title }}</p>
+    {% if styled_title %}{{ styled_title }}{% else %}
+    <label>{{ title }}</label>
+    {% endif %}
     <label>
         <input class="styled" type="radio" ng-value="true" ng-model="job.featured_job" name="ch5"/>Yes!
     </label>

@@ -970,6 +970,7 @@ footer ._footer ._footer_nav ul li a {
     display:inline-block;
     margin:30px 0;
     padding:0 172px;
+    
 }
 
 .stages .right .form ._submit .exit,.stages .right .form ._submit .cont {
@@ -981,6 +982,10 @@ footer ._footer ._footer_nav ul li a {
     float:left;
     padding:5px 0;
 }
+.stages .right .form ._submit .exit {
+    margin:0 10px 0 -10px;
+}
+
 
 .exit2 {
     width:150px;
