@@ -19,7 +19,7 @@ PostJobApp.controller ('JobPaymentData', function($scope, sharePayment) {
     }
 });
 
-PostJobApp.controller('JobPayment',function($scope, sharePayment) {
+PostJobApp.controller('JobPayment',function($scope, sharePayment, share) {
     $scope.subscriptions = sharePayment.subscriptions;
     $scope.packages = sharePayment.packages;
     
@@ -27,6 +27,8 @@ PostJobApp.controller('JobPayment',function($scope, sharePayment) {
     $scope.user_package = sharePayment.user_package;
     
     $scope.default_package = sharePayment.default_package;
+
+    $scope.job = share.job;
 });
 
 // Main post job controller

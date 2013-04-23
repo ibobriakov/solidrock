@@ -77,12 +77,20 @@ directives.upload = function(){
 directives.payment = function() {
     return {
         restrict: "E",
-        controller: function($scope, sharePayment){
+        controller: function($scope, sharePayment, share, $http){
             $scope.subscriptions = sharePayment.subscriptions;
             $scope.packages = sharePayment.packages;
             $scope.user_subscription = sharePayment.user_subscription;
             $scope.user_package = sharePayment.user_package;
             $scope.default_package = sharePayment.default_package;
+            $scope.job = share.job;
+            $scope.select = sharePayment.select;
+
+            $scope.confirm = function(){
+                $http.post('/', {})
+                    .success(function(){})
+                    .error(function(){});
+            };
 
             if ($scope.user_subscription) {
                 var start_date = new Date();
@@ -101,6 +109,7 @@ directives.payment = function() {
                 $scope.default_package.active = false;
 
                 item.active = true;
+                $scope.select = item;
             };
 
             $scope.select = function(item){
@@ -109,6 +118,26 @@ directives.payment = function() {
             }
         },
         templateUrl: "payment-job.html"
+    }
+};
+
+directives.advpayment = function(){
+    return {
+        restrict: "E",
+        controller: function($scope, share){
+            $scope.job = share.job;
+        },
+        link: function($scope, element, attrs){
+            var html = "<div class='advanced_payment'>";
+            if ($scope.job.featured_job) {
+                html += "<p> Featured Job - $100 </p>";
+            }
+            if ($scope.job.executive_positions) {
+                html += "<p> Executive positions - $25 <p>";
+            }
+            html+="</div>";
+            element.replaceWith(html);
+        }
     }
 };
 

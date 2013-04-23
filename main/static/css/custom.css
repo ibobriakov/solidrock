@@ -149,3 +149,7 @@ a.remove {
 .span-bv, .row-bv {
     cursor: pointer;
 }
+
+.row-bv.bulk, .row-bv.subscription {
+    cursor: auto;
+}

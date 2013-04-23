@@ -275,11 +275,9 @@
                     <p>AU ${[{ default_package.cost }]}</p>
                 </div>
                 {% endif %}
-                <div>
-                    
-                </div>
+                <advpayment></advpayment>
                 <div class="_submit confirm">
-                    <div class="cont">Confirm Order</div>
+                    <div class="cont" ng-click="confirm()">Confirm Order</div>
                 </div>
             </fieldset>
         </script>
