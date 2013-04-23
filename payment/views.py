@@ -9,6 +9,7 @@ from django.conf import settings
 from employer.models import Job
 from forms import PaymentForm
 from models import AdPackageType, SubscriptionType, Transaction, Order, Subscription, AdPackage
+from utils import is_ads_already_paid
 from tasks import process_payment
 
 
@@ -36,10 +37,6 @@ class PricingView(TemplateView):
         custom_contex['packages'] = AdPackageType.objects.exclude(default=True)
         custom_contex['default'] = AdPackageType.objects.get(default=True)
         return super(PricingView, self).get_context_data(**custom_contex)
-
-
-def is_ads_already_paid(user):
-    return (Subscription.objects.filter(owner=user).count() + AdPackage.objects.filter(owner=user).count()) > 0
 
 
 def pay_redirect(request):
