@@ -64,6 +64,7 @@ class DesireableResource(ModelResource):
 class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
                   ResourceRelatedFieldsUrlSchemaMixin, ModelResource):
     location = fields.ToOneField(LocationResource, 'location', blank=True, null=True)
+    area = fields.ToManyField(JobAreaResource, 'area', blank=True, null=True)
     hours = fields.ToOneField(HourResource, 'hours', blank=True, null=True)
     employment_type = fields.ToOneField(EmploymentTypeResource, 'employment_type', blank=True, null=True)
     special_conditions = fields.ToOneField(SpecialConditionResource, 'special_conditions',
