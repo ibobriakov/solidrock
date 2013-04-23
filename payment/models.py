@@ -1,3 +1,5 @@
+from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 
@@ -18,6 +20,18 @@ class Transaction(models.Model):
 
     class Meta:
         ordering = ("-datetime", )
+
+
+class Order(models.Model):
+    datetime = models.DateTimeField(auto_now_add=True)
+    amount = models.PositiveIntegerField()
+    transaction = models.ForeignKey('payment.Transaction')
+    owner = models.ForeignKey('auth.User')
+    amount = models.PositiveIntegerField()
+    approved = models.BooleanField(default=False)
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    order_object = generic.GenericForeignKey('content_type', 'object_id')
 
 
 class SubscriptionType(models.Model):
