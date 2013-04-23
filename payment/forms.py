@@ -9,3 +9,7 @@ class PaymentForm(forms.Form):
     card_expiry_year = forms.IntegerField(initial="2013")
     card_expiry_month = forms.IntegerField(initial="05")
     card_ccv = forms.IntegerField(initial="111")
+
+
+class ExternalPaymentForm(forms.Form):
+    pass

@@ -10,7 +10,7 @@ def process_payment(user, amount, card_number, card_exp, card_sec_code):
                                              amount=amount)
     order = "order:{0}".format(transaction.pk)
     try:
-        result = process(amount, card_number, card_exp, card_sec_code,order_info=order, merch_ref=order)
+        result = process(amount, card_number, card_exp, card_sec_code, order_info=order, merch_ref=order)
         if result["vpc_TxnResponseCode"] != "0":
             transaction.error_code = int(result["vpc_TxnResponseCode"])
             transaction.error = result["vpc_Message"]
