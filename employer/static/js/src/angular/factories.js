@@ -13,7 +13,7 @@ PostJobApp.factory ('sharePayment', function(){
         user_package = false,
         user_subscription = false,
         default_package = false,
-        select = false;
+        select_item = false;
 
     return {
         subscriptions: subscriptions,
@@ -21,6 +21,6 @@ PostJobApp.factory ('sharePayment', function(){
         user_package: user_package,
         user_subscription: user_subscription,
         default_package: default_package,
-        select: select
+        select_item: select_item
     };
 });

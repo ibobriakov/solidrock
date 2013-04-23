@@ -84,10 +84,10 @@ directives.payment = function() {
             $scope.user_package = sharePayment.user_package;
             $scope.default_package = sharePayment.default_package;
             $scope.job = share.job;
-            $scope.select = sharePayment.select;
+            $scope.select_item = sharePayment.select_item;
 
-            $scope.confirm = function(){
-                $http.post('/', {})
+            $scope.confirm = function() {
+                $http.post('/payment/payment_redirect/', {job: $scope.job.resource_uri, item: $scope.select_item.resource_uri})
                     .success(function(){})
                     .error(function(){});
             };
@@ -109,12 +109,11 @@ directives.payment = function() {
                 $scope.default_package.active = false;
 
                 item.active = true;
-                $scope.select = item;
             };
 
             $scope.select = function(item){
                 set_active(item);
-                console.log(item);
+                $scope.select_item = item;
             }
         },
         templateUrl: "payment-job.html"
