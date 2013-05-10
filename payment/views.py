@@ -140,5 +140,5 @@ def pay_callback(request):
             order.save()
 
     transaction.save()
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect(reverse('thank_you'))
 
