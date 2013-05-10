@@ -36,9 +36,9 @@ window.onload = function () {
         (function (st, state) {
             st[0].style.cursor = "pointer";
             st.attr("fill", "#333");
-            st.animate({"fill-opacity": 0.5, stroke: "#ccc"}, 500);
+            st.animate({"fill-opacity": 0.5}, 500);
             st[0].onmouseover = function () {
-                st.animate({"fill": st.color, "fill-opacity": 1, stroke: "#ccc"}, 500);
+                st.animate({"fill": st.color, "fill-opacity": 1}, 500);
                 R.safari();
             };
             st[0].onmouseout = function () {
@@ -46,7 +46,7 @@ window.onload = function () {
                     st.animate({stroke: "#666"}, 500);
                 }
                 else{
-                    st.animate({"fill":"#333", "fill-opacity": 0.5, stroke: "#666"}, 500);
+                    st.animate({"fill":"#333", "fill-opacity": 0.5}, 500);
                 }
                 R.safari();
             };
