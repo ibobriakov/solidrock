@@ -40,4 +40,8 @@ class EmailWithPermissionBackend(EmailBackend):
             return True
         elif perm == 'contactus.add_feedback':
             return True
+        elif perm == 'job_seeker.change_applytojob':
+            return obj.paper.owner == user
+        elif perm == 'job_seeker.add_applytojob':
+            return True
         return False

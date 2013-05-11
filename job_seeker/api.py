@@ -10,16 +10,15 @@ __all__ = ['ApplyToJobResource']
 
 
 class ApplyToJobResource(ModelResource):
-    job = fields.ToOneField('employer.api.JobResource', 'job')
     resume = fields.ToOneField('resume.api.ResumeResource', 'resume', blank=True, null=True)
     cover_letter = fields.ToOneField('cover_letter.api.CoverLetterResource', 'cover_letter', blank=True, null=True)
 
     def hydrate(self, bundle):
         bundle.obj.job_seeker = bundle.request.user
         bundle.obj.job_id = bundle.data['job']
+        return bundle
 
     class Meta:
         queryset = ApplyToJob.objects.all()
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        # validation = JobResourceValidation(form_class=modelform_factory(Job))

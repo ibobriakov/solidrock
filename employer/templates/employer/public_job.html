@@ -101,8 +101,16 @@
         </div>
         {% if not user.is_anonymous %}
         {% if user.user_type == 0 %} {# Job seeker #}
-        <div class="click-apply-now" style="height: auto;" collapse>
-            <a class="collapseAction" href="">Click here to <span>Apply Now</span></a>
+        <div class="click-apply-now" style="height: auto;"{% if not already_applied %} collapse{% endif %}>
+
+            <a class="collapseAction" href="">
+                {% if already_applied %}
+                    You have been applied for this job.
+                {% else %}
+                    Click here to <span>Apply Now</span>
+                {% endif %}
+            </a>
+            {% if not already_applied %}
             <div class="collapseItems">
                 <form>
                     {% csrf_token %}
@@ -121,10 +129,11 @@
                 </form>
                 <div class="clear"></div>
             </div>
+            {% endif %}
         </div>
         {% else %}
         <div class="job-contact-info" style="height: auto;" collapse>
-            <a class="collapseAction" href="#">JobSeeker's applications</a>
+            <a class="collapseAction" href="">JobSeeker's applications</a>
             <div class="collapseItems" class="collapsed">
                 {% for application in job.applytojob_set.all %}
                 <p>
