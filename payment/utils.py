@@ -43,6 +43,8 @@ def buy_job(job, user):
                                         action=1)  # post job
 
     job.approved = True
+    job.open_date = datetime.datetime.now().date()
+    job.end_date = datetime.timedelta(days=30) + job.open_date
     job.save()
 
 
