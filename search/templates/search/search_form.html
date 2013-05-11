@@ -11,7 +11,7 @@
                     {% if field.name == "executive_positions" %}
                         <div class="_field styled">
                             <label>{{ field.label }}</label>
-                            <input id="id_executive_positions" type="checkbox" name="{{ field.name }}">
+                            {{ field }}
                             <label for="id_executive_positions"><span></span>Yes</label>
                         </div>
                     {% else %}
