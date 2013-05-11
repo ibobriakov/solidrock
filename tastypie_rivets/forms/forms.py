@@ -13,11 +13,12 @@ def rivet_modelform_factory(base_name):
                 if isinstance(field, ModelChoiceField):
                     required = field.required | (name in getattr(self.Meta.model, 'REQUIRED_FIELDS', []))
                     # REQUIRED_FIELDS dog-nail see employer/models.py:54: %-)
-                    kwargs = {'resource_name': field.queryset.model.__name__.lower(),
+                    widgets = getattr(self.Meta, 'widgets', {})
+                    resource_map = getattr(self.Meta, 'resource_names', {})
+                    kwargs = {'resource_name': resource_map[name] if name in resource_map else field.queryset.model.__name__.lower(),
                               'queryset': field.queryset,
                               'empty_label': '',
                               'required': required}
-                    widgets = getattr(self.Meta, 'widgets', {})
                     if name in widgets:
                         kwargs['widget'] = widgets[name]
                     self.fields[name] = ResourceSelect(**kwargs)
