@@ -4,59 +4,23 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from tastypie.api import Api
-from cover_letter.api import CoverLetterResource, CoverLetterItemResource
-from payment.api import SubscriptionTypeResource, AdPackageTypeResource, AdPackageResource, SubscriptionResource
-from registration_rest_backend.api import JobSeekerRegistrationResource, EmployerRegistrationResource,\
-    ActivationResource, LoginResource
-from resume.api import ResumeItemResource, ResumeResource
-from userprofile.api import JobSeekerInformationResource, JobSeekerCurrentEmploymentResource,\
-    JobSeekerPreviousEmploymentResource, JobSeekerEducationResource, JobSeekerRefereeResource, \
-    EmployerResource
-from employer.api import JobResource, LocationResource, HourResource,\
-    EmploymentTypeResource, SpecialConditionResource, EssentialResource, DesireableResource,\
-    JobCategoryResource, JobSubCategoryResource, JobUploadDocumentResource,\
-    JobUploadDocumentTypeResource, JobSelectedCategoryResource, JobSelectedSubCategoryResource,\
-    JobExecutivePositionsResource,JobAreaResource
-from contactus.api import FeedbackResource
-from job_seeker.api import ApplyToJobResource
 
-v1_api = Api(api_name='v1')
-v1_api.register(EmployerResource())
-v1_api.register(CoverLetterResource())
-v1_api.register(CoverLetterItemResource())
-v1_api.register(ResumeResource())
-v1_api.register(ResumeItemResource())
-v1_api.register(JobSeekerRegistrationResource())
-v1_api.register(EmployerRegistrationResource())
-v1_api.register(JobSeekerInformationResource())
-v1_api.register(JobSeekerCurrentEmploymentResource())
-v1_api.register(JobSeekerPreviousEmploymentResource())
-v1_api.register(JobSeekerEducationResource())
-v1_api.register(JobSeekerRefereeResource())
-v1_api.register(ActivationResource())
-v1_api.register(LoginResource())
-v1_api.register(JobResource())
-v1_api.register(JobAreaResource())
-v1_api.register(LocationResource())
-v1_api.register(HourResource())
-v1_api.register(EmploymentTypeResource())
-v1_api.register(SpecialConditionResource())
-v1_api.register(EssentialResource())
-v1_api.register(DesireableResource())
-v1_api.register(JobCategoryResource())
-v1_api.register(JobSubCategoryResource())
-v1_api.register(JobUploadDocumentTypeResource())
-v1_api.register(JobUploadDocumentResource())
-v1_api.register(JobSelectedCategoryResource())
-v1_api.register(JobSelectedSubCategoryResource())
-v1_api.register(JobExecutivePositionsResource())
-v1_api.register(FeedbackResource())
-v1_api.register(SubscriptionTypeResource())
-v1_api.register(AdPackageTypeResource())
-v1_api.register(AdPackageResource())
-v1_api.register(SubscriptionResource())
-v1_api.register(ApplyToJobResource())
 
+def resouce_autodiscover():
+    from django.conf import settings
+    from django.utils.importlib import import_module
+    v1_api = Api(api_name='v1')
+    for app in settings.INSTALLED_APPS:
+        try:
+            resorce_api = import_module('%s.api' % app)
+            for resource_klass_name in resorce_api.__all__:
+                resource_klass = getattr(resorce_api, resource_klass_name)
+                v1_api.register(resource_klass())
+        except:
+            continue
+    return v1_api
+
+v1_api = resouce_autodiscover()
 admin.autodiscover()
 
 urlpatterns = patterns(
