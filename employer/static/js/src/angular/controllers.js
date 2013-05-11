@@ -78,7 +78,7 @@ PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routePara
     };
 
     $scope.upload_add_btn_hide = function(container){
-        return container.length > 1 ? true : false;
+        return container.length > 5 ? true : false;
     };
 
     var success_callback = function (data, status, headers, config) {

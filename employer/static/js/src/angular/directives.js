@@ -156,12 +156,14 @@ directives.advpayment = function(){
                 advanced_total += 25;
             }
             if ($scope.job.categories_set.length > 1) {
-                html += "<p> Advanced category - $15 <p>";
-                advanced_total += 15;
+                var category_total = (parseInt($scope.job.categories_set.length)-1)*15;
+                html += "<p> Advanced category - $" + category_total + "<p>";
+                advanced_total += category_total;
             }
             if ($scope.job.sub_categories_set.length > 1) {
-                html += "<p> Advanced sub-category - $15 <p>";
-                advanced_total += 15;
+                var sub_category_total = (parseInt($scope.job.sub_categories_set.length)-1)*15;
+                html += "<p> Advanced sub-category - $" + sub_category_total + "<p>";
+                advanced_total += sub_category_total;
             }
             $scope.advanced_total = advanced_total;
             html+="</div>";
