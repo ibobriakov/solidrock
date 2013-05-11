@@ -7,25 +7,34 @@
         <form class="search_from" method="POST" action="{% url "search.search" %}">
             {% csrf_token %}
             <fieldset>
-                {% for filed in search_from.default_fields %}
-                    <div class="_field {% if filed.name == "sub_categories" or  filed.name == "area"%}_pod{% endif %}">
-                        <label>{{ filed.label }}</label>
-                        {{ filed }}
-                    {# bad html hack for inset sub_categories and area #}
-                    {% if filed.name != "categories" and filed.name != "location" %}
-                    </div>
-                    {% endif %}
-                    {% if filed.name == "sub_categories" or  filed.name == "area" %}
-                    </div>
+                {% for field in search_from.default_fields %}
+                    {% if field.name == "executive_positions" %}
+                        <div class="_field styled">
+                            <label>{{ field.label }}</label>
+                            <input id="id_executive_positions" type="checkbox" name="{{ field.name }}">
+                            <label for="id_executive_positions"><span></span>Yes</label>
+                        </div>
+                    {% else %}
+                        <div class="_field {% if field.name == "sub_categories" or  field.name == "area"%}_pod{% endif %}">
+                            <label>{{ field.label }}</label>
+                            {{ field }}
+                        {# bad html hack for inset sub_categories and area #}
+
+                        {% if field.name != "categories" and field.name != "location" %}
+                            </div>
+                        {% endif %}
+                        {% if field.name == "sub_categories" or  field.name == "area" %}
+                            </div>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </fieldset>
             {% if full_search_from %}
             <fieldset>
-                {% for filed in search_from.more_options_fileds %}
+                {% for field in search_from.more_options_fields %}
                     <div class="_field">
-                        <label>{{ filed.label }}</label>
-                        {{ filed }}
+                        <label>{{ field.label }}</label>
+                        {{ field }}
                     </div>
                 {% endfor %}
             </fieldset>

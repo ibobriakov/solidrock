@@ -1393,6 +1393,29 @@ div.styled input[type=radio]:checked + label span {
     background:url(../img/checkbox.png) 0 -22px;
 }
 
+div.styled input[type=checkbox] {
+    display:none;
+}
+
+div.styled input[type=checkbox] + label {
+    font-family:Arial, sans-serif;
+    font-size:14px;
+}
+
+div.styled input[type=checkbox] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    vertical-align:middle;
+    background:url(../img/checkbox.png) left top no-repeat;
+    cursor:pointer;
+    margin:-1px 4px 0 0;
+}
+
+div.styled input[type=checkbox]:checked + label span {
+    background:url(../img/checkbox.png) 0 -22px;
+}
+
 .field {
     position:relative;
 }
