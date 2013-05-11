@@ -10,7 +10,7 @@
 {% endblock %}
 {% block content %}
 {% with profile=job.owner.profile %}
-    <div class="_content stages" ng-app="ApplyJobApp" ng-controller="ApplyJobCtrl" ng-init='applyToJob["job"]={{ job|as_json|safe }}[0].resource_uri' >
+    <div class="_content stages" ng-app="ApplyJobApp" ng-controller="ApplyJobCtrl" ng-init='applyToJob["job"]={{ job.pk }}' >
         <h1>Employer information</h1>
         {% thumbnail profile.logo "170x170" crop="center" as im %}
         <div class="employer-logo">
