@@ -11,8 +11,8 @@ var GlobalRoute = Backbone.Router.extend({
         "close":"close"
     },
     close: function(){
-        $('._hide, .window_block').hide();
-        $('.window.terms .window_block').hide();
+        $('._hide, .window_block').fadeOut();
+        $('.window.terms .window_block').fadeOut();
     },
     terms_conditions: function(){
         this.show_terms_modal();

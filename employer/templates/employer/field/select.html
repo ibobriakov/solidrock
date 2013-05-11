@@ -1,15 +1,3 @@
-{#<div class="field star styled">#}
-{#    {% if styled_title %}{{ styled_title }}{% else %}#}
-{#    <label>{{ title }}</label>#}
-{#    {% endif %}#}
-{#    <label>#}
-{#        <input class="styled" type="radio" ng-value="true" ng-model="job.featured_job" name="ch5"/><span></span>Yes!#}
-{#    </label>#}
-{#    <label>#}
-{#        <input class="styled" type="radio" ng-value="false" ng-model="job.featured_job" name="ch5"/><span></span>No Thanks#}
-{#    </label>#}
-{#</div>#}
-
 <div class="{% if class %}{{ class }}{% else %}field star styled{% endif %}">
     {% if styled_title %}{{ styled_title }}{% else %}
         <label>{{ title }}</label>
