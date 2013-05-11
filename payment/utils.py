@@ -1,6 +1,18 @@
+import copy
 import datetime
+from hashlib import md5
+from django.conf import settings
 
 __author__ = 'ir4y'
+
+
+def calculate_secure_hash(data_dict, exclude=tuple()):
+    secure_secret = copy.copy(settings.SECURE_SECRET)
+    for key in sorted(data_dict.keys()):
+        if key in exclude:
+            continue
+        secure_secret += data_dict[key]
+    return md5(secure_secret).hexdigest().upper()
 
 
 def has_subscription(user):
