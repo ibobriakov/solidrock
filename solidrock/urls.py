@@ -55,6 +55,7 @@ v1_api.register(SubscriptionTypeResource())
 v1_api.register(AdPackageTypeResource())
 v1_api.register(AdPackageResource())
 v1_api.register(SubscriptionResource())
+v1_api.register(ApplyToJobResource())
 
 admin.autodiscover()
 

@@ -6,13 +6,11 @@ from tastypie_rivets import rivet_modelform_factory
 __author__ = 'ir4y'
 
 
-class ApplyToJobForm(rivet_modelform_factory('apply_to_job')):
+class ApplyToJobForm(rivet_modelform_factory('applyToJob')):
     class Meta:
         model = ApplyToJob
         widgets = {
-            'job': HiddenInput(),
-            'resume': Select2Widget(select2_options={'placeholder': 'No Resume'}),
-            'cover_letter': Select2Widget(select2_options={'placeholder': 'No Cover Letter'}),
+            'job': HiddenInput()
         }
         resource_names = {
             'cover_letter': 'cover_letter_name',
