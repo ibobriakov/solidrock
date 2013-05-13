@@ -90,10 +90,12 @@ class AdPackageHistory(models.Model):
     class Meta:
         ordering = ("-datetime", )
 
-
-job_content_type = ContentType.objects.get_for_model(Job)
-ad_package_content_type = ContentType.objects.get_for_model(AdPackageType)
-subscribe_content_type = ContentType.objects.get_for_model(SubscriptionType)
+try:
+    job_content_type = ContentType.objects.get_for_model(Job)
+    ad_package_content_type = ContentType.objects.get_for_model(AdPackageType)
+    subscribe_content_type = ContentType.objects.get_for_model(SubscriptionType)
+except:
+    pass
 
 
 def after_order_save(instance, created, **kwargs):
