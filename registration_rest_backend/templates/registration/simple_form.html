@@ -1,0 +1,19 @@
+{% load main_tags %}
+<div class="_content stages contact">
+    <h1>{{ form_title }}</h1>
+    <div class="right">
+        <form class="form" method="POST">
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+            <div class="field">
+                <label>{{ field.label }}</label>
+                {{ field|add_class:"it3" }}
+                <div class="error">{{ field.errors.0 }}</div>
+            </div>
+            {% endfor %}
+            <div class="_submit">
+                <input type="submit" class="exit" value="Continue">
+            </div>
+        </form>
+    </div>
+</div>

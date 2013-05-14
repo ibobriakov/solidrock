@@ -35,6 +35,7 @@
         <div class="block avt">
             <div class="title">Users Login Here</div>
             <fieldset>
+                <a href="{% url "auth_password_reset" %}">Forget password?</a>
                 <form id="login_form" {% if next %}data-next-url="{{ next }}"{% endif %}></form>
             </fieldset>
         </div>

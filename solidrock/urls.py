@@ -37,6 +37,7 @@ urlpatterns = patterns(
     url(r'^promo/', include('promo.urls')),
     url(r'^contact_us/', include('contactus.urls')),
     url(r'^payment/', include('payment.urls')),
+    url(r'^password/', include('registration_rest_backend.urls')),
     url(r'^', include('main.urls')),
 )
 
@@ -51,6 +52,6 @@ urlpatterns += patterns('django.contrib.flatpages.views',
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += patterns('django.contrib.flatpages.views',
-                        (r'^(?P<url>.*)$', 'flatpage'),
-                        )
+# urlpatterns += patterns('django.contrib.flatpages.views',
+#                         (r'^(?P<url>.*)$', 'flatpage'),
+#                         )
