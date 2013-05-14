@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'redactor',
     'haystack',
     'widget_tweaks',
+    "djcelery_email",
 )
 
 LOCAL_APPS = (
@@ -183,6 +184,8 @@ HAYSTACK_CONNECTIONS = {  # Should be changed at production
 SOUTH_MIGRATION_MODULES = {
     'auth': 'userprofile.auth_migrations',
 }
+
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
 from local import *
 
