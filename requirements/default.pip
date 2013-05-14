@@ -20,7 +20,6 @@ django-picklefield==0.3.0
 -e git://github.com/ir4y/django-redactorjs.git@6fb3315d50dbc663b0beac2d1c9821f078225091#egg=django_redactorjs-dev
 django-registration==0.8
 django-tastypie==0.9.15
-django-widget-tweaks==1.3
 mimeparse==0.1.3
 paramiko==1.10.1
 pip-tools==0.3.1
