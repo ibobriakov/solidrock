@@ -2178,6 +2178,11 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     display:block;
 }
 
+.field.fl_left:hover .help-tip_hover,
+.field:hover .help-tip {
+    display:block;
+}
+
 .company-logo div:first-child,.field p span,.required span {
     color:#d86a2b;
 }
