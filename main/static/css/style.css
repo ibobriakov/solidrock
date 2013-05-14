@@ -858,9 +858,15 @@ footer ._footer ._footer_nav ul li a {
     padding:0 15px;
 }
 
-.stages .right .form .s2,.stages .right .form .s3,.stages .right .form .s4,.stages .right .form .s5 {
+.stages .right .form .s2,
+.stages .right .form .s4,
+.stages .right .form .s5 {
     display:none;
     overflow:hidden;
+}
+
+.stages .right .form .s3 {
+    overflow: visible;
 }
 
 .stages .right .form .title {
@@ -1397,7 +1403,19 @@ div.styled input[type=radio]:checked + label span {
     position:relative;
 }
 
-.help-tip {
+.help-tip_focus {
+    width:220px;
+    background:#f2fbff;
+    border:1px solid #d5d5d5;
+    position:absolute;
+    top:-13px;
+    left:-261px;
+    display:none;
+    min-height:100px;
+    z-index:5;
+}
+
+.help-tip_hover {
     width:220px;
     background:#f2fbff;
     border:1px solid #d5d5d5;
@@ -2150,7 +2168,13 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     margin-right: 10px;
     border: none;
 }
-.field input:focus + .help-tip,.field.fl_left input:focus + .help-tip,.field textarea:focus + .help-tip {
+.field.fl_left:focus .help-tip_focus,
+.field:focus .help-tip_focus {
+    display:block;
+}
+
+.field.fl_left:hover .help-tip_hover,
+.field:hover .help-tip_hover{
     display:block;
 }
 
