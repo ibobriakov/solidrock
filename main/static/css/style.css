@@ -1679,7 +1679,12 @@ div.paper-block {
     width:275px;
     float:left;
     background:#f2fbff;
-    margin: 5px 18px 15px 18px;
+    margin: 0 54px 20px 0;
+}
+
+
+.Job:nth-child(3n) {
+    margin-right: 0;
 }
 
 ._slider_block .VjCarouselLite ul li {
@@ -1884,14 +1889,6 @@ div.paper-block {
 
 .search-result {
     margin-top:30px;
-}
-
-.search-result .Job {
-    margin:0 30px 20px 0;
-}
-
-.search-result .Job:nth-child(3n) {
-    margin-right:0;
 }
 
 .company-info .right {
@@ -2289,4 +2286,10 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 .stages .full_width {
     width: 940px;
     margin-bottom: 40px;
+}
+
+.logo_right_floater {
+    float: right;
+    width: 225px;
+    margin-top: 10px;
 }

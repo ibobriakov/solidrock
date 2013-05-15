@@ -3,18 +3,18 @@
 {% block content %}
     <div class="_content stages">
     <h1>{{ employer.company }} Information</h1>
-    {% thumbnail employer.logo "220x220" crop="center" as im %}
-        <div class="left">
-            <div class="company-logo">
-                <div>Company Logo (optional)</div>
-                <div class="img"><img src="{{ im.url }}" width="220" height="220" /></div>
-            </div>
-        </div>
-    {% endthumbnail %}
+
 
     <div class="right full_width">
 
     <div class="form">
+    {% thumbnail employer.logo "220x220" crop="center" as im %}
+        <div class="logo_right_floater">
+            <div class="company-logo">
+                <div class="img"><img src="{{ im.url }}" width="220" height="220" /></div>
+            </div>
+        </div>
+    {% endthumbnail %}
     <div class="s1">
         <div class="title">General Business Information</div>
         <fieldset>
