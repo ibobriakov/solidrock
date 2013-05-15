@@ -822,7 +822,7 @@ footer ._footer ._footer_nav ul li a {
 .stages .right ul {
     list-style:none;
     overflow:hidden;
-    width:651px;
+    width:652px;
     position:relative;
     bottom:-1px;
 }
@@ -1427,6 +1427,18 @@ div.styled input[type=radio]:checked + label span {
     z-index:5;
 }
 
+.help-tip {
+    width:220px;
+    background:#f2fbff;
+    border:1px solid #d5d5d5;
+    position:absolute;
+    top:-13px;
+    left:-261px;
+    display:none;
+    min-height:100px;
+    z-index:5;
+}
+
 .help-tip-title {
     background:#409bcd;
     font-size:18px;
@@ -1667,6 +1679,7 @@ div.paper-block {
     width:275px;
     float:left;
     background:#f2fbff;
+    margin: 5px 18px 15px 18px;
 }
 
 ._slider_block .VjCarouselLite ul li {
@@ -2271,4 +2284,9 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     z-index:9999;
     opacity:0.5;
    
+}
+
+.stages .full_width {
+    width: 940px;
+    margin-bottom: 40px;
 }

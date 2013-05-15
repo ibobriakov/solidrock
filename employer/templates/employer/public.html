@@ -12,7 +12,7 @@
         </div>
     {% endthumbnail %}
 
-    <div class="right">
+    <div class="right full_width">
 
     <div class="form">
     <div class="s1">
@@ -66,6 +66,7 @@
     </div>
     </div>
     <div class="clear"></div>
+    <h1>Employer's jobs</h1>
     <div>
         {% for job in employer.user.job_set.all %}
             {% include "job_banner.html" %}
