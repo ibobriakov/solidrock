@@ -2120,6 +2120,10 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     background:#e4732b;
 }
 
+.job_seeker .app_info .center ul li a {
+    background:#e4732b;
+}
+
 .stages .right ul li.active,.builder .nav .pages li.active {
     background:#f2fbff;
     color:#e4732b;
@@ -2296,4 +2300,8 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 
 ._search_box._search_job.more-options ._center form fieldset ._field.no_bottom_margin {
     margin-bottom: 0;
+}
+
+._content .h1_margin_top {
+    margin-top: 40px;
 }
