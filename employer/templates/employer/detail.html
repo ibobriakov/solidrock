@@ -70,6 +70,10 @@
             $('#fileupload').trigger('click');
             return false;
         });
+        $('#company_logo').on('click',function(){
+            $('#fileupload').trigger('click');
+            return false;
+        });
         $('#link_remove_file').on('click',function(){
             $.ajax({
                 url: $(this).attr('data-url')
