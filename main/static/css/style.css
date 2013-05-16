@@ -2293,3 +2293,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     width: 225px;
     margin-top: 10px;
 }
+
+._search_box._search_job.more-options ._center form fieldset ._field.no_bottom_margin {
+    margin-bottom: 0;
+}

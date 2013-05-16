@@ -1,0 +1,66 @@
+<div class="_search_box _search_job more-options">
+    <div class="_top">
+        <div class="_icon"></div>
+        <div class="_title">Job Search</div>
+    </div>
+    <div class="_center">
+        <form class="search_from" method="POST" action="{% url "search.search" %}">
+            {% csrf_token %}
+            <fieldset>
+                <div class="_field">
+                    {% include "search/fields/input.html" with field=search_form.keywords  %}
+                </div>
+                <div class="_field">
+                    {% include "search/fields/select.html" with field=search_form.location classes="no_bottom_margin"  %}
+                    {% include "search/fields/select.html" with field=search_form.area classes="_pod"  %}
+                </div>
+                <div class="_field">
+                    {% include "search/fields/select.html" with field=search_form.categories classes="no_bottom_margin"  %}
+                    {% include "search/fields/select.html" with field=search_form.sub_categories classes="_pod"  %}
+                </div>
+
+                {% include "search/fields/select.html" with field=search_form.hours  %}
+                {% include "search/fields/input.html" with field=search_form.salary_min  %}
+                {% include "search/fields/input.html" with field=search_form.salary_max %}
+                {% include "search/fields/select.html" with field=search_form.employment_type  %}
+                {% include "search/fields/checkbox.html" with field=search_form.featured  %}
+                {% include "search/fields/checkbox.html" with field=search_form.executive_positions  %}
+
+            </fieldset>
+            <div class="_submit">
+                <input class="_search_button" type="submit" value="Search"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+{#{% for field in search_from.default_fields %}#}
+{#                    {% if field.name == "executive_positions" %}#}
+{#                        <div class="_field styled">#}
+{#                            <label>{{ field.label }}</label>#}
+{#                            {{ field }}#}
+{#                            <label for="id_executive_positions"><span></span>Yes</label>#}
+{#                        </div>#}
+{#                    {% else %}#}
+{#                        <div class="_field {% if field.name == "sub_categories" or  field.name == "area"%}_pod{% endif %}">#}
+{#                            <label>{{ field.label }}</label>#}
+{#                            {{ field }}#}
+                        {# bad html hack for inset sub_categories and area #}
+{##}
+{#                        {% if field.name != "categories" and field.name != "location" %}#}
+{#                            </div>#}
+{#                        {% endif %}#}
+{#                        {% if field.name == "sub_categories" or  field.name == "area" %}#}
+{#                            </div>#}
+{#                        {% endif %}#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#            </fieldset>#}
+{#            {% if full_search_from %}#}
+{#            <fieldset>#}
+{#                {% for field in search_from.more_options_fields %}#}
+{#                    <div class="_field">#}
+{#                        <label>{{ field.label }}</label>#}
+{#                        {{ field }}#}
+{#                    </div>#}
+{#                {% endfor %}#}

@@ -19,7 +19,7 @@ class SearchView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
-        context['full_search_from'] = True
+        context['full_search_form'] = True
         return context
 
     def form_valid(self, form):
