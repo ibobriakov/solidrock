@@ -4,7 +4,7 @@
         <div class="_title">Job Search</div>
     </div>
     <div class="_center">
-        <form class="search_from" method="POST" action="{% url "search.search" %}">
+        <form class="search_from" method="GET" action="{% url "search.search" %}">
             {% csrf_token %}
             <fieldset>
                 <div class="_field">

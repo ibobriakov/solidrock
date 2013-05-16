@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.views.generic import FormView
+from django.views.generic.list import MultipleObjectMixin
 from haystack.query import SearchQuerySet
 from employer.models import Job
 from forms import SearchForm
@@ -13,18 +14,21 @@ def get_search_by_keywords(keywords):
     return Q(pk__in=pk_list)
 
 
-class SearchView(FormView):
+class SearchView(FormView, MultipleObjectMixin):
     template_name = "search/search.html"
     form_class = SearchForm
+    context_object_name = 'jobs'
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
+        if 'object_list' not in kwargs:
+            kwargs['object_list'] = Job.objects.none()
         context = super(SearchView, self).get_context_data(**kwargs)
         context['full_search_form'] = True
         return context
 
     def form_valid(self, form):
         form_data = form.data
-        context = self.get_context_data(form=form)
         query = Q()
         if 'keywords' in form_data and form_data['keywords']:
             query = get_search_by_keywords(form_data['keywords'])
@@ -37,8 +41,9 @@ class SearchView(FormView):
             query &= Q(salary_range_min__gte=form_data['salary_min'])
         if 'salary_max' in form_data and form_data['salary_max'] != '':
             query &= Q(salary_range_max__lte=form_data['salary_max'])
-        context['jobs'] = Job.objects.filter(query).exclude(name=None)
+        jobs = Job.objects.filter(query).exclude(name=None)
         if 'executive_positions' in form_data:
-            context['jobs'] = context['jobs'].exclude(executive_positions=None)
-        context['jobs'] = context['jobs'].exclude(approved=False)
+            jobs = jobs.exclude(executive_positions=None)
+        jobs = jobs.exclude(approved=False)
+        context = self.get_context_data(form=form, object_list=jobs)
         return  self.render_to_response(context)
