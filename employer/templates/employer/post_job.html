@@ -34,7 +34,6 @@
 {% block content %}
     <div class="_content stages" ng-app="PostJobApp">
         <div ng-controller="JobData" ng-init='set_data({{ object|as_json|safe }}[0])'></div>
-
         <div ng-controller="JobPaymentData"
              ng-init='set_data({
                 subscriptions: {{ subscriptions|as_json|safe }},
@@ -44,7 +43,6 @@
                 {% if user_package %},user_package: {{ user_package|as_json|safe }}[0]{% endif %}
              })'>
         </div>
-
         <script type="text/ng-template" id="post-job.html">
             <div >
             <h1>Post a Job Listing</h1>
@@ -65,125 +63,122 @@
                     <li><a href="#/section/4/">Section 4</a></li>
                 </ul>
                 <div class="form">
-                <form activated="block">
-                    <div class="s1">
-                        <div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
-                        <fieldset>
-                            <div class="job-information">
+                    <form activated="block">
+                        <div class="s1">
+                            <div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
+                            <fieldset>
+                                <div class="job-information">
+                                    <div>
+                                        {% thumbnail user.profile.logo "205x205" crop="center" as im %}
+                                            <img src="{{ im.url }}"/>
+                                        {% empty %}
+                                            <img src="{% static 'main/img/002.jpg' %}"/>
+                                        {% endthumbnail %}
+                                    </div>
+                                    <div>
+                                        <h4>{{ user.profile.company }}</h4>
+                                        {% if user.profile.address_first %}
+                                            <p>{{ user.profile.address_first }}</p>
+                                        {% endif %}
+                                        {% if user.profile.address_second %}
+                                            <p>{{ user.profile.address_second }}</p>
+                                        {% endif %}
+                                        {% if user.profile.city %}
+                                            <p>{{ user.profile.city }}</p>
+                                        {% endif %}
+                                        <br/>
+                                        {% if user.profile.brief %}
+                                            <p>
+                                                {{ user.profile.brief }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
                                 <div>
-                                    {% thumbnail user.profile.logo "205x205" crop="center" as im %}
-                                        <img src="{{ im.url }}"/>
-                                    {% empty %}
-                                        <img src="{% static 'main/img/002.jpg' %}"/>
-                                    {% endthumbnail %}
-                                </div>
-                                <div>
-                                    <h4>{{ user.profile.company }}</h4>
-                                    {% if user.profile.address_first %}
-                                        <p>{{ user.profile.address_first }}</p>
-                                    {% endif %}
-                                    {% if user.profile.address_second %}
-                                        <p>{{ user.profile.address_second }}</p>
-                                    {% endif %}
-                                    {% if user.profile.city %}
-                                        <p>{{ user.profile.city }}</p>
-                                    {% endif %}
-                                    <br/>
-                                    {% if user.profile.brief %}
-                                        <p>
-                                            {{ user.profile.brief }}
-                                        </p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                            <div>
-                                {% include 'employer/field/input.html' with field=job_form.name %}
-                                {% include 'employer/field/input.html' with field=job_form.title %}
-                                {% include 'employer/field/input.html' with field=job_form.description %}
-                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.location %}
-                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.area %}
-                                <div class="clear"></div>
-                                {% include 'employer/field/input.html' with field=job_form.award %}
-                                <div class="clear"></div>
-                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.salary_range_min %}
-                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.salary_range_max %}
-                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.hours %}
-                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.employment_type %}
-                                <div class="clear"></div>
-                                {% include 'employer/field/input.html' with field=job_form.special_conditions %}
-                                {% include 'employer/field/input.html' with class='pod' input_class='it-pod' field=job_form.other_conditions %}
-                                <div class="field ">
-                                    <label>Selection Criteria (please list one per line)*</label>
-                                </div>
-                                <div class="clear"></div>
-                                {% include 'employer/field/criteria.html' with label="Essential" field="essential" %}
-                                {% include 'employer/field/criteria.html' with label="Desireable" field="desireable" %}
-{#                                <div class="clear"></div>#}
-{#                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.open_date %}#}
-{#                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.end_date %}#}
-                                <div class="clear"></div>
-                                <div class="field ">
-                                    <label>Contact Person for This Listing*</label>
-                                </div>
-                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_name %}
-                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_phone %}
-                                <div class="clear"></div>
-                                {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_email %}
+                                    {% include 'employer/field/input.html' with field=job_form.name %}
+                                    {% include 'employer/field/input.html' with field=job_form.title %}
+                                    {% include 'employer/field/input.html' with field=job_form.description %}
+                                    {% include 'employer/field/input.html' with class='fl_left' field=job_form.location %}
+                                    {% include 'employer/field/input.html' with class='fl_left' field=job_form.area %}
+                                    <div class="clear"></div>
+                                    {% include 'employer/field/input.html' with field=job_form.award %}
+                                    <div class="clear"></div>
+                                    {% include 'employer/field/input.html' with class='fl_left' field=job_form.salary_range_min %}
+                                    {% include 'employer/field/input.html' with class='fl_left' field=job_form.salary_range_max %}
+                                    {% include 'employer/field/input.html' with class='fl_left' field=job_form.hours %}
+                                    {% include 'employer/field/input.html' with class='fl_left' field=job_form.employment_type %}
+                                    <div class="clear"></div>
+                                    {% include 'employer/field/input.html' with field=job_form.special_conditions %}
+                                    {% include 'employer/field/input.html' with class='pod' input_class='it-pod' field=job_form.other_conditions %}
+                                    <div class="field ">
+                                        <label>Selection Criteria (please list one per line)*</label>
+                                    </div>
+                                    <div class="clear"></div>
+                                    {% include 'employer/field/criteria.html' with label="Essential" field="essential" %}
+                                    {% include 'employer/field/criteria.html' with label="Desireable" field="desireable" %}
+                                    <div class="clear"></div>
+                                    <div class="field ">
+                                        <label>Contact Person for This Listing*</label>
+                                    </div>
+                                    {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_name %}
+                                    {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_phone %}
+                                    <div class="clear"></div>
+                                    {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_email %}
 
-                                <div class="_submit">
-                                    <div class="exit" ng-click="save_exit()">Save and Exit</div>
-                                    <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                                    <div class="_submit">
+                                        <div class="exit" ng-click="save_exit()">Save and Exit</div>
+                                        <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div class="s2">
-                        <div class="title">Upload Documents</div>
-                        <p>
-                            From this section you can upload documents associated with this job listing.<br/>
-                            Note that only Adobe PDF or Microsoft Word Documents are allowed.
-                        </p>
-                        <br/>
-                        <fieldset>
-                            <div class="field">
-                                <label>Upload Other Supporting Documents</label>
-                                <supportdocument></supportdocument><br/>
-                                <upload url="{% url "upload" "job_support_document" object.pk %}">Upload a Supporting Document</upload>
-                                <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
-                            </div>
-                            <div class="field">
-                                <label>School, College, or University Name</label>
-                                <fullpositiondocument></fullpositiondocument><br/>
-                                <upload url="{% url "upload" "job_full_position_document" object.pk %}">Upload the Full Position Description</upload>
-                                <div class="text">(Note: You may only upload one Full Position Description)</div>
-                            </div>
-                            <div class="_submit">
-                                    <div class="exit" ng-click="save_exit()">Save and Exit</div>
-                                    <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div class="s3">
-                        <div class="title">Select a Category</div>
-                        <fieldset>
-                            {% include 'employer/field/category.html' with bind='ng-model:categories.category' field=job_form.categories %}
-                            {% include 'employer/field/category.html' with class='pod' bind='ng-model:sub_categories.subcategory' field=job_form.sub_categories %}
+                            </fieldset>
+                        </div>
+                        <div class="s2">
+                            <div class="title">Upload Documents</div>
+                            <p>
+                                From this section you can upload documents associated with this job listing.<br/>
+                                Note that only Adobe PDF or Microsoft Word Documents are allowed.
+                            </p>
                             <br/>
-                            {% include 'employer/field/input.html' with class='star' field=job_form.executive_positions styled_title='<p>Would you like to make this an <span>exclusive Executive Position </span> for only $25?</p>' %}
-                            {% include 'employer/field/select.html' with styled_title='<p>Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for only $100?</p>' %}
-                            <div class="_submit">
-                                    <div class="exit" ng-click="save_exit()">Save and Exit</div>
-                                    <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div class="s4">
-                    <div ng-controller="JobPayment">
-                        <payment></payment>
-                    </div>
-                    </div>
-                </form>
+                            <fieldset>
+                                <div class="field">
+                                    <label>Upload Other Supporting Documents</label>
+                                    <supportdocument></supportdocument><br/>
+                                    <upload url="{% url "upload" "job_support_document" object.pk %}">Upload a Supporting Document</upload>
+                                    <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
+                                </div>
+                                <div class="field">
+                                    <label>School, College, or University Name</label>
+                                    <fullpositiondocument></fullpositiondocument><br/>
+                                    <upload url="{% url "upload" "job_full_position_document" object.pk %}">Upload the Full Position Description</upload>
+                                    <div class="text">(Note: You may only upload one Full Position Description)</div>
+                                </div>
+                                <div class="_submit">
+                                        <div class="exit" ng-click="save_exit()">Save and Exit</div>
+                                        <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="s3">
+                            <div class="title">Select a Category</div>
+                            <fieldset>
+                                {% include 'employer/field/category.html' with bind='ng-model:categories.category' field=job_form.categories %}
+                                {% include 'employer/field/category.html' with class='pod' bind='ng-model:sub_categories.subcategory' field=job_form.sub_categories %}
+                                <br/>
+                                {% include 'employer/field/input.html' with class='star' field=job_form.executive_positions styled_title='<p>Would you like to make this an <span>exclusive Executive Position </span> for only $25?</p>' %}
+                                {% include 'employer/field/select.html' with styled_title='<p>Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for only $100?</p>' %}
+                                <div class="_submit">
+                                        <div class="exit" ng-click="save_exit()">Save and Exit</div>
+                                        <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="s4">
+                        <div ng-controller="JobPayment">
+                            <payment></payment>
+                        </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             </div>
