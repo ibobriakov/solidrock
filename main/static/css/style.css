@@ -2305,3 +2305,28 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 ._content .h1_margin_top {
     margin-top: 40px;
 }
+
+.pagination {
+    position: relative;
+    float: right;
+    right: 50%;
+    margin-top: 15px;
+}
+
+.pagination ul {
+    overflow: hidden;
+    position: relative;
+    display: block;
+    list-style: none;
+    right: -50%;
+}
+
+.pagination ul li {
+    float: left;
+    margin: 0 5px;
+}
+
+.pagination ul li.current a {
+    color: #E4732B;
+    font-size: 18px;
+}
