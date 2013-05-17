@@ -1,0 +1,11 @@
+Hi {{ employer }},
+
+Congratulations! Some one has applied to the job you posted on Solid Rock Recruitment
+
+ Please click the link below to view their application.
+
+
+{{ protocol }}://{{ domain }}{% url 'employer.job.view' job.pk  %}
+
+ Regards,
+ Solid Rock Recruitment Support

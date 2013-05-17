@@ -1,5 +1,10 @@
 from django.core.exceptions import ValidationError
+from django.contrib.sites.models import Site
+from django.core.mail import send_mail
 from django.db import models
+from django.db.models.signals import post_save
+from django.template import loader, Context
+from django.conf import settings
 
 
 class ApplyToJob(models.Model):
@@ -20,3 +25,17 @@ class ApplyToJob(models.Model):
 
     class Meta:
         unique_together = ('job_seeker', 'job',)
+
+
+def email_notify(instance, created, **kwargs):
+    if created:
+        template = loader.get_template("email/apply_to_job.txt")
+        site = Site.objects.get_current()
+        email_text = template.render(Context({'protocol': 'http',
+                                              'domain': site.domain,
+                                              'employer': instance.job.owner,
+                                              'job': instance.job}))
+        send_mail('Solid Rock - Some one applied to your job!',
+                  email_text, settings.EMAIL_HOST_USER, [instance.job.owner.email])
+
+post_save.connect(email_notify,ApplyToJob)
