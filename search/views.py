@@ -25,7 +25,25 @@ class SearchView(FormView, MultipleObjectMixin):
             kwargs['object_list'] = Job.objects.none()
         context = super(SearchView, self).get_context_data(**kwargs)
         context['full_search_form'] = True
+        context['query_dict'] = self.request.GET.urlencode()
         return context
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        """
+        Returns the keyword arguments for instantiating the form.
+        """
+        kwargs = {'initial': self.get_initial()}
+        if self.request.method in ('POST', 'PUT'):
+            kwargs.update({
+                'data': self.request.POST,
+                'files': self.request.FILES,
+            })
+        if self.request.method == 'GET':
+            kwargs['data'] = self.request.GET
+        return kwargs
 
     def form_valid(self, form):
         form_data = form.data
