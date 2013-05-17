@@ -40,6 +40,8 @@ class Employer(AddressMixin, models.Model):
     email = models.EmailField(verbose_name=_('Email Address'), blank=True, null=True)
     agree = models.BooleanField(verbose_name=_('Do you agree to the Terms and Conditions?'), default=False)
 
+    REQUIRED_FIELDS = ('name', 'email', )
+
     @property
     def avatar(self):
         return self.logo

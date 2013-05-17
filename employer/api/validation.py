@@ -18,5 +18,5 @@ class JobResourceValidation(FormValidation):
         errors.update(super(JobResourceValidation, self).is_valid(self.fix_pk_in_bundle(bundle), request))
         for key, value in bundle.data.items():
             if key in Job.REQUIRED_FIELDS and not value:
-                errors[key].append('Field required')
+                errors[key].append('This field is required.')
         return errors

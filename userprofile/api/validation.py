@@ -12,6 +12,9 @@ class EmployerResourceValidation(FormValidation):
         errors.update(super(EmployerResourceValidation, self).is_valid(bundle, request))
         if 'agree' not in bundle.data or bundle.data['agree'] != 'true':
             errors['agree'].append('You should accept user agreement')
+        for key, value in bundle.data.items():
+            if key in self.form_class._meta.model.REQUIRED_FIELDS and not value:
+                errors[key].append('This field is required.')
         return errors
 
 

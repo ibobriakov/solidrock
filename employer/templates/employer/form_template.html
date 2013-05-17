@@ -2,7 +2,7 @@
 <div class="title">General Business Information</div>
 <fieldset>
     <div class="left_info">
-        {% include 'employer/field.html' with class="field fl_left" title="Company" field="company" %}
+        {% include 'employer/field.html' with class="field fl_left" title="Company*" field="company" %}
         {% include 'employer/field.html' with class="field fl_left" title="ABN/ACN" field="abn_or_acn" %}
         <div class="clear"></div>
         <div class="clear"></div>
@@ -16,9 +16,9 @@
 
     <div class="bot_info">
         <div class="title">Account Contact Person</div>
-        {% include 'employer/field.html' with input_class="it3" title="Name." field="name"%}
-        {% include 'employer/field.html' with input_class="it2" title="Phone Number" field="phone"%}
-        {% include 'employer/field.html' with input_class="it3" title="Email Address" field="email"%}
+        {% include 'employer/field.html' with input_class="it3" title="Name*" field="name"%}
+        {% include 'employer/field.html' with input_class="it2" title="Phone Number*" field="phone"%}
+        {% include 'employer/field.html' with input_class="it3" title="Email Address*" field="email"%}
         <div class="title">Terms and Conditions</div>
         <div class="text2"><a href="#terms_conditions">Please click here to read the full document</a></div>
         {% include 'employer/field_checked.html' with only_yes="True" title="Do you agree to the Terms and Conditions?" field="agree" input_name="ch4" %}
