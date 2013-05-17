@@ -4,6 +4,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, TemplateView, ListView
+from django.views.generic.list import MultipleObjectMixin
 from job_seeker.forms import ApplyToJobForm
 from job_seeker.models import ApplyToJob
 from models import Job, JobLocation, Hour, EmploymentType,\
@@ -100,6 +101,11 @@ class JobPublicView(DetailView):
         return context
 
 
-class EmployerPublicView(DetailView):
+class EmployerPublicView(DetailView, MultipleObjectMixin):
     template_name = "employer/public.html"
     model = Employer
+    paginate_by = 3
+
+    def get_context_data(self, **kwargs):
+        kwargs['object_list'] = self.object.user.job_set.approved()
+        return super(EmployerPublicView, self).get_context_data(**kwargs)

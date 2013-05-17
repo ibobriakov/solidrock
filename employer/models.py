@@ -48,6 +48,11 @@ class SpecialCondition(models.Model):
         return self.special_condition
 
 
+class JobManager(models.Manager):
+    def approved(self):
+        return self.filter(approved=True)
+
+
 class Job(models.Model):
     REQUIRED_FIELDS = ('name', 'title', 'description', 'location', 'hours', 'employment_type',
                        'contact_name', 'contact_phone', 'contact_email', )
@@ -98,6 +103,9 @@ class Job(models.Model):
     sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedSubCategory',
                                             blank=True, null=True)
     approved = models.BooleanField(default=False)
+
+
+    objects = JobManager()
 
     def __unicode__(self):
         return "Job by {0}".format(self.owner)
