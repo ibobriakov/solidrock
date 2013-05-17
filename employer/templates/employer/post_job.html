@@ -45,7 +45,7 @@
         </div>
         <script type="text/ng-template" id="post-job.html">
             <div >
-            <h1>Post a Job Listing</h1>
+            <h1>{% if job.approved %}Edit{% else %}Post{% endif %} a Job Listing</h1>
 
             <div class="left">
                 <ul activated>
