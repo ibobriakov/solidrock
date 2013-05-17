@@ -1450,7 +1450,7 @@ div.styled input[type=radio]:checked + label span {
 
 .help-tip-text {
     font-size:12px;
-    color:#94949;
+    color:#949494;
     padding:10px;
 }
 
@@ -1761,7 +1761,7 @@ div.paper-block {
 .name-desc-bv {
     float:left;
     display:inline-block;
-    width:170px;
+    width:165px;
 }
 
 .row-bv.mini .span-bv.string {
