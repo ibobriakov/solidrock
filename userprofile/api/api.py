@@ -7,6 +7,7 @@ from tastypie.resources import ModelResource
 from tastypie.validation import FormValidation
 from constance import config
 from main.api import ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin
+from main.api.validation import FormWithRequiredFiledValidation
 from ..models import JobSeekerInformation, JobSeekerCurrentEmployment, JobSeekerPreviousEmployment,\
     JobSeekerEducation, JobSeekerReferee, Employer, JobSeekerEducationType
 from main.api.authorization import AuthorizationWithObjectPermissions
@@ -117,7 +118,7 @@ class JobSeekerCurrentEmploymentResource(JobSeekerItemResource):
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = FormValidation(form_class=modelform_factory(JobSeekerCurrentEmployment))
+        validation = FormWithRequiredFiledValidation(form_class=modelform_factory(JobSeekerCurrentEmployment))
 
 
 class JobSeekerPreviousEmploymentResource(JobSeekerItemResource):
@@ -127,7 +128,7 @@ class JobSeekerPreviousEmploymentResource(JobSeekerItemResource):
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = FormValidation(form_class=modelform_factory(JobSeekerPreviousEmployment))
+        validation = FormWithRequiredFiledValidation(form_class=modelform_factory(JobSeekerPreviousEmployment))
 
 
 class JobSeekerEducationResource(JobSeekerItemResource):
@@ -157,4 +158,4 @@ class JobSeekerRefereeResource(JobSeekerItemResource):
         always_return_data = True
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
-        validation = FormValidation(form_class=modelform_factory(JobSeekerReferee))
+        validation = FormWithRequiredFiledValidation(form_class=modelform_factory(JobSeekerReferee))

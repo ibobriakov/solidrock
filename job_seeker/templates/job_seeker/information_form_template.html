@@ -4,10 +4,10 @@
             {% include 'job_seeker/field.html' with input_class="it2" class="field fl_left" title="Last Name*" field="last_name"%}
             {% include 'job_seeker/field.html' with input_class="it2" class="field fl_left" title="First Name*" field="first_name" %}
             <div class="clear" ></div>
-            {% include 'job_seeker/field.html' with input_class="it4" title="Address first" field="address_first" %}
+            {% include 'job_seeker/field.html' with input_class="it4" title="Address first*" field="address_first" %}
             {% include 'job_seeker/field.html' with input_class="it4" title="Address second" field="address_second"%}
-            {% include 'job_seeker/field.html' with input_class="it4" title="City" field="city"%}
-            {% include 'job_seeker/field.html' with input_class="it3" title="Postcode" field="postcode"%}
+            {% include 'job_seeker/field.html' with input_class="it4" title="City*" field="city"%}
+            {% include 'job_seeker/field.html' with input_class="it3" title="Postcode*" field="postcode"%}
         </div>
         <div class="avatar">
             <div>Profile Picture (optional)</div>
@@ -22,11 +22,11 @@
             <input class="_hide" id="fileupload" type="file" name="files[]" data-url="{% url "upload" "job_seeker_photo" %}">
         </div>
         <div class="bot_info">
-            {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Home Phone Number" field="home_phone" %}
+            {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Home Phone Number*" field="home_phone" %}
             {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Daytime Phone Number" field="daytime_phone" %}
             {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Mobile Phone Number" field="mobile_phone" %}
             <div class="clear" ></div>
-            {% include 'job_seeker/field.html' with class="field" input_class="it3" title="Email Address" field="email" %}
+            {% include 'job_seeker/field.html' with class="field" input_class="it3" title="Email Address*" field="email" %}
             {% include 'job_seeker/field_checked.html' with title="Can potential employers contact you at work?" field="can_contact_at_work" input_name="ch1" %}
             {% include 'job_seeker/field_checked.html' with class="field fl_left styled" title="Are you an Australian Citizen / Permanent Resident?" field="is_australian" input_name="ch2" %}
             {% include 'job_seeker/field_checked.html' with class="field fl_left styled" title="If no do you have a working visa?" field="have_visa" input_name="ch3" %}

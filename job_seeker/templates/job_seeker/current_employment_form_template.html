@@ -1,14 +1,14 @@
 <fieldset>
-    {% include 'job_seeker/field.html' with input_class="it4" title="Name of Employer" field="name" %}
-    {% include 'job_seeker/field.html' with input_class="it4" title="Address first" field="address_first" %}
+    {% include 'job_seeker/field.html' with input_class="it4" title="Name of Employer*" field="name" %}
+    {% include 'job_seeker/field.html' with input_class="it4" title="Address first*" field="address_first" %}
     {% include 'job_seeker/field.html' with input_class="it4" title="Address second" field="address_second"%}
-    {% include 'job_seeker/field.html' with input_class="it4" title="City" field="city"%}
-    {% include 'job_seeker/field.html' with input_class="it3" title="Postcode" field="postcode"%}
-    {% include 'job_seeker/field.html' with input_class="it3" title="Position Title" field="position_title"%}
-    {% include 'job_seeker/field.html' with class="field date" input_class="it3" title="Date Commenced" field="date_commenced"%}
+    {% include 'job_seeker/field.html' with input_class="it4" title="City*" field="city"%}
+    {% include 'job_seeker/field.html' with input_class="it3" title="Postcode*" field="postcode"%}
+    {% include 'job_seeker/field.html' with input_class="it3" title="Position Title*" field="position_title"%}
+    {% include 'job_seeker/field.html' with class="field date" input_class="it3" title="Date Commenced*" field="date_commenced"%}
     {% include 'job_seeker/field.html' with input_class="it4" title="Department/Section" field="department"%}
-    {% include 'job_seeker/field_textarea.html' with title="Brief Description of Duties" field="brief" %}
-    {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Fulltime, Parttime or Casual" field="job_type"%}
+    {% include 'job_seeker/field_textarea.html' with title="Brief Description of Duties*" field="brief" %}
+    {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Fulltime, Parttime or Casual*" field="job_type"%}
     {% include 'job_seeker/field.html' with class="field fl_left" input_class="it2" title="Last Day of Service <span>(if no longer employed)</span>" field="last_day_of_service"%}
     {% include 'job_seeker/field_textarea.html' with class="field fl_clear" title="Reason for Leaving <span>(if no longer employed)</span>" field="leaving_reason" %}
 </fieldset>

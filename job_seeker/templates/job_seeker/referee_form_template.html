@@ -1,11 +1,11 @@
 <fieldset>
-    {% include 'job_seeker/field.html' with input_class="it3" title="Name" field="name"%}
-    {% include 'job_seeker/field.html' with input_class="it3" title="Position Title or Relationship" field="position_title"%}
-    {% include 'job_seeker/field.html' with input_class="it4" title="Address first" field="address_first" %}
+    {% include 'job_seeker/field.html' with input_class="it3" title="Name*" field="name"%}
+    {% include 'job_seeker/field.html' with input_class="it3" title="Position Title or Relationship*" field="position_title"%}
+    {% include 'job_seeker/field.html' with input_class="it4" title="Address first*" field="address_first" %}
     {% include 'job_seeker/field.html' with input_class="it4" title="Address second" field="address_second"%}
-    {% include 'job_seeker/field.html' with input_class="it4" title="City" field="city"%}
-    {% include 'job_seeker/field.html' with input_class="it3" title="Postcode" field="postcode"%}
-    {% include 'job_seeker/field.html' with input_class="it2" title="Phone Number" field="phone_number"%}
+    {% include 'job_seeker/field.html' with input_class="it4" title="City*" field="city"%}
+    {% include 'job_seeker/field.html' with input_class="it3" title="Postcode*" field="postcode"%}
+    {% include 'job_seeker/field.html' with input_class="it2" title="Phone Number*" field="phone_number"%}
     {% include 'job_seeker/field.html' with input_class="it2" title="Email Address" field="email"%}
     {% include 'job_seeker/field_checked.html' with title="Are you willing for this referee to be approached prior to an interview?" field="is_for_interview" input_name="ch5" %}
 </fieldset>

@@ -112,6 +112,8 @@ class JobSeekerInformation(AddressMixin, models.Model):
     is_driver = models.BooleanField(verbose_name=_("Do you have a current driver's licence?"),
                                     default=False)
 
+    REQUIRED_FIELDS = ('first_name', 'last_name', 'address_first', 'city', 'postcode', 'home_phone', 'email',)
+
     def get_photo_url(self):
         return self.photo.url if self.photo else config.DEFAULT_AVATAR
 
@@ -133,6 +135,9 @@ class JobSeekerCurrentEmployment(AddressMixin, models.Model):
     last_day_of_service = models.CharField(verbose_name="Last Day of Service", max_length=255, blank=True, null=True)
     leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
 
+    REQUIRED_FIELDS = ('name', 'address_first', 'city', 'postcode',
+                       'position_title', 'date_commenced', 'brief', 'job_type',)
+
     def __unicode__(self):
         return "Job Seeker Current Employment for {0}".format(self.job_seeker.__unicode__())
 
@@ -145,7 +150,10 @@ class JobSeekerPreviousEmployment(AddressMixin, models.Model):
     name = models.CharField(verbose_name="Name of Employer", max_length=255, blank=True, null=True)
     position_title = models.CharField(verbose_name="Position Title", max_length=255, blank=True, null=True)
     brief = models.TextField(verbose_name="Brief Description of Duties", blank=True, null=True)
-    leaving_reason = models.TextField(verbose_name="Reson for Leaving", blank=True, null=True)
+    leaving_reason = models.TextField(verbose_name="Reason for Leaving", blank=True, null=True)
+
+    REQUIRED_FIELDS = ('name', 'address_first', 'city', 'postcode',
+                       'position_title', 'date_commenced', 'brief', 'leaving_reason',)
 
     def __unicode__(self):
         return "Job Seeker Previous Employment for {0}".format(self.job_seeker.__unicode__())
@@ -187,6 +195,8 @@ class JobSeekerReferee(AddressMixin, models.Model):
     is_for_interview = \
         models.BooleanField(verbose_name=_("Are you willing for this to be approached prior to an interview ?"),
                             default=False)
+
+    REQUIRED_FIELDS = ('name', 'position_title', 'address_first', 'city', 'postcode', 'phone_number',)
 
     def __unicode__(self):
         return "Job Seeker Referee for {0}".format(self.job_seeker.__unicode__())
