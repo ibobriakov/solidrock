@@ -226,4 +226,7 @@
 </div>
 </div>
 {% endwith %}
+    {% if user.profile == jobseeker %}
+        <a href="{% url "job_seeker.profile.information" %}">Click Here To Edit Your Account Information</a>
+    {% endif %}
 {% endblock %}
