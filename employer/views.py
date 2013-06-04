@@ -1,19 +1,32 @@
 import datetime
-from django.contrib.auth.decorators import login_required
+from functools import wraps
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
-from django.utils.decorators import method_decorator
+from django.utils.decorators import available_attrs
 from django.views.generic import DetailView, TemplateView, ListView
 from django.views.generic.list import MultipleObjectMixin
 from job_seeker.forms import ApplyToJobForm
 from job_seeker.models import ApplyToJob
-from models import Job, JobLocation, Hour, EmploymentType,\
-    SpecialCondition, Essential, Desireable, JobCategory, JobSubCategory, JobExecutivePositions
-from payment.models import SubscriptionType, AdPackageType, Subscription, AdPackageHistory, AdPackage
+from main.utils import view_decorator
+from models import Job
+from payment.models import SubscriptionType, AdPackageType, Subscription, AdPackage
 from userprofile.models import Employer
 from employer.forms import JobForm
 
 
+def profile_complete(view_func):
+    @wraps(view_func, assigned=available_attrs(view_func))
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.profile.complete:
+            return view_func(request, *args, **kwargs)
+        else:
+            return redirect('employer.profile.edit')
+    return _wrapped_view
+
+
+@view_decorator(login_required(login_url='/#login'))
+@view_decorator(profile_complete)
 class EmployerView(DetailView):
     model = Employer
     context_object_name = 'profile'
@@ -22,15 +35,12 @@ class EmployerView(DetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(self.model, user=self.request.user)
 
-    @method_decorator(login_required(login_url='/#login'))
-    def dispatch(self, request, *args, **kwargs):
-        return super(EmployerView, self).dispatch(request, *args, **kwargs)
-
 
 class EmployerEditView(TemplateView):
     template_name = "employer/detail.html"
 
 
+@profile_complete
 def create_job_view(request):
     new_job = Job.objects.create(owner=request.user,
                                  open_date=datetime.datetime.now().date(),
@@ -40,6 +50,7 @@ def create_job_view(request):
     return redirect('employer.job.edit', new_job.pk)
 
 
+@view_decorator(profile_complete)
 class JobListView(ListView):
     template_name = "employer/job_list.html"
     model = Job
@@ -48,6 +59,7 @@ class JobListView(ListView):
         return super(JobListView, self).get_queryset().filter(owner=self.request.user)
 
 
+@view_decorator(profile_complete)
 class EditJobView(DetailView):
     template_name = "employer/post_job.html"
     model = Job
@@ -77,11 +89,13 @@ class EditJobView(DetailView):
         return context
 
 
+@profile_complete
 def delete_job_view(request, pk):
     get_object_or_404(Job, pk=pk, owner=request.user).delete()
     return redirect('employer.profile.base')
 
 
+@view_decorator(profile_complete)
 class JobPublicView(DetailView):
     template_name = "employer/public_job.html"
     model = Job
@@ -101,6 +115,7 @@ class JobPublicView(DetailView):
         return context
 
 
+@view_decorator(profile_complete)
 class EmployerPublicView(DetailView, MultipleObjectMixin):
     template_name = "employer/public.html"
     model = Employer

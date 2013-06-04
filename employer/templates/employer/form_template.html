@@ -3,15 +3,15 @@
 <fieldset>
     <div class="left_info">
         {% include 'employer/field.html' with class="field fl_left" title="Company*" field="company" %}
-        {% include 'employer/field.html' with class="field fl_left" title="ABN/ACN" field="abn_or_acn" %}
+        {% include 'employer/field.html' with class="field fl_left" title="ABN/ACN*" field="abn_or_acn" %}
         <div class="clear"></div>
         <div class="clear"></div>
         {% include 'employer/field.html' with input_class="it4" title="Address first" field="address_first" %}
         {% include 'employer/field.html' with input_class="it4" title="Address second" field="address_second"%}
-        {% include 'employer/field.html' with input_class="it4" title="City" field="city"%}
+        {% include 'employer/field.html' with input_class="it4" title="City*" field="city"%}
         {% include 'employer/field.html' with input_class="it3" title="Postcode" field="postcode"%}
         {% include 'employer/field.html' with input_class="it3" title="Business Phone" field="business_phone"%}
-        {% include 'employer/field_textarea.html' with title="Brief Description of Your Company" field="brief" %}
+        {% include 'employer/field_textarea.html' with title="Brief Description of Your Company*" field="brief" %}
     </div>
 
     <div class="bot_info">

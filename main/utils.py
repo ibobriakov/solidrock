@@ -1,6 +1,7 @@
 from django.db.models import OneToOneField, ForeignKey
 from django.db.models.fields import Field, BooleanField, AutoField
 import types
+from django.utils.decorators import method_decorator
 
 
 def patch_model(model_to_patch, class_to_patch_with):
@@ -90,3 +91,43 @@ def get_model_values(item, exclude=('id',), fileds=None):
                       map(lambda u: u.name,
                           filter(lambda u:not isinstance(u,(BooleanField, AutoField, OneToOneField, ForeignKey)),
                                  item._meta.fields))))
+
+
+def any_not_None(l):
+    return any(map(lambda u: u is not None and u != '', l))
+
+def all_not_None(l):
+    return all(map(lambda u: u is not None and u != '', l))
+
+def view_decorator(orig_dec):
+    """
+        Convert the provided decorator to one that can be applied to a view
+        class (ie. automatically decorates dispatch)
+    """
+
+    # We're going to be applying a regular decorator to a method, so the first
+    # step is to convert it to a method decorator.
+    method_dec = method_decorator(orig_dec)
+
+    # This is the decorator we're actually going to return. Since we're
+    # returning a class decorator, it takes a single argument, the class
+    # that it's decorating. It therefore returns this as well.
+    def dec(cls):
+        # We're about to change what cls.dispatch refers to, so we need to
+        # keep a reference to the original dispatch around so that we can
+        # call it later.
+        orig_dispatch = cls.dispatch
+        def _dispatch(self, *args, **kwargs):
+            # Right - decorate the original dispatch method using our new,
+            # method-ised version of the decorator we were passed in to start
+            # with
+            decorated = method_dec(orig_dispatch)
+
+            # Finally, we can call the decorated dispatch() method.
+            return decorated(self, *args, **kwargs)
+
+        # Replace the original dispatch with our new dispatch function. We
+        # kept a reference to the old dispatch method earlier, in a closure.
+        cls.dispatch = _dispatch
+        return cls
+    return dec

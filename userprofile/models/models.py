@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models.signals import post_save, pre_save
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
-from main.utils import patch_model
+from main.utils import patch_model, get_model_values, all_not_None
 from fields import PhoneField
 from mixins import AddressMixin, SlugTraits
 
@@ -40,7 +40,7 @@ class Employer(AddressMixin, models.Model):
     email = models.EmailField(verbose_name=_('Email Address'), blank=True, null=True)
     agree = models.BooleanField(verbose_name=_('Do you agree to the Terms and Conditions?'), default=False)
 
-    REQUIRED_FIELDS = ('name', 'email', )
+    REQUIRED_FIELDS = ('company', 'abn_or_acn', 'city', 'brief', 'name', 'phone', 'email',)
 
     @property
     def avatar(self):
@@ -48,6 +48,10 @@ class Employer(AddressMixin, models.Model):
 
     def url(self):
         return reverse('employer.profile.base')
+
+    @property
+    def complete(self):
+        return all_not_None(get_model_values(self, fileds=self.REQUIRED_FIELDS))
 
     def __unicode__(self):
         return "Employer profile for {0}".format(self.company)

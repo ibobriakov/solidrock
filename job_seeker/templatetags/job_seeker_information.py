@@ -1,5 +1,5 @@
 from django import template
-from main.utils import get_model_values
+from main.utils import get_model_values, any_not_None
 
 
 __author__ = 'ir4y'
@@ -8,8 +8,6 @@ __author__ = 'ir4y'
 register = template.Library()
 
 
-def any_not_None(l):
-    return any(map(lambda u: u is not None and u != '', l))
 
 
 @register.filter()
