@@ -95,7 +95,6 @@ def delete_job_view(request, pk):
     return redirect('employer.profile.base')
 
 
-@view_decorator(profile_complete)
 class JobPublicView(DetailView):
     template_name = "employer/public_job.html"
     model = Job
