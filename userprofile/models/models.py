@@ -2,7 +2,7 @@ from constance import config
 from django.contrib.auth.forms import UserChangeForm
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from main.utils import patch_model
@@ -207,3 +207,10 @@ def create_job_seeker_profile(instance, created, **kwargs):
 
 
 post_save.connect(create_job_seeker_profile, sender=JobSeeker)
+
+
+def change_username(instance, **kwargs):
+    if instance.username != instance.email:
+        instance.username = instance.email
+
+pre_save.connect(change_username, sender=User)
