@@ -62,6 +62,9 @@
                 </div>
             </div>
         </fieldset>
+        {% if user.profile == employer %}
+        <a href="{% url "employer.profile.edit" %}">Edit Your Company Information</a>
+        {% endif %}
     </div>
     </div>
     </div>

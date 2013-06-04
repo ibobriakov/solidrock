@@ -119,7 +119,7 @@ class JobPublicView(DetailView):
 class EmployerPublicView(DetailView, MultipleObjectMixin):
     template_name = "employer/public.html"
     model = Employer
-    paginate_by = 3
+    paginate_by = 9
 
     def get_context_data(self, **kwargs):
         kwargs['object_list'] = self.object.user.job_set.approved()
