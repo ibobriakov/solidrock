@@ -15,6 +15,10 @@ class Resume(models.Model):
     def __unicode__(self):
         return self.name
 
+    @property
+    def list_set(self):
+        return self.resumeitem_set
+
     class Meta:
         app_label = 'resume'
 

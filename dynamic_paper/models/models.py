@@ -1,7 +1,6 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.translation import ugettext_lazy as _
-import json
 
 
 class PaperItemType(models.Model):
@@ -32,15 +31,16 @@ def paper_item_factory(*args, **kwargs):
             return "{value} [{type}]".format(value=self.value, type=self.type.__unicode__())
 
         def as_json(self):
-            return json.dumps({
+            return {
                 'id': self.id,
                 'paper': self.paper_id,
                 'item_class': self.item_class,
                 'parent': self.parent_id if self.parent else False,
                 'resource_uri': self.get_resource_uri(),
                 'type': self.type.name,
-                'value': self.value
-            })[1:-1]
+                'value': self.value,
+                'children': [item.as_json() for item in self.get_children()]
+            }
 
         class Meta:
             abstract = True

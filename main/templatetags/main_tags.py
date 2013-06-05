@@ -1,4 +1,5 @@
 import copy
+import json
 import re
 from django import template
 from django.utils.safestring import mark_safe
@@ -15,6 +16,7 @@ def as_title(string):
     if '.' in title:
         title = title.split('.')[0]
     return " ".join(map(lambda u: u.capitalize(), title.split('_')))
+
 
 @register.filter()
 def startswith(string, startswith):
@@ -33,6 +35,7 @@ def is_employer(user):
 
 class_re = re.compile(r'(?<=class=["\'])(.*)(?=["\'])')
 
+
 @register.filter
 def add_class(value, css_class):
     string = unicode(value)
@@ -48,6 +51,12 @@ def add_class(value, css_class):
         return mark_safe(string.replace('>', ' class="%s">' % css_class))
     return value
 
+
 @register.filter
 def contain_list(value):
     return True if len(str(value).split('_'))>1 and str(value).split('_')[1] == 'list' else False
+
+
+@register.simple_tag
+def paper_tree(paper):
+    return json.dumps([item.as_json() for item in paper.list_set.filter(parent=None)])

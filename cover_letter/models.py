@@ -14,11 +14,15 @@ class CoverLetter(models.Model):
     def __unicode__(self):
         return self.name
 
+    @property
+    def list_set(self):
+        return self.coverletter_set
+
     class Meta:
         app_label = 'cover_letter'
 
 
-class  CoverLetterItem(paper_item_factory('cover_letter.CoverLetter', verbose_name=_('Cover Letter')), models.Model):
+class CoverLetterItem(paper_item_factory('cover_letter.CoverLetter', verbose_name=_('Cover Letter')), models.Model):
     def get_resource_uri(self):
         return reverse('api_dispatch_detail', kwargs={'api_name': 'v1', 'resource_name': 'cover_letter', 'pk': self.pk})
 

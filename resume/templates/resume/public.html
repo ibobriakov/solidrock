@@ -9,7 +9,7 @@
 
         <div class="list str1">
             <ul class="links">
-                <li><a href="#">download a PDF</a></li>
+                <li><a href="{% url 'resume.pdf' object.pk %}">download a PDF</a></li>
             </ul>
             <div class="list_it">
                 {% recursetree object.resumeitem_set.all %}

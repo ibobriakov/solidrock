@@ -2225,7 +2225,6 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     background: -o-linear-gradient(top,  #e17129 0%,#9d4b23 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  #e17129 0%,#9d4b23 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #e17129 0%,#9d4b23 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e17129', endColorstr='#9d4b23',GradientType=0 ); /* IE6-9 */
 }
 .gradient {
     filter: none;
