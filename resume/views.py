@@ -3,6 +3,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
+from dynamic_paper.views import PdfRenderMixin
 from models import Resume
 from forms import ResumeSelectForm
 
@@ -38,6 +39,12 @@ class ResumeView(DetailView):
 class ResumePublicView(DetailView):
     template_name = 'resume/public.html'
     model = Resume
+
+
+class ResumePDFView(PdfRenderMixin, DetailView):
+    template_name = 'resume/pdf.html'
+    model = Resume
+
 
 @login_required(login_url='/#login')
 def delete_resume_view(request, resume_pk):
