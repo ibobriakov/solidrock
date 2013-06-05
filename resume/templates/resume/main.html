@@ -3,7 +3,7 @@
 {% load serialize %}
 
 {% block content %}
-    <div class="_content builder">
+    <div class="_content builder" ng-app="DynamicPaperApp">
         <h1>Resume Builder<a href="{% url "job_seeker.profile.base" %}">Exit Resume Builder</a></h1>
         <div class="top">
             <div class="title">Resume</div>
@@ -12,7 +12,7 @@
                 <div class="links">
                     <a class="link" href="#">Resume Builder Instructions</a>
 {#                    <div class="pop">Popluate</div>#}
-{#                    <div class="save">Save</div>#}
+                    <div class="save">Save</div>
                 </div>
             </form>
         </div>
@@ -27,34 +27,18 @@
                 </ul>
             </div>
         </div>
-        <div class="list str1">
+        <div class="list str1" ng-controller="DynamicPaperCtrl" ng-init='set_data([])'>
+
+            {% recursetree object.resumeitem_set.all %}{ {{ node.as_json|safe }} }{% endrecursetree %}
             <ul class="links">
                 <li><a href="#">view resume</a></li>
                 <li>|</li>
                 <li><a href="#">download a PDF</a></li>
             </ul>
-            <div class="list_it"></div>
+            <div class="list_it">
+                <paper data="paper_data"></paper>
+            </div>
         </div>
 
     </div>
-{% endblock %}
-
-{% block initialize-js %}
-    <script>
-        var type = 'resume', paper = {{ object.pk }}, button = true;
-        var paper_view = new (paper_view_factory(type,paper,button))({el: $('.list_it')});
-        paper_view.collection.reset([
-            {% recursetree object.resumeitem_set.all %}
-                { {{ node.as_json|safe }}
-                {% if not node.is_leaf_node %},'children': new (paper_collection_factory(type,paper))().reset([{{ children }}])},{% else %}},{% endif %}
-            {% endrecursetree %}
-        ]);
-        paper_view.render();
-        var paper_name_view = new (paper_name_view_factory('resume_name'))({el:$('._content.builder')});
-        paper_name_view.model.set({{ object|as_json|safe }}[0]);
-        paper_name_view.bindel();
-        $('#id_resume').change(function(){
-            document.location = $('#id_resume').val();
-        });
-    </script>
 {% endblock %}
