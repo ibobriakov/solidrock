@@ -5,6 +5,45 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>Resume</title>
+    <style>
+        body {
+            color: #333333;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            margin: 0;
+        }
+
+        .list div {
+            padding: 0px 110px;
+        }
+
+        .list div div {
+            padding: 0px;
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .title.mini {
+            font-size: 14px;
+        }
+
+        .list-item {
+            margin-left: 0px;
+        }
+
+        .education {
+            padding: 10px 110px;
+        }
+
+        span {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body style='font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
              font-size: 14px;
@@ -16,10 +55,22 @@
             {% recursetree object.resumeitem_set.all %}
                 {% if node.type|contain_list %}
                     <div class="paper {{ node.item_class }}">{{ node.value }}</div>
-                    <div class="group">{{ children }}</div>
+                    <div class="group">
+                    {% if node|is_ul %}
+                        <ul>
+                    {% endif %}
+                        {{ children }}
+                     {% if node|is_ul %}
+                        </ul>
+                    {% endif %}
+                    </div>
                 {% elif node.type|safe == "container" %}
                     <div class="paper container {{ node.item_class }}">{{ children }}</div>
-                {% else %}
+                 {% elif node|is_li %}
+                    <li class="paper {{ node.item_class }} {{ node.type }} {% if node.type == "text" %} outline{% endif %}">{{ node.value }}</li>
+                {% elif node|is_span %}
+                    <span class="paper {{ node.item_class }} {{ node.type }} {% if node.type == "text" %} outline{% endif %}">{{ node.value }}</span>
+               {% else %}
                     <div class="paper {{ node.item_class }} {{ node.type }} {% if node.type == "text" %} outline{% endif %}">{{ node.value }}</div>
                 {% endif %}
             {% endrecursetree %}

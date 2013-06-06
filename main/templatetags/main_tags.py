@@ -60,3 +60,19 @@ def contain_list(value):
 @register.simple_tag
 def paper_tree(paper):
     return json.dumps([item.as_json() for item in paper.list_set.filter(parent=None)])
+
+
+@register.filter
+def is_span(node):
+    return "span" in node.item_class
+
+
+@register.filter
+def is_li(node):
+    return "list-item" in node.item_class
+
+
+@register.filter
+def is_ul(node):
+    return node.value in ("Key Strengths", "Key Responsibilities", "Key Achievements",)
+
