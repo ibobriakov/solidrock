@@ -23,6 +23,9 @@
                     {% endif %}
                 {% endrecursetree %}
             </div>
+            <ul class="links">
+                <li><a href="{% url 'resume.pdf' object.pk %}">download a PDF</a></li>
+            </ul>
         </div>
 
     </div>
