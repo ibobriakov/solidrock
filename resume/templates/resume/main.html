@@ -1,17 +1,23 @@
 {% extends 'resume/base.html' %}
 {% load mptt_tags %}
 {% load serialize %}
+{% load main_tags %}
+
+{% block templates %}
+{% endblock %}
 
 {% block content %}
     <div class="_content builder" ng-app="DynamicPaperApp">
         <h1>Resume Builder<a href="{% url "job_seeker.profile.base" %}">Exit Resume Builder</a></h1>
+
         <div class="top">
             <div class="title">Resume</div>
             <form>
                 <input type="text" data-value="resume_name.name">
+
                 <div class="links">
                     <a class="link" href="#">Resume Builder Instructions</a>
-{#                    <div class="pop">Popluate</div>#}
+
                     <div class="save">Save</div>
                 </div>
             </form>
@@ -27,17 +33,14 @@
                 </ul>
             </div>
         </div>
-        <div class="list str1" ng-controller="DynamicPaperCtrl" ng-init='set_data([])'>
-
-            {% recursetree object.resumeitem_set.all %}{ {{ node.as_json|safe }} }{% endrecursetree %}
+        <div class="list str1" ng-controller="DynamicPaperCtrl" ng-init='set_data({% paper_tree object %})'>
             <ul class="links">
-{#                <li><a href="#">view resume</a></li>#}
-{#                <li>|</li>#}
                 <li><a href="{% url 'resume.pdf' object.pk %}">download a PDF</a></li>
             </ul>
             <div class="list_it">
-                <paper data="paper_data"></paper>
+                <tree data="paper_data"></tree>
             </div>
+            <br>
         </div>
 
     </div>

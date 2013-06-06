@@ -1,7 +1,11 @@
-/**
- * Created with PyCharm.
- * User: jackdevil
- * Date: 06.06.13
- * Time: 9:23
- * To change this template use File | Settings | File Templates.
- */
+//
+//var dpf = {}; //Dynamic paper filters
+//
+//dpf.isListItem = function(){
+//    return function(item){
+//        console.log(item);
+//        return false;
+//    };
+//};
+//
+//DynamicPaperApp.filter(dpf);

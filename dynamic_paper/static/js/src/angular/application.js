@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var DynamicPaperApp = angular.module('DynamicPaperApp', ['ui','angularTree']);
+var DynamicPaperApp = angular.module('DynamicPaperApp', ['ui',]);
 
 DynamicPaperApp.config(["$httpProvider", function (provider) {
     provider.defaults.headers.common['X-CSRFToken'] = get_cookie('csrftoken');
