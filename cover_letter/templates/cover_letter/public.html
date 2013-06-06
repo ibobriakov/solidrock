@@ -1,62 +1,32 @@
 {% extends 'cover_letter/base.html' %}
 {% load mptt_tags %}
 {% load serialize %}
-
-{% block templates %}
-    <script id="paper_model" type="text/template">
-        <% if (model.get('type').split('_')[1] == 'list') { %>
-        <div class="paper <%=model.get('item_class')%>">
-            <%=model.get('value')%>
-        </div>
-        <div class="group">
-            <% if (model.get('children')) { %>
-                <%=model.get('children').html(level)%>
-            <% } %>
-        </div>
-        <% } else if (model.get('type') == 'container') {  %>
-        <div class="paper container <%=model.get('item_class')%>">
-            <% if (model.get('children')) { %>
-                <%=model.get('children').html(level+1)%>
-            <% } %>
-        </div>
-        <% } else { %>
-        <div data-id="<%=model.get('id')%>" class="paper <%=model.get('type')%> <%=model.get('item_class')%> <% if (model.get('type')=='text') { %> outline <% } %>"><%=model.get('value')%></div>
-        <% } %>
-    </script>
-    <script id="paper_collection" type="text/template">
-        <% for (var i=0; i < collection.length; i++) { %>
-            <%=collection.models[i].html(level)%>
-        <% } %>
-    </script>
-{% endblock %}
+{% load main_tags %}
 
 {% block content %}
     <div class="_content builder">
         <h1>Cover Letter View<a href onclick="window.history.back(); return false;">Back</a></h1>
+
         <div class="list str1">
+            <ul class="links">
+                <li><a href="{% url 'cover_letter.pdf' object.pk %}">download a PDF</a></li>
+            </ul>
             <div class="list_it letter">
+                 {% recursetree object.coverletteritem_set.all %}
+                    {% if node.type|contain_list %}
+                        <div class="paper {{ node.item_class }}">{{ node.value }}</div>
+                        <div class="group">{{ children }}</div>
+                    {% elif node.type|safe == "container" %}
+                        <div class="paper container {{ node.item_class }}">{{ children }}</div>
+                    {% else %}
+                        <div class="paper {{ node.item_class }} {{ node.type }} {% if node.type == "text" %} outline{% endif %}">{{ node.value }}</div>
+                    {% endif %}
+                {% endrecursetree %}
             </div>
+            <ul class="links">
+                <li><a href="{% url 'cover_letter.pdf' object.pk %}">download a PDF</a></li>
+            </ul>
         </div>
 
     </div>
-{% endblock %}
-
-{% block initialize-js %}
-    <script>
-        var type = 'cover_letter', paper = {{ object.pk }}, button = false;
-        var paper_view = new (paper_view_factory(type,paper,button))({el: $('.list_it.letter')});
-        paper_view.collection.reset([
-            {% recursetree object.coverletteritem_set.all %}
-                { {{ node.as_json|safe }}
-                {% if not node.is_leaf_node %},'children': new (paper_collection_factory(type,paper))().reset([{{ children }}])},{% else %}},{% endif %}
-            {% endrecursetree %}
-        ]);
-        paper_view.render();
-        var paper_name_view = new (paper_name_view_factory('cover_letter_name'))({el:$('._content.builder')});
-        paper_name_view.model.set({{ object|as_json|safe }}[0]);
-        paper_name_view.bindel();
-        $('#id_cover_letter').change(function(){
-            document.location = $('#id_cover_letter').val();
-        });
-    </script>
 {% endblock %}

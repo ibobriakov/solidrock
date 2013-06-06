@@ -3,6 +3,7 @@ from django.http import Http404
 from django.shortcuts import redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
+from dynamic_paper.views import PdfRenderMixin
 from models import CoverLetter
 from forms import CoverLetterSelectForm
 
@@ -21,7 +22,7 @@ class CoverLetterView(DetailView):
         object = super(CoverLetterView, self).get_object(queryset)
         if object.owner != self.request.user:
             raise Http404
-        return  object
+        return object
 
     def get_context_data(self, **kwargs):
         context = super(CoverLetterView, self).get_context_data(**kwargs)
@@ -34,10 +35,17 @@ class CoverLetterView(DetailView):
     def dispatch(self, request, *args, **kwargs):
         return super(CoverLetterView, self).dispatch(request, *args, **kwargs)
 
+
 class CoverLetterViewPublic(DetailView):
     template_name = 'cover_letter/public.html'
     model = CoverLetter
     context_object_name = 'cover_letter'
+
+
+class CoverLetterPDFView(PdfRenderMixin, DetailView):
+    template_name = 'cover_letter/pdf.html'
+    model = CoverLetter
+
 
 @login_required(login_url='/#login')
 def delete_cover_letter_view(request, resume_pk):

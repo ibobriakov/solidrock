@@ -16,7 +16,7 @@ class CoverLetter(models.Model):
 
     @property
     def list_set(self):
-        return self.coverletter_set
+        return self.coverletteritem_set
 
     class Meta:
         app_label = 'cover_letter'
