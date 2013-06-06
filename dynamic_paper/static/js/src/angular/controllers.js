@@ -11,7 +11,7 @@ var dpc = {}; // Dynamic Paper Controllers Dict
 dpc.DynamicPaperCtrl = function($scope) {
     $scope.paper_data = {};
     $scope.set_data = function(data){
-        console.log(data)
+        $scope.paper_data = data;
     };
 };
 

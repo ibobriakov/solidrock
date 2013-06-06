@@ -8,14 +8,26 @@
 
 var dpd = {}; // Dynamic Paper directives Dict
 
-dpd.paper = function(){
+dpd.contenteditable = function () {
     return {
-        restrict: "E",
-        scope: {
-            data: '='
-        },
-        template: "<div ng-repeat=\'item in data\'>\n    <p>{[{ item }]}</p>\n</div>"
+        require: 'ngModel',
+        link: function (scope, element, attrs, ctrl) {
+            // view -> model
+            element.bind('blur', function () {
+                scope.$apply(function () {
+                    ctrl.$setViewValue(element.html());
+                });
+            });
+
+            // model -> view
+            ctrl.$render = function () {
+                element.html(ctrl.$viewValue);
+            };
+
+            // load init value from DOM
+            ctrl.$setViewValue(element.html());
+        }
     }
-};
+}
 
 DynamicPaperApp.directive(dpd);
