@@ -34,16 +34,16 @@ cover_letter_template = [
     lambda paper:CoverLetterItem(type=get_paper_item('right_list'), item_class="paper-right paper-block",
                                  value=" ", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini date clear", value="Date", paper=paper),
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini date clear", placeholder="Date", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini clear", value="Re: Job Title",
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini clear", placeholder="Re: Job Title",
                                  paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", value="""Lorem ipsum dolor sit amet,
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", placeholder="""Lorem ipsum dolor sit amet,
      consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
      volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper.""", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", value="""Lorem ipsum dolor sit amet,
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", placeholder="""Lorem ipsum dolor sit amet,
     consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
     volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
     ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
@@ -51,28 +51,28 @@ cover_letter_template = [
     luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend
     option congue nihil imperdiet doming id quod mazim placerat facer possim assum.""", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", value="""Lorem ipsum dolor sit amet,
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", placeholder="""Lorem ipsum dolor sit amet,
     consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
      Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
      commodo consequat.""", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", value="Closing", paper=paper),
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", placeholder="Closing", paper=paper),
 
     lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block",
-                                 value="Quick-reference contact number", paper=paper), ]
+                                 placeholder="Quick-reference contact number", paper=paper), ]
 
 cover_letter_type_template = {
     'right': [
-        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", value="Name",
+        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Name",
                                                  paper=cover_letter_item.paper, parent=cover_letter_item),
 
-        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", value="Address",
+        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Address",
                                                  paper=cover_letter_item.paper, parent=cover_letter_item),
 
-        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", value="Phone Number",
+        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Phone Number",
                                                  paper=cover_letter_item.paper, parent=cover_letter_item),
 
-        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", value="Email Address",
+        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Email Address",
                                                  paper=cover_letter_item.paper, parent=cover_letter_item),
     ]
 }

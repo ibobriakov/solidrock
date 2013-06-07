@@ -24,7 +24,8 @@ def paper_item_factory(*args, **kwargs):
         paper = models.ForeignKey(*args, **kwargs)
         type = models.ForeignKey(PaperItemType, verbose_name=_('Type of element'))
         item_class = models.CharField(blank=True, null=True, max_length=50)
-        value = models.TextField(verbose_name=_('Paper Item Value'))
+        placeholder = models.TextField(blank=True, null=True)
+        value = models.TextField(verbose_name=_('Paper Item Value'), blank=True, null=True)
         parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
 
         def __unicode__(self):
@@ -39,6 +40,7 @@ def paper_item_factory(*args, **kwargs):
                 'resource_uri': self.get_resource_uri(),
                 'type': self.type.name,
                 'value': self.value,
+                'placeholder': self.placeholder,
                 'children': [item.as_json() for item in self.get_children()]
             }
 
