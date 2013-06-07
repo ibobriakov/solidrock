@@ -16,26 +16,16 @@
                 <input type="text" data-value="resume_name.name">
 
                 <div class="links">
-                    <a class="link" href="#">Resume Builder Instructions</a>
-
-                    <div class="save">Save</div>
+                    <div class="title">Jump to Another Resume</div>
+                    {{ resume_select.resume }}
                 </div>
             </form>
         </div>
-        <div class="nav">
-            <div class="info2">
-                <div class="title">Jump to Another Resume</div>
-                {{ resume_select.resume }}
-            </div>
-            <div class="info1">
-                <ul>
-                    <li data-text="resume_name.name"></li>
-                </ul>
-            </div>
-        </div>
         <div class="list str1" ng-controller="DynamicPaperCtrl" ng-init='set_data({% paper_tree object %})'>
             <ul class="links">
-                <li><a href="{% url 'resume.pdf' object.pk %}">download a PDF</a></li>
+                <li>
+                    <a href="{% url 'resume.pdf' object.pk %}">download a PDF</a>
+                </li>
             </ul>
             <div class="list_it">
                 <tree data="paper_data"></tree>
