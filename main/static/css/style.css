@@ -2046,6 +2046,10 @@ a:hover,.stages a,.builder .list .links li a,.builder .list .list_it a  {
     text-decoration:underline;
 }
 
+.stages a.button_common,.builder .list .links li a.button_common,.builder .list .list_it a.button_common {
+    text-decoration: none;
+}
+
 img,._search_job ._center form fieldset,.window .window_block .center.reg-avt .block fieldset,.stages .right .form fieldset {
     border:none;
 }
@@ -2332,4 +2336,31 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 
 .pagination ul li.current a:hover {
     text-decoration: none;
+}
+
+.button_common {
+    background:#E4732B;
+    color: #FFFFFF;
+    display: block;
+    font-size: 15px;
+    margin: 8px auto;
+    padding: 5px 0;
+    width: 240px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button_common:hover {
+    text-decoration: none;
+}
+
+.positioning {
+    bottom: 55px;
+    left: 50%;
+    margin-left: -120px;
+    position: absolute;
+}
+
+.spacing {
+    padding: 15px;
 }
