@@ -19,8 +19,8 @@ class ResumeResource(PaperResource):
 
 
 class ResumeItemResource(PaperItemResource):
-    # children = fields.ToManyField('resume.api.ResumeItemResource',
-    #                               'children', full=True, null=True)
+    children = fields.ToManyField('resume.api.ResumeItemResource',
+                                  'children', full=True, null=True, readonly=True)
 
     class Meta:
         queryset = ResumeItem.objects.all()
