@@ -1,3 +1,4 @@
+from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from dynamic_paper.api import PaperResource, PaperItemResource
 from dynamic_paper.api.validation import PaperItemValidation
@@ -18,6 +19,9 @@ class ResumeResource(PaperResource):
 
 
 class ResumeItemResource(PaperItemResource):
+    # children = fields.ToManyField('resume.api.ResumeItemResource',
+    #                               'children', full=True, null=True)
+
     class Meta:
         queryset = ResumeItem.objects.all()
         resource_name = 'resume'
