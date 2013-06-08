@@ -2487,6 +2487,13 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     display: inline-block;
 }
 
+.ng-scope .group remove.remove_top {
+    display: block;
+    position: absolute;
+    right: 30px;
+    top: 7px;
+}
+
 .group.title.mini.relativity .ng-scope {
     display: inline-block;
 }
