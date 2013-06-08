@@ -1475,11 +1475,10 @@ div.styled input[type=radio]:checked + label span {
 }
 
 div.paper-block {
-    margin-bottom:30px;
 }
 
 .paper.text.title.mini.date {
-    padding-top:50px;
+    margin-top: 50px;
 }
 
 .field.pod {
@@ -2104,7 +2103,6 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 
 ._banners_block ._banners a:last-child,.builder .top .links,.list_it.letter .paper.container {
-    float:right;
 }
 
 .window .window_block .center.reg-avt .block.avt fieldset .continue,.window .window_block .center.reg-avt .block.reg fieldset .continue {
@@ -2380,7 +2378,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     height: 20px;
 }
 
-.builder .list .list_it .paper.text.title.mini.span.outline {
+.builder .list .list_it.resume .paper.text.title.mini.span.outline {
     height: 20px;
     width: auto;
     margin-right: 10px;
@@ -2409,7 +2407,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     font-size: 14px;
 }
 
-.builder .list .list_it .paper.title.mini {
+.builder .list .list_it.resume .paper.title.mini {
     width: 645px;
 }
 
@@ -2418,83 +2416,83 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     font-weight: normal;
     height: auto;
     min-height: 20px;
+    width: 675px;
 }
 
-.ng-scope {
-    overflow: hidden;
+.resume .ng-scope {
 }
 
-.ng-scope .group .ng-scope:hover {
+.resume .ng-scope .group .ng-scope:hover {
     background: #F2FBFF;
 }
 
-.ng-scope .group .ng-scope {
+.resume .ng-scope .group .ng-scope {
     display: inline-block;
     overflow: visible;
 }
 
-.ng-scope .group .ng-scope .ng-scope .ng-scope {
+.resume .ng-scope .group .ng-scope .ng-scope .ng-scope {
     display: block;
 }
 
-.ng-scope .group .ng-scope .ng-scope .ng-scope .group .ng-scope {
+.resume .ng-scope .group .ng-scope .ng-scope .ng-scope .group .ng-scope {
     display: block;
 }
 
-.ng-scope append {
+.resume .ng-scope append {
     float: left;
     margin: 10px;
     width: 380px;
 }
 
-.builder .list .list_it .title.wide {
+.builder .list .list_it.resume .title.wide {
     width: 675px;
 }
 
-.builder .list .list_it .title.relativity {
+.builder .list .list_it.resume .title.relativity {
     float: left;
 }
 
-.builder .list .list_it .group.title.relativity {
+.builder .list .list_it.resume .group.title.relativity {
     margin: 0;
 }
 
-.builder .list .list_it .title.relativity + append {
+.builder .list .list_it.resume .title.relativity + append {
     margin-top: 17px;
 }
 
-.builder .list .list_it .title.mini.relativity + append {
+.builder .list .list_it.resume .title.mini.relativity + append {
     font-size: 14px;
     font-weight: normal;
     margin-top: 10px;
     width: 500px;
 }
 
-.builder .list .list_it .paper.title.mini.relativity {
+.builder .list .list_it.resume .paper.title.mini.relativity {
     margin-right: 5px;
     width: auto;
 }
 
-.paper.container {
+.resume .paper.container {
     width: 690px;
 }
 
-.ng-scope .group .ng-scope .ng-scope remove.ng-scope {
+.resume .ng-scope .group .ng-scope .ng-scope remove.ng-scope {
     display: inline-block;
 }
 
-.ng-scope .group.ng-scope remove.ng-scope {
+.resume .ng-scope .group.ng-scope remove.ng-scope {
     display: inline-block;
 }
 
-.ng-scope .group remove.remove_top {
+.resume .ng-scope .group remove.remove_top {
     display: block;
     position: absolute;
     right: 30px;
     top: 7px;
 }
 
-.group.title.mini.relativity .ng-scope {
+.resume .group.title.mini.relativity .ng-scope {
     display: inline-block;
 }
 
@@ -2511,4 +2509,22 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     height: 23px;
     width: 23px;
     margin-bottom: -7px;
+}
+
+.builder .list .list_it.letter .ng-scope {
+    overflow: hidden;
+}
+
+.builder .list .list_it.letter remove.ng-scope {
+    overflow: hidden;
+    padding-bottom: 8px;
+}
+
+.paper.text.paper-right.outline {
+    float: right;
+    width: 200px;
+}
+
+.group.paper-right.paper-block {
+    margin-bottom: 30px;
 }
