@@ -2384,10 +2384,20 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     height: 20px;
     width: auto;
     margin-right: 10px;
+    font-size: 14px;
+}
+
+.paper.text.title.span.outline {
+    font-size: 24px;
 }
 
 .paper.text.span.outline {
     margin-right: 5px;
+    font-size: 14px;
+}
+
+.paper.text.span.outline.list-item {
+    font-size: 14px;
 }
 
 .paper.line.title.span {
@@ -2396,6 +2406,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 
 .paper.line.span {
     padding: 0 5px 0 0;
+    font-size: 14px;
 }
 
 .builder .list .list_it .paper.title.mini {
@@ -2411,20 +2422,20 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     overflow: hidden;
 }
 
-.ng-scope .group.ng-scope .ng-scope:hover {
+.ng-scope .group .ng-scope:hover {
     background: #F2FBFF;
 }
 
-.ng-scope .group.ng-scope .ng-scope {
+.ng-scope .group .ng-scope {
     display: inline-block;
     overflow: visible;
 }
 
-.ng-scope .group.ng-scope .ng-scope .ng-scope .ng-scope {
+.ng-scope .group .ng-scope .ng-scope .ng-scope {
     display: block;
 }
 
-.ng-scope .group.ng-scope .ng-scope .ng-scope .ng-scope .group.ng-scope .ng-scope {
+.ng-scope .group .ng-scope .ng-scope .ng-scope .group .ng-scope {
     display: block;
 }
 
@@ -2442,11 +2453,17 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     float: left;
 }
 
+.builder .list .list_it .group.title.relativity {
+    margin: 0;
+}
+
 .builder .list .list_it .title.relativity + append {
     margin-top: 17px;
 }
 
 .builder .list .list_it .title.mini.relativity + append {
+    font-size: 14px;
+    font-weight: normal;
     margin-top: 10px;
     width: 500px;
 }
@@ -2456,10 +2473,33 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     width: auto;
 }
 
-.ng-scope .group.ng-scope .ng-scope .ng-scope remove.ng-scope {
+.paper.container {
+    width: 690px;
+}
+
+.ng-scope .group .ng-scope .ng-scope remove.ng-scope {
     display: inline-block;
 }
 
 .ng-scope .group.ng-scope remove.ng-scope {
     display: inline-block;
+}
+
+.group.title.mini.relativity .ng-scope {
+    display: inline-block;
+}
+
+.builder .list .list_it append a {
+    background: url("../img/icon_add.png") no-repeat;
+    display: block;
+    height: 23px;
+    width: 23px;
+}
+
+.builder .list .list_it remove a {
+    background: url("../img/icon_remove.png") no-repeat;
+    display: block;
+    height: 23px;
+    width: 23px;
+    margin-bottom: -7px;
 }
