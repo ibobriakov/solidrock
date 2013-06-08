@@ -90,15 +90,14 @@ dpd.tree = function () {
     }
 };
 
-dpd.oneLine = function () {
+dpd.oneline = function () {
     return {
-        require: 'ngModel',
-        scope: {
-            data: '=oneLine',
-            index: '=',
-            container: '='
-        },
-        link: function (scope, element, attrs, ctrl) {
+        link: function (scope, element, attrs) {
+            element.keypress(function (e) {
+                if (e.which == 13) {
+                    $(this).blur();
+                }
+            });
         }
     }
 };
@@ -113,22 +112,22 @@ dpd.children = function ($compile) {
         },
         link: function (scope, element) {
             var template = '';
-            var list = true ? scope.data.item_class && scope.data.item_class.split(' ').indexOf('list-item') != -1 : false;
+            var oneline = true ? scope.data.item_class && scope.data.item_class.split(' ').indexOf('oneline') != -1 : false;
             if (scope.data.type.split('_')[1] == 'list') {
                 template += '<div>\n    <div noteditable="true" class="paper {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"></div>\n    <append container="data"></append>\n</div>\n<div class="group {[{ data.item_class }]}">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n</div>'
             } else if (scope.data.type == 'container') {
-                if (scope.data.children.length>2){
+                if (scope.data.children.length > 2) {
                     template += '<div class="paper container {[{ data.item_class }]} ">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n    <remove container="container" index="index" class="remove_top"></remove>\n</div>'
                 } else {
                     template += '<div class="paper container {[{ data.item_class }]} ">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n    <remove container="container" index="index"></remove>\n</div>'
                 }
             } else if (scope.data.type == 'text') {
                 template += '<div contenteditable="true" ng-class="{outline: data.type == \'text\'}" class="paper {[{ data.type }]} {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"';
-                if (scope.data.value) {
+                if (scope.data.value && scope.data.value!="<br>") {
                     template += ' data-div-placeholder-content="true" ';
                 }
-                if (list) {
-                    template += ' one-line="data" container="container" index="index" ';
+                if (oneline) {
+                    template += ' oneline ';
                 }
                 template += '></div>';
             } else {
