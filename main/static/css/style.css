@@ -2407,8 +2407,17 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     min-height: 20px;
 }
 
+.ng-scope {
+    overflow: hidden;
+}
+
+.ng-scope .group.ng-scope .ng-scope:hover {
+    background: #F2FBFF;
+}
+
 .ng-scope .group.ng-scope .ng-scope {
     display: inline-block;
+    overflow: visible;
 }
 
 .ng-scope .group.ng-scope .ng-scope .ng-scope .ng-scope {
@@ -2419,10 +2428,42 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     display: block;
 }
 
-.ng-scope append {
-    bottom: -60%;
-    position: relative;
+.ng-scope .group.ng-scope .group.ng-scope:hover {
+    background: #CACACA;
 }
 
-.builder .list .list_it .relativity {
+.ng-scope append {
+    float: left;
+    margin: 10px;
+    width: 380px;
+}
+
+.builder .list .list_it .title.wide {
+    width: 675px;
+}
+
+.builder .list .list_it .title.relativity {
+    float: left;
+}
+
+.builder .list .list_it .title.relativity + append {
+    margin-top: 17px;
+}
+
+.builder .list .list_it .title.mini.relativity + append {
+    margin-top: 10px;
+    width: 500px;
+}
+
+.builder .list .list_it .paper.title.mini.relativity {
+    margin-right: 5px;
+    width: auto;
+}
+
+.ng-scope .group.ng-scope .ng-scope .ng-scope remove.ng-scope {
+    display: inline-block;
+}
+
+.ng-scope .group.ng-scope remove.ng-scope {
+    display: inline-block;
 }
