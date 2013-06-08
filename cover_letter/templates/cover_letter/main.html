@@ -1,66 +1,40 @@
 {% extends 'cover_letter/base.html' %}
 {% load mptt_tags %}
 {% load serialize %}
+{% load main_tags %}
 
 {% block content %}
-    <div class="_content builder">
+    <div class="_content builder" ng-app="DynamicPaperApp">
         <h1>Cover Letter Builder<a href="{% url "job_seeker.profile.base" %}">Exit Cover Letter Builder</a></h1>
+
         <div class="top">
             <div class="title">Name This Cover Letter</div>
             <form>
                 <input type="text" data-value="cover_letter_name.name">
+
                 <div class="links">
                     <a class="link" href="#">Cover Letter Builder Instructions</a>
-{#                    <div class="pop">Popluate</div>#}
-{#                    <div class="save">Save</div>#}
                 </div>
             </form>
         </div>
         <div class="nav">
-{#            <ul class="pages">#}
-{#                <li id="str1" class="active">Page 1</li>#}
-{#            </ul>#}
             <div class="info2">
                 <div class="title">Jump to Another Cover Letter</div>
                 {{ cover_letter_select.cover_letter }}
             </div>
-            <div class="info1">
-                <ul>
-                    <li data-text="cover_letter_name.name"></li>
-{#                    <li class="sep">|</li>#}
-{#                    <li class="page">Page 1</li>#}
-                </ul>
-            </div>
         </div>
-        <div class="list str1">
+        <div class="list str1" ng-controller="DynamicPaperCtrl" ng-init='set_data({% paper_tree object %})'>
             <ul class="links">
-{#                <li><a href="#">view cover letter</a></li>#}
-{#                <li>|</li>#}
-{#                <li><a href="#">download a PDF</a></li>#}
+                <li><a href="#">view cover letter</a></li>
+                <li>|</li>
+                <li><a href="#">download a PDF</a></li>
             </ul>
             <div class="list_it letter">
+                <tree data="paper_data"></tree>
             </div>
+            <br>
+            <a class="button_common" href="{% url "job_seeker.profile.base" %}">Exit Cover Letter Builder</a>
         </div>
 
     </div>
-{% endblock %}
-
-{% block initialize-js %}
-    <script>
-        var type = 'cover_letter', paper = {{ object.pk }}, button = false;
-        var paper_view = new (paper_view_factory(type,paper,button))({el: $('.list_it.letter')});
-        paper_view.collection.reset([
-            {% recursetree object.coverletteritem_set.all %}
-                { {{ node.as_json|safe }}
-                {% if not node.is_leaf_node %},'children': new (paper_collection_factory(type,paper))().reset([{{ children }}])},{% else %}},{% endif %}
-            {% endrecursetree %}
-        ]);
-        paper_view.render();
-        var paper_name_view = new (paper_name_view_factory('cover_letter_name'))({el:$('._content.builder')});
-        paper_name_view.model.set({{ object|as_json|safe }}[0]);
-        paper_name_view.bindel();
-        $('#id_cover_letter').change(function(){
-            document.location = $('#id_cover_letter').val();
-        });
-    </script>
 {% endblock %}

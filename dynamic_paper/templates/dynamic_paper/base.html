@@ -4,36 +4,12 @@
 
 {% block library-js %}
     {{ block.super }}
-    <script src="{% static 'dynamic_paper/js/src/backbone/models.js' %}" type="text/javascript"></script>
-    <script src="{% static 'dynamic_paper/js/src/backbone/collections.js' %}" type="text/javascript"></script>
-    <script src="{% static 'dynamic_paper/js/src/backbone/views.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/lib/angular.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/lib/angular-ui.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/extra.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dynamic_paper/js/src/angular/application.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dynamic_paper/js/src/angular/controllers.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dynamic_paper/js/src/angular/directives.js' %}" type="text/javascript"></script>
+    <script src="{% static 'dynamic_paper/js/src/angular/filters.js' %}" type="text/javascript"></script>
 {% endblock %}
-{% block templates %}
-    {{ block.super }}
-    <script id="paper_model" type="text/template">
-        <% if (model.get('type').split('_')[1] == 'list') { %>
-        <div class="paper <%=model.get('item_class')%>"><%=model.get('value')%>
-            <% if (button) { %><a class="add" data-id="<%=model.get('id')%>">add</a><% } %>
-        </div>
-        <div class="group">
-            <% if (model.get('children')) { %>
-            <%=model.get('children').html(level)%>
-            <% } %>
-        </div>
-        <% } else if (model.get('type') == 'container') {  %>
-        <div class="paper container <%=model.get('item_class')%>">
-            <% if (model.get('children')) { %>
-                <%=model.get('children').html(level+1)%>
-            <% if (button) { %><a class="del span" data-id="<%=model.get('id')%>">del</a><% } %>
-            <% } %>
-        </div>
-        <% } else { %>
-        <div <% if (model.get('type')=='text') { %> contenteditable='true' <% } %> data-id="<%=model.get('id')%>" class="paper <%=model.get('type')%> <%=model.get('item_class')%> <% if (model.get('type')=='text') { %> outline <% } %>"><%=model.get('value')%></div>
-        <% } %>
-    </script>
-    <script id="paper_collection" type="text/template">
-        <% for (var i=0; i < collection.length; i++) { %>
-        <%=collection.models[i].html(level)%>
-        <% } %>
-    </script>
-{% endblock %}
+
