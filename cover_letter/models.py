@@ -31,49 +31,42 @@ class CoverLetterItem(paper_item_factory('cover_letter.CoverLetter', verbose_nam
 
 
 cover_letter_template = [
-    lambda paper:CoverLetterItem(type=get_paper_item('right_list'), item_class="paper-right paper-block",
-                                 value=" ", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini date clear", placeholder="Date", paper=paper),
+    lambda paper: CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Name",
+                                  paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini clear", placeholder="Re: Job Title",
-                                 paper=paper),
+    lambda paper: CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Address",
+                                  paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block multiline", placeholder="""Lorem ipsum dolor sit amet,
-     consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-     volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper.""", paper=paper),
+    lambda paper: CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Phone Number",
+                                  paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block multiline", placeholder="""Lorem ipsum dolor sit amet,
-    consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-    volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
-    ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
-    vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-    luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend
-    option congue nihil imperdiet doming id quod mazim placerat facer possim assum.""", paper=paper),
+    lambda paper: CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Email Address",
+                                  paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block multiline", placeholder="""Lorem ipsum dolor sit amet,
-    consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-     Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-     commodo consequat.""", paper=paper),
+    lambda paper: CoverLetterItem(type=get_paper_item('text'), item_class="title mini date clear", placeholder="Date",
+                                  paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", placeholder="Closing", paper=paper),
+    lambda paper: CoverLetterItem(type=get_paper_item('text'), item_class="title mini clear",
+                                  placeholder="Re: Job Title",
+                                  paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block",
-                                 placeholder="Quick-reference contact number", paper=paper), ]
+    lambda paper: CoverLetterItem(type=get_paper_item('blocks_list'), item_class="paper-right paper-block",
+                                  value=" ", paper=paper),
+
+    lambda paper: CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", placeholder="Closing",
+                                  paper=paper),
+
+    lambda paper: CoverLetterItem(type=get_paper_item('text'), item_class="paper-block",
+                                  placeholder="Quick-reference contact number", paper=paper), ]
 
 cover_letter_type_template = {
-    'right': [
-        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Name",
-                                                 paper=cover_letter_item.paper, parent=cover_letter_item),
-
-        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Address",
-                                                 paper=cover_letter_item.paper, parent=cover_letter_item),
-
-        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Phone Number",
-                                                 paper=cover_letter_item.paper, parent=cover_letter_item),
-
-        lambda cover_letter_item:CoverLetterItem(type=get_paper_item('text'), item_class="paper-right", placeholder="Email Address",
-                                                 paper=cover_letter_item.paper, parent=cover_letter_item),
+    'blocks': [
+        lambda cover_letter_item: CoverLetterItem(type=get_paper_item('text'), item_class="paper-block multiline",
+                                                  placeholder="""Lorem ipsum dolor sit amet,
+     consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+     volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper.""", paper=cover_letter_item.paper,
+                                                  parent=cover_letter_item),
     ]
 }
 
@@ -84,6 +77,7 @@ def cover_letter_proxy(instance, created, **kwargs):
 
 def cover_letter_item_proxy(instance, created, **kwargs):
     return get_signal_for_page_item(cover_letter_type_template)(instance, created, **kwargs)
+
 
 post_save.connect(cover_letter_proxy, sender=CoverLetter)
 post_save.connect(cover_letter_item_proxy, sender=CoverLetterItem)
