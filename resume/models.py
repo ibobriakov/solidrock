@@ -37,7 +37,7 @@ resume_template = [
                             paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('text'), item_class="", placeholder="Your Address",
                             paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('phone_list'), item_class="title mini", value="Phones",
+    lambda paper:ResumeItem(type=get_paper_item('phone_list'), item_class="title mini relativity", value="Phones",
                             paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('header'), item_class="title mini span", value="Email",
                             paper=paper),
@@ -46,7 +46,7 @@ resume_template = [
     lambda paper:ResumeItem(type=get_paper_item('header'), item_class="title", value="Career Overview",
                             paper=paper),
 
-    lambda paper:ResumeItem(type=get_paper_item('text'), item_class="", placeholder="""Lorem ipsum dolor sit amet,
+    lambda paper:ResumeItem(type=get_paper_item('text'), item_class="multiline", placeholder="""Lorem ipsum dolor sit amet,
     consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
     volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
     aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
@@ -84,7 +84,7 @@ resume_type_template = {
         lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title",
                                       placeholder="Employer Company Name", paper=resume_item.paper, parent=resume_item),
 
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="", placeholder="""Lorem ipsum dolor sit amet,
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="multiline", placeholder="""Lorem ipsum dolor sit amet,
         consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
         volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
         aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
