@@ -67,8 +67,8 @@ dpd.append = function ($http) {
                 scope.container.children.push(data);
             };
             scope.append = function (container) {
-                var url = '/api/v1/resume/';
-                //url = url.substr(url.lastIndexOf('/') + 1);
+                var url = container.resource_uri;
+                url = url.replace(url.substr((url.substring(0, url.length-1)).lastIndexOf('/') + 1), '');
                 $http.post(url, {
                     'paper': container.paper,
                     'type': 'container',
@@ -88,6 +88,15 @@ dpd.tree = function () {
         },
         template: '<div ng-repeat="child in all_data">\n    <children data="child" index="$index" container="all_data"></children>\n</div>'
     }
+};
+
+dpd.oneLine = function(){
+  return {
+      restrict: 'E',
+      link: function(scope, element) {
+
+      }
+  }
 };
 
 dpd.children = function ($compile) {
