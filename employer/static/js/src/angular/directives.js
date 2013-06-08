@@ -29,12 +29,12 @@ directives.section = function ($location, $http) {
     return {
         transclude: true,
         scope: {
-            num: '@'
+            num: '@',
+            error: '='
         },
         template: '<a href="#/section/{[{num}]}/" ng-transclude></a>',
         controller: function($scope, share) {
             $scope.job = share.job;
-            $scope.error = share.error;
         },
         link: function ($scope, element, attr) {
             var success_callback = function (data, status, headers, config) {

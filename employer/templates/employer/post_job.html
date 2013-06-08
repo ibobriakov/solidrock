@@ -33,18 +33,18 @@
 
 {% block content %}
     <div class="_content stages" ng-app="PostJobApp">
-        <div ng-controller="JobData" ng-init='set_data({{ object|as_json|safe }}[0])'></div>
-        <div ng-controller="JobPaymentData"
-             ng-init='set_data({
+    <div ng-controller="JobData" ng-init='set_data({{ object|as_json|safe }}[0])'></div>
+    <div ng-controller="JobPaymentData"
+         ng-init='set_data({
                 subscriptions: {{ subscriptions|as_json|safe }},
                 packages: {{ packages|as_json|safe }},
                 default_package: {{ default|as_json|safe }}[0]
                 {% if user_subscription %},user_subscription: {{ user_subscription|as_json|safe }}[0]{% endif %}
                 {% if user_package %},user_package: {{ user_package|as_json|safe }}[0]{% endif %}
              })'>
-        </div>
-        <script type="text/ng-template" id="post-job.html">
-            <div >
+    </div>
+    <script type="text/ng-template" id="post-job.html">
+        <div>
             <h1>{% if job.approved %}Edit{% else %}Post{% endif %} a Job Listing</h1>
 
             <div class="left">
@@ -55,17 +55,27 @@
                     <li section num="4" error="error">Section 4: Payment Information</li>
                 </ul>
             </div>
+            <div class="error">
+                <div>
+                    <ul>
+                        <li ng-repeat="(key,value) in error">
+                            <span>Error in filed {[{key}]}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="right">
                 <ul activated>
-                    <li section num="1">Section 1</li>
-                    <li section num="2">Section 2</li>
-                    <li section num="3">Section 3</li>
-                    <li section num="4">Section 4</li>
+                    <li section num="1" error="error">Section 1</li>
+                    <li section num="2" error="error">Section 2</li>
+                    <li section num="3" error="error">Section 3</li>
+                    <li section num="4" error="error">Section 4</li>
                 </ul>
                 <div class="form">
                     <form activated="block">
                         <div class="s1">
-                            <div class="title">Job Information <p class="required"><span>*</span>Indicates a required field</p></div>
+                            <div class="title">Job Information <p class="required"><span>*</span>Indicates a required
+                                field</p></div>
                             <fieldset>
                                 <div class="job-information">
                                     <div>
@@ -143,19 +153,27 @@
                             <fieldset>
                                 <div class="field">
                                     <label>Upload Other Supporting Documents</label>
-                                    <supportdocument></supportdocument><br/>
-                                    <upload url="{% url "upload" "job_support_document" object.pk %}">Upload a Supporting Document</upload>
-                                    <div class="text">(Note: You can upload as many other supporting documents as you’d like.)</div>
+                                    <supportdocument></supportdocument>
+                                    <br/>
+                                    <upload url="{% url "upload" "job_support_document" object.pk %}">Upload a
+                                        Supporting Document
+                                    </upload>
+                                    <div class="text">(Note: You can upload as many other supporting documents as you’d
+                                        like.)
+                                    </div>
                                 </div>
                                 <div class="field">
                                     <label>School, College, or University Name</label>
-                                    <fullpositiondocument></fullpositiondocument><br/>
-                                    <upload url="{% url "upload" "job_full_position_document" object.pk %}">Upload the Full Position Description</upload>
+                                    <fullpositiondocument></fullpositiondocument>
+                                    <br/>
+                                    <upload url="{% url "upload" "job_full_position_document" object.pk %}">Upload the
+                                        Full Position Description
+                                    </upload>
                                     <div class="text">(Note: You may only upload one Full Position Description)</div>
                                 </div>
                                 <div class="_submit">
-                                        <div class="exit" ng-click="save_exit()">Save and Exit</div>
-                                        <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                                    <div class="exit" ng-click="save_exit()">Save and Exit</div>
+                                    <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
                                 </div>
                             </fieldset>
                         </div>
@@ -168,35 +186,37 @@
                                 {% include 'employer/field/input.html' with class='star' field=job_form.executive_positions styled_title='<p>Would you like to make this an <span>exclusive Executive Position </span> for only $25?</p>' %}
                                 {% include 'employer/field/select.html' with styled_title='<p>Would you like to <span> make this a “Featured Jobs” Ad that appears on the Home Page </span> for only $100?</p>' %}
                                 <div class="_submit">
-                                        <div class="exit" ng-click="save_exit()">Save and Exit</div>
-                                        <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                                    <div class="exit" ng-click="save_exit()">Save and Exit</div>
+                                    <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="s4">
-                        <div ng-controller="JobPayment">
-                            <payment></payment>
-                        </div>
+                            <div ng-controller="JobPayment">
+                                <payment></payment>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
-            </div>
-        </script>
+        </div>
+    </script>
 
-        <script type="text/ng-template" id="payment-job.html">
-            <div class="title"></div>
-            <fieldset>
-                {% if not user_subscription and not user_package %}
+    <script type="text/ng-template" id="payment-job.html">
+        <div class="title"></div>
+        <fieldset>
+            {% if not user_subscription and not user_package %}
                 <p>Buy now and save!</p>
                 <div class="row-bv subscription">
                     <div class="name-desc-bv">
                         <span>Best Value</span>
+
                         <p>Subscription</p>
                         <span>Post an ultimited<br/>amount of ads</span>
                     </div>
                     <div class="span-bv-group">
-                        <div class="span-bv" ng-repeat="subscription in subscriptions" ng-class="{active: subscription.active}">
+                        <div class="span-bv" ng-repeat="subscription in subscriptions"
+                             ng-class="{active: subscription.active}">
                             <div ng-click="select(subscription)">
                                 <p>{[{ subscription.promo }]}</p>
                                 <span>AU ${[{ subscription.cost }]}</span>
@@ -219,6 +239,7 @@
                             <div ng-click="select(package)">
                                 <p>{[{ package.name }]}</p>
                                 <span>AU ${[{ package.cost }]}</span>
+
                                 <div class="save">
                                     <p>SAVE</p>
                                     <span>10%</span>
@@ -228,12 +249,12 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-                {% endif %}
-                <div class="clear"></div>
-                {% if user_package %}
-                    <p>Use my current package</p>
-                    <div class="row-bv mini" >
-{#                    ng-class="{active: user_package.active}" ng-click="select(user_package)"#}
+            {% endif %}
+            <div class="clear"></div>
+            {% if user_package %}
+                <p>Use my current package</p>
+                <div class="row-bv mini">
+                    {#                    ng-class="{active: user_package.active}" ng-click="select(user_package)"#}
                     <div class="span-bv string">
                         <p>{[{ user_package.type.ad_count }]}</p>
                         <span>Bulk Ad Pack</span>
@@ -246,11 +267,11 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-                {% endif %}
-                {% if user_subscription %}
-                    <p>Use my current subscription</p>
-                    <div class="row-bv mini">
-{#                    ng-class="{active: user_subscription.active}" ng-click="select(user_subscription)"#}
+            {% endif %}
+            {% if user_subscription %}
+                <p>Use my current subscription</p>
+                <div class="row-bv mini">
+                    {#                    ng-class="{active: user_subscription.active}" ng-click="select(user_subscription)"#}
                     <div class="span-bv string">
                         <p>{[{ user_subscription.type.name }]}</p>
                         <span>Subscription</span>
@@ -263,23 +284,23 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-                {% endif %}
-                <div class="clear"></div>
-                {% if not user_subscription and not user_package %}
+            {% endif %}
+            <div class="clear"></div>
+            {% if not user_subscription and not user_package %}
                 <p>Post only this ad</p>
                 <div class="row-bv" ng-class="{active: default_package.active}" ng-click="select(default_package)">
                     <p>AU ${[{ default_package.cost }]}</p>
                 </div>
-                {% endif %}
-                <advpayment></advpayment>
-                <total></total>
-                <div class="_submit confirm">
-                    <div class="error">{[{ payment_error }]}</div>
-                    <div class="cont" ng-click="confirm()">Confirm Order</div>
-                </div>
-            </fieldset>
-        </script>
-        <ng-view></ng-view>
+            {% endif %}
+            <advpayment></advpayment>
+            <total></total>
+            <div class="_submit confirm">
+                <div class="error">{[{ payment_error }]}</div>
+                <div class="cont" ng-click="confirm()">Confirm Order</div>
+            </div>
+        </fieldset>
+    </script>
+    <ng-view></ng-view>
     </div>
 {% endblock %}
 
