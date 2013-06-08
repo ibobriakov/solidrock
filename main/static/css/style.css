@@ -2428,10 +2428,6 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     display: block;
 }
 
-.ng-scope .group.ng-scope .group.ng-scope:hover {
-    background: #CACACA;
-}
-
 .ng-scope append {
     float: left;
     margin: 10px;
