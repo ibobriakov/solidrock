@@ -52,13 +52,13 @@ resume_template = [
     aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
     molestie consequat.""", paper=paper),
 
-    lambda paper:ResumeItem(type=get_paper_item('keystrengts_list'), item_class="title", value="Key Strengths",
+    lambda paper:ResumeItem(type=get_paper_item('keystrengts_list'), item_class="title relativity", value="Key Strengths",
                             paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('career_list'), item_class="title", value="Career History",
+    lambda paper:ResumeItem(type=get_paper_item('career_list'), item_class="title relativity", value="Career History",
                             paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('education_list'), item_class="title", value="Education & Training",
+    lambda paper:ResumeItem(type=get_paper_item('education_list'), item_class="title relativity", value="Education & Training",
                             paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('personal_list'), item_class="title", value="Personal Memberships",
+    lambda paper:ResumeItem(type=get_paper_item('personal_list'), item_class="title relativity", value="Personal Memberships",
                             paper=paper), ]
 
 resume_type_template = {
@@ -81,7 +81,7 @@ resume_type_template = {
                                       paper=resume_item.paper, parent=resume_item),
         lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title mini span",
                                       placeholder="Job title", paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title",
+        lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="title wide",
                                       placeholder="Employer Company Name", paper=resume_item.paper, parent=resume_item),
 
         lambda resume_item:ResumeItem(type=get_paper_item('text'), item_class="multiline", placeholder="""Lorem ipsum dolor sit amet,
@@ -90,10 +90,10 @@ resume_type_template = {
         aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
         molestie consequat.""", paper=resume_item.paper, parent=resume_item),
 
-        lambda resume_item:ResumeItem(type=get_paper_item('keyresponsibilities_list'), item_class="title mini",
+        lambda resume_item:ResumeItem(type=get_paper_item('keyresponsibilities_list'), item_class="title mini relativity",
                                       value="Key Responsibilities",
                                       paper=resume_item.paper, parent=resume_item),
-        lambda resume_item:ResumeItem(type=get_paper_item('keyachievements_list'), item_class="title mini",
+        lambda resume_item:ResumeItem(type=get_paper_item('keyachievements_list'), item_class="title mini relativity",
                                       value="Key Achievements",
                                       paper=resume_item.paper, parent=resume_item), ],
     'keyachievements': [
