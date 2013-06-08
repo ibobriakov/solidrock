@@ -2103,6 +2103,11 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 
 ._banners_block ._banners a:last-child,.builder .top .links,.list_it.letter .paper.container {
+   float: right;
+}
+
+.list_it.letter .paper.container {
+   float: none;
 }
 
 .window .window_block .center.reg-avt .block.avt fieldset .continue,.window .window_block .center.reg-avt .block.reg fieldset .continue {
