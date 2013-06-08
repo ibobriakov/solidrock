@@ -117,7 +117,11 @@ dpd.children = function ($compile) {
             if (scope.data.type.split('_')[1] == 'list') {
                 template += '<div>\n    <div noteditable="true" class="paper {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"></div>\n    <append container="data"></append>\n</div>\n<div class="group {[{ data.item_class }]}">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n</div>'
             } else if (scope.data.type == 'container') {
-                template += '<div class="paper container {[{ data.item_class }]} ">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n    <remove container="container" index="index"></remove>\n</div>'
+                if (scope.data.children.length>2){
+                    template += '<div class="paper container {[{ data.item_class }]} ">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n    <remove container="container" index="index" class="remove_top"></remove>\n</div>'
+                } else {
+                    template += '<div class="paper container {[{ data.item_class }]} ">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n    <remove container="container" index="index"></remove>\n</div>'
+                }
             } else if (scope.data.type == 'text') {
                 template += '<div contenteditable="true" ng-class="{outline: data.type == \'text\'}" class="paper {[{ data.type }]} {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"';
                 if (scope.data.value) {
