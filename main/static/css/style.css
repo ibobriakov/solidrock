@@ -2414,6 +2414,8 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 
 .paper.text.multiline.outline {
+    font-size: 14px;
+    font-weight: normal;
     height: auto;
     min-height: 20px;
 }
