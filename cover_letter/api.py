@@ -1,3 +1,4 @@
+from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from dynamic_paper.api import PaperResource, PaperItemResource
 from dynamic_paper.api.validation import PaperItemValidation
@@ -18,6 +19,9 @@ class CoverLetterResource(PaperResource):
 
 
 class CoverLetterItemResource(PaperItemResource):
+    children = fields.ToManyField('cover_letter.api.CoverLetterItemResource',
+                                  'children', full=True, null=True, readonly=True)
+
     class Meta:
         queryset = CoverLetterItem.objects.all()
         resource_name = 'cover_letter'
