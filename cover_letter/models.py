@@ -39,11 +39,11 @@ cover_letter_template = [
     lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="title mini clear", placeholder="Re: Job Title",
                                  paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", placeholder="""Lorem ipsum dolor sit amet,
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block multiline", placeholder="""Lorem ipsum dolor sit amet,
      consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
      volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper.""", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", placeholder="""Lorem ipsum dolor sit amet,
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block multiline", placeholder="""Lorem ipsum dolor sit amet,
     consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
     volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
     ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
@@ -51,7 +51,7 @@ cover_letter_template = [
     luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend
     option congue nihil imperdiet doming id quod mazim placerat facer possim assum.""", paper=paper),
 
-    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block", placeholder="""Lorem ipsum dolor sit amet,
+    lambda paper:CoverLetterItem(type=get_paper_item('text'), item_class="paper-block multiline", placeholder="""Lorem ipsum dolor sit amet,
     consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
      Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
      commodo consequat.""", paper=paper),

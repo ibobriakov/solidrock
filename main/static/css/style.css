@@ -2364,3 +2364,65 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 .spacing {
     padding: 15px;
 }
+
+*[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
+    content: attr(data-placeholder);
+    color: #b3b3b3;
+}
+
+/*resume*/
+
+.paper.text.title.outline {
+    height: 32px;
+}
+
+.paper.text.outline {
+    height: 20px;
+}
+
+.builder .list .list_it .paper.text.title.mini.span.outline {
+    height: 20px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.paper.text.span.outline {
+    margin-right: 5px;
+}
+
+.paper.line.title.span {
+    padding: 0 5px 0 0;
+}
+
+.paper.line.span {
+    padding: 0 5px 0 0;
+}
+
+.builder .list .list_it .paper.title.mini {
+    width: 645px;
+}
+
+.paper.text.multiline.outline {
+    height: auto;
+    min-height: 20px;
+}
+
+.ng-scope .group.ng-scope .ng-scope {
+    display: inline-block;
+}
+
+.ng-scope .group.ng-scope .ng-scope .ng-scope .ng-scope {
+    display: block;
+}
+
+.ng-scope .group.ng-scope .ng-scope .ng-scope .ng-scope .group.ng-scope .ng-scope {
+    display: block;
+}
+
+.ng-scope append {
+    bottom: -60%;
+    position: relative;
+}
+
+.builder .list .list_it .relativity {
+}
