@@ -37,7 +37,7 @@ resume_template = [
                             paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('text'), item_class="", placeholder="Your Address",
                             paper=paper),
-    lambda paper:ResumeItem(type=get_paper_item('phone_list'), item_class="title mini", value="Phones",
+    lambda paper:ResumeItem(type=get_paper_item('phone_list'), item_class="title mini relativity", value="Phones",
                             paper=paper),
     lambda paper:ResumeItem(type=get_paper_item('header'), item_class="title mini span", value="Email",
                             paper=paper),
