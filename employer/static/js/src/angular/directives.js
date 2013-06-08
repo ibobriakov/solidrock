@@ -25,6 +25,37 @@ directives.activated = function () {
     }
 };
 
+directives.section = function ($location, $http) {
+    return {
+        transclude: true,
+        scope: {
+            num: '@'
+        },
+        template: '<a href="#/section/{[{num}]}/" ng-transclude></a>',
+        controller: function($scope, share) {
+            $scope.job = share.job;
+            $scope.error = share.error;
+        },
+        link: function ($scope, element, attr) {
+            var success_callback = function (data, status, headers, config) {
+                $('.preloader').hide();
+                $location.path('/section/' + parseInt($scope.num) + '/');
+            };
+            var error_callback = function (data, status, headers, config) {
+                $('.preloader').hide();
+                $scope.error = data.job;
+            };
+            element.bind('click', function (event) {
+                $('.preloader').show();
+                $http.put($scope.job.resource_uri, $scope.job)
+                    .success(success_callback)
+                    .error(error_callback);
+                return false;
+            });
+        }
+    }
+};
+
 directives.supportdocument = function () {
     return {
         restrict: "E",
@@ -221,6 +252,6 @@ directives.field = function () {
             console.log("controller");
         }
     }
-}
+};
 
 PostJobApp.directive(directives);

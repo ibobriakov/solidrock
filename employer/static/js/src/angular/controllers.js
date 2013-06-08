@@ -43,7 +43,7 @@ PostJobApp.controller ('JobData', function($scope, share) {
 PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams, $location, share) {
     $scope.job = share.job;
 
-    $scope.error = [];
+    $scope.error = share.error;
     $scope.section = parseInt($routeParams.section);
 
     $scope.checkActive = function(section) {

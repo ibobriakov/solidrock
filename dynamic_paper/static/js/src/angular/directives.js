@@ -4,7 +4,7 @@
 
 var dpd = {}; // Dynamic Paper directives Dict
 
-dpd.noteditable = function (){
+dpd.noteditable = function () {
     return {
         require: 'ngModel',
         link: function (scope, element, attrs, ctrl) {
@@ -24,7 +24,7 @@ dpd.contenteditable = function ($http) {
                 scope.$apply(function () {
                     ctrl.$setViewValue(element.html());
                     var url = scope.data.resource_uri;
-                    $http.put(url,scope.data);
+                    $http.put(url, scope.data);
                 });
             });
             ctrl.$render = function () {
@@ -68,7 +68,7 @@ dpd.append = function ($http) {
             };
             scope.append = function (container) {
                 var url = container.resource_uri;
-                url = url.replace(url.substr((url.substring(0, url.length-1)).lastIndexOf('/') + 1), '');
+                url = url.replace(url.substr((url.substring(0, url.length - 1)).lastIndexOf('/') + 1), '');
                 $http.post(url, {
                     'paper': container.paper,
                     'type': 'container',
@@ -90,13 +90,17 @@ dpd.tree = function () {
     }
 };
 
-dpd.oneLine = function(){
-  return {
-      restrict: 'E',
-      link: function(scope, element) {
-
-      }
-  }
+dpd.oneLine = function () {
+    return {
+        require: 'ngModel',
+        scope: {
+            data: '=oneLine',
+            index: '=',
+            container: '='
+        },
+        link: function (scope, element, attrs, ctrl) {
+        }
+    }
 };
 
 dpd.children = function ($compile) {
@@ -109,16 +113,20 @@ dpd.children = function ($compile) {
         },
         link: function (scope, element) {
             var template = '';
+            var list = true ? scope.data.item_class && scope.data.item_class.split(' ').indexOf('list-item') != -1 : false;
             if (scope.data.type.split('_')[1] == 'list') {
                 template += '<div>\n    <div noteditable="true" class="paper {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"></div>\n    <append container="data"></append>\n</div>\n<div class="group">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n</div>'
             } else if (scope.data.type == 'container') {
                 template += '<div ng-class="data.type" class="paper container {[{ data.item_class }]}">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n    <remove container="container" index="index"></remove>\n</div>'
             } else if (scope.data.type == 'text') {
+                template += '<div contenteditable="true" ng-class="{outline: data.type == \'text\'}" class="paper {[{ data.type }]} {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"';
                 if (scope.data.value) {
-                    template += '<div data-div-placeholder-content="true" contenteditable="true" ng-class="{outline: data.type == \'text\'}" class="paper {[{ data.type }]} {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"></div>'
-                } else {
-                    template += '<div contenteditable="true" ng-class="{outline: data.type == \'text\'}" class="paper {[{ data.type }]} {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"></div>'
+                    template += ' data-div-placeholder-content="true" ';
                 }
+                if (list) {
+                    template += ' one-line="data" container="container" index="index" ';
+                }
+                template += '></div>';
             } else {
                 template += '<div noteditable="true" ng-class="{outline: data.type == \'text\'}" class="paper {[{ data.type }]} {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"></div>'
             }

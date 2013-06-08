@@ -3,8 +3,12 @@
  */
 
 PostJobApp.factory ('share',function() {
-    var job = [];
-    return { job: job };
+    var job = [],
+        error = [];
+    return {
+        job: job ,
+        error: error
+    };
 });
 
 PostJobApp.factory ('sharePayment', function(){
