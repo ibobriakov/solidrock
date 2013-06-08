@@ -101,7 +101,7 @@ dpd.children = function ($compile) {
         link: function (scope, element) {
             var template = '';
             if (scope.data.type.split('_')[1] == 'list') {
-                template += '<div>\n    <append container="data"></append>\n    <div noteditable="true" class="paper {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"></div>\n</div>\n<div class="group">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n</div>'
+                template += '<div>\n    <div noteditable="true" class="paper {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"></div>\n    <append container="data"></append>\n</div>\n<div class="group">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n</div>'
             } else if (scope.data.type == 'container') {
                 template += '<div ng-class="data.type" class="paper container {[{ data.item_class }]}">\n    <div ng-repeat="child in data.children">\n        <children data="child" index="$index" container="data"></children>\n    </div>\n    <remove container="container" index="index"></remove>\n</div>'
             } else if (scope.data.type == 'text') {
