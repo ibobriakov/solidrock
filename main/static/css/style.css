@@ -2517,7 +2517,6 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 
 .builder .list .list_it.letter .ng-scope {
-    overflow: hidden;
 }
 
 .builder .list .list_it.letter remove.ng-scope {
@@ -2525,11 +2524,16 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     padding-bottom: 8px;
 }
 
-.paper.text.paper-right.outline {
+.paper.text.paper-right {
     float: right;
     width: 200px;
+    padding-left: 250px;
 }
 
 .group.paper-right.paper-block {
     margin-bottom: 30px;
+}
+
+div.paper-block {
+    margin: 15px 0;
 }
