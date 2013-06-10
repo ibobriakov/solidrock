@@ -4,7 +4,8 @@
 {% load main_tags %}
 
 {% block content %}
-    <div class="_content builder" ng-app="DynamicPaperApp" ng-controller="DynamicPaperCtrl" ng-init='set_data({ data:{% paper_tree object %}, name:{{ object|as_json|safe }} })'>
+    <div class="_content builder" ng-app="DynamicPaperApp" ng-controller="DynamicPaperCtrl"
+         ng-init='set_data({ data:{% paper_tree object %}, name:{{ object|as_json|safe }} })'>
         <h1>Cover Letter Builder<a href="{% url "job_seeker.profile.base" %}">Exit Cover Letter Builder</a></h1>
 
         <div class="top">
@@ -13,21 +14,16 @@
                 <paper-name data="paper.name"></paper-name>
 
                 <div class="links">
-                    <a class="link" href="#">Cover Letter Builder Instructions</a>
+                    <div class="title">Jump to Another Cover Letter</div>
+                    {{ cover_letter_select.cover_letter }}
                 </div>
             </form>
         </div>
-        <div class="nav">
-            <div class="info2">
-                <div class="title">Jump to Another Cover Letter</div>
-                {{ cover_letter_select.cover_letter }}
-            </div>
-        </div>
         <div class="list str1">
             <ul class="links">
-                <li><a href="#">view cover letter</a></li>
+                <li><a href="{% url 'cover_letter.view' object.pk %}">view cover letter</a></li>
                 <li>|</li>
-                <li><a href="#">download a PDF</a></li>
+                <li><a href="{% url 'cover_letter.pdf' object.pk %}">download a PDF</a></li>
             </ul>
             <div class="list_it letter">
                 <tree data="paper.data"></tree>

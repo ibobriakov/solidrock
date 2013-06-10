@@ -4,12 +4,15 @@
 {% load main_tags %}
 
 {% block content %}
-    <div class="_content builder" ng-app="DynamicPaperApp" ng-controller="DynamicPaperCtrl" ng-init='set_data({ data:{% paper_tree object %}, name:{{ object|as_json|safe }} })'>
+    <div class="_content builder" ng-app="DynamicPaperApp" ng-controller="DynamicPaperCtrl"
+         ng-init='set_data({ data:{% paper_tree object %}, name:{{ object|as_json|safe }} })'>
         <h1>Resume Builder<a href="{% url "job_seeker.profile.base" %}">Exit Resume Builder</a></h1>
+
         <div class="top">
             <div class="title">Resume</div>
             <form>
                 <paper-name data="paper.name"></paper-name>
+
                 <div class="links">
                     <div class="title">Jump to Another Resume</div>
                     {{ resume_select.resume }}
@@ -18,7 +21,7 @@
         </div>
         <div class="list str1">
             <ul class="links">
-                <li><a href="#">view cover letter</a></li>
+                <li><a href="{% url 'resume.view' object.pk %}">view cover letter</a></li>
                 <li>|</li>
                 <li><a href="{% url 'resume.pdf' object.pk %}">download a PDF</a></li>
             </ul>
@@ -28,5 +31,6 @@
             <br>
             <a class="button_common" href="{% url "job_seeker.profile.base" %}">Exit Resume Builder</a>
         </div>
+
     </div>
 {% endblock %}
