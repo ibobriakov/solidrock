@@ -102,6 +102,22 @@ dpd.oneline = function () {
     }
 };
 
+dpd.paperName = function ($http) {
+    return {
+        restrict: 'E',
+        scope: {
+            data: '='
+        },
+        template: '<input type="text" ng-model="data.name"/>',
+        link: function (scope, element, attrs) {
+            element.find('input').bind('blur', function () {
+                var url = scope.data.resource_uri;
+                $http.put(url, scope.data);
+            })
+        }
+    }
+};
+
 dpd.children = function ($compile) {
     return {
         restrict: 'E',
@@ -123,7 +139,7 @@ dpd.children = function ($compile) {
                 }
             } else if (scope.data.type == 'text') {
                 template += '<div contenteditable="true" ng-class="{outline: data.type == \'text\'}" class="paper {[{ data.type }]} {[{ data.item_class }]}" ng-model="data.value" data-placeholder="{[{ data.placeholder }]}"';
-                if (scope.data.value && scope.data.value!="<br>") {
+                if (scope.data.value && scope.data.value != "<br>") {
                     template += ' data-div-placeholder-content="true" ';
                 }
                 if (oneline) {

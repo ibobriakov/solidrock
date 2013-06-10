@@ -22,7 +22,7 @@ class ResumeView(DetailView):
         object = super(ResumeView, self).get_object(queryset)
         if object.owner != self.request.user:
             raise Http404
-        return  object
+        return object
 
     def get_context_data(self, **kwargs):
         context = super(ResumeView, self).get_context_data(**kwargs)

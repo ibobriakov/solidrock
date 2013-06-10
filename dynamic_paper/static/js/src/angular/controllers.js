@@ -4,10 +4,11 @@
 
 var dpc = {}; // Dynamic Paper Controllers Dict
 
-dpc.DynamicPaperCtrl = function($scope, $http) {
-    $scope.paper_data = {};
+dpc.DynamicPaperCtrl = function($scope) {
+    $scope.paper = {};
     $scope.set_data = function(data){
-        $scope.paper_data = data;
+        $scope.paper.data = data.data;
+        $scope.paper.name = data.name[0];
     };
 };
 
