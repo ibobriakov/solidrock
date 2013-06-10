@@ -45,3 +45,7 @@ div.styled input[type=checkbox]:checked + label span {
 .stages .right .form input[type=password].it3 {
     width:254px;
 }
+
+.gray{
+    color: #b3b3b3;
+}

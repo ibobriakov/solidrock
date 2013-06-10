@@ -1,8 +1,4 @@
 {% extends 'resume/base.html' %}
-{% load mptt_tags %}
-{% load serialize %}
-{% load main_tags %}
-
 {% block content %}
     <div class="_content builder">
         <h1>Resume View<a href onclick="window.history.back(); return false;">Back</a></h1>
@@ -12,16 +8,7 @@
                 <li><a href="{% url 'resume.pdf' object.pk %}">download a PDF</a></li>
             </ul>
             <div class="list_it">
-                {% recursetree object.resumeitem_set.all %}
-                    {% if node.type|contain_list %}
-                        <div class="paper {{ node.item_class }}">{{ node.value }}</div>
-                        <div class="group">{{ children }}</div>
-                    {% elif node.type|safe == "container" %}
-                        <div class="paper container {{ node.item_class }}">{{ children }}</div>
-                    {% else %}
-                        <div class="paper {{ node.item_class }} {{ node.type }} {% if node.type == "text" %} outline{% endif %}">{{ node.value }}</div>
-                    {% endif %}
-                {% endrecursetree %}
+            {% include "dynamic_paper/dynamic_tree.html" %}
             </div>
             <ul class="links">
                 <li><a href="{% url 'resume.pdf' object.pk %}">download a PDF</a></li>

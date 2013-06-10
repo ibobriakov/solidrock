@@ -1,0 +1,24 @@
+{% load mptt_tags %}
+{% load main_tags %}
+{% recursetree object.list_set.all %}
+    {% if node.type|contain_list %}
+        <div class="paper {{ node.item_class }}{% if not node.value %} gray{% endif %}">{{ node.value|default:node.placeholder }}</div>
+        <div class="group">
+        {% if node|is_ul %}
+            <ul>
+        {% endif %}
+            {{ children }}
+         {% if node|is_ul %}
+            </ul>
+        {% endif %}
+        </div>
+    {% elif node.type|safe == "container" %}
+        <div class="paper container {{ node.item_class }}{% if not node.value %} gray{% endif %}">{{ children }}</div>
+    {% elif node|is_li %}
+        <li class="paper {{ node.item_class }} {{ node.type }} {% if node.type == "text" %} outline{% endif %}{% if not node.value %} gray{% endif %}">{{ node.value|default:node.placeholder }}</li>
+    {% elif node|is_span %}
+        <span class="paper {{ node.item_class }} {{ node.type }} {% if node.type == "text" %} outline{% endif %}{% if not node.value %} gray{% endif %}">{{ node.value|default:node.placeholder }}</span>
+    {% else %}
+        <div class="paper {{ node.item_class }} {{ node.type }} {% if node.type == "text" %} outline{% endif %}{% if not node.value %} gray{% endif %}">{{ node.value|default:node.placeholder }}</div>
+    {% endif %}
+{% endrecursetree %}
