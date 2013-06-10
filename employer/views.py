@@ -109,16 +109,20 @@ class JobPublicView(DetailView):
                 context['already_applied'] = True
             except ApplyToJob.DoesNotExist:
                 initial = {'job': self.object.pk}
-                if 'resume' in self.request.GET:
-                    initial['resume'] = reverse('api_dispatch_detail',
-                                                kwargs={'api_name': 'v1',
-                                                        'resource_name': 'resume_name',
-                                                        'pk': self.request.GET['resume']})
-                if 'cover_letter' in self.request.GET:
-                    initial['cover_letter'] = reverse('api_dispatch_detail',
-                                                      kwargs={'api_name': 'v1',
-                                                              'resource_name': 'cover_letter_name',
-                                                              'pk': self.request.GET['cover_letter']})
+                if 'autocreate_resume' in self.request.session:
+                    if int(self.request.session['autocreate_resume']['job']) == context['object'].pk:
+                        resume_pk = self.request.session['autocreate_resume']['resume']
+                        initial['resume'] = reverse('api_dispatch_detail',
+                                                    kwargs={'api_name': 'v1',
+                                                            'resource_name': 'resume_name',
+                                                            'pk': resume_pk})
+                if 'autocreate_cover_letter' in self.request.session:
+                    if int(self.request.session['autocreate_cover_letter']['job']) == context['object'].pk:
+                        cover_letter_pk = self.request.session['autocreate_cover_letter']['cover_letter']
+                        initial['cover_letter'] = reverse('api_dispatch_detail',
+                                                                     kwargs={'api_name': 'v1',
+                                                                             'resource_name': 'cover_letter_name',
+                                                                             'pk': cover_letter_pk})
 
                 form = ApplyToJobForm(initial=initial)
                 context['already_applied'] = False
