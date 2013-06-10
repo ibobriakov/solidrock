@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from dynamic_paper.views import PdfRenderMixin
+from employer.models import Job
 from models import Resume
 from forms import ResumeSelectForm
 
@@ -11,6 +12,8 @@ from forms import ResumeSelectForm
 @login_required(login_url='/#login')
 def create_resume_view(request):
     new_resume = Resume.objects.create(owner=request.user, name="New Resume")
+    if 'job' in request.GET:
+        request.session['autocreate_resume'] = {'job': request.GET['job'], 'resume': new_resume.pk}
     return redirect('resume.edit', new_resume.pk)
 
 
@@ -29,6 +32,12 @@ class ResumeView(DetailView):
         resume_select_form = ResumeSelectForm()
         resume_select_form.fields['resume'].queryset = Resume.objects.filter(owner=self.request.user)
         context['resume_select'] = resume_select_form
+        if 'autocreate_resume' in self.request.session:
+            if context['object'].pk == self.request.session['autocreate_resume']['resume']:
+                try:
+                    context['for_job'] = Job.objects.get(pk=self.request.session['autocreate_resume']['job'])
+                except Job.DoesNotExist:
+                    pass
         return context
 
     @method_decorator(login_required(login_url='/#login'))

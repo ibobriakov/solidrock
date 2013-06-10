@@ -116,12 +116,18 @@
                     {% csrf_token %}
                     {{ apply_job_form.job }}
                     <div class="field ">
-                        {{ apply_job_form.resume }}
-                    </select>
+                        {%  if apply_job_form.resume.field.queryset %}
+                            {{ apply_job_form.resume }}
+                        {% else %}
+                            <a target="_blank" href="{% url 'resume.create' %}?job={{ object.pk }}">Click here to add New Resume</a>
+                        {% endif %}
                     </div>
                     <div class="field">
-                        {{ apply_job_form.cover_letter }}
-                        </select>
+                        {% if apply_job_form.cover_letter.field.queryset %}
+                            {{ apply_job_form.cover_letter }}
+                        {% else %}
+                            <a target="_blank" href="{% url 'cover_letter.create' %}?job={{ object.pk }}">Click here to add Cover Letter</a>
+                        {% endif %}
                     </div>
                     <div class="_submit">
                         <a class="cont" href="" ng-click="confirm()">Apply</a>
