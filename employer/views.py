@@ -110,13 +110,16 @@ class JobPublicView(DetailView):
             except ApplyToJob.DoesNotExist:
                 initial = {'job': self.object.pk}
                 if 'resume' in self.request.GET:
-                    try:
-                        initial['resume'] = reverse('api_dispatch_detail',
-                                                    kwargs={'api_name': 'v1',
-                                                            'resource_name': 'resume_name',
-                                                            'pk': self.request.GET['resume']})
-                    except Resume.DoesNotExist:
-                        pass
+                    initial['resume'] = reverse('api_dispatch_detail',
+                                                kwargs={'api_name': 'v1',
+                                                        'resource_name': 'resume_name',
+                                                        'pk': self.request.GET['resume']})
+                if 'cover_letter' in self.request.GET:
+                    initial['cover_letter'] = reverse('api_dispatch_detail',
+                                                      kwargs={'api_name': 'v1',
+                                                              'resource_name': 'cover_letter_name',
+                                                              'pk': self.request.GET['cover_letter']})
+
                 form = ApplyToJobForm(initial=initial)
                 context['already_applied'] = False
             form.fields['resume'].queryset = self.request.user.resume_set.all()
