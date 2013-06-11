@@ -2542,6 +2542,13 @@ div.paper-block {
     font-size: 12px;
 }
 
+.error_top {
+    color: red;
+    font-size: 12px;
+    margin-top: -25px;
+    position: absolute;
+}
+
 div.remove_cross {
     float: left;
     margin: 0 0 0 5px;
@@ -2588,5 +2595,9 @@ a.remove_cross {
 }
 
 .section1, .section2, .section3, .section4, .section5 {
+    margin-top: 35px;
+}
+
+.s1, .s2, .s3, .s4, .s5 {
     margin-top: 35px;
 }
