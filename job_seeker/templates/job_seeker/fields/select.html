@@ -1,0 +1,20 @@
+<div class="{{ class|default:"field styled" }}">
+    {% if styled_title %}
+        {{ styled_title }}
+    {% else %}
+        <label>{{ label }}</label>
+    {% endif %}
+    <input id="{{ name }}_yes" class="styled" type="radio" ng-value="true" ng-model="item.{{ name }}" name="ch{{ ch }}{[{item.id}]}">
+    <label for="{{ name }}_yes"><span></span>Yes</label>
+    <input id="{{ name }}_no" class="styled" type="radio" ng-value="false" ng-model="item.{{ name }}" name="ch{{ ch }}{[{item.id}]}"/>
+    <label for="{{ name }}_no"><span></span>No</label>
+    <div class="help-tip">
+        <div class="help-tip-title">Helpful Tip</div>
+        <div class="help-tip-text">
+            <div class="help-tip-right"></div>{{ tooltip|default:label }}
+        </div>
+    </div>
+    <div class="error">
+        <span ng-repeat="err in item.error.{{ name }}">{[{err}]}</span>
+    </div>
+</div>

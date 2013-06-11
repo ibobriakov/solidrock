@@ -8,6 +8,7 @@ class JobForm(rivet_modelform_factory('job')):
         for field_name in self._meta.model.REQUIRED_FIELDS:
             label = self.fields[field_name].label
             self.fields[field_name].label = label+'*'
+
     class Meta:
         model = Job
 

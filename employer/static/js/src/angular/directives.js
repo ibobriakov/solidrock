@@ -224,7 +224,7 @@ directives.total = function () {
         },
         template: "<p>{[{ select_text() }]}</p><br/><p>Total - ${[{service_cost + advanced_total}]}<p>"
     }
-}
+};
 
 directives.field = function () {
     return {

@@ -61,18 +61,6 @@ class JobSeekerInformationResource(JobSeekerItemResource):
     last_name = fields.CharField()
     photo = fields.FileField(readonly=True)
 
-    def dehydrate_have_visa(self, bundle):
-        return str(bundle.obj.have_visa).lower()
-
-    def dehydrate_is_australian(self, bundle):
-        return str(bundle.obj.is_australian).lower()
-
-    def dehydrate_is_driver(self, bundle):
-        return str(bundle.obj.is_driver).lower()
-
-    def dehydrate_can_contact_at_work(self, bundle):
-        return str(bundle.obj.can_contact_at_work).lower()
-
     def dehydrate_first_name(self, bundle):
         return bundle.obj.job_seeker.user.first_name
 

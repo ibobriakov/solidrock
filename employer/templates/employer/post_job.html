@@ -43,6 +43,7 @@
                 {% if user_package %},user_package: {{ user_package|as_json|safe }}[0]{% endif %}
              })'>
     </div>
+
     <script type="text/ng-template" id="post-job.html">
         <div>
             <h1>{% if job.approved %}Edit{% else %}Post{% endif %} a Job Listing</h1>
@@ -300,7 +301,9 @@
             </div>
         </fieldset>
     </script>
+
     <ng-view></ng-view>
+
     </div>
 {% endblock %}
 

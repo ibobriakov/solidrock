@@ -15,7 +15,8 @@ class RequiredFiledValidationMixin(object):
         errors.update(super(RequiredFiledValidationMixin, self).is_valid(bundle, request))
         for key, value in bundle.data.items():
             if key in self.form_class._meta.model.REQUIRED_FIELDS and not value:
-                if self.form_class().fields[key].required:
+                fields = self.form_class().fields
+                if key in fields and fields[key].required:
                     continue
                 errors[key].append('This field is required.')
         return errors

@@ -1,0 +1,12 @@
+<div class="{{ class|default:"field" }}">
+    <label>{{ label }}</label>
+    <input class="{{ input_class }}" type="text" ng-model="item.{{ name }}"/>
+    <div class="help-tip">
+        <div class="help-tip-title">Helpful Tip</div>
+        <div class="help-tip-text">
+            <div class="help-tip-right"></div>{{ tooltip|default:label }}</div>
+    </div>
+    <div class="error">
+        <span ng-repeat="err in item.error.{{ name }}">{[{err}]}</span>
+    </div>
+</div>
