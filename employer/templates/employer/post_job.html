@@ -56,15 +56,6 @@
                     <li section num="4" error="error">Section 4: Payment Information</li>
                 </ul>
             </div>
-            <div class="error">
-                <div>
-                    <ul>
-                        <li ng-repeat="(key,value) in error">
-                            <span>Error in filed {[{key}]}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
             <div class="right">
                 <ul activated>
                     <li section num="1" error="error">Section 1</li>
@@ -75,6 +66,7 @@
                 <div class="form">
                     <form activated="block">
                         <div class="s1">
+                        <div ng-show="error" class="error">Some of required fields are empty</div>
                             <div class="title">Job Information <p class="required"><span>*</span>Indicates a required
                                 field</p></div>
                             <fieldset>
