@@ -21,6 +21,22 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
     $scope.data.referees = aplInfoShare.referees;
     $scope.section = parseInt($routeParams.section);
 
+    $scope.current = function() {
+        switch ($scope.section) {
+            case 1:
+                return $scope.data.personal_information
+            case 2:
+                return $scope.data.current_employment
+            case 3:
+                return $scope.data.previous_employments
+            case 4:
+                return $scope.data.educations
+            case 5:
+                return $scope.data.referees
+        }
+        return false;
+    };
+
     $scope.append = function (container, url, append_data) {
         append_data = append_data || {};
         var success_callback = function (data, status, headers, config) {
@@ -36,7 +52,8 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
         }
     };
 
-    $scope.save = function (list) {
+    $scope.save = function (list, exit) {
+        exit = typeof (exit) == 'boolean' ? exit : true;
         var no_valid = list.length;
         _.each(list, function (item) {
             $('.preloader').show();
@@ -54,8 +71,16 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
                     $location.path('/section/' + parseInt($scope.section + 1) + '/');
                 }
             };
+            var success_exit_callback = function (data, status, headers, config) {
+                no_valid--;
+                item.error = {};
+                if (!no_valid) {
+                    $('.preloader').hide();
+                    $location.path('/section/' + parseInt($scope.section + 1) + '/');
+                }
+            };
             $http.put(item.resource_uri, item)
-                .error(error_callback).success(success_callback);
+                .error(error_callback).success(exit ? success_exit_callback : success_callback);
         });
     }
 });
