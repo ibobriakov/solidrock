@@ -873,7 +873,7 @@ footer ._footer ._footer_nav ul li a {
     color:#409bcd;
     font-weight:700;
     font-size:18px;
-    margin:35px 0 12px;
+    margin:0 0 12px;
 }
 
 .stages .right .form input[type=text] {
@@ -2544,7 +2544,7 @@ div.paper-block {
 
 div.remove_cross {
     float: left;
-    margin: 35px 0 0 5px;
+    margin: 0 0 0 5px;
 }
 
 .remove_cross a {
@@ -2585,4 +2585,8 @@ a.remove_cross {
     background: url("../img/icon_add.png") right no-repeat;
     display: inline-block;
     padding-right: 28px;
+}
+
+.section1, .section2, .section3, .section4, .section5 {
+    margin-top: 35px;
 }

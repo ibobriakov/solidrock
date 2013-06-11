@@ -220,7 +220,7 @@
                         {% include "job_seeker/fields/select.html" with label="Are you willing for this referee to be approached prior to an interview?" name="is_for_interview" %}
                         <div class="clear"></div>
                     </fieldset>
-                    <a href="" ng-click="append(data.referees, '/api/v1/job_seeker_referee/')">Add Another Referee</a>
+                    <a class="add_cross" href="" ng-click="append(data.referees, '/api/v1/job_seeker_referee/')">Add Another Referee</a>
 
                     <div class="_submit">
                         <div class="exit" ng-click="save(data.referees,true)">Save and Exit</div>
