@@ -49,6 +49,7 @@
                 <div class="section1">
                     <fieldset ng-repeat="item in data.personal_information">
                         <div class="title">Personal Information</div>
+                        <div class="clear"></div>
                         <div class="left_info">
                             {% include "job_seeker/fields/input.html" with label="Last Name" name="last_name" class="field fl_left" input_class="it2" %}
                             {% include "job_seeker/fields/input.html" with label="First Name" name="first_name" class="field fl_left" input_class="it2" %}
@@ -96,6 +97,7 @@
                 <div class="section2">
                     <fieldset ng-repeat="item in data.current_employment">
                         <div class="title">Current Employment</div>
+                        <div class="clear"></div>
                         <div class="text">(If now unemployed give details of last employer)</div>
                         {% include "job_seeker/fields/input.html" with label="Name of Employer" name="name" input_class="it4" %}
                         {% include "job_seeker/fields/input.html" with label="First address" name="address_first" input_class="it4" %}
@@ -118,11 +120,12 @@
                 <div class="section3">
                     <fieldset ng-repeat="item in data.previous_employments">
                         <div class="title">Previous Employment</div>
+                        <div class="remove_cross">
+                            <a href="" ng-click="remove(item, data.previous_employments)"></a>
+                        </div>
+                        <div class="clear"></div>
                         <div class="text">(Most recent Employer first. Please cover you last three positions if
                             applicable)
-                        </div>
-                        <div>
-                            <a href="" ng-click="remove(item, data.previous_employments)">Remove</a>
                         </div>
                         {% include "job_seeker/fields/input.html" with label="Name of Employer" name="name" input_class="it4" %}
                         {% include "job_seeker/fields/input.html" with label="First address" name="address_first" input_class="it4" %}
@@ -133,7 +136,7 @@
                         {% include "job_seeker/fields/textarea.html" with label="Brief Description of Duties" name="brief" %}
                         {% include "job_seeker/fields/textarea.html" with label="Reason for Leaving <span>(if no longer employed)</span>" name="leaving_reason" class="field fl_clear" %}
                     </fieldset>
-                    <a href="" ng-click="append(data.previous_employments, '/api/v1/job_seeker_previous_employment/')">Add Another Position</a>
+                    <a class="add_cross" href="" ng-click="append(data.previous_employments, '/api/v1/job_seeker_previous_employment/')">Add Another Position</a>
 
                     <div class="_submit">
                         <div class="exit">Save and Exit</div>
@@ -141,7 +144,8 @@
                     </div>
                 </div>
                 <div class="s4">
-                    <div class="title">Education</div>
+                    <div class="title no_float">Education</div>
+                    <div class="clear"></div>
                     <div class="text">(Qualifications from Schools, Colleges and Universities. Please list your
                         highest qualification first.)
                     </div>
@@ -150,17 +154,17 @@
                             <label>School, College, or University Name</label>
 
                             <div ng-repeat="item in data.educations | filter: {education_type:'school-college-or-university-name'}">
-                                <input class="it4" type="text" ng-model="item.value"/><a href="" ng-click="remove(item, data.educations)">Del</a>
+                                <input class="it4" type="text" ng-model="item.value"/><a class="remove_cross" href="" ng-click="remove(item, data.educations)"></a>
                             </div>
-                            <a href="" ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'school-college-or-university-name'})">Add another School, College or University</a>
+                            <a class="add_cross" href="" ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'school-college-or-university-name'})">Add another School, College or University</a>
                         </div>
                         <div class="field">
                             <label>Major Course of Study or Classes Taken</label>
 
                             <div ng-repeat="item in data.educations | filter: {education_type:'major-course-of-study-or-classes-taken'}">
-                                <input class="it4" type="text" ng-model="item.value"/><a href="" ng-click="remove(item, data.educations)">Del</a>
+                                <input class="it4" type="text" ng-model="item.value"/><a class="remove_cross" href="" ng-click="remove(item, data.educations)"></a>
                             </div>
-                            <a href=""
+                            <a class="add_cross" href=""
                                ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'major-course-of-study-or-classes-taken'})">Add
                                 another Major Course of Study or Class Taken</a>
                         </div>
@@ -168,18 +172,18 @@
                             <label>Degrees and/or Post-Graduate Qualifications Obtained</label>
 
                             <div ng-repeat="item in data.educations | filter: {education_type:'degrees-andor-post-graduate-qualifications-obtained'}">
-                                <input class="it4" type="text" ng-model="item.value"/><a href="" ng-click="remove(item, data.educations)">Del</a>
+                                <input class="it4" type="text" ng-model="item.value"/><a class="remove_cross" href="" ng-click="remove(item, data.educations)"></a>
                             </div>
-                            <a href="" ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'degrees-andor-post-graduate-qualifications-obtained'})">Add
+                            <a class="add_cross" href="" ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'degrees-andor-post-graduate-qualifications-obtained'})">Add
                                 another Degree and/or Post-Graduate Qualification Obtained</a>
                         </div>
                         <div class="field">
                             <label>Certificates and/or Diplomas Obtained</label>
 
                             <div ng-repeat="item in data.educations | filter: {education_type:'certificates-andor-diplomas-obtained'}">
-                                <input class="it4" type="text" ng-model="item.value"/><a href="" ng-click="remove(item, data.educations)">Del</a>
+                                <input class="it4" type="text" ng-model="item.value"/><a class="remove_cross" href="" ng-click="remove(item, data.educations)"></a>
                             </div>
-                            <a href="" ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'certificates-andor-diplomas-obtained'})">Add
+                            <a class="add_cross" href="" ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'certificates-andor-diplomas-obtained'})">Add
                                 another Certificate and/or Diploma Obtained</a>
                         </div>
                         <div class="field">
@@ -198,9 +202,10 @@
                 <div class="s5">
                     <fieldset ng-repeat="item in data.referees">
                         <div class="title">Referees</div>
-                        <div>
-                            <a href="" ng-click="remove(item, data.referees)">Remove</a>
+                        <div class="remove_cross">
+                            <a href="" ng-click="remove(item, data.referees)"></a>
                         </div>
+                        <div class="clear"></div>
                         <div class="text">(Please give the names and addresses of your two most recent employers or
                             other work related referees.)
                         </div>
