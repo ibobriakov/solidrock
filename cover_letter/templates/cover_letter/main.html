@@ -29,8 +29,10 @@
                 <tree data="paper.data"></tree>
             </div>
             <br>
-            <a class="button_common" href="{% url "job_seeker.profile.base" %}">Exit Cover Letter Builder</a>
+            {% if for_job %}
+                <a class="button_common" href="{% url "employer.job.view" for_job.pk %}">Apply for {{ for_job.name }}</a>
+            {% endif %}
+                <a class="button_common" href="{% url "job_seeker.profile.base" %}">Exit Cover Letter Builder</a>
         </div>
-
     </div>
 {% endblock %}

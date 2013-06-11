@@ -1,6 +1,7 @@
 import datetime
 from functools import wraps
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.decorators import available_attrs
@@ -11,6 +12,7 @@ from job_seeker.models import ApplyToJob
 from main.utils import view_decorator
 from models import Job
 from payment.models import SubscriptionType, AdPackageType, Subscription, AdPackage
+from resume.models import Resume
 from userprofile.models import Employer
 from employer.forms import JobForm
 
@@ -106,7 +108,23 @@ class JobPublicView(DetailView):
                 form = ApplyToJobForm(instance=self.request.user.applytojob_set.get(job=self.object))
                 context['already_applied'] = True
             except ApplyToJob.DoesNotExist:
-                form = ApplyToJobForm(initial={'job': self.object})
+                initial = {'job': self.object.pk}
+                if 'autocreate_resume' in self.request.session:
+                    if int(self.request.session['autocreate_resume']['job']) == context['object'].pk:
+                        resume_pk = self.request.session['autocreate_resume']['resume']
+                        initial['resume'] = reverse('api_dispatch_detail',
+                                                    kwargs={'api_name': 'v1',
+                                                            'resource_name': 'resume_name',
+                                                            'pk': resume_pk})
+                if 'autocreate_cover_letter' in self.request.session:
+                    if int(self.request.session['autocreate_cover_letter']['job']) == context['object'].pk:
+                        cover_letter_pk = self.request.session['autocreate_cover_letter']['cover_letter']
+                        initial['cover_letter'] = reverse('api_dispatch_detail',
+                                                                     kwargs={'api_name': 'v1',
+                                                                             'resource_name': 'cover_letter_name',
+                                                                             'pk': cover_letter_pk})
+
+                form = ApplyToJobForm(initial=initial)
                 context['already_applied'] = False
             form.fields['resume'].queryset = self.request.user.resume_set.all()
             form.fields['cover_letter'].queryset = self.request.user.coverletter_set.all()
