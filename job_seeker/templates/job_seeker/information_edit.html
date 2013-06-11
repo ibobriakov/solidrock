@@ -1,6 +1,7 @@
 {% extends 'job_seeker/base.html' %}
 {% load staticfiles %}
 {% load serialize %}
+{% load job_seeker_information %}
 
 {% block library-js %}
     {{ block.super }}
@@ -28,11 +29,11 @@
 
     <div class="left">
         <ul activated>
-            <li section num="1" current="current">Section 1: Personal Information</li>
-            <li section num="2" current="current">Section 2: Current Employment</li>
-            <li section num="3" current="current">Section 3: Previous Employment</li>
-            <li section num="4" current="current">Section 4: Education</li>
-            <li section num="5" current="current">Section 5: References</li>
+            <li class="{% if user|section1_complete %}checked {% endif %}" section num="1" current="current">Section 1: Personal Information</li>
+            <li class="{% if user|section2_complete %}checked {% endif %}" section num="2" current="current">Section 2: Current Employment</li>
+            <li class="{% if user|section3_complete %}checked {% endif %}" section num="3" current="current">Section 3: Previous Employment</li>
+            <li class="{% if user|section4_complete %}checked {% endif %}" section num="4" current="current">Section 4: Education</li>
+            <li class="{% if user|section5_complete %}checked {% endif %}" section num="5" current="current">Section 5: References</li>
         </ul>
     </div>
 
@@ -234,14 +235,11 @@
             {% include "job_seeker/fields/select.html" with label="Are you willing for this referee to be approached prior to an interview?" name="is_for_interview" %}
             <div class="clear"></div>
         </fieldset>
-        <a class="add_cross" href="" ng-click="append(data.referees, '/api/v1/job_seeker_referee/')">Add
-            Another Referee</a>
+        <a class="add_cross" href="" ng-click="append(data.referees, '/api/v1/job_seeker_referee/')">Add Another Referee</a>
 
         <div class="_submit">
             <div class="exit" ng-click="save(data.referees,true)">Save and Exit</div>
-            <div class="cont" ng-click="save(data.referees)">Save and Continue</div>
         </div>
-
     </div>
     </form>
     </div>

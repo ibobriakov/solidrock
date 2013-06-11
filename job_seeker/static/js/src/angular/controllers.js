@@ -68,6 +68,7 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
                 item.error = {};
                 if (!no_valid) {
                     $('.preloader').hide();
+                    $('.left li.active').addClass('checked');
                     $location.path('/section/' + parseInt($scope.section + 1) + '/');
                 }
             };
