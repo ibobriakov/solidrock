@@ -53,7 +53,7 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
     };
 
     $scope.save = function (list, exit) {
-        exit = typeof (exit) == 'boolean' ? exit : true;
+        exit = exit || false;
         var no_valid = list.length;
         _.each(list, function (item) {
             $('.preloader').show();
@@ -76,7 +76,7 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
                 item.error = {};
                 if (!no_valid) {
                     $('.preloader').hide();
-                    $location.path('/section/' + parseInt($scope.section + 1) + '/');
+                    window.location.href="/job_seeker/";
                 }
             };
             $http.put(item.resource_uri, item)
