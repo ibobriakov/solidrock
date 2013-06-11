@@ -33,51 +33,34 @@ directives.section = function ($location, $http) {
         transclude: true,
         scope: {
             num: '@',
-            error: '='
+            current: '='
         },
         template: '<a href="#/section/{[{num}]}/" ng-transclude></a>',
-        controller: function($scope) {
-//            $scope.job = share.job;
-        },
         link: function ($scope, element, attr) {
-//            var success_callback = function (data, status, headers, config) {
-//                $('.preloader').hide();
-//                $location.path('/section/' + parseInt($scope.num) + '/');
-//            };
-//            var error_callback = function (data, status, headers, config) {
-//                $('.preloader').hide();
-//                $scope.error = data.job;
-//            };
             element.bind('click', function (event) {
-                $location.path('/section/' + parseInt($scope.num) + '/');
-//                $('.preloader').show();
-//                $http.put($scope.job.resource_uri, $scope.job)
-//                    .success(success_callback)
-//                    .error(error_callback);
-//                return false;
+                $scope.list = $scope.current();
+                var no_valid = $scope.list.length;
+                _.each($scope.list, function (item) {
+                    $('.preloader').show();
+                    var error_callback = function (data, status, headers, config) {
+                        $('.preloader').hide();
+                        _.each(data, function (value, key) {
+                            item.error = value;
+                        });
+                    };
+                    var success_callback = function (data, status, headers, config) {
+                        no_valid--;
+                        item.error = {};
+                        if (!no_valid) {
+                            $('.preloader').hide();
+                            $location.path('/section/' + parseInt($scope.num) + '/');
+                        }
+                    };
+                    $http.put(item.resource_uri, item).error(error_callback).success(success_callback);
+                });
+                return false;
             });
         }
-    }
-};
-
-directives.inputField = function() {
-    return {
-        restrict: 'E',
-        scope: {
-            data: '=',
-            'name': '@name',
-            'label': '@'
-        },
-        compile: function(scope, element, attr){
-
-        }
-
-    }
-};
-
-directives.save = function($http) {
-    return {
-        restrict: 'E'
     }
 };
 
