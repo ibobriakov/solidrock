@@ -66,9 +66,10 @@
                 <div class="form">
                     <form activated="block">
                         <div class="s1">
-                        <div ng-show="error" class="error">Some of required fields are empty</div>
+                        <div ng-show="error" class="error_top">Some of required fields are empty</div>
                             <div class="title">Job Information <p class="required"><span>*</span>Indicates a required
                                 field</p></div>
+                        <div class="clear"></div>
                             <fieldset>
                                 <div class="job-information">
                                     <div>
@@ -130,14 +131,15 @@
                                     {% include 'employer/field/input.html' with class='fl_left' field=job_form.contact_email %}
 
                                     <div class="_submit">
-                                        <div class="exit" ng-click="save_exit()">Save and Exit</div>
-                                        <div class="cont" ng-click="save_exit(false)">Save and Continue</div>
+                                        <div class="exit add_cross" ng-click="save_exit()">Save and Exit</div>
+                                        <div class="cont add_cross" ng-click="save_exit(false)">Save and Continue</div>
                                     </div>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="s2">
                             <div class="title">Upload Documents</div>
+                            <div class="clear"></div>
                             <p>
                                 From this section you can upload documents associated with this job listing.<br/>
                                 Note that only Adobe PDF or Microsoft Word Documents are allowed.
@@ -172,6 +174,7 @@
                         </div>
                         <div class="s3">
                             <div class="title">Select a Category</div>
+                            <div class="clear"></div>
                             <fieldset>
                                 {% include 'employer/field/category.html' with bind='ng-model:categories.category' field=job_form.categories %}
                                 {% include 'employer/field/category.html' with class='pod' bind='ng-model:sub_categories.subcategory' field=job_form.sub_categories %}
