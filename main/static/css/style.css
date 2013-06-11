@@ -972,10 +972,9 @@ footer ._footer ._footer_nav ul li a {
 }
 
 .stages .right .form ._submit {
-    clear:both;
     display:inline-block;
     margin:30px 0;
-    padding:0 172px;
+    padding:0 170px;
     
 }
 
@@ -1041,7 +1040,7 @@ footer ._footer ._footer_nav ul li a {
 }
 
 .stages .right .form .s2 .text,.stages .right .form .s3 .text,.stages .right .form .s4 .text,.stages .right .form .s5 .text {
-    margin:-13px 0 15px;
+    margin:0px 0 15px;
 }
 
 .stages .right .form .s2 .date {
@@ -2536,4 +2535,54 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 
 div.paper-block {
     margin: 15px 0;
+}
+
+.error span {
+    color: red;
+    font-size: 12px;
+}
+
+div.remove_cross {
+    float: left;
+    margin: 35px 0 0 5px;
+}
+
+.remove_cross a {
+    background: url("../img/icon_remove.png") left no-repeat;
+    display: block;
+    height: 23px;
+    width: 23px;
+}
+
+a.remove_cross {
+    background: url("../img/icon_remove.png") left no-repeat;
+    display: inline-block;
+    height: 23px;
+    width: 23px;
+}
+
+.stages .right .form .field a.remove_cross {
+    display: inline-block;
+    margin: 0 0 -8px 5px;
+}
+
+
+.stages .right .form .title {
+    float: left;
+}
+
+.stages .right .form .title.no_float {
+    float: none;
+}
+
+.add_cross {
+    background: url("../img/icon_add.png") right no-repeat;
+    display: inline-block;
+    padding-right: 28px;
+}
+
+.stages .right .form .field a.add_cross {
+    background: url("../img/icon_add.png") right no-repeat;
+    display: inline-block;
+    padding-right: 28px;
 }
