@@ -143,7 +143,7 @@
                         <div class="cont" ng-click="save(data.previous_employments)">Save and Continue</div>
                     </div>
                 </div>
-                <div class="s4">
+                <div class="section4">
                     <div class="title no_float">Education</div>
                     <div class="clear"></div>
                     <div class="text">(Qualifications from Schools, Colleges and Universities. Please list your
@@ -199,7 +199,7 @@
                         <div class="cont" ng-click="save(data.educations)">Save and Continue</div>
                     </div>
                 </div>
-                <div class="s5">
+                <div class="section5">
                     <fieldset ng-repeat="item in data.referees">
                         <div class="title">Referees</div>
                         <div class="remove_cross">
@@ -220,7 +220,7 @@
                         {% include "job_seeker/fields/select.html" with label="Are you willing for this referee to be approached prior to an interview?" name="is_for_interview" %}
                         <div class="clear"></div>
                     </fieldset>
-                    <a href="" ng-click="append(data.referees, '/api/v1/job_seeker_referee/')">Add Another Referee</a>
+                    <a class="add_cross" href="" ng-click="append(data.referees, '/api/v1/job_seeker_referee/')">Add Another Referee</a>
 
                     <div class="_submit">
                         <div class="exit">Save and Exit</div>
