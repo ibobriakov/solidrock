@@ -69,19 +69,7 @@
                 {% include "job_seeker/fields/select.html" with label="Do you hold a current driver’s licence?" name="is_driver" ch="4" %}
             </div>
             <div class="avatar">
-                <div>Profile Picture (optional)</div>
-                <div class="img">
-                    <img id="avatar_img" src="{[{ item.photo }]}">
-
-                    <div class="links">
-                        <a id="link_upload_file" href="#">Upload Photo</a>|
-                        <a data-url="{% url "remove" "job_seeker_photo" %}" id="link_remove_file"
-                           href="#">Delete
-                            Picture</a>
-                    </div>
-                </div>
-                <input class="_hide" id="fileupload" type="file" name="files[]"
-                       data-url="{% url "upload" "job_seeker_photo" %}">
+                <upload photo="item.photo"></upload>
             </div>
             <div class="bot_info">
                 {% include "job_seeker/fields/input.html" with label="Home Phone Number" name="home_phone" input_class="it2" class="field fl_left" %}
