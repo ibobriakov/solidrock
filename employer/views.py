@@ -24,6 +24,7 @@ def profile_complete(view_func):
             return view_func(request, *args, **kwargs)
         else:
             return redirect('employer.profile.edit')
+
     return _wrapped_view
 
 
@@ -112,17 +113,19 @@ class JobPublicView(DetailView):
                 if 'autocreate_resume' in self.request.session:
                     if int(self.request.session['autocreate_resume']['job']) == context['object'].pk:
                         resume_pk = self.request.session['autocreate_resume']['resume']
-                        initial['resume'] = reverse('api_dispatch_detail',
-                                                    kwargs={'api_name': 'v1',
+                        context['initial_resume'] = reverse('api_dispatch_detail',
+                                                            kwargs={'api_name': 'v1',
                                                             'resource_name': 'resume_name',
                                                             'pk': resume_pk})
+                        context['form_default_data'] = True
                 if 'autocreate_cover_letter' in self.request.session:
                     if int(self.request.session['autocreate_cover_letter']['job']) == context['object'].pk:
                         cover_letter_pk = self.request.session['autocreate_cover_letter']['cover_letter']
-                        initial['cover_letter'] = reverse('api_dispatch_detail',
-                                                                     kwargs={'api_name': 'v1',
-                                                                             'resource_name': 'cover_letter_name',
-                                                                             'pk': cover_letter_pk})
+                        context['initial_cover_letter'] = reverse('api_dispatch_detail',
+                                                                  kwargs={'api_name': 'v1',
+                                                                  'resource_name': 'cover_letter_name',
+                                                                  'pk': cover_letter_pk})
+                        context['form_default_data'] = True
 
                 form = ApplyToJobForm(initial=initial)
                 context['already_applied'] = False

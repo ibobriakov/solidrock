@@ -5,6 +5,7 @@
  * Time: 10:14
  * To change this template use File | Settings | File Templates.
  */
+
 var directives = {};
 
 directives.upload = function () {

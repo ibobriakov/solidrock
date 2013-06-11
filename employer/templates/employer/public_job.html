@@ -4,13 +4,12 @@
 {% load static %}
 {% block library-js %}
     {{ block.super }}
-    <script src="{% static 'employer/js/lib/angular.js' %}" type="text/javascript"></script>
-    <script src="{% static 'employer/js/lib/angular-ui.js' %}" type="text/javascript"></script>
-
+    <script src="{% static 'main/js/lib/angular.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/lib/angular-ui.js' %}" type="text/javascript"></script>
 {% endblock %}
 {% block content %}
 {% with profile=job.owner.profile %}
-    <div class="_content stages" ng-app="ApplyJobApp" ng-controller="ApplyJobCtrl" ng-init='applyToJob["job"]={{ job.pk }}' >
+    <div class="_content stages" ng-app="ApplyJobApp" ng-controller="ApplyJobCtrl" ng-init='applyToJob={"job":{{ job.pk }}, "resume":"{{ initial_resume }}", "cover_letter":"{{ initial_cover_letter }}"}' >
         <h1>Employer information</h1>
         {% thumbnail profile.logo "170x170" crop="center" as im %}
         <div class="employer-logo">
@@ -91,7 +90,7 @@
                 {% endfor %}
             </p>
         </div>
-        <div class="job-contact-info" style="height: auto;" collapse>
+        <div class="job-contact-info" style="height: auto;" collapse="true">
             <a class="collapseAction" href="">Job Contact Information</a>
             <div class="collapseItems">
                     <p><b>Contact Name </b> {{ job.contact_name }}</p>
@@ -101,7 +100,7 @@
         </div>
         {% if not user.is_anonymous %}
         {% if user.user_type == 0 %} {# Job seeker #}
-        <div class="click-apply-now" style="height: auto;"{% if not already_applied %} collapse{% endif %}>
+        <div class="click-apply-now" style="height: auto;"{% if not already_applied %} collapse="{% if form_default_data %}false{% else %}true{% endif %}"{% endif %}>
 
             <a class="collapseAction" href="">
                 {% if already_applied %}
@@ -138,7 +137,7 @@
             {% endif %}
         </div>
         {% else %}
-        <div class="job-contact-info" style="height: auto;" collapse>
+        <div class="job-contact-info" style="height: auto;" collapse="true">
             <a class="collapseAction" href="">JobSeeker's applications</a>
             <div class="collapseItems" class="collapsed">
                 {% for application in job.applytojob_set.all %}
@@ -164,7 +163,7 @@
 
 {% block initialize-js %}
     <script src="{% static 'main/js/src/backbone/route.js' %}" type="text/javascript"></script>
-    <script src="{% static 'employer/js/src/angular/extra.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/extra.js' %}" type="text/javascript"></script>
     <script src="{% static 'employer/js/src/angular/apply_job/application.js' %}" type="text/javascript"></script>
     <script src="{% static 'employer/js/src/angular/apply_job/controllers.js' %}" type="text/javascript"></script>
     <script src="{% static 'employer/js/src/angular/apply_job/directives.js' %}" type="text/javascript"></script>
