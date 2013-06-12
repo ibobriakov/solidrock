@@ -29,9 +29,7 @@ class ResumeView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ResumeView, self).get_context_data(**kwargs)
-        resume_select_form = ResumeSelectForm()
-        resume_select_form.fields['resume'].queryset = Resume.objects.filter(owner=self.request.user)
-        context['resume_select'] = resume_select_form
+        context['selected'] = Resume.objects.filter(owner=self.request.user).exclude(pk=self.object.pk)
         if 'autocreate_resume' in self.request.session:
             if context['object'].pk == self.request.session['autocreate_resume']['resume']:
                 try:

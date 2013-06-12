@@ -5,7 +5,7 @@
 
 {% block content %}
     <div class="_content builder" ng-app="DynamicPaperApp" ng-controller="DynamicPaperCtrl"
-         ng-init='set_data({ data:{% paper_tree object %}, name:{{ object|as_json|safe }} })'>
+         ng-init='set_data({ data:{% paper_tree object %}, name:{{ object|as_json|safe }}, select: {{ selected|as_json|safe }} })'>
         <h1>Resume Builder<a href="{% url "job_seeker.profile.base" %}">Exit Resume Builder</a></h1>
 
         <div class="top">
@@ -15,7 +15,10 @@
 
                 <div class="links">
                     <div class="title">Jump to Another Resume</div>
-{#                    {{ resume_select.resume }}#}
+                    <select ng-model="paper.selected" data-placeholder="Select Resume" id="select_resume">
+                        <option value=""></option>
+                        <option ng-repeat="(v,k) in paper.select" value="/resume/{[{k.id}]}/">{[{k.name}]}</option>
+                    </select>
                 </div>
             </form>
         </div>

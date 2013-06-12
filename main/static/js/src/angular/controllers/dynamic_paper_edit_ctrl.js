@@ -9,13 +9,14 @@ dpc.DynamicPaperCtrl = function ($scope) {
     $scope.set_data = function (data) {
         $scope.paper.data = data.data;
         $scope.paper.name = data.name[0];
+        $scope.paper.select = data.select;
     };
 
-    $('#id_resume').change(function () {
+    $('#select_resume').change(function () {
         window.location.replace(this.value);
     });
 
-    $('#id_cover_letter').change(function () {
+    $('#select_cover_letter').change(function () {
         window.location.replace(this.value);
     });
 };

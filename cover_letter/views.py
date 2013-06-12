@@ -30,9 +30,7 @@ class CoverLetterView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(CoverLetterView, self).get_context_data(**kwargs)
-        resume_select_form = CoverLetterSelectForm()
-        resume_select_form.fields['cover_letter'].queryset = CoverLetter.objects.filter(owner=self.request.user)
-        context['cover_letter_select'] = resume_select_form
+        context['selected'] = CoverLetter.objects.filter(owner=self.request.user).exclude(pk=self.object.pk)
         if 'autocreate_cover_letter' in self.request.session:
             if context['object'].pk == self.request.session['autocreate_cover_letter']['cover_letter']:
                 try:
