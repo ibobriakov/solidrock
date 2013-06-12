@@ -63,7 +63,7 @@
             <form activated="block">
                 <div class="section1">
                     <fieldset ng-repeat="item in data.personal_information">
-                        <div ng-show="item.error" class="error_top">Some of required fields are empty</div>
+                        <div ng-show="has_error(item.error)" class="error_top">Some of required fields are empty</div>
                         <div class="title">Personal Information</div>
                         <div class="clear"></div>
                         <div class="left_info">
@@ -100,7 +100,7 @@
                 </div>
                 <div class="section2">
                     <fieldset ng-repeat="item in data.current_employment">
-                        <div ng-show="item.error" class="error_top">Some of required fields are empty</div>
+                        <div ng-show="has_error(item.error)" class="error_top">Some of required fields are empty</div>
                         <div class="title">Current Employment</div>
                         <div class="clear"></div>
                         <div class="text">(If now unemployed give details of last employer)</div>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="section3">
                     <fieldset ng-repeat="item in data.previous_employments">
-                        <div ng-show="item.error" class="error_top">Some of required fields are empty</div>
+                        <div ng-show="has_error(item.error)" class="error_top">Some of required fields are empty</div>
                         <div class="title">Previous Employment</div>
                         <div class="remove_cross">
                             <a href="" ng-click="remove(item, data.previous_employments)"></a>
@@ -217,7 +217,7 @@
                 </div>
                 <div class="section5">
                     <fieldset ng-repeat="item in data.referees">
-                        <div ng-show="item.error" class="error_top">Some of required fields are empty</div>
+                        <div ng-show="has_error(item.error)" class="error_top">Some of required fields are empty</div>
                         <div class="title">Referees</div>
                         <div class="remove_cross">
                             <a href="" ng-click="remove(item, data.referees)"></a>

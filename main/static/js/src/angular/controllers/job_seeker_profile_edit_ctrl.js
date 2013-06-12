@@ -20,8 +20,17 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
     $scope.data.educations = aplInfoShare.educations;
     $scope.data.referees = aplInfoShare.referees;
     $scope.section = parseInt($routeParams.section);
+    $scope.has_error = function (dict) {
+        if (!dict) return false;
+        for (var key in dict) {
+            if (dict.hasOwnProperty(key)) {
+                return true;
+            }
+        }
+        return false;
+    };
 
-    $scope.current = function() {
+    $scope.current = function () {
         switch ($scope.section) {
             case 1:
                 return $scope.data.personal_information
@@ -77,7 +86,7 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
                 item.error = {};
                 if (!no_valid) {
                     $('.preloader').hide();
-                    window.location.href="/job_seeker/";
+                    window.location.href = "/job_seeker/";
                 }
             };
             $http.put(item.resource_uri, item)
