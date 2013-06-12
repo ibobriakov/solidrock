@@ -49,11 +49,10 @@
                                         <label>{{ personal_information.postcode }}</label>
                                     </div>
                                 </div>
-                                {% thumbnail personal_information.photo "137x137" crop="center" as im %}
+                                {% thumbnail personal_information.photo "203x203" crop="center" as im %}
                                     <div class="field avatar">
-                                        <label>Profile Picture</label>
 
-                                        <div class="img"><img src="{{ im.url }}"/></div>
+                                        <div class="img fix"><img src="{{ im.url }}"/></div>
                                     </div>
                                 {% endthumbnail %}
                                 <div class="bot_info">
@@ -191,7 +190,7 @@
                                     <label>{{ education_type.name }}</label>
                                     <ul>
                                         {% for education in education_type.educations %}
-                                            <li>{{ education.value }}</li>
+                                            <li class="not_styled">{{ education.value }}</li>
                                         {% endfor %}
                                     </ul>
                                 </div>

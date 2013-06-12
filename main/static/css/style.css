@@ -2601,3 +2601,15 @@ a.remove_cross {
 .s1, .s2, .s3, .s4, .s5 {
     margin-top: 35px;
 }
+
+.stages .right .form .section1 .avatar .img.fix {
+    margin: -35px 0 10px -20px;
+}
+
+
+.stages .right ul li.not_styled {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #000000;
+    font-size: 14px;
+}

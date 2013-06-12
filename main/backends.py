@@ -10,11 +10,11 @@ class EmailWithPermissionBackend(EmailBackend):
         if perm == 'userprofile.change_employer':
             return obj.user == user
         elif perm in ('userprofile.change_jobseekerinformation',
-                      'userprofile.change_jobseekercurrentemployment',):
-            return obj.job_seeker == user.profile
-        elif perm in ('userprofile.change_jobseekerpreviousemployment',
+                      'userprofile.change_jobseekercurrentemployment',
+                      'userprofile.change_jobseekerpreviousemployment',
                       'userprofile.change_jobseekereducation',
-                      'userprofile.change_jobseekerreferee',):
+                      'userprofile.change_jobseekerreferee',
+                      'userprofile.delete_jobseekereducation',):
             return obj.job_seeker == user.profile
         elif perm in ('userprofile.add_jobseekerpreviousemployment',
                       'userprofile.add_jobseekereducation',
