@@ -1,0 +1,19 @@
+{% extends 'cover_letter/base.html' %}
+{% block content %}
+    <div class="_content builder">
+        <h1>Cover Letter View<a href onclick="window.history.back(); return false;">Back</a></h1>
+
+        <div class="list str1">
+            <ul class="links">
+                <li><a href="{% url 'cover_letter.pdf' object.pk %}">download a PDF</a></li>
+            </ul>
+            <div class="list_it letter">
+                {% include "dynamic_paper/tree.html" %}
+            </div>
+            <ul class="links">
+                <li><a href="{% url 'cover_letter.pdf' object.pk %}">download a PDF</a></li>
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}

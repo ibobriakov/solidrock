@@ -1,0 +1,90 @@
+{% extends 'employer/base.html' %}
+{% load flatblock_tags %}
+{% load thumbnail %}
+{% load serialize %}
+
+{% block content %}
+    <div class="_content stages">
+        <h1>Your Business Information</h1>
+        <div class="left">
+            <div class="company-logo">
+                <div>Company Logo (optional)</div>
+                <div class="img"><img src="img/002.jpg" width="220" height="220"/></div>
+                <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="form">
+                <form>
+                    <div class="section1">
+                        <div class="title">General Business Information</div>
+                        <fieldset>
+                            <div class="left_info">
+                                <div class="field fl_left">
+                                    <label>Company Name</label>
+                                    <input class="it2" type="text"/>
+                                </div>
+                                <div class="field">
+                                    <label>ABN/ACN</label>
+                                    <input type="text"/>
+                                </div>
+                                <div class="field">
+                                    <label>Address</label>
+                                    <input class="it4" type="text"/>
+                                    <input class="it4" type="text"/>
+                                    <input class="it4" type="text"/>
+                                </div>
+                                <div class="field">
+                                    <label>Postcode</label>
+                                    <input class="it3" type="text"/>
+                                </div>
+                                <div class="field">
+                                    <label>Business Phone</label>
+                                    <input class="it3" type="text"/>
+                                </div>
+                                <div class="field">
+                                    <label>Brief Description of Your Company</label>
+                                    <textarea></textarea>
+                                </div>
+                            </div>
+                            <div class="bot_info">
+                                <div class="title">Account Contact Person</div>
+                                <div class="field">
+                                    <label>Name</label>
+                                    <input class="it3" type="text"/>
+                                </div>
+                                <div class="field">
+                                    <label>Phone</label>
+                                    <input class="it3" type="text"/>
+                                </div>
+                                <div class="field">
+                                    <label>Email Address</label>
+                                    <input class="it3" type="text"/>
+                                </div>
+                                <div class="title">Terms and Conditions</div>
+                                <div class="text2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+                                    nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+                                    wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis
+                                    nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in
+                                    hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat
+                                    nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
+                                    praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam
+                                    liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod
+                                    mazim placerat facer possim assum.
+                                </div>
+
+                                <div class="field">
+                                    <label>Do you agree to the Terms and Conditions?</label>
+                                    <label><input class="styled" type="radio" name="ch1"/>Yes</label>
+                                </div>
+                                <div class="_submit">
+                                    <div class="exit2">Save and Exit</div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

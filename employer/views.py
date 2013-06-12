@@ -40,7 +40,7 @@ class EmployerView(DetailView):
 
 
 class EmployerEditView(TemplateView):
-    template_name = "employer/detail.html"
+    template_name = "employer/profile/edit.html"
 
 
 @profile_complete
@@ -55,7 +55,7 @@ def create_job_view(request):
 
 @view_decorator(profile_complete)
 class JobListView(ListView):
-    template_name = "employer/job_list.html"
+    template_name = "employer/job/list.html"
     model = Job
 
     def get_queryset(self):
@@ -64,7 +64,7 @@ class JobListView(ListView):
 
 @view_decorator(profile_complete)
 class EditJobView(DetailView):
-    template_name = "employer/post_job.html"
+    template_name = "employer/job/edit.html"
     model = Job
 
     def get_object(self, queryset=None):
@@ -99,7 +99,7 @@ def delete_job_view(request, pk):
 
 
 class JobPublicView(DetailView):
-    template_name = "employer/public_job.html"
+    template_name = "employer/job/view.html"
     model = Job
 
     def get_context_data(self, **kwargs):
@@ -137,7 +137,7 @@ class JobPublicView(DetailView):
 
 @view_decorator(profile_complete)
 class EmployerPublicView(DetailView, MultipleObjectMixin):
-    template_name = "employer/public.html"
+    template_name = "employer/profile/view.html"
     model = Employer
     paginate_by = 9
 

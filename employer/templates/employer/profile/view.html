@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'employer/base.html' %}
 {% load staticfiles %}
 {% load thumbnail %}
 {% load flatblock_tags %}
@@ -23,24 +23,22 @@
             <div class="title">Your Company Information</div>
             <div class="center">
                 <ul>
-                    <li><a href="{% url "employer.profile.public" profile.pk %}">View Your Company Information</a></li>
-                    <li><a href="{% url "employer.profile.edit" %}">Edit Your Company Information</a></li>
-                    <li><a href="{% url "employer.job.create" %}">Post Job</a></li>
+{#                    <li><a href="{% url "employer.profile.public" profile.pk %}">View Your Company Information</a></li>#}
+{#                    <li><a href="{% url "employer.profile.edit" %}">Edit Your Company Information</a></li>#}
+{#                    <li><a href="{% url "employer.job.create" %}">Post Job</a></li>#}
                 </ul>
             </div>
         </div>
         <div class="clear"></div>
         <h1 class="h1_margin_top">Jobs list</h1>
-
         <div class="search-result">
             {% for job in profile.user.job_set.all %}
                 {% include "job_banner.html" %}
             {% endfor %}
         </div>
         <br>
-
         <div class="spacing">
             <a class="button_common positioning" href="{% url "employer.job.create" %}">Click here to post a job now</a>
         </div>
-    </div>
+
 {% endblock %}
