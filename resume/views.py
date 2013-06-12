@@ -18,7 +18,7 @@ def create_resume_view(request):
 
 
 class ResumeView(DetailView):
-    template_name = 'resume/main.html'
+    template_name = 'resume/edit.html'
     model = Resume
 
     def get_object(self, queryset=None):
@@ -46,7 +46,7 @@ class ResumeView(DetailView):
 
 
 class ResumePublicView(DetailView):
-    template_name = 'resume/public.html'
+    template_name = 'resume/view.html'
     model = Resume
 
 

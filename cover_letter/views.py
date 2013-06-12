@@ -18,7 +18,7 @@ def create_cover_letter_view(request):
 
 
 class CoverLetterView(DetailView):
-    template_name = 'cover_letter/main.html'
+    template_name = 'cover_letter/edit.html'
     model = CoverLetter
     context_object_name = 'cover_letter'
 
@@ -47,7 +47,7 @@ class CoverLetterView(DetailView):
 
 
 class CoverLetterViewPublic(DetailView):
-    template_name = 'cover_letter/public.html'
+    template_name = 'cover_letter/view.html'
     model = CoverLetter
     context_object_name = 'cover_letter'
 

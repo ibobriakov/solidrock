@@ -4,14 +4,10 @@
 
 {% block library-js %}
     {{ block.super }}
-    <script src="{% static 'main/js/lib/angular.js' %}" type="text/javascript"></script>
-    <script src="{% static 'main/js/lib/angular-ui.js' %}" type="text/javascript"></script>
-    <script src="{% static 'main/js/src/angular/extra.js' %}" type="text/javascript"></script>
-    <script src="{% static 'dynamic_paper/js/src/angular/application.js' %}" type="text/javascript"></script>
-    <script src="{% static 'dynamic_paper/js/src/angular/controllers.js' %}" type="text/javascript"></script>
-    <script src="{% static 'dynamic_paper/js/src/angular/directives.js' %}" type="text/javascript"></script>
-    <script src="{% static 'dynamic_paper/js/src/angular/filters.js' %}" type="text/javascript"></script>
-{% endblock %}
-
-{% block initialize-js %}
+    <script src="{% static 'main/js/src/angular/applications/dynamic_paper_edit_app.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/controllers/dynamic_paper_edit_ctrl.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/directives/dynamic_paper_edit_dir.js' %}"
+            type="text/javascript"></script>
 {% endblock %}

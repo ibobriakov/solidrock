@@ -16,7 +16,7 @@ directives.upload = function () {
             removeUrl: '@',
             photo: '='
         },
-        template: '<div>Profile Picture (optional)</div>\n<div class="img">\n    <img id="avatar_img" src="{[{ photo }]}">\n\n    <div class="links">\n        <a id="link_upload_file" href="">Upload Photo</a>|\n        <a id="link_remove_file" url="" href="">Delete Picture</a>\n    </div>\n</div>\n<input class="_hide" id="fileupload" type="file" name="files[]" data-url="/upload/job_seeker_photo/">',
+        template: '<div>Profile Picture (optional)</div>\n<div class="img">\n    <img id="avatar_img" ng-src="{[{photo}]}">\n\n    <div class="links">\n        <a id="link_upload_file" href="">Upload Photo</a>|\n        <a id="link_remove_file" url="" href="">Delete Picture</a>\n    </div>\n</div>\n<input class="_hide" id="fileupload" type="file" name="files[]" data-url="/upload/job_seeker_photo/">',
         link: function (scope, element, attr) {
             element.find('#fileupload').fileupload({
                 singleFileUploads: true,
