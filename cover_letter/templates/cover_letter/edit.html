@@ -15,7 +15,7 @@
 
                 <div class="links">
                     <div class="title">Jump to Another Cover Letter</div>
-                    <select ng-model="paper.selected" data-placeholder="Select Cover Letter" id="select_cover_letter">
+                    <select ui-select2 ng-model="paper.selected" data-placeholder="Select Cover Letter" id="select_cover_letter">
                         <option value=""></option>
                         <option ng-repeat="(v,k) in paper.select" value="/cover_letter/{[{k.id}]}/">{[{k.name}]}</option>
                     </select>
