@@ -6,28 +6,28 @@
     <title>Contact Us :: Solid Rock Recruitment</title>
 {% endblock %}
 
+{% block library-js %}
+    {{ block.super }}
+    <script src="{% static 'main/js/src/angular/applications/contactus_app.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/controllers/contactus_ctrl.js' %}"
+            type="text/javascript"></script>
+{% endblock %}
+
 {% block content %}
     <div class="_content stages contact">
         <h1>Contact Us</h1>
-        <div class="right">
-            <div class="form" id="contact-form" data-next-url="/contact_us/">
-                {% for field in form.visible_fields %}
-                <div class="field">
-                    <label>{{ field.label }}</label>
-                    {{ field|add_class:"it3" }}
-                    <div class="error" data-error="contactus_errors.{{ field.name }}"></div>
-                </div>
-                {% endfor %}
+        <div class="right" ng-app="ContactUsApp">
+            <div class="form" id="contact-form" data-next-url="/contact_us/" ng-controller="ContactUsCtrl">
+                {% include "fields/input.html" with label="Name" name="name" input_class="it4" %}
+                {% include "fields/input.html" with label="Email" name="email" input_class="it4" %}
+                {% include "fields/input.html" with label="Subject" name="subject" input_class="it4" %}
+
+                {% include "fields/textarea.html" with label="Message" name="message" %}
                 <div class="_submit">
-                    <div class="exit" data-on-click="contactus:commit">Continue</div>
+                    <div class="exit">Continue</div>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block initialize-js %}
-    {{ block.super }}
-    <script src="{% static 'contactus/js/backbone/models.js' %}" type="text/javascript"></script>
-    <script src="{% static 'contactus/js/backbone/views.js' %}" type="text/javascript"></script>
 {% endblock %}

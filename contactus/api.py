@@ -4,6 +4,7 @@ from main.api import AuthorizationWithObjectPermissions
 from models import Feedback
 from forms import FeedbackForm
 
+__all__ = ['FeedbackResource']
 __author__ = 'ir4y'
 
 

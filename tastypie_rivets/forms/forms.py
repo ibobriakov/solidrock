@@ -25,7 +25,7 @@ def rivet_modelform_factory(base_name):
                     if name in widgets:
                         kwargs['widget'] = widgets[name]
                     self.fields[name] = ResourceSelect(**kwargs)
-                    self.fields[name].widget.attrs['ui-select2'] = '{allowClear:true}'
+                    self.fields[name].widget.attrs['ui-select2'] = '{allowClear:true, width:\'off\'}'
                     self.fields[name].widget.attrs['data-placeholder'] = self.fields[name].label
                 self.fields[name].widget.attrs['ng-model'] = base_name + "." + name
     return RivetModelForm

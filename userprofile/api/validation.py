@@ -11,7 +11,7 @@ class EmployerResourceValidation(RequiredFiledValidationMixin, FormValidation):
     def is_valid(self, bundle, request=None):
         errors = defaultdict(list)
         errors.update(super(EmployerResourceValidation, self).is_valid(bundle, request))
-        if 'agree' not in bundle.data or bundle.data['agree'] != 'true':
+        if 'agree' not in bundle.data or not bundle.data['agree']:
             errors['agree'].append('You should accept user agreement')
         return errors
 

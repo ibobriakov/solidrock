@@ -43,6 +43,11 @@ PostJobApp.controller ('JobData', function($scope, share) {
 PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams, $location, share) {
     $scope.job = share.job;
 
+    $scope.select2Options = {
+        allowClear:true,
+        width: 'off'
+    };
+
     $scope.error = share.error;
     $scope.section = parseInt($routeParams.section);
 
