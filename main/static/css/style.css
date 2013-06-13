@@ -2424,6 +2424,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 
 .resume .ng-scope {
+    overflow: hidden;
 }
 
 .resume .ng-scope .group .ng-scope:hover {
@@ -2454,6 +2455,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 
 .builder .list .list_it.resume .title.relativity {
+    clear: both;
     float: left;
 }
 
@@ -2479,6 +2481,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 
 .resume .paper.container {
     width: 690px;
+    position: relative;
 }
 
 .resume .ng-scope .group .ng-scope .ng-scope remove.ng-scope {
