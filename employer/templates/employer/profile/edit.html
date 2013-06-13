@@ -25,64 +25,65 @@
         <script type="text/ng-template" id="employer-profile-edit">
             <h1>Your Business Information</h1>
 
-            <div class="left">
-                <div class="company-logo">
-                    <div>Company Logo (optional)</div>
-                    <div class="img"><img src="img/002.jpg" width="220" height="220"/></div>
-                    <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
+            <div ng-repeat="item in data.personal_information">
+                <div class="left">
+                    <div class="company-logo">
+                        <upload logo="item.logo"></upload>
+                    </div>
                 </div>
-            </div>
-            <div class="right">
-                <div class="form">
-                    <form>
-                        <div class="section1">
-                            <fieldset ng-repeat="item in data.personal_information">
-                                <div class="title">General Business Information</div>
-                                <div class="clear"></div>
-                                <div class="left_info">
-                                    {% include "fields/input.html" with label="Company Name" name="company" class="field fl_left" input_class="it2" %}
-                                    {% include "fields/input.html" with label="ABN/ACN" name="abn_or_acn" input_class="it2" %}
-
-                                    {% include "fields/input.html" with label="First address" name="address_first" input_class="it4" %}
-                                    {% include "fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
-                                    {% include "fields/input.html" with label="City" name="city" input_class="it4" %}
-                                    {% include "fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
-                                    {% include "fields/textarea.html" with label="Brief Description of Duties" name="brief" %}
-                                </div>
-                                <div class="bot_info">
-                                    <div class="title">Account Contact Person</div>
+                <div class="right">
+                    <div class="form">
+                        <form>
+                            <div class="section1">
+                                <fieldset>
+                                    <div class="title">General Business Information</div>
                                     <div class="clear"></div>
-                                    {% include "fields/input.html" with label="Name" name="name" input_class="it3" %}
-                                    {% include "fields/input.html" with label="Phone" name="phone" input_class="it3" %}
-                                    {% include "fields/input.html" with label="Email Address" name="email" input_class="it3" %}
-                                    <div class="title">Terms and Conditions</div>
-                                    <div class="clear"></div>
-                                    <div class="text2"><a href="#terms_conditions">Please click here to read the full
-                                        document</a></div>
-                                    <div class="field styled">
-                                        <label>Do you agree to the Terms and Conditions?</label>
-                                        <input id="agree_yes" class="styled" type="radio" ng-value="true"
-                                               ng-model="item.agree" name="ch1{[{item.id}]}">
-                                        <label for="agree_yes"><span></span>Yes</label>
+                                    <div class="left_info">
+                                        {% include "fields/input.html" with label="Company Name" name="company" class="field fl_left" input_class="it2" %}
+                                        {% include "fields/input.html" with label="ABN/ACN" name="abn_or_acn" input_class="it2" %}
 
-                                        <div class="help-tip">
-                                            <div class="help-tip-title">Helpful Tip</div>
-                                            <div class="help-tip-text">
-                                                <div class="help-tip-right"></div>
-                                                Do you agree to the Terms and Conditions?
+                                        {% include "fields/input.html" with label="First address" name="address_first" input_class="it4" %}
+                                        {% include "fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
+                                        {% include "fields/input.html" with label="City" name="city" input_class="it4" %}
+                                        {% include "fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
+                                        {% include "fields/textarea.html" with label="Brief Description of Duties" name="brief" %}
+                                    </div>
+                                    <div class="bot_info">
+                                        <div class="title">Account Contact Person</div>
+                                        <div class="clear"></div>
+                                        {% include "fields/input.html" with label="Name" name="name" input_class="it3" %}
+                                        {% include "fields/input.html" with label="Phone" name="phone" input_class="it3" %}
+                                        {% include "fields/input.html" with label="Email Address" name="email" input_class="it3" %}
+                                        <div class="title">Terms and Conditions</div>
+                                        <div class="clear"></div>
+                                        <div class="text2"><a href="#terms_conditions">Please click here to read the
+                                            full
+                                            document</a></div>
+                                        <div class="field styled">
+                                            <label>Do you agree to the Terms and Conditions?</label>
+                                            <input id="agree_yes" class="styled" type="radio" ng-value="true"
+                                                   ng-model="item.agree" name="ch1{[{item.id}]}">
+                                            <label for="agree_yes"><span></span>Yes</label>
+
+                                            <div class="help-tip">
+                                                <div class="help-tip-title">Helpful Tip</div>
+                                                <div class="help-tip-text">
+                                                    <div class="help-tip-right"></div>
+                                                    Do you agree to the Terms and Conditions?
+                                                </div>
+                                            </div>
+                                            <div class="error">
+                                                <span ng-repeat="err in item.error.agree">{[{err}]}</span>
                                             </div>
                                         </div>
-                                        <div class="error">
-                                            <span ng-repeat="err in item.error.agree">{[{err}]}</span>
-                                        </div>
                                     </div>
+                                </fieldset>
+                                <div class="_submit">
+                                    <div class="exit2" ng-click="save(data.personal_information)">Save and Exit</div>
                                 </div>
-                            </fieldset>
-                            <div class="_submit">
-                                <div class="exit2" ng-click="save(data.personal_information)">Save and Exit</div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </script>
