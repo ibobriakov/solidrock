@@ -5,13 +5,13 @@
 
         <div class="list str1">
             <ul class="links">
-                <li><a href="{% url 'cover_letter.pdf' object.pk %}">download a PDF</a></li>
+                <li><a target="_blank" href="{% url 'cover_letter.pdf' object.pk %}">download a PDF</a></li>
             </ul>
             <div class="list_it letter">
                 {% include "dynamic_paper/dynamic_tree.html" %}
             </div>
             <ul class="links">
-                <li><a href="{% url 'cover_letter.pdf' object.pk %}">download a PDF</a></li>
+                <li><a target="_blank" href="{% url 'cover_letter.pdf' object.pk %}">download a PDF</a></li>
             </ul>
         </div>
 
