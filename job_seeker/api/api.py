@@ -1,12 +1,13 @@
+from django.forms.models import modelform_factory
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
 from main.api import AuthorizationWithObjectPermissions
-from models import ApplyToJob
+from ..models import ApplyToJob
+from validation import ApplyToJobValidation
 
 
 __author__ = 'ir4y'
-__all__ = ['ApplyToJobResource']
 
 
 class ApplyToJobResource(ModelResource):
@@ -16,9 +17,13 @@ class ApplyToJobResource(ModelResource):
     def hydrate(self, bundle):
         bundle.obj.job_seeker = bundle.request.user
         bundle.obj.job_id = bundle.data['job']
+        for item in ('cover_letter', 'resume',):
+            if bundle.data[item] == '':
+                del(bundle.data[item])
         return bundle
 
     class Meta:
         queryset = ApplyToJob.objects.all()
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
+        validation = ApplyToJobValidation(form_class=modelform_factory(ApplyToJob))
