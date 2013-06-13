@@ -1,4 +1,7 @@
 from collections import defaultdict
+from socket import _fileobject
+from django.core.exceptions import ImproperlyConfigured
+from django.forms import ModelChoiceField
 from tastypie.validation import FormValidation
 
 
@@ -19,6 +22,9 @@ class RequiredFiledValidationMixin(object):
                 if key in fields and fields[key].required:
                     continue
                 errors[key].append('This field is required.')
+        for field_name in self.form_class._meta.model.REQUIRED_FIELDS:
+            if field_name not in bundle.data:
+                errors[field_name].append('This field is required.')
         return errors
 
 
