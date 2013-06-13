@@ -12,163 +12,182 @@
             type="text/javascript"></script>
 {% endblock %}
 {% block content %}
-{% with profile=job.owner.profile %}
-    <div class="_content stages" ng-app="ApplyJobApp" ng-controller="ApplyJobCtrl" ng-init='applyToJob={"job":{{ job.pk }}, "resume":"{{ initial_resume }}", "cover_letter":"{{ initial_cover_letter }}"}' >
-        <h1>Employer information</h1>
-        {% thumbnail profile.logo "170x170" crop="center" as im %}
-        <div class="employer-logo">
-            <a href="{% url "employer.profile.public" profile.pk %}"><img src="{{ im.url }}"></a>
-        </div>
-        {% empty %}
-        {%  endthumbnail %}
-        <div class="employer-name">
-            <p>
-                <a href="{% url "employer.profile.public" profile.pk %}">{{ profile.company }}</a>
-            </p>
-            <p>
-                {{ profile.brief|linebreaksbr }}
-            </p>
+    {% with profile=job.owner.profile %}
+        <div class="_content stages" ng-app="ApplyJobApp" ng-controller="ApplyJobCtrl"
+             ng-init='applyToJob={"job":{{ job.pk }}, "resume":"{{ initial_resume }}", "cover_letter":"{{ initial_cover_letter }}"}'>
+            <h1>Employer information</h1>
+            {% thumbnail profile.logo "170x170" crop="center" as im %}
+                <div class="employer-logo">
+                    <a href="{% url "employer.profile.public" profile.pk %}"><img src="{{ im.url }}"></a>
+                </div>
+            {% empty %}
+            {% endthumbnail %}
+            <div class="employer-name">
+                <p>
+                    <a href="{% url "employer.profile.public" profile.pk %}">{{ profile.company }}</a>
+                </p>
 
-        </div>
-        <div class="clear"></div>
+                <p>
+                    {{ profile.brief|linebreaksbr }}
+                </p>
 
-        <h3>Job information</h3>
-        <div class="job-title">
-            <p>{{ job.title }}</p>
-            <p>
-                {{ job.description|linebreaksbr }}
-            </p>
-        </div>
-        <div class="job-info">
-            <h3></h3>
-            <div class="properties">
-                <p>Location: <span>{{ job.location }}</span></p>
-                <p>Hours: <span>{{ job.hours }}</span></p>
-                <p>Salary Range: <span>{{ job.get_salary }}</span></p>
-                <p>Type of Employment: <span>{{ job.employment_type }}</span></p>
-                <div class="clear"></div>
-            </div>
-        </div>
-        {% if job.special_conditions %}
-        <div class="specical-conditions">
-            <p>Specical Conditions</p>
-            <p>
-                {{ job.special_conditions }}<br>
-                {% if job.other_conditions %}
-                    {{ job.other_conditions }}
-                {% endif %}
-            </p>
-        </div>
-        {% endif %}
-        <div class="selection-criteria">
-            <p>Selection Criteria</p>
-            <div class="essential">
-                <p>Essential</p>
-                <ul>
-                    {% for item in job.essential_set.all %}
-                    <li>{{ item }}</li>
-                    {% empty %}
-                        <li>Not select</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="desireable">
-                <p>Desireable</p>
-                <ul>
-                    {% for item in job.desireable_set.all %}
-                        <li>{{ item }}</li>
-                    {% empty %}
-                        <li>Not select</li>
-                    {% endfor %}
-                </ul>
             </div>
             <div class="clear"></div>
-        </div>
-        <div class="supportiong-document">
-            <p>Supporting Documents</p>
-            <p>
-                {% for document in job.jobuploaddocument_set.all %}
-                    <p><a href="{{ document.document.url }}">{{ document }}</a></p>
-                {% empty %}
-                    <p>No document has been uploaded yet</p>
-                {% endfor %}
-            </p>
-        </div>
-        <div class="job-contact-info" style="height: auto;" collapse="true">
-            <a class="collapseAction" href="">Job Contact Information</a>
-            <div class="collapseItems">
-                    <p><b>Contact Name </b> {{ job.contact_name }}</p>
-                    <p><b>Contact Phone </b> {{ job.contact_phone }}</p>
-                    <p><b>Contact Email </b> {{ job.contact_email }}</p>
-            </div>
-        </div>
-        {% if not user.is_anonymous %}
-        {% if user.user_type == 0 %} {# Job seeker #}
-        <div class="click-apply-now" style="height: auto;"{% if not already_applied %} collapse="{% if form_default_data %}false{% else %}true{% endif %}"{% endif %}>
 
-            <a class="collapseAction" href="">
-                {% if already_applied %}
-                    You have been applied for this job.
-                {% else %}
-                    Click here to <span>Apply Now</span>
-                {% endif %}
-            </a>
-            {% if not already_applied %}
-            <div class="collapseItems">
-                <form>
-                    {% csrf_token %}
-                    {{ apply_job_form.job }}
-                    <div class="field ">
-                        {%  if apply_job_form.resume.field.queryset %}
-                            {{ apply_job_form.resume }}
-                            <div class="error">
-                                <span ng-repeat="err in error.resume">{[{ err }]}</span>
-                            </div>
-                        {% else %}
-                            <a href="{% url 'resume.create' %}?job={{ object.pk }}">Click here to add New Resume</a>
-                        {% endif %}
-                    </div>
-                    <div class="field">
-                        {% if apply_job_form.cover_letter.field.queryset %}
-                            {{ apply_job_form.cover_letter }}
-                            <div class="error">
-                                <span ng-repeat="err in error.cover_letter">{[{ err }]}</span>
-                            </div>
-                        {% else %}
-                            <a href="{% url 'cover_letter.create' %}?job={{ object.pk }}">Click here to add Cover Letter</a>
-                        {% endif %}
-                    </div>
-                    <div class="_submit">
-                        <a class="cont" href="" ng-click="confirm()">Apply</a>
-                    </div>
-                </form>
-                <div class="clear"></div>
-            </div>
-            {% endif %}
-        </div>
-        {% else %}
-        <div class="job-contact-info" style="height: auto;" collapse="true">
-            <a class="collapseAction" href="">JobSeeker's applications</a>
-            <div class="collapseItems" class="collapsed">
-                {% for application in job.applytojob_set.all %}
+            <h3>Job information</h3>
+
+            <div class="job-title">
+                <p>{{ job.title }}</p>
+
                 <p>
-                <a href="{% url "job_seeker.profile.information.public" application.job_seeker.profile.id %}">
-                    {{ application.job_seeker }}
-                </a>
-                {% if application.resume %}
-                    <a href="{% url "resume.view" application.resume_id %}">{{ application.resume }}</a>
-                {% endif %}
-                {% if application.cover_letter %}
-                    <a href="{% url "cover_letter.view" application.cover_letter_id %}">{{ application.cover_letter }}</a>
-                {% endif %}
-                {% endfor %}
+                    {{ job.description|linebreaksbr }}
                 </p>
             </div>
+            <div class="job-info">
+                <h3></h3>
+
+                <div class="properties">
+                    <p>Location: <span>{{ job.location }}</span></p>
+
+                    <p>Hours: <span>{{ job.hours }}</span></p>
+
+                    <p>Salary Range: <span>{{ job.get_salary }}</span></p>
+
+                    <p>Type of Employment: <span>{{ job.employment_type }}</span></p>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+            {% if job.special_conditions %}
+                <div class="specical-conditions">
+                    <p>Specical Conditions</p>
+
+                    <p>
+                        {{ job.special_conditions }}<br>
+                        {% if job.other_conditions %}
+                            {{ job.other_conditions }}
+                        {% endif %}
+                    </p>
+                </div>
+            {% endif %}
+            <div class="selection-criteria">
+                <p>Selection Criteria</p>
+
+                <div class="essential">
+                    <p>Essential</p>
+                    <ul>
+                        {% for item in job.essential_set.all %}
+                            <li>{{ item }}</li>
+                        {% empty %}
+                            <li>Not select</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="desireable">
+                    <p>Desireable</p>
+                    <ul>
+                        {% for item in job.desireable_set.all %}
+                            <li>{{ item }}</li>
+                        {% empty %}
+                            <li>Not select</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="supportiong-document">
+                <p>Supporting Documents</p>
+
+                <p>
+                    {% for document in job.jobuploaddocument_set.all %}
+                        <p><a href="{{ document.document.url }}">{{ document }}</a></p>
+                    {% empty %}
+                        <p>No document has been uploaded yet</p>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="job-contact-info" style="height: auto;" collapse="true">
+                <a class="collapseAction" href="">Job Contact Information</a>
+
+                <div class="collapseItems">
+                    <p><b>Contact Name </b> {{ job.contact_name }}</p>
+
+                    <p><b>Contact Phone </b> {{ job.contact_phone }}</p>
+
+                    <p><b>Contact Email </b> {{ job.contact_email }}</p>
+                </div>
+            </div>
+            {% if not user.is_anonymous %}
+                {% if user.user_type == 0 %} {# Job seeker #}
+                    <div class="click-apply-now" style="height: auto;"{% if not already_applied %}
+                         collapse="{% if form_default_data %}false{% else %}true{% endif %}"{% endif %}>
+
+                        <a class="collapseAction" href="">
+                            {% if already_applied %}
+                                You have been applied for this job.
+                            {% else %}
+                                Click here to <span>Apply Now</span>
+                            {% endif %}
+                        </a>
+                        {% if not already_applied %}
+                            <div class="collapseItems">
+                                <form>
+                                    {% csrf_token %}
+                                    {{ apply_job_form.job }}
+                                    <div class="field ">
+                                        {% if apply_job_form.resume.field.queryset %}
+                                            {{ apply_job_form.resume }}
+                                        {% else %}
+                                            <a href="{% url 'resume.create' %}?job={{ object.pk }}">Click here to add
+                                                New Resume</a>
+                                        {% endif %}
+                                        <div class="error">
+                                            <span ng-repeat="err in error.resume">{[{ err }]}</span>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        {% if apply_job_form.cover_letter.field.queryset %}
+                                            {{ apply_job_form.cover_letter }}
+                                        {% else %}
+                                            <a href="{% url 'cover_letter.create' %}?job={{ object.pk }}">Click here to
+                                                add Cover Letter</a>
+                                        {% endif %}
+                                        <div class="error">
+                                            <span ng-repeat="err in error.cover_letter">{[{ err }]}</span>
+                                        </div>
+                                    </div>
+                                    <div class="_submit">
+                                        <a class="cont" href="" ng-click="confirm()">Apply</a>
+                                    </div>
+                                </form>
+                                <div class="clear"></div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="job-contact-info" style="height: auto;" collapse="true">
+                        <a class="collapseAction" href="">JobSeeker's applications</a>
+
+                        <div class="collapseItems" class="collapsed">
+                            {% for application in job.applytojob_set.all %}
+                                <p>
+                                <a href="{% url "job_seeker.profile.information.public" application.job_seeker.profile.id %}">
+                                    {{ application.job_seeker }}
+                                </a>
+                                {% if application.resume %}
+                                    <a href="{% url "resume.view" application.resume_id %}">{{ application.resume }}</a>
+                                {% endif %}
+                                {% if application.cover_letter %}
+                                    <a href="{% url "cover_letter.view" application.cover_letter_id %}">{{ application.cover_letter }}</a>
+                                {% endif %}
+                            {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
         </div>
-        {% endif %}
-        {% endif %}
-    </div>
-{% endwith %}
+    {% endwith %}
 {% endblock %}
 
 {% block initialize-js %}
