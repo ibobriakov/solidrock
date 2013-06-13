@@ -18,12 +18,12 @@ contactUsController.ContactUsCtrl = function ($scope, $http) {
 
     var error_callback = function (data, status, headers, config) {
         $('.preloader').hide();
-        $scope.error = data.job;
+        $scope.item.error = data.contactus;
     };
 
-    $scope.save_exit = function () {
+    $scope.save = function () {
         $('.preloader').show();
-        $http.put('', $scope.item)
+        $http.post('/api/v1/contactus/', $scope.item)
             .success(success_callback)
             .error(error_callback);
     };
