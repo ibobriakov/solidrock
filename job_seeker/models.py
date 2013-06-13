@@ -14,6 +14,7 @@ class ApplyToJob(models.Model):
     resume = models.ForeignKey('resume.Resume', verbose_name="Select resume", blank=True, null=True)
     cover_letter = models.ForeignKey('cover_letter.CoverLetter',
                                      verbose_name="Select cover letter", blank=True, null=True)
+    REQUIRED_FIELDS = ('resume', 'cover_letter',)
 
     def __unicode__(self):
         return "User {0} applied for job {1}".format(self.job_seeker, self.job)
