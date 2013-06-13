@@ -1,44 +1,82 @@
 {% extends 'employer/base.html' %}
-{% load staticfiles %}
 {% load thumbnail %}
-{% load flatblock_tags %}
-
 {% block content %}
-    <div class="_content job_seeker">
+    <div class="_content stages">
+    <h1>{{ employer.company }} Information</h1>
 
-        <h1>{{ profile.company }}’s Account Home Page</h1>
 
-        <div class="user_info">
-            <div class="avatar">
-                {% thumbnail profile.logo "137x137" crop="center" as im %}
-                    <img src="{{ im.url }}">
-                {% empty %}
-                    <img width="137" height="137" src="{{ profile.personal_information.get_photo_url }}">
-                {% endthumbnail %}
-            </div>
-            <div class="hello">Hi {{ user.profile.company }}!</div>
-            <div class="desc">{{ user.profile.brief }}</div>
-        </div>
-        <div class="app_info">
-            <div class="title">Your Company Information</div>
-            <div class="center">
-                <ul>
-{#                    <li><a href="{% url "employer.profile.public" profile.pk %}">View Your Company Information</a></li>#}
-{#                    <li><a href="{% url "employer.profile.edit" %}">Edit Your Company Information</a></li>#}
-{#                    <li><a href="{% url "employer.job.create" %}">Post Job</a></li>#}
-                </ul>
+    <div class="right full_width">
+
+    <div class="form">
+    {% thumbnail employer.logo "220x220" crop="center" as im %}
+        <div class="logo_right_floater">
+            <div class="company-logo">
+                <div class="img"><img src="{{ im.url }}" width="220" height="220" /></div>
             </div>
         </div>
+    {% endthumbnail %}
+    <div class="section1">
+        <div class="title">General Business Information</div>
         <div class="clear"></div>
-        <h1 class="h1_margin_top">Jobs list</h1>
-        <div class="search-result">
-            {% for job in profile.user.job_set.all %}
-                {% include "job_banner.html" %}
-            {% endfor %}
-        </div>
-        <br>
-        <div class="spacing">
-            <a class="button_common positioning" href="{% url "employer.job.create" %}">Click here to post a job now</a>
-        </div>
-
+        <fieldset>
+            <div class="left_info">
+                <div class="field fl_left">
+                    <label>Company Name</label>
+                    <label>{{ employer.company }}</label>
+                </div>
+                <div class="field">
+                    <label>ABN/ACN</label>
+                    <label>{{ employer.abn_or_acn }}</label>
+                </div>
+                <div class="field">
+                    <label>Address</label>
+                    <label>{{ employer.address_first }}</label>
+                    <label>{{ employer.address_second }}</label>
+                    <label>{{ employer.city }}</label>
+                </div>
+                <div class="field">
+                    <label>Postcode</label>
+                    <label>{{ employer.postcode }}</label>
+                </div>
+                <div class="field">
+                    <label>Business Phone</label>
+                    <label>{{ employer.business_phone }}</label>
+                </div>
+                <div class="field">
+                    <label>Brief Description of Your Company</label>
+                    <div>{{ employer.brief|linebreaksbr }}</div>
+                </div>
+            </div>
+            <div class="bot_info">
+                <div class="title">Account Contact Person</div>
+                <div class="clear"></div>
+                <div class="field">
+                    <label>Name</label>
+                    <label>{{ employer.name }}</label>
+                </div>
+                <div class="field">
+                    <label>Phone</label>
+                    <label>{{ employer.phone }}</label>
+                </div>
+                <div class="field">
+                    <label>Email Address</label>
+                    <label>{{ employer.email }}</label>
+                </div>
+            </div>
+        </fieldset>
+        {% if user.profile == employer %}
+        <a class="button_common positioning_2" href="{% url "employer.profile.edit" %}">Edit Your Company Information</a>
+        {% endif %}
+    </div>
+    </div>
+    </div>
+    <div class="clear"></div>
+    <h1>Employer's jobs</h1>
+    <div>
+        {% for job in object_list %}
+            {% include "job_banner.html" %}
+        {% endfor %}
+    </div>
+        {% include "paginator.html" %}
+    </div>
 {% endblock %}
