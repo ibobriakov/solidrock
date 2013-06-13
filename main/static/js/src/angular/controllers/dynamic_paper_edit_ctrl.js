@@ -13,12 +13,14 @@ dpc.DynamicPaperCtrl = function ($scope) {
     };
 
     $('#select_resume').change(function () {
-        window.location.replace(this.value);
+        if (this.value) {
+            window.location.replace(this.value);
+        }
     });
-
-    $('#select_cover_letter').change(function () {
-        window.location.replace(this.value);
-    });
+//
+//    $('#select_cover_letter').change(function () {
+//        window.location.replace(this.value);
+//    });
 };
 
 DynamicPaperApp.controller(dpc);

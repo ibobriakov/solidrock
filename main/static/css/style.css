@@ -1081,7 +1081,7 @@ footer ._footer ._footer_nav ul li a {
     top:-20px;
     border-bottom:1px solid #d5d5d5;
     overflow:hidden;
-    padding:0 0 18px;
+    padding: 0 66px 18px 0;
 }
 
 .builder .top .title {

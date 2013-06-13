@@ -10,7 +10,7 @@ from models import ApplyToJob
 class JobSeekerBaseDetailView(DetailView):
     model = JobSeeker
     context_object_name = 'profile'
-    template_name = 'job_seeker/detail.html'
+    template_name = 'job_seeker/main.html'
 
     def get_object(self, queryset=None):
         return get_object_or_404(self.model, user=self.request.user)
@@ -22,7 +22,7 @@ class JobSeekerBaseDetailView(DetailView):
 
 class JobSeekerInformationDetailView(DetailView):
     model = JobSeeker
-    template_name = 'job_seeker/edit.html'
+    template_name = 'job_seeker/profile/edit.html'
     context_object_name = 'profile'
 
     def get_object(self, queryset=None):
@@ -35,7 +35,7 @@ class JobSeekerInformationDetailView(DetailView):
 
 class JobSeekerInformationPublicView(DetailView):
     model = JobSeeker
-    template_name = 'job_seeker/view.html'
+    template_name = 'job_seeker/profile/view.html'
 
 
 def apply_for(request, job_id):

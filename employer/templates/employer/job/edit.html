@@ -7,10 +7,15 @@
 
 {% block library-js %}
     {{ block.super }}
-    <script src="{% static 'employer/js/src/angular/application.js' %}" type="text/javascript"></script>
-    <script src="{% static 'employer/js/src/angular/factories.js' %}" type="text/javascript"></script>
-    <script src="{% static 'employer/js/src/angular/directives.js' %}" type="text/javascript"></script>
-    <script src="{% static 'employer/js/src/angular/controllers.js' %}" type="text/javascript"></script>
+
+    <script src="{% static 'main/js/lib/fileupload/vendor/jquery.ui.widget.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/lib/fileupload/jquery.iframe-transport.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/lib/fileupload/jquery.fileupload.js' %}" type="text/javascript"></script>
+
+    <script src="{% static 'main/js/src/angular/applications/employer_job_edit_app.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/controllers/employer_job_edit_ctrl.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/directives/employer_job_edit_dir.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/factories/employer_job_edit_fact.js' %}" type="text/javascript"></script>
 {% endblock %}
 
 {% block stylesheet %}

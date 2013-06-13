@@ -15,7 +15,7 @@
 
                 <div class="links">
                     <div class="title">Jump to Another Resume</div>
-                    <select ng-model="paper.selected" data-placeholder="Select Resume" id="select_resume">
+                    <select ui-select2 ng-model="paper.selected" data-placeholder="Select Resume" id="select_resume">
                         <option value=""></option>
                         <option ng-repeat="(v,k) in paper.select" value="/resume/{[{k.id}]}/">{[{k.name}]}</option>
                     </select>

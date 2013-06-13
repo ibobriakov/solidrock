@@ -12,22 +12,19 @@
     <link rel="icon" href="{% static 'main/img/favicon.ico' %}"/>
     {% block stylesheet %}
         <link rel="stylesheet" href="{% static 'main/css/style.css' %}" type="text/css" media="screen"/>
-        <link rel="stylesheet" href="{% static 'main/css/select2.css' %}" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="{% static 'main/app/select2-3.4.0/select2.css' %}" type="text/css" media="screen"/>
         <link rel="stylesheet" href="{% static 'main/css/fixtures.css' %}" type="text/css" media="screen"/>
     {% endblock %}
     {% block library-js %}
         <script src="{% static 'main/js/lib/jquery-latest.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'main/js/lib/underscore-min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/app/select2-3.4.0/select2.min.js' %}" type="text/javascript"></script>
 
         <script src="{% static 'main/js/lib/angular.js' %}" type="text/javascript"></script>
         <script src="{% static 'main/js/lib/angular-mocks.js' %}" type="text/javascript"></script>
-        <script src="{% static 'main/js/lib/angular-ui.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/lib/angular.ui/select2.js' %}" type="text/javascript"></script>
         <script src="{% static 'main/js/src/angular/additional/cookie.js' %}" type="text/javascript"></script>
 
-        <script src="{% static 'main/js/lib/fileupload/vendor/jquery.ui.widget.js' %}" type="text/javascript"></script>
-        <script src="{% static 'main/js/lib/fileupload/jquery.iframe-transport.js' %}" type="text/javascript"></script>
-        <script src="{% static 'main/js/lib/fileupload/jquery.fileupload.js' %}" type="text/javascript"></script>
-        <script src="{% static 'main/js/lib/jQuery.divPlaceholder.js' %}" type="text/javascript"></script>
     {% endblock %}
     {% block templates %}
     {% endblock %}
