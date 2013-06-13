@@ -104,11 +104,12 @@ dpd.oneline = function () {
 
 dpd.paperName = function ($http) {
     return {
+        transclude: true,
         restrict: 'E',
         scope: {
             data: '='
         },
-        template: '<input type="text" ng-model="data.name"/>',
+        template: '<div class="title" ng-transclude></div><input type="text" ng-model="data.name"/>',
         link: function (scope, element, attrs) {
             element.find('input').bind('blur', function () {
                 var url = scope.data.resource_uri;

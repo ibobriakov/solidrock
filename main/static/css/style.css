@@ -1096,6 +1096,7 @@ footer ._footer ._footer_nav ul li a {
     border:1px solid #c4c4c4;
     float:left;
     padding:4px 7px;
+    margin-top: 10px;
 }
 
 .builder .top .links a {
@@ -2612,4 +2613,8 @@ a.remove_cross {
     border: medium none;
     color: #000000;
     font-size: 14px;
+}
+
+.builder .top .links {
+    margin-top: -20px;
 }
