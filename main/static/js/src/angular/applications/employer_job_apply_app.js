@@ -3,7 +3,7 @@
 **/
 
 
-var ApplyJobApp = angular.module('ApplyJobApp', ['ui']);
+var ApplyJobApp = angular.module('ApplyJobApp', []);
 
 
 ApplyJobApp.config(["$httpProvider", function (provider) {

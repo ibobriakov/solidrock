@@ -2,89 +2,90 @@
 {% load flatblock_tags %}
 {% load thumbnail %}
 {% load serialize %}
+{% load staticfiles %}
+
+{% block library-js %}
+    {{ block.super }}
+    <script src="{% static 'main/js/src/angular/applications/employer_profile_edit_app.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/controllers/employer_profile_edit_ctrl.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/directives/employer_profile_edit_dir.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/factories/employer_profile_edit_fact.js' %}"
+            type="text/javascript"></script>
+{% endblock %}
 
 {% block content %}
-    <div class="_content stages">
-        <h1>Your Business Information</h1>
-        <div class="left">
-            <div class="company-logo">
-                <div>Company Logo (optional)</div>
-                <div class="img"><img src="img/002.jpg" width="220" height="220"/></div>
-                <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
-            </div>
-        </div>
-        <div class="right">
-            <div class="form">
-                <form>
-                    <div class="section1">
-                        <div class="title">General Business Information</div>
-                        <fieldset>
-                            <div class="left_info">
-                                <div class="field fl_left">
-                                    <label>Company Name</label>
-                                    <input class="it2" type="text"/>
-                                </div>
-                                <div class="field">
-                                    <label>ABN/ACN</label>
-                                    <input type="text"/>
-                                </div>
-                                <div class="field">
-                                    <label>Address</label>
-                                    <input class="it4" type="text"/>
-                                    <input class="it4" type="text"/>
-                                    <input class="it4" type="text"/>
-                                </div>
-                                <div class="field">
-                                    <label>Postcode</label>
-                                    <input class="it3" type="text"/>
-                                </div>
-                                <div class="field">
-                                    <label>Business Phone</label>
-                                    <input class="it3" type="text"/>
-                                </div>
-                                <div class="field">
-                                    <label>Brief Description of Your Company</label>
-                                    <textarea></textarea>
-                                </div>
-                            </div>
-                            <div class="bot_info">
-                                <div class="title">Account Contact Person</div>
-                                <div class="field">
-                                    <label>Name</label>
-                                    <input class="it3" type="text"/>
-                                </div>
-                                <div class="field">
-                                    <label>Phone</label>
-                                    <input class="it3" type="text"/>
-                                </div>
-                                <div class="field">
-                                    <label>Email Address</label>
-                                    <input class="it3" type="text"/>
-                                </div>
-                                <div class="title">Terms and Conditions</div>
-                                <div class="text2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                    nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                                    wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis
-                                    nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in
-                                    hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat
-                                    nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
-                                    praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam
-                                    liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod
-                                    mazim placerat facer possim assum.
-                                </div>
+    <div class="_content stages" ng-app="EmployerEditProfileApp">
 
-                                <div class="field">
-                                    <label>Do you agree to the Terms and Conditions?</label>
-                                    <label><input class="styled" type="radio" name="ch1"/>Yes</label>
-                                </div>
-                                <div class="_submit">
-                                    <div class="exit2">Save and Exit</div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                </form>
+        <div ng-controller="EmployerEditProfileData"
+             ng-init='set_data({personal_information:{{ user.profile|as_json|safe }}})'></div>
+
+        <script type="text/ng-template" id="employer-profile-edit">
+            <h1>Your Business Information</h1>
+
+            <div class="left">
+                <div class="company-logo">
+                    <div>Company Logo (optional)</div>
+                    <div class="img"><img src="img/002.jpg" width="220" height="220"/></div>
+                    <div class="links"><a href="#">Upload Photo</a>|<a href="#">Delete Picture</a></div>
+                </div>
             </div>
-        </div>
+            <div class="right">
+                <div class="form">
+                    <form>
+                        <div class="section1">
+                            <fieldset ng-repeat="item in data.personal_information">
+                                <div class="title">General Business Information</div>
+                                <div class="clear"></div>
+                                <div class="left_info">
+                                    {% include "fields/input.html" with label="Company Name" name="company" class="field fl_left" input_class="it2" %}
+                                    {% include "fields/input.html" with label="ABN/ACN" name="abn_or_acn" input_class="it2" %}
+
+                                    {% include "fields/input.html" with label="First address" name="address_first" input_class="it4" %}
+                                    {% include "fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
+                                    {% include "fields/input.html" with label="City" name="city" input_class="it4" %}
+                                    {% include "fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
+                                    {% include "fields/textarea.html" with label="Brief Description of Duties" name="brief" %}
+                                </div>
+                                <div class="bot_info">
+                                    <div class="title">Account Contact Person</div>
+                                    <div class="clear"></div>
+                                    {% include "fields/input.html" with label="Name" name="name" input_class="it3" %}
+                                    {% include "fields/input.html" with label="Phone" name="phone" input_class="it3" %}
+                                    {% include "fields/input.html" with label="Email Address" name="email" input_class="it3" %}
+                                    <div class="title">Terms and Conditions</div>
+                                    <div class="clear"></div>
+                                    <div class="text2"><a href="#terms_conditions">Please click here to read the full
+                                        document</a></div>
+                                    <div class="field styled">
+                                        <label>Do you agree to the Terms and Conditions?</label>
+                                        <input id="agree_yes" class="styled" type="radio" ng-value="true"
+                                               ng-model="item.agree" name="ch1{[{item.id}]}">
+                                        <label for="agree_yes"><span></span>Yes</label>
+
+                                        <div class="help-tip">
+                                            <div class="help-tip-title">Helpful Tip</div>
+                                            <div class="help-tip-text">
+                                                <div class="help-tip-right"></div>
+                                                Do you agree to the Terms and Conditions?
+                                            </div>
+                                        </div>
+                                        <div class="error">
+                                            <span ng-repeat="err in item.error.agree">{[{err}]}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="_submit">
+                                <div class="exit2" ng-click="save(data.personal_information)">Save and Exit</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </script>
+        <ng-view></ng-view>
     </div>
 {% endblock %}

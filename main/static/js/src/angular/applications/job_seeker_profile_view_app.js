@@ -2,7 +2,7 @@
  * User: jackdevil
  */
 
-var AplInfoPublicApp = angular.module('AplInfoPublicApp', ['ui']);
+var AplInfoPublicApp = angular.module('AplInfoPublicApp', []);
 
 AplInfoPublicApp.config( function ( $routeProvider) {
     $routeProvider

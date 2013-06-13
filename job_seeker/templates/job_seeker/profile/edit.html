@@ -23,8 +23,7 @@
             current_employment:{{ profile.current_employment|as_json|safe }},
             previous_employments:{{ profile.previous_employments_set.all|as_json }},
             educations:{{ profile.educations_set.all|as_json }},
-            referees:{{ profile.referees_set.all|as_json }},
-            exit_url:"/job_seeker/"
+            referees:{{ profile.referees_set.all|as_json }}
         })'></div>
 
     <script type="text/ng-template" id="application-information">
@@ -67,30 +66,30 @@
                         <div class="title">Personal Information</div>
                         <div class="clear"></div>
                         <div class="left_info">
-                            {% include "job_seeker/fields/input.html" with label="Last Name" name="last_name" class="field fl_left" input_class="it2" %}
-                            {% include "job_seeker/fields/input.html" with label="First Name" name="first_name" class="field fl_left" input_class="it2" %}
+                            {% include "fields/input.html" with label="Last Name" name="last_name" class="field fl_left" input_class="it2" %}
+                            {% include "fields/input.html" with label="First Name" name="first_name" class="field fl_left" input_class="it2" %}
                             <div class="clear"></div>
-                            {% include "job_seeker/fields/input.html" with label="First address" name="address_first" input_class="it4" %}
-                            {% include "job_seeker/fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
-                            {% include "job_seeker/fields/input.html" with label="City" name="city" input_class="it4" %}
-                            {% include "job_seeker/fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
-                            {% include "job_seeker/fields/select.html" with label="Can potential employers contact you at work?" name="can_contact_at_work" ch="1" %}
-                            {% include "job_seeker/fields/select.html" with label="Are you an Australian Citizen / Permanent Resident?" name="is_australian" ch="2" %}
-                            {% include "job_seeker/fields/select.html" with label="If no do you have a working visa?" name="have_visa" ch="3" %}
+                            {% include "fields/input.html" with label="First address" name="address_first" input_class="it4" %}
+                            {% include "fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
+                            {% include "fields/input.html" with label="City" name="city" input_class="it4" %}
+                            {% include "fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
+                            {% include "fields/select.html" with label="Can potential employers contact you at work?" name="can_contact_at_work" ch="1" %}
+                            {% include "fields/select.html" with label="Are you an Australian Citizen / Permanent Resident?" name="is_australian" ch="2" %}
+                            {% include "fields/select.html" with label="If no do you have a working visa?" name="have_visa" ch="3" %}
                             <div class="text">(Note: To be eligible for employment, applicants must have the appropriate
                                 work visa or have permanent residency status.)
                             </div>
-                            {% include "job_seeker/fields/select.html" with label="Do you hold a current driver’s licence?" name="is_driver" ch="4" %}
+                            {% include "fields/select.html" with label="Do you hold a current driver’s licence?" name="is_driver" ch="4" %}
                         </div>
                         <div class="avatar">
                             <upload photo="item.photo"></upload>
                         </div>
                         <div class="bot_info">
-                            {% include "job_seeker/fields/input.html" with label="Home Phone Number" name="home_phone" input_class="it2" class="field fl_left" %}
-                            {% include "job_seeker/fields/input.html" with label="Daytime Phone Number" name="daytime_phone" input_class="it2" class="field fl_left" %}
-                            {% include "job_seeker/fields/input.html" with label="Mobile Phone Number" name="mobile_phone" input_class="it2" class="field fl_left" %}
+                            {% include "fields/input.html" with label="Home Phone Number" name="home_phone" input_class="it2" class="field fl_left" %}
+                            {% include "fields/input.html" with label="Daytime Phone Number" name="daytime_phone" input_class="it2" class="field fl_left" %}
+                            {% include "fields/input.html" with label="Mobile Phone Number" name="mobile_phone" input_class="it2" class="field fl_left" %}
                             <div class="clear"></div>
-                            {% include "job_seeker/fields/input.html" with label="Email Address" name="email" input_class="it3" %}
+                            {% include "fields/input.html" with label="Email Address" name="email" input_class="it3" %}
                         </div>
                     </fieldset>
                     <div class="_submit">
@@ -104,18 +103,18 @@
                         <div class="title">Current Employment</div>
                         <div class="clear"></div>
                         <div class="text">(If now unemployed give details of last employer)</div>
-                        {% include "job_seeker/fields/input.html" with label="Name of Employer" name="name" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="First address" name="address_first" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="City" name="city" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
-                        {% include "job_seeker/fields/input.html" with label="Position title" name="position_title" input_class="it3" %}
-                        {% include "job_seeker/fields/input.html" with label="Date Commenced" name="date_commenced" input_class="it3" class="field date" %}
-                        {% include "job_seeker/fields/input.html" with label="Department/Section" name="department" input_class="it4" %}
-                        {% include "job_seeker/fields/textarea.html" with label="Brief Description of Duties" name="brief" %}
-                        {% include "job_seeker/fields/input.html" with label="Fulltime, Parttime or Casual" name="job_type" input_class="it2" class="field fl_left" %}
-                        {% include "job_seeker/fields/input.html" with label="Last Day of Service <span>(if no longer employed)</span>" name="last_day_of_service" input_class="it2" class="field fl_left" %}
-                        {% include "job_seeker/fields/textarea.html" with label="Reason for Leaving <span>(if no longer employed)</span>" name="leaving_reason" class="field fl_clear" %}
+                        {% include "fields/input.html" with label="Name of Employer" name="name" input_class="it4" %}
+                        {% include "fields/input.html" with label="First address" name="address_first" input_class="it4" %}
+                        {% include "fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
+                        {% include "fields/input.html" with label="City" name="city" input_class="it4" %}
+                        {% include "fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
+                        {% include "fields/input.html" with label="Position title" name="position_title" input_class="it3" %}
+                        {% include "fields/input.html" with label="Date Commenced" name="date_commenced" input_class="it3" class="field date" %}
+                        {% include "fields/input.html" with label="Department/Section" name="department" input_class="it4" %}
+                        {% include "fields/textarea.html" with label="Brief Description of Duties" name="brief" %}
+                        {% include "fields/input.html" with label="Fulltime, Parttime or Casual" name="job_type" input_class="it2" class="field fl_left" %}
+                        {% include "fields/input.html" with label="Last Day of Service <span>(if no longer employed)</span>" name="last_day_of_service" input_class="it2" class="field fl_left" %}
+                        {% include "fields/textarea.html" with label="Reason for Leaving <span>(if no longer employed)</span>" name="leaving_reason" class="field fl_clear" %}
                     </fieldset>
                     <div class="_submit">
                         <div class="exit" ng-click="save(data.current_employment,true)">Save and Exit</div>
@@ -133,14 +132,14 @@
                         <div class="text">(Most recent Employer first. Please cover you last three positions if
                             applicable)
                         </div>
-                        {% include "job_seeker/fields/input.html" with label="Name of Employer" name="name" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="First address" name="address_first" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="City" name="city" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
-                        {% include "job_seeker/fields/input.html" with label="Position title" name="position_title" input_class="it3" %}
-                        {% include "job_seeker/fields/textarea.html" with label="Brief Description of Duties" name="brief" %}
-                        {% include "job_seeker/fields/textarea.html" with label="Reason for Leaving <span>(if no longer employed)</span>" name="leaving_reason" class="field fl_clear" %}
+                        {% include "fields/input.html" with label="Name of Employer" name="name" input_class="it4" %}
+                        {% include "fields/input.html" with label="First address" name="address_first" input_class="it4" %}
+                        {% include "fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
+                        {% include "fields/input.html" with label="City" name="city" input_class="it4" %}
+                        {% include "fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
+                        {% include "fields/input.html" with label="Position title" name="position_title" input_class="it3" %}
+                        {% include "fields/textarea.html" with label="Brief Description of Duties" name="brief" %}
+                        {% include "fields/textarea.html" with label="Reason for Leaving <span>(if no longer employed)</span>" name="leaving_reason" class="field fl_clear" %}
                     </fieldset>
                     <a class="add_cross" href=""
                        ng-click="append(data.previous_employments, '/api/v1/job_seeker_previous_employment/')">Add
@@ -226,15 +225,15 @@
                         <div class="text">(Please give the names and addresses of your two most recent employers or
                             other work related referees.)
                         </div>
-                        {% include "job_seeker/fields/input.html" with label="Name" name="name" input_class="it3" %}
-                        {% include "job_seeker/fields/input.html" with label="Position Title or Relationshi" name="position_title" input_class="it3" %}
-                        {% include "job_seeker/fields/input.html" with label="First address" name="address_first" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="City" name="city" input_class="it4" %}
-                        {% include "job_seeker/fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
-                        {% include "job_seeker/fields/input.html" with label="Phone Number" name="phone_number" input_class="it2" %}
-                        {% include "job_seeker/fields/input.html" with label="Email Address" name="email" input_class="it3" %}
-                        {% include "job_seeker/fields/select.html" with label="Are you willing for this referee to be approached prior to an interview?" name="is_for_interview" %}
+                        {% include "fields/input.html" with label="Name" name="name" input_class="it3" %}
+                        {% include "fields/input.html" with label="Position Title or Relationshi" name="position_title" input_class="it3" %}
+                        {% include "fields/input.html" with label="First address" name="address_first" input_class="it4" %}
+                        {% include "fields/input.html" with label="Second address" name="address_second" input_class="it4" %}
+                        {% include "fields/input.html" with label="City" name="city" input_class="it4" %}
+                        {% include "fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
+                        {% include "fields/input.html" with label="Phone Number" name="phone_number" input_class="it2" %}
+                        {% include "fields/input.html" with label="Email Address" name="email" input_class="it3" %}
+                        {% include "fields/select.html" with label="Are you willing for this referee to be approached prior to an interview?" name="is_for_interview" %}
                         <div class="clear"></div>
                     </fieldset>
                     <a class="add_cross" href="" ng-click="append(data.referees, '/api/v1/job_seeker_referee/')">Add

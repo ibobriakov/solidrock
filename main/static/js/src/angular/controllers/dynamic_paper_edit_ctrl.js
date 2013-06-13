@@ -11,6 +11,10 @@ dpc.DynamicPaperCtrl = function ($scope) {
         $scope.paper.name = data.name[0];
         $scope.paper.select = data.select;
     };
+    $scope.select2Options = {
+         allowClear: true,
+        width: 'off'
+    };
 
     $('#select_cover_letter, #select_resume').change(function () {
         if (this.value) {

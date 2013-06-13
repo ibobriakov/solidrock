@@ -2,9 +2,9 @@
  * User: jackdevil
  */
 
-var directives = {};
+var aplInfoDir = {};
 
-directives.upload = function () {
+aplInfoDir.upload = function () {
     return {
         restrict: 'E',
         scope: {
@@ -37,7 +37,7 @@ directives.upload = function () {
     }
 };
 
-directives.activated = function () {
+aplInfoDir.activated = function () {
     return {
         restrict: "A",
         link: function ($scope, element, attr) {
@@ -58,7 +58,7 @@ directives.activated = function () {
     }
 };
 
-directives.section = function ($location, $http) {
+aplInfoDir.section = function ($location, $http) {
     return {
         transclude: true,
         scope: {
@@ -94,4 +94,4 @@ directives.section = function ($location, $http) {
     }
 };
 
-AplInfoApp.directive(directives);
+AplInfoApp.directive(aplInfoDir);

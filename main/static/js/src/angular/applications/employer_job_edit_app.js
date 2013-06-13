@@ -2,7 +2,7 @@
  * User: jackdevil
  */
 
-var PostJobApp = angular.module('PostJobApp', ['ui']);
+var PostJobApp = angular.module('PostJobApp', ['ui.select2']);
 
 PostJobApp.config( function ( $routeProvider) {
     $routeProvider

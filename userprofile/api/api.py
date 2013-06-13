@@ -20,9 +20,6 @@ __author__ = 'ir4y'
 class EmployerResource(ResourceLabelSchemaMixin, ResourceFieldsOrderSchemaMixin, ModelResource):
     logo = fields.FileField(readonly=True)
 
-    def dehydrate_agree(self, bundle):
-        return str(bundle.obj.agree).lower()
-
     def get_object_list(self, request):
         query_set = super(EmployerResource, self).get_object_list(request)
         return query_set.filter(user=request.user)

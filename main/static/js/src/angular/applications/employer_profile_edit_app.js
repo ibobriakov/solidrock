@@ -2,19 +2,19 @@
  * User: jackdevil
  */
 
-var EditProfileApp = angular.module('EditProfileApp', []);
+var EmployerEditProfileApp = angular.module('EmployerEditProfileApp', []);
 
-EditProfileApp.config( function ( $routeProvider) {
+EmployerEditProfileApp.config( function ( $routeProvider) {
     $routeProvider
-        .when('/section/:section/', { controller: 'JobInfoCtrl', templateUrl: 'post-job.html' }  )
+        .when('/section/:section/', { controller: 'EmployerEditProfileCtrl', templateUrl: 'employer-profile-edit' }  )
         .otherwise({ redirectTo: '/section/1/' })
 });
 
-EditProfileApp.config(["$httpProvider", function (provider) {
+EmployerEditProfileApp.config(["$httpProvider", function (provider) {
     provider.defaults.headers.common['X-CSRFToken'] = get_cookie('csrftoken');
 }]);
 
-EditProfileApp.config(function($interpolateProvider){
+EmployerEditProfileApp.config(function($interpolateProvider){
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
 });
