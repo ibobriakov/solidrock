@@ -16,6 +16,8 @@ ApplyJobApp.controller('ApplyJobCtrl',function($scope, $http) {
             })
             .success(function(data, status, headers, config) {
                 $('.click-apply-now').replaceWith('<div class="click-apply-now" style="height: auto;"><a>You have been applied for this job.</a></div>')
+            }).error(function(data, status, headers, config){
+                $scope.error = data.applytojob;
             })
         };
 });

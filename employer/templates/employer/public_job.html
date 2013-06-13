@@ -117,6 +117,9 @@
                     <div class="field ">
                         {%  if apply_job_form.resume.field.queryset %}
                             {{ apply_job_form.resume }}
+                            <div class="error">
+                                <span ng-repeat="err in error.resume">{[{ err }]}</span>
+                            </div>
                         {% else %}
                             <a href="{% url 'resume.create' %}?job={{ object.pk }}">Click here to add New Resume</a>
                         {% endif %}
@@ -124,6 +127,9 @@
                     <div class="field">
                         {% if apply_job_form.cover_letter.field.queryset %}
                             {{ apply_job_form.cover_letter }}
+                            <div class="error">
+                                <span ng-repeat="err in error.cover_letter">{[{ err }]}</span>
+                            </div>
                         {% else %}
                             <a href="{% url 'cover_letter.create' %}?job={{ object.pk }}">Click here to add Cover Letter</a>
                         {% endif %}
