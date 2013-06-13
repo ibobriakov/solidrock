@@ -2621,3 +2621,8 @@ a.remove_cross {
 .builder .top .links {
     margin-top: -20px;
 }
+
+.width_clear {
+    overflow: hidden;
+    width: 100%;
+}
