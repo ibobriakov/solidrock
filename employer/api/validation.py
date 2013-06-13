@@ -1,10 +1,9 @@
 from collections import defaultdict
 import copy
-from tastypie.validation import FormValidation
-from employer.models import Job
+from main.api.validation import FormWithRequiredFiledValidation
 
 
-class JobResourceValidation(FormValidation):
+class JobResourceValidation(FormWithRequiredFiledValidation):
     def fix_pk_in_bundle(self, bundle):
         fixed_bundle = copy.copy(bundle)
         for field in ('location', 'salary_range', 'hours', 'employment_type',
@@ -16,7 +15,4 @@ class JobResourceValidation(FormValidation):
     def is_valid(self, bundle, request=None):
         errors = defaultdict(list)
         errors.update(super(JobResourceValidation, self).is_valid(self.fix_pk_in_bundle(bundle), request))
-        for key, value in bundle.data.items():
-            if key in Job.REQUIRED_FIELDS and not value:
-                errors[key].append('This field is required.')
         return errors
