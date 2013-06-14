@@ -4,10 +4,9 @@
     <div class="fields">
         <div class="pod" ng-repeat="{{ field }} in job.{{ field }}_set">
             <input class="it-pod2" type="text" ng-model="{{ field }}.{{ field }}"/>
-            <a href="" ng-click="remove(job.{{ field }}_set, $index)">
-                <img src="{% static 'main/img/icon_remove.png' %}">
+            <a class="remove_cross" href="" ng-click="remove(job.{{ field }}_set, $index)">
             </a>
         </div>
     </div>
-    <a ng-click="append(job.{{ field }}_set)" href="">Add Another {{ label }} Criteria Item</a>
+    <a class="add_cross" ng-click="append(job.{{ field }}_set)" href="">Add Another {{ label }} Criteria Item</a>
 </div>

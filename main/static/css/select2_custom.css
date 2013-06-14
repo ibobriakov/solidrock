@@ -1,12 +1,6 @@
 .select2-drop.select2-display-none.select2-drop-active.select2-with-searchbox {
 }
 
-
-.select2-display-none {
-    margin-top: 9px;
-}
-
-
 .select2-results .select2-no-results, .select2-results .select2-searching,
 .select2-results .select2-selection-limit {
     background: #fff;
@@ -15,6 +9,7 @@
 .select2-container .select2-choice {
     background: #fff;
     border-radius: 0;
+    width: 260px;
 }
 
 .select2-dropdown-open .select2-choice {
@@ -40,10 +35,18 @@
 }
 
 .select2-drop.select2-drop-above {
-    margin-top: 10px;
     border-radius: 0;
 }
 
 .select2-container {
     float: right;
+}
+
+.stages .right .form .select2-container {
+    float: none;
+    margin-top: 5px;
+}
+
+.field.pod input.select2-offscreen, .field.pod2 input.select2-offscreen {
+    position: absolute;
 }

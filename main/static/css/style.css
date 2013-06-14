@@ -1087,6 +1087,7 @@ footer ._footer ._footer_nav ul li a {
 .builder .top .title {
     color:#d86a2b;
     font-weight:700;
+    margin-bottom: 10px;
 }
 
 .builder .top input[type=text] {
@@ -1096,7 +1097,6 @@ footer ._footer ._footer_nav ul li a {
     border:1px solid #c4c4c4;
     float:left;
     padding:4px 7px;
-    margin-top: 10px;
 }
 
 .builder .top .links a {
@@ -1104,7 +1104,6 @@ footer ._footer ._footer_nav ul li a {
     float:left;
     text-decoration:underline;
     position:relative;
-    top:10px;
 }
 
 .builder .top .links .pop,.builder .top .links .save {
@@ -1364,6 +1363,7 @@ footer ._footer ._footer_nav ul li a {
     display:block;
     float:right;
     margin-right:20px;
+    margin-top: 10px;
 }
 
 .criteria label {
@@ -1535,6 +1535,7 @@ div.paper-block {
     font-size:16px;
     color:#409bcd;
     font-family:"Myriad Pro";
+    margin-bottom: 10px;
 }
 
 .field.star label span {
@@ -2541,7 +2542,7 @@ div.paper-block {
     margin: 15px 0;
 }
 
-.error span {
+.error {
     color: red;
     font-size: 12px;
 }
@@ -2610,7 +2611,6 @@ a.remove_cross {
     margin: -35px 0 10px -20px;
 }
 
-
 .stages .right ul li.not_styled {
     background: none repeat scroll 0 0 transparent;
     border: medium none;
@@ -2619,10 +2619,30 @@ a.remove_cross {
 }
 
 .builder .top .links {
-    margin-top: -20px;
+    margin-top: -30px;
 }
 
 .width_clear {
     overflow: hidden;
     width: 100%;
+}
+
+.stages .right .form .s1 input[type="text"] {
+    width: 254px;
+}
+
+.criteria .pod a {
+    vertical-align: sub;
+}
+
+.stages .right .form .s1 input[type=text].it-pod2 {
+    width:560px;
+}
+
+.stages .right .form .s3 .field a.remove_cross {
+    margin: 0 0 -11px 5px;
+}
+
+.stages .right .form .s3 .field a.add_cross {
+    margin-top: 10px;
 }
