@@ -12,30 +12,36 @@ class SearchForm(forms.Form):
     categories = forms.ModelChoiceField(queryset=JobCategory.objects.none(),
                                         required=False, empty_label='',
                                         widget=Select2Widget(select2_options={'placeholder': 'Any Category',
-                                                                              'allowClear': True}))
+                                                                              'allowClear': True,
+                                                                              'width': 'off'}))
 
     sub_categories = forms.ModelChoiceField(queryset=JobSubCategory.objects.none(),
                                             required=False, empty_label='',
                                             widget=Select2Widget(select2_options={'placeholder': 'All',
-                                                                                  'allowClear': True}))
+                                                                                  'allowClear': True,
+                                                                                  'width': 'off'}))
     location = forms.ModelChoiceField(queryset=JobLocation.objects.none(),
                                       required=False, empty_label='',
                                       widget=Select2Widget(select2_options={'placeholder': 'All Australia',
-                                                                            'allowClear': True}))
+                                                                            'allowClear': True,
+                                                                            'width': 'off'}))
     area = forms.ModelChoiceField(queryset=JobArea.objects.none(),
                                   required=False, empty_label='',
                                   widget=Select2Widget(select2_options={'placeholder': 'All',
-                                                                        'allowClear': True}))
+                                                                        'allowClear': True,
+                                                                        'width': 'off'}))
     # more options
     featured = forms.BooleanField(label="Featured Jobs", required=False)
     hours = forms.ModelChoiceField(queryset=Hour.objects.none(),
                                    required=False, empty_label='',
                                    widget=Select2Widget(select2_options={'placeholder': 'All',
-                                                                         'allowClear': True}))
+                                                                         'allowClear': True,
+                                                                         'width': 'off'}))
     employment_type = forms.ModelChoiceField(queryset=EmploymentType.objects.none(),
                                              required=False, empty_label='',
                                              widget=Select2Widget(select2_options={'placeholder': 'All',
-                                                                                   'allowClear': True}))
+                                                                                   'allowClear': True,
+                                                                                   'width': 'off'}))
     salary_min = forms.IntegerField(label='Salary Range Min', required=False)
     salary_max = forms.IntegerField(label='Salary Range Max', required=False)
 

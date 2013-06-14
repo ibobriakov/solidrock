@@ -17,7 +17,7 @@ class MainView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MainView, self).get_context_data(**kwargs)
         context['next'] = self.request.GET['next'] if 'next' in self.request.GET else None
-        context['search_from'] = SearchForm()
+        context['search_form'] = SearchForm()
         context['featured_jobs'] = Job.objects.filter(featured_job=True)
         return context
 

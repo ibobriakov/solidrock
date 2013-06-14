@@ -50,3 +50,12 @@
 .field.pod input.select2-offscreen, .field.pod2 input.select2-offscreen {
     position: absolute;
 }
+
+
+._center .select2-container .select2-choice {
+    width: 230px;
+}
+
+._center .select2-container {
+    float: none;
+}

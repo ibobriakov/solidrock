@@ -292,7 +292,7 @@ footer ._footer ._footer_nav ul li a {
 ._search_job ._center form fieldset ._field{
     width:240px;
     float:left;
-    margin:0 35px 25px 0;
+    margin: 0 35px 15px 0;
 }
 
 ._search_box._search_job ._center form fieldset ._field:nth-child(2),._search_job ._center form fieldset ._field:nth-child(4),._search_job ._center form fieldset ._field:nth-child(6) {
@@ -305,7 +305,7 @@ footer ._footer ._footer_nav ul li a {
 ._search_box._search_job.more-options ._center form fieldset ._field{
     width:240px;
     float:left;
-    margin:0 35px 25px 0;
+    margin:0 35px 15px 0;
 }
 ._search_job ._center form fieldset ._field._pod #s2id_e4 .select2-choice, ._search_job ._center form fieldset ._field._pod #s2id_e5 .select2-choice {
     width: 184px!important;
@@ -339,7 +339,7 @@ footer ._footer ._footer_nav ul li a {
 }
 
 ._search_job ._center form fieldset ._field._pod #s2id_id_sub_categories .select2-choice,._search_job ._center form fieldset ._field._pod #s2id_id_area .select2-choice {
-    width:184px!important;
+    width:190px!important;
 }
 
 ._search_job ._center form ._submit {
@@ -356,7 +356,7 @@ footer ._footer ._footer_nav ul li a {
     background:#409bcd;
     cursor:pointer;
     float:left;
-    padding:5px 0;
+    padding:7px 0;
 }
 
 ._search_job ._center form ._submit ._search_button {
@@ -1355,7 +1355,7 @@ footer ._footer ._footer_nav ul li a {
     width:605px;
     background:url(../img/select_line.png) 16px 0 no-repeat;
     margin-top:-20px;
-    padding:25px 0 0 40px;
+    padding:27px 0 0 40px;
 }
 
 
@@ -1485,7 +1485,7 @@ div.paper-block {
     width:605px;
     background:url(../img/select_line.png) 16px 0 no-repeat;
     margin-top:-8px;
-    padding:0 0 0 40px;
+    padding: 8px 0 0 40px;
 }
 
 .stages .right .form .field.pod2 {
@@ -1660,17 +1660,12 @@ div.paper-block {
     font-weight:400;
 }
 
-.contact .right {
-    width:940px;
-}
-
 .contact .right .form form {
     margin-top:20px;
 }
 
 .contact ._submit {
-    margin:0 0 30px!important;
-    padding:0!important;
+    margin: 0 0 0 -15px !important;
 }
 
 .Job {
@@ -2645,4 +2640,35 @@ a.remove_cross {
 
 .stages .right .form .s3 .field a.add_cross {
     margin-top: 10px;
+}
+
+
+.stages .right .form.contact_us {
+    padding: 25px 30px;
+}
+
+._content.stages.contact {
+    overflow: visible;
+}
+
+.stages .right .form.contact_us textarea {
+    width: 418px;
+}
+
+.stages.contact .right {
+    margin-right: 215px;
+    width: 495px;
+}
+
+._search_job ._center form fieldset ._field.no_bottom_margin {
+    margin-bottom: 0;
+}
+
+
+._search_box._search_job.more-options ._center form fieldset ._field._pod {
+}
+
+
+.stages .right .form .field.no_bottom_margin {
+    margin-bottom: 0;
 }
