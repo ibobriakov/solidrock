@@ -12,7 +12,7 @@ dpc.DynamicPaperCtrl = function ($scope) {
         $scope.paper.select = data.select;
     };
     $scope.select2Options = {
-         allowClear: true,
+        allowClear: true,
         width: 'off'
     };
 
@@ -23,4 +23,4 @@ dpc.DynamicPaperCtrl = function ($scope) {
     });
 };
 
-DynamicPaperApp.controller(dpc);
+MainApp.controller(dpc);

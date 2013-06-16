@@ -4,248 +4,244 @@
 
 {% block library-js %}
     {{ block.super }}
-    <script src="{% static 'main/js/src/angular/applications/job_seeker_profile_view_app.js' %}"
-            type="text/javascript"></script>
-    <script src="{% static 'main/js/src/angular/controllers/job_seeker_profile_view_ctrl.js' %}"
-            type="text/javascript"></script>
-    <script src="{% static 'main/js/src/angular/directives/job_seeker_profile_view_dir.js' %}"
+    <script src="{% static 'main/js/src/angular/routing/job_seeker_profile_route.js' %}"
             type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
     {% with personal_information=jobseeker.personal_information current_employment=jobseeker.current_employment %}
-        <div class="_content stages" ng-app="AplInfoPublicApp">
-        <script type="text/ng-template" id="application-information-public">
-            <h1>Your Application Information</h1>
+        <div class="_content stages">
+        <div ui-view="page"></div>
+        <div>
+        <h1>Your Application Information</h1>
 
-            <div class="right full_width">
-                <ul activated>
-                    <li section num="1">Section 1</li>
-                    <li section num="2">Section 2</li>
-                    <li section num="3">Section 3</li>
-                    <li section num="4">Section 4</li>
-                    <li section num="5">Section 5</li>
-                </ul>
-                <div class="form">
-                    <form activated="block">
-                        <div class="section1">
-                            <div class="title">Personal Information</div>
-                            <div class="clear"></div>
-                            <fieldset>
-                                <div class="left_info">
-                                    <div class="field fl_left">
-                                        <label>Last Name</label>
-                                        <label>{{ jobseeker.last_name }}</label>
-                                    </div>
-                                    <div class="field fl_left">
-                                        <label>First Name</label>
-                                        <label>{{ jobseeker.first_name }}</label>
-                                    </div>
-                                    <div class="clear"></div>
-                                    <div class="field">
-                                        <label>Address</label>
-                                        <label>{{ personal_information.address_first }}</label>
-                                        <label>{{ personal_information.address_second }}</label>
-                                        <label>{{ personal_information.city }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Postcode</label>
-                                        <label>{{ personal_information.postcode }}</label>
-                                    </div>
-                                </div>
-                                {% thumbnail personal_information.photo "203x203" crop="center" as im %}
-                                    <div class="field avatar">
-
-                                        <div class="img fix"><img src="{{ im.url }}"/></div>
-                                    </div>
-                                {% endthumbnail %}
-                                <div class="bot_info">
-                                    <div class="field fl_left">
-                                        <label>Home Phone Number</label>
-                                        <label>{{ personal_information.home_phone }}</label>
-                                    </div>
-                                    <div class="field fl_left">
-                                        <label>Daytime Phone Number</label>
-                                        <label>{{ personal_information.daytime_phone }}</label>
-                                    </div>
-                                    <div class="field fl_left">
-                                        <label>Mobile Phone Number</label>
-                                        <label>{{ personal_information.mobile_phone }}</label>
-                                    </div>
-                                    <div class="clear"></div>
-                                    <div class="field">
-                                        <label>Email Address</label>
-                                        <label>{{ personal_information.email }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Can potential employers contact you at work? </label>
-                                        <label><b>{{ personal_information.can_contact_at_work|yesno }}</b></label>
-                                    </div>
-                                    <div class="field fl_left">
-                                        <label>Are you an Australian Citizen / Permanent Resident?</label>
-                                        <label><b>{{ personal_information.is_australian|yesno }}</b></label>
-                                    </div>
-                                    <div class="field">
-                                        <label>If no do you have a working visa?</label>
-                                        <label><b>{{ personal_information.have_visa|yesno }}</b></label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Do you hold a current driver’s licence?</label>
-                                        <label><b>{{ personal_information.is_driver|yesno }}</b></label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="section2">
-                            <div class="title">Current Employment</div>
-                            <div class="clear"></div>
-                            <fieldset>
-                                <div class="field">
-                                    <label>Name of Employer</label>
-                                    <label>{{ current_employment.name }}</label>
-                                </div>
-                                <div class="field">
-                                    <label>Address</label>
-                                    <label>{{ current_employment.address_first }}</label>
-                                    <label>{{ current_employment.address_second }}</label>
-                                    <label>{{ current_employment.city }}</label>
-                                </div>
-                                <div class="field">
-                                    <label>Postcode</label>
-                                    <label>{{ current_employment.postcode }}</label>
-                                </div>
-                                <div class="field">
-                                    <label>Position Title</label>
-                                    <label>{{ current_employment.position_title }}</label>
-                                </div>
-                                <div class="field date">
-                                    <label>Date Commenced</label>
-                                    <label>{{ current_employment.date_commenced }}</label>
-                                </div>
-                                <div class="field">
-                                    <label>Department/Section</label>
-                                    <label>{{ current_employment.department }}</label>
-                                </div>
-                                <div class="field">
-                                    <label>Brief Description of Duties</label>
-
-                                    <p>{{ current_employment.brief|linebreaksbr }}</p>
-                                </div>
-                                <div class="field fl_left">
-                                    <label>Fulltime, Parttime or Casual</label>
-                                    <label>{{ current_employment.job_type }}</label>
-                                </div>
-                                {% if current_employment.last_day_of_service %}
-                                    <div class="field fl_left">
-                                        <label>Last Day of Service</label>
-                                        <label>{{ current_employment.last_day_of_service }}</label>
-                                    </div>
-                                    <div class="field fl_clear">
-                                        <label>Reason for Leaving <span>(if no longer employed)</span></label>
-
-                                        <p>{{ current_employment.leaving_reason|linebreaksbr }}</p>
-                                    </div>
-                                {% endif %}
-                            </fieldset>
-                        </div>
-                        <div class="section3">
-                            <div class="title">Previous Employment</div>
-                            <div class="clear"></div>
-                            {% for previous_employment in jobseeker.previous_employments_set.all %}
-                                <div class="title">{{ forloop.counter }} Employer</div>
-                                <div class="clear"></div>
-                                <fieldset>
-                                    <div class="field">
-                                        <label>Name of Employer</label>
-                                        <label>{{ previous_employment.name }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Address</label>
-                                        <label>{{ previous_employment.address_first }}</label>
-                                        <label>{{ previous_employment.address_second }}</label>
-                                        <label>{{ previous_employment.city }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Postcode</label>
-                                        <label>{{ previous_employment.postcode }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Position Title</label>
-                                        <label>{{ previous_employment.position_title }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Brief Description of Duties</label>
-
-                                        <p>{{ previous_employment.brief|linebreaksbr }}</p>
-                                    </div>
-                                    <div class="field">
-                                        <label>Reason for Leaving</label>
-
-                                        <p>{{ previous_employment.leaving_reason|linebreaksbr }}</p>
-                                    </div>
-                                </fieldset>
-                            {% endfor %}
-                        </div>
-                        <div class="section4">
-                            <div class="title">Education</div>
-                            <div class="clear"></div>
-                            {% for education_type in jobseeker.educations %}
-                                <div class="field">
-                                    <label>{{ education_type.name }}</label>
-                                    <ul>
-                                        {% for education in education_type.educations %}
-                                            <li class="not_styled">{{ education.value }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            {% endfor %}
-                            </fieldset>
-                        </div>
-                        <div class="section5">
-                            <div class="title">Referees</div>
-                            <div class="clear"></div>
-                            {% for referee in jobseeker.referees_set.all %}
-                                <div class="title">{{ forloop.counter }} Referee</div>
-                                <div class="clear"></div>
-                                <fieldset>
-                                    <div class="field">
-                                        <label>Name</label>
-                                        <label>{{ referee.name }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Position Title or Relationship</label>
-                                        <label>{{ referee.position_title }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Address</label>
-                                        <label>{{ referee.address_first }}</label>
-                                        <label>{{ referee.address_second }}</label>
-                                        <label>{{ referee.city }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Postcode</label>
-                                        <label>{{ referee.postcode }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Phone Number</label>
-                                        <label>{{ referee.phone_number }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Email Address</label>
-                                        <label>{{ referee.email }}</label>
-                                    </div>
-                                    <div class="field">
-                                        <label>Are you willing for this referee to be approached prior to an interview?</label>
-                                        <label><b>{{ referee.is_for_interview|yesno }}</b></label>
-                                    </div>
-                                </fieldset>
-                            {% endfor %}
-                        </div>
-                    </form>
+        <div class="right full_width">
+        <ul class="sections">
+            <li class="section1"><a href="#/section/1/">Section 1</a></li>
+            <li class="section2"><a href="#/section/2/">Section 2</a></li>
+            <li class="section3"><a href="#/section/3/">Section 3</a></li>
+            <li class="section4"><a href="#/section/4/">Section 4</a></li>
+            <li class="section5"><a href="#/section/5/">Section 5</a></li>
+        </ul>
+        <div class="form">
+        <form class="pages sections">
+        <div class="section1" style="display: none;">
+            <div class="title">Personal Information</div>
+            <div class="clear"></div>
+            <fieldset>
+                <div class="left_info">
+                    <div class="field fl_left">
+                        <label>Last Name</label>
+                        <label>{{ jobseeker.last_name }}</label>
+                    </div>
+                    <div class="field fl_left">
+                        <label>First Name</label>
+                        <label>{{ jobseeker.first_name }}</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="field">
+                        <label>Address</label>
+                        <label>{{ personal_information.address_first }}</label>
+                        <label>{{ personal_information.address_second }}</label>
+                        <label>{{ personal_information.city }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Postcode</label>
+                        <label>{{ personal_information.postcode }}</label>
+                    </div>
                 </div>
-            </div>
-        </script>
-        <ng-view></ng-view>
+                {% thumbnail personal_information.photo "203x203" crop="center" as im %}
+                    <div class="field avatar">
+
+                        <div class="img fix"><img src="{{ im.url }}"/></div>
+                    </div>
+                {% endthumbnail %}
+                <div class="bot_info">
+                    <div class="field fl_left">
+                        <label>Home Phone Number</label>
+                        <label>{{ personal_information.home_phone }}</label>
+                    </div>
+                    <div class="field fl_left">
+                        <label>Daytime Phone Number</label>
+                        <label>{{ personal_information.daytime_phone }}</label>
+                    </div>
+                    <div class="field fl_left">
+                        <label>Mobile Phone Number</label>
+                        <label>{{ personal_information.mobile_phone }}</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="field">
+                        <label>Email Address</label>
+                        <label>{{ personal_information.email }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Can potential employers contact you at work? </label>
+                        <label><b>{{ personal_information.can_contact_at_work|yesno }}</b></label>
+                    </div>
+                    <div class="field fl_left">
+                        <label>Are you an Australian Citizen / Permanent Resident?</label>
+                        <label><b>{{ personal_information.is_australian|yesno }}</b></label>
+                    </div>
+                    <div class="field">
+                        <label>If no do you have a working visa?</label>
+                        <label><b>{{ personal_information.have_visa|yesno }}</b></label>
+                    </div>
+                    <div class="field">
+                        <label>Do you hold a current driver’s licence?</label>
+                        <label><b>{{ personal_information.is_driver|yesno }}</b></label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="section2" style="display: none;">
+            <div class="title">Current Employment</div>
+            <div class="clear"></div>
+            <fieldset>
+                <div class="field">
+                    <label>Name of Employer</label>
+                    <label>{{ current_employment.name }}</label>
+                </div>
+                <div class="field">
+                    <label>Address</label>
+                    <label>{{ current_employment.address_first }}</label>
+                    <label>{{ current_employment.address_second }}</label>
+                    <label>{{ current_employment.city }}</label>
+                </div>
+                <div class="field">
+                    <label>Postcode</label>
+                    <label>{{ current_employment.postcode }}</label>
+                </div>
+                <div class="field">
+                    <label>Position Title</label>
+                    <label>{{ current_employment.position_title }}</label>
+                </div>
+                <div class="field date">
+                    <label>Date Commenced</label>
+                    <label>{{ current_employment.date_commenced }}</label>
+                </div>
+                <div class="field">
+                    <label>Department/Section</label>
+                    <label>{{ current_employment.department }}</label>
+                </div>
+                <div class="field">
+                    <label>Brief Description of Duties</label>
+
+                    <p>{{ current_employment.brief|linebreaksbr }}</p>
+                </div>
+                <div class="field fl_left">
+                    <label>Fulltime, Parttime or Casual</label>
+                    <label>{{ current_employment.job_type }}</label>
+                </div>
+                {% if current_employment.last_day_of_service %}
+                    <div class="field fl_left">
+                        <label>Last Day of Service</label>
+                        <label>{{ current_employment.last_day_of_service }}</label>
+                    </div>
+                    <div class="field fl_clear">
+                        <label>Reason for Leaving <span>(if no longer employed)</span></label>
+
+                        <p>{{ current_employment.leaving_reason|linebreaksbr }}</p>
+                    </div>
+                {% endif %}
+            </fieldset>
+        </div>
+        <div class="section3" style="display: none;">
+            <div class="title">Previous Employment</div>
+            <div class="clear"></div>
+            {% for previous_employment in jobseeker.previous_employments_set.all %}
+                <div class="title">{{ forloop.counter }} Employer</div>
+                <div class="clear"></div>
+                <fieldset>
+                    <div class="field">
+                        <label>Name of Employer</label>
+                        <label>{{ previous_employment.name }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Address</label>
+                        <label>{{ previous_employment.address_first }}</label>
+                        <label>{{ previous_employment.address_second }}</label>
+                        <label>{{ previous_employment.city }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Postcode</label>
+                        <label>{{ previous_employment.postcode }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Position Title</label>
+                        <label>{{ previous_employment.position_title }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Brief Description of Duties</label>
+
+                        <p>{{ previous_employment.brief|linebreaksbr }}</p>
+                    </div>
+                    <div class="field">
+                        <label>Reason for Leaving</label>
+
+                        <p>{{ previous_employment.leaving_reason|linebreaksbr }}</p>
+                    </div>
+                </fieldset>
+            {% endfor %}
+        </div>
+        <div class="section4" style="display: none;">
+            <div class="title">Education</div>
+            <div class="clear"></div>
+            {% for education_type in jobseeker.educations %}
+                <div class="field">
+                    <label>{{ education_type.name }}</label>
+                    <ul>
+                        {% for education in education_type.educations %}
+                            <li class="not_styled">{{ education.value }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+            </fieldset>
+        </div>
+        <div class="section5" style="display: none;">
+            <div class="title">Referees</div>
+            <div class="clear"></div>
+            {% for referee in jobseeker.referees_set.all %}
+                <div class="title">{{ forloop.counter }} Referee</div>
+                <div class="clear"></div>
+                <fieldset>
+                    <div class="field">
+                        <label>Name</label>
+                        <label>{{ referee.name }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Position Title or Relationship</label>
+                        <label>{{ referee.position_title }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Address</label>
+                        <label>{{ referee.address_first }}</label>
+                        <label>{{ referee.address_second }}</label>
+                        <label>{{ referee.city }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Postcode</label>
+                        <label>{{ referee.postcode }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Phone Number</label>
+                        <label>{{ referee.phone_number }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Email Address</label>
+                        <label>{{ referee.email }}</label>
+                    </div>
+                    <div class="field">
+                        <label>Are you willing for this referee to be approached prior to an interview?</label>
+                        <label><b>{{ referee.is_for_interview|yesno }}</b></label>
+                    </div>
+                </fieldset>
+            {% endfor %}
+        </div>
+        </form>
+        </div>
+        </div>
+        </div>
         </div>
     {% endwith %}
     {% if user.profile == jobseeker %}

@@ -157,4 +157,4 @@ dpd.children = function ($compile) {
     }
 };
 
-DynamicPaperApp.directive(dpd);
+MainApp.directive(dpd);

@@ -1,7 +1,7 @@
 /**
  * User: jackdevil
  */
-var current_section = 1;
+
 MainApp.config(function ($stateProvider, $routeProvider, $urlRouterProvider) {
     $urlRouterProvider
         .otherwise('/section/1/');
