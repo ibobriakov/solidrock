@@ -2,7 +2,9 @@
  * User: jackdevil
  */
 
-AplInfoApp.controller('AplInfoData', function ($scope, aplInfoShare) {
+var AplInfoCtrl = {};
+
+AplInfoCtrl.AplInfoData = function ($scope, aplInfoShare) {
     $scope.set_data = function (data) {
         aplInfoShare.personal_information = data.personal_information;
         aplInfoShare.current_employment = data.current_employment;
@@ -10,16 +12,16 @@ AplInfoApp.controller('AplInfoData', function ($scope, aplInfoShare) {
         aplInfoShare.educations = data.educations;
         aplInfoShare.referees = data.referees;
     };
-});
+};
 
-AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routeParams, $location, aplInfoShare) {
+AplInfoCtrl.AplInfoCtrl = function ($scope, $rootScope, $http, $location, aplInfoShare) {
     $scope.data = {};
     $scope.data.personal_information = aplInfoShare.personal_information;
     $scope.data.current_employment = aplInfoShare.current_employment;
     $scope.data.previous_employments = aplInfoShare.previous_employments;
     $scope.data.educations = aplInfoShare.educations;
     $scope.data.referees = aplInfoShare.referees;
-    $scope.section = parseInt($routeParams.section);
+
     $scope.has_error = function (dict) {
         if (!dict) return false;
         for (var key in dict) {
@@ -30,16 +32,16 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
         return false;
     };
 
-    $scope.current = function () {
-        switch ($scope.section) {
+    $scope.get_current_data = function (current) {
+        switch (current) {
             case 1:
-                return $scope.data.personal_information
+                return $scope.data.personal_information;
             case 2:
-                return $scope.data.current_employment
+                return $scope.data.current_employment;
             case 3:
-                return $scope.data.previous_employments
+                return $scope.data.previous_employments;
             case 4:
-                return $scope.data.educations
+                return $scope.data.educations;
             case 5:
                 return $scope.data.referees
         }
@@ -61,7 +63,7 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
         }
     };
 
-    $scope.save = function (list, exit) {
+    $scope.save = function (list, exit, next) {
         exit = exit || false;
         var no_valid = list.length;
         _.each(list, function (item) {
@@ -77,8 +79,9 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
                 item.error = {};
                 if (!no_valid) {
                     $('.preloader').hide();
-                    $('.left li.active').addClass('checked');
-                    $location.path('/section/' + parseInt($scope.section + 1) + '/');
+                    $('.section'+$scope.current).addClass('checked');
+                    $scope.current = parseInt(next);
+                    $location.path('/section/' + parseInt(next) + '/');
                 }
             };
             var success_exit_callback = function (data, status, headers, config) {
@@ -93,4 +96,6 @@ AplInfoApp.controller('AplInfoCtrl', function ($scope, $http, $route, $routePara
                 .error(error_callback).success(exit ? success_exit_callback : success_callback);
         });
     }
-});
+};
+
+MainApp.controller(AplInfoCtrl);

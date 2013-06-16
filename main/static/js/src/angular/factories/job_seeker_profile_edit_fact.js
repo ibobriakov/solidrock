@@ -2,7 +2,7 @@
  * User: jackdevil
  */
 
-AplInfoApp.factory('aplInfoShare', function () {
+MainApp.factory('aplInfoShare', function () {
     var personal_information = [],
         current_employment = [],
         previous_employments = [],
