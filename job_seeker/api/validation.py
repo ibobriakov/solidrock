@@ -16,4 +16,9 @@ class ApplyToJobValidation(FormWithRequiredFiledValidation):
     def is_valid(self, bundle, request=None):
         errors = defaultdict(list)
         errors.update(super(ApplyToJobValidation, self).is_valid(self.fix_pk_in_bundle(bundle), request))
+        user = bundle.request.user
+        if 'resume' in errors or 'cover_letter' in errors:
+            errors['error'] = ['Please select a Resume and Cover Letter']
+        if not user.resume_set.count() or not user.coverletter_set.count():
+            errors['error'] = ['You must create a Resume and Cover Letter before applying for a job']
         return errors
