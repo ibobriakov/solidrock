@@ -29,4 +29,4 @@ contactUsController.ContactUsCtrl = function ($scope, $http) {
     };
 };
 
-ContactUsApp.controller(contactUsController);
+MainApp.controller(contactUsController);

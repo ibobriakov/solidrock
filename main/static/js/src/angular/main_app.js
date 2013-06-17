@@ -2,7 +2,7 @@
  * User: jackdevil
  */
 
-var MainApp = angular.module('MainApp', ['ui.state']);
+var MainApp = angular.module('MainApp', ['ui.state', 'ui.select2']);
 
 var show_auth_modal = function () {
     var id = $('.window.login .window_block');

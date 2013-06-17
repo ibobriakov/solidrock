@@ -29,16 +29,15 @@
         <script src="{% static 'main/js/lib/angular.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'main/js/lib/angular.ui/select2.js' %}" type="text/javascript"></script>
         <script src="{% static 'main/js/lib/angular.ui/angular-ui-router.min.js' %}" type="text/javascript"></script>
-        <script src="{% static 'main/js/src/angular/additional/cookie.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/src/angular/cookie.js' %}" type="text/javascript"></script>
+        <script src="{% static 'main/js/src/angular/main_app.js' %}" type="text/javascript"></script>
 
-        <script src="{% static 'main/js/src/angular/applications/main_app.js' %}" type="text/javascript"></script>
         <script src="{% static 'main/js/src/angular/controllers/main_ctrl.js' %}" type="text/javascript"></script>
-    {% endblock %}
-    {% block templates %}
     {% endblock %}
 </head>
 <body ng-app="MainApp">
 <a name="top"></a>
+
 <div class="preloader" style="display: none"></div>
 <div class="_wrapper">
     <header>
@@ -55,166 +54,10 @@
 </footer>
 <div ui-view="modal"></div>
 <div class="window login">
-    <div class="window_block">
-        <div class="top">
-            <div class="title">Login or Register</div>
-            <a href="#close">
-                <div class="close"></div>
-            </a>
-        </div>
-        <div class="center reg-avt">
-            <div class="block avt" ng-controller="LoginCtrl">
-                <div class="title">Users Login Here</div>
-                <fieldset>
-                    <form id="login_form" {% if next %}data-next-url="{{ next }}"{% endif %}>
-                        <div class="field">
-                            <label>Email Address</label>
-                            <input type="text" ng-model="login.username">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.username">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label>Password<a href="{% url "auth_password_reset" %}">Forgot Your Password?</a></label>
-                            <input type="password" ng-model="login.password">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.password">{[{err}]}</span>
-                            </div>
-                        </div>
-                        <input type="submit" value="Submit" ng-click="submit()">
-                    </form>
-                </fieldset>
-            </div>
-            <div class="block reg">
-                <div class="title">Register for an Account Here</div>
-                <ul>
-                    <li id="register_job_seeker_tab" class="active"><a href="#register/job_seeker">Job
-                        Seeker</a>
-                    </li>
-                    <li id="register_employer_tab"><a href="#register/employer">Employer</a></li>
-                </ul>
-                <fieldset id="register_job_seeker_tab_fieldset" class="login_form">
-                    <form id="register_job_seeker_form" ng-controller="RegisterJobSeekerCtrl">
-                        <div class="field">
-                            <label>First Name</label>
-                            <input type="text" ng-model="reg.first_name">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.first_name">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label>Last Name</label>
-                            <input type="text" ng-model="reg.last_name">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.last_name">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label>Email Address</label>
-                            <input type="text" ng-model="reg.email_address">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.email_address">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="field password">
-                            <label>Password</label>
-                            <input type="password" ng-model="reg.password">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.password">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="field password">
-                            <label>Re-type Password</label>
-                            <input type="password" ng-model="reg.re_password">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.re_password">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="continue" ng-click="submit()">Continue</div>
-                    </form>
-                </fieldset>
-                <fieldset id="register_employer_tab_fieldset" class="login_form_2">
-                    <form id="register_employer_form" ng-controller="RegisterEmployerCtrl" data-next-url="{% url "employer.profile.edit" %}">
-                        <div class="field">
-                            <label>Company Name</label>
-                            <input type="text" ng-model="reg.company_name">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.company_name">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label>Email Address</label>
-                            <input type="text" ng-model="reg.email_address">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.email_address">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label>Phone Number</label>
-                            <input type="text" ng-model="reg.phone_number">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.password">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="field password">
-                            <label>Password</label>
-                            <input type="password" ng-model="reg.password">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.password">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="field password">
-                            <label>Re-type Password</label>
-                            <input type="password" ng-model="reg.re_password">
-
-                            <div class="error">
-                                <span ng-repeat="err in error.re_password">{[{err}]}<br></span>
-                            </div>
-                        </div>
-                        <div class="continue" ng-click="submit()">Continue</div>
-                    </form>
-                </fieldset>
-            </div>
-        </div>
-    </div>
-    <a href="#close" class="close_hide">
-        <div class="_hide"></div>
-    </a>
+    {% include "auth.html" %}
 </div>
 <div class="window terms">
-    <div class="window_block">
-        <div class="top">
-            <ul>
-                <li id="terms_conditions_tab" class="active"><a href="#terms_conditions">Terms & Conditions</a></li>
-                <li id="privacy_policy_tab"><a href="#privacy_policy">Privacy Policy</a></li>
-            </ul>
-            <a href="#close">
-                <div class="close"></div>
-            </a>
-        </div>
-        <div class="center">
-            <div id="terms_conditions_content">
-                {% flatblock "main.terms_conditions" %}
-            </div>
-            <div id="privacy_policy_content" style="display: none">
-                {% flatblock "main.privacy_policy" %}
-            </div>
-        </div>
-    </div>
-    <a href="#close" class="close_hide">
-        <div class="_hide"></div>
-    </a>
+    {% include "terms.html" %}
 </div>
 </body>
 <script>
@@ -233,4 +76,9 @@
     ga('create', 'UA-39882376-1', 'solidrockrecruitment.com.au');
     ga('send', 'pageview');
 </script>
+{% block initial-js %}
+    <script src="{% static 'main/js/src/extra/jcarousellite_1.0.1.min.js' %}"></script>
+    <script src="{% static 'main/js/src/extra/carousel.js' %}"></script>123
+    <script src="{% static 'main/js/src/extra/map.js' %}"></script>
+{% endblock %}
 </html>

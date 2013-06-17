@@ -1,55 +1,133 @@
-<script id="form-template" type="text/template">
-    <% _.each(fields,function(value,key) { %>
-    <% if (model.types[key]) { %>
-    <div class="field <%=model.types[key]%> <% if (errors[key]) { %>error<% } %>">
-        <% if (model.types[key] != 'hidden') { %><label><%=model.labels[key]%></label><% } %>
-        <input data-value="<%=type%>.<%=key%>" data-on-keyup="<%=type%>:keyup" type="<%=model.types[key]%>">
-        <% if (errors[key]) { %>
-        <div class="error_list" style="display: none">
-            <% _.each(errors[key],function(value){ %>
-            <p><%=value%></p>
-            <% }) %>
-        </div>
-        <% } %>
-    </div>
-    <% } %>
-    <% }) %>
-    <% if (errors['__all__']) { %>
-    <div class="field error">
-        <ul>
-            <% _.each(errors['__all__'],function(value){ %>
-            <li><%=value%></li>
-            <% }) %>
-        </ul>
-    </div>
-    <% } %>
-    <div class="continue" data-on-click="<%=type%>:commit">Continue</div>
-</script>
-
 <div class="window_block">
     <div class="top">
         <div class="title">Login or Register</div>
-        <a href="#close"><div class="close"></div></a>
+        <a href="#close">
+            <div class="close"></div>
+        </a>
     </div>
     <div class="center reg-avt">
-        <div class="block avt">
+        <div class="block avt" ng-controller="LoginCtrl">
             <div class="title">Users Login Here</div>
             <fieldset>
-                <a href="{% url "auth_password_reset" %}">Forget password?</a>
-                <form id="login_form" {% if next %}data-next-url="{{ next }}"{% endif %}></form>
+                <form id="login_form" {% if next %}data-next-url="{{ next }}"{% endif %}>
+                    <div class="field">
+                        <label>Email Address</label>
+                        <input type="text" ng-model="login.username">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.username">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Password<a href="{% url "auth_password_reset" %}">Forgot Your Password?</a></label>
+                        <input type="password" ng-model="login.password">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.password">{[{err}]}</span>
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit" ng-click="submit()">
+                </form>
             </fieldset>
         </div>
         <div class="block reg">
             <div class="title">Register for an Account Here</div>
             <ul>
-                <li id="register_job_seeker_tab" class="active"><a href="#register/job_seeker">Job Seeker</a></li>
+                <li id="register_job_seeker_tab" class="active"><a href="#register/job_seeker">Job
+                    Seeker</a>
+                </li>
                 <li id="register_employer_tab"><a href="#register/employer">Employer</a></li>
             </ul>
-            <fieldset id="register_job_seeker_tab_fieldset">
-                <form id="register_job_seeker_form"></form>
+            <fieldset id="register_job_seeker_tab_fieldset" class="login_form">
+                <form id="register_job_seeker_form" ng-controller="RegisterJobSeekerCtrl">
+                    <div class="field">
+                        <label>First Name</label>
+                        <input type="text" ng-model="reg.first_name">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.first_name">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Last Name</label>
+                        <input type="text" ng-model="reg.last_name">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.last_name">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Email Address</label>
+                        <input type="text" ng-model="reg.email_address">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.email_address">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field password">
+                        <label>Password</label>
+                        <input type="password" ng-model="reg.password">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.password">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field password">
+                        <label>Re-type Password</label>
+                        <input type="password" ng-model="reg.re_password">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.re_password">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="continue" ng-click="submit()">Continue</div>
+                </form>
             </fieldset>
-            <fieldset id="register_employer_tab_fieldset">
-                <form id="register_employer_form" data-next-url="{% url "employer.profile.edit" %}"></form>
+            <fieldset id="register_employer_tab_fieldset" class="login_form_2">
+                <form id="register_employer_form" ng-controller="RegisterEmployerCtrl"
+                      data-next-url="{% url "employer.profile.edit" %}">
+                    <div class="field">
+                        <label>Company Name</label>
+                        <input type="text" ng-model="reg.company_name">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.company_name">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Email Address</label>
+                        <input type="text" ng-model="reg.email_address">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.email_address">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Phone Number</label>
+                        <input type="text" ng-model="reg.phone_number">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.password">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field password">
+                        <label>Password</label>
+                        <input type="password" ng-model="reg.password">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.password">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field password">
+                        <label>Re-type Password</label>
+                        <input type="password" ng-model="reg.re_password">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.re_password">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="continue" ng-click="submit()">Continue</div>
+                </form>
             </fieldset>
         </div>
     </div>
@@ -57,5 +135,3 @@
 <a href="#close" class="close_hide">
     <div class="_hide"></div>
 </a>
-{% load staticfiles %}
-<script src="{% static 'main/js/src/extra/auth.js' %}" type="text/javascript"></script>

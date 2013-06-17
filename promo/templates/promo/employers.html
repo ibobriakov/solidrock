@@ -3,78 +3,73 @@
 {% load thumbnail %}
 {% load serialize %}
 
-{% block templates %}
-{{ block.super }}
-<script id="form-promo-employer-template" type="text/template">
-    <% _.each(fields,function(value,key) { %>
-    <% if (model.types[key]) { %>
-    <div class="field <% if (model.types[key] == 'password') { %>fl_left<% } %> <% if (errors[key]) { %>error<% } %>">
-        <% if (model.types[key] != 'hidden') { %><label><%=model.labels[key]%></label><% } %>
-        <input class="<% if (model.types[key] == 'password') { %>it1<% } else { %>it3<% } %>"
-               data-value="<%=type%>.<%=key%>" data-on-keyup="<%=type%>:keyup"
-               type="<% if (model.types[key] == 'password' || model.types[key] == 'hidden') { %><%=model.types[key]%><% } else { %>text<% } %>">
-        <% if (errors[key]) { %>
-        <div class="error_list" style="display: none">
-            <% _.each(errors[key],function(value){ %>
-            <div><%=value%></div>
-            <% }) %>
-        </div>
-        <% } %>
-    </div>
-    <% } %>
-    <% }) %>
-
-    <% if (errors['__all__']) { %>
-        <div class="field error">
-            <% _.each(errors['__all__'],function(value){ %>
-                <p><%=value%></p>
-            <% }) %>
-        </div>
-    <% } %>
-    <div class="_submit" id="emp">
-        <div class="exit" data-on-click="<%=type%>:commit">Continue</div>
-    </div>
-</script>
-{% endblock %}
-
 {% block content %}
-<div class="_content stages employer">
-    <div class="left">
-        <div class="register-post-job">
-            <div>
-                <p>Register now and <br/> post a job anytime for <br/> just</p>
-                <span>$220</span>
+    <div class="_content stages employer">
+        <div class="left">
+            <div class="register-post-job">
+                <div>
+                    <p>Register now and <br/> post a job anytime for <br/> just</p>
+                    <span>$220</span>
+                </div>
+                <p>Finally one place for recruitment of <br/> Aboriginal and Torres Strait islander people!</p>
+                <br/>
+                <p>Same day publication of Advertisements - no <br/> fuss, direct, targeted, recruitment - target the<br/>people you want working for you!</p>
             </div>
-            <p>
-                Finally one place for recruitment of <br/> Aboriginal and Torres Strait islander people!
-            </p>
-            <br/>
-            <p>
-                Same day publication of Advertisements - no <br/> fuss, direct, targeted, recruitment - target the <br/>
-                people you want working for you!
-            </p>
         </div>
-    </div>
-    <div class="right">
-        <p>REGISTER <span>NOW!</span></p>
-        <div class="form">
-            <form id="register_promo_employer_form"></form>
-        </div>
-    </div>
-    <div class="clear"></div>
-    <a href="{% url "pricing" %}" class="left-pricing"><span>Click here to see our</span><br/> Pricing Guide</a>
-    <a href="{% url "contact_us" %}" class="right-contact"><span>Need help ?</span><br/>Contact Us</a>
-</div>
-{% endblock %}
+        <div class="right">
+            <p>REGISTER <span>NOW!</span></p>
 
-{% block initialize-js %}
-    {{ block.super }}
-    <script>
-        var employer_promo_registration_view = new (form_view_fabric(
-                'employer_registration',
-                '#form-promo-employer-template'))({
-                    el:$('#register_promo_employer_form')
-                });
-        employer_promo_registration_view.render();
-    </script>
+            <div class="form">
+                <form id="register_promo_employer_form" ng-controller="RegisterEmployerCtrl"
+                      data-next-url="{% url "employer.profile.edit" %}">
+                    <div class="field">
+                        <label>Company Name</label>
+                        <input class="it3" type="text" ng-model="reg.company_name">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.company_name">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Email Address</label>
+                        <input class="it3" type="text" ng-model="reg.email_address">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.email_address">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Phone Number</label>
+                        <input class="it3" type="text" ng-model="reg.phone_number">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.password">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field fl_left">
+                        <label>Password</label>
+                        <input class="it1" type="password" ng-model="reg.password">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.password">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="field fl_left">
+                        <label>Re-type Password</label>
+                        <input class="it1" type="password" ng-model="reg.re_password">
+
+                        <div class="error">
+                            <span ng-repeat="err in error.re_password">{[{err}]}<br></span>
+                        </div>
+                    </div>
+                    <div class="_submit" id="emp">
+                        <div class="exit" ng-click="submit()">Continue</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <a href="{% url "pricing" %}" class="left-pricing"><span>Click here to see our</span><br/> Pricing Guide</a>
+        <a href="{% url "contact_us" %}" class="right-contact"><span>Need help ?</span><br/>Contact Us</a>
+    </div>
 {% endblock %}
