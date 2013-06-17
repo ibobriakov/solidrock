@@ -14,6 +14,7 @@ MainApp.config(function ($stateProvider, $routeProvider, $urlRouterProvider) {
                 $('.pages.sections').children().hide();
                 $('.pages.sections .section'+section).show();
                 $('.section'+section).addClass('active');
+                $('body,html').animate({scrollTop:0},500);
             }
         });
 });

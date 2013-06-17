@@ -2594,7 +2594,7 @@ a.remove_cross {
     padding-right: 28px;
 }
 
-.section1, .section2, .section3, .section4, .section5 {
+.form .section1, .form .section2, .form .section3, .form  .section4, .form .section5 {
     margin-top: 35px;
 }
 

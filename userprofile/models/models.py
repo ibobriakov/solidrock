@@ -153,7 +153,7 @@ class JobSeekerPreviousEmployment(AddressMixin, models.Model):
     leaving_reason = models.TextField(verbose_name="Reason for Leaving", blank=True, null=True)
 
     REQUIRED_FIELDS = ('name', 'address_first', 'city', 'postcode',
-                       'position_title', 'date_commenced', 'brief', 'leaving_reason',)
+                       'position_title', 'brief', 'leaving_reason',)
 
     def __unicode__(self):
         return "Job Seeker Previous Employment for {0}".format(self.job_seeker.__unicode__())

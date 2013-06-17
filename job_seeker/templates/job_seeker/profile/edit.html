@@ -95,8 +95,8 @@
                         </div>
                     </fieldset>
                     <div class="_submit">
-                        <div class="exit" ng-click="save(data.personal_information, true)">Save and Exit</div>
-                        <div class="cont" ng-click="save(data.personal_information, false, 2)">Save and Continue</div>
+                        <div class="exit" ng-click="save(1, data.personal_information, true)">Save and Exit</div>
+                        <div class="cont" ng-click="save(1, data.personal_information, false, 2)">Save and Continue</div>
                     </div>
                 </div>
                 <div class="section2" style="display: none;">
@@ -119,8 +119,8 @@
                         {% include "fields/textarea.html" with label="Reason for Leaving <span>(if no longer employed)</span>" name="leaving_reason" class="field fl_clear" %}
                     </fieldset>
                     <div class="_submit">
-                        <div class="exit" ng-click="save(data.current_employment,true)">Save and Exit</div>
-                        <div class="cont" ng-click="save(data.current_employment, false, 3)">Save and Continue</div>
+                        <div class="exit" ng-click="save(2, data.current_employment, true)">Save and Exit</div>
+                        <div class="cont" ng-click="save(2, data.current_employment, false, 3)">Save and Continue</div>
                     </div>
                 </div>
                 <div class="section3" style="display: none;">
@@ -140,17 +140,15 @@
                         {% include "fields/input.html" with label="City" name="city" input_class="it4" %}
                         {% include "fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
                         {% include "fields/input.html" with label="Position title" name="position_title" input_class="it3" %}
-                        {% include "fields/input.html" with label="Date Commenced" name="date_commenced" input_class="it3" class="field date" %}
                         {% include "fields/textarea.html" with label="Brief Description of Duties" name="brief" %}
                         {% include "fields/textarea.html" with label="Reason for Leaving <span>(if no longer employed)</span>" name="leaving_reason" class="field fl_clear" %}
                     </fieldset>
                     <a class="add_cross" href=""
-                       ng-click="append(data.previous_employments, '/api/v1/job_seeker_previous_employment/')">Add
-                        Another Position</a>
+                       ng-click="append(data.previous_employments)">Add Another Position</a>
 
                     <div class="_submit">
-                        <div class="exit" ng-click="save(data.previous_employments,true)">Save and Exit</div>
-                        <div class="cont" ng-click="save(data.previous_employments, false, 4)">Save and Continue</div>
+                        <div class="exit" ng-click="save(3, data.previous_employments, true)">Save and Exit</div>
+                        <div class="cont" ng-click="save(3, data.previous_employments, false, 4)">Save and Continue</div>
                     </div>
                 </div>
                 <div class="section4" style="display: none;">
@@ -168,7 +166,7 @@
                                                                                          ng-click="remove(item, data.educations)"></a>
                             </div>
                             <a class="add_cross" href=""
-                               ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'school-college-or-university-name'})">Add
+                               ng-click="append(data.educations, {education_type:'school-college-or-university-name'})">Add
                                 another School, College or University</a>
                         </div>
                         <div class="field">
@@ -179,7 +177,7 @@
                                                                                          ng-click="remove(item, data.educations)"></a>
                             </div>
                             <a class="add_cross" href=""
-                               ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'major-course-of-study-or-classes-taken'})">Add
+                               ng-click="append(data.educations, {education_type:'major-course-of-study-or-classes-taken'})">Add
                                 another Major Course of Study or Class Taken</a>
                         </div>
                         <div class="field">
@@ -190,7 +188,7 @@
                                                                                          ng-click="remove(item, data.educations)"></a>
                             </div>
                             <a class="add_cross" href=""
-                               ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'degrees-andor-post-graduate-qualifications-obtained'})">Add
+                               ng-click="append(data.educations, {education_type:'degrees-andor-post-graduate-qualifications-obtained'})">Add
                                 another Degree and/or Post-Graduate Qualification Obtained</a>
                         </div>
                         <div class="field">
@@ -201,7 +199,7 @@
                                                                                          ng-click="remove(item, data.educations)"></a>
                             </div>
                             <a class="add_cross" href=""
-                               ng-click="append(data.educations, '/api/v1/job_seeker_education/', {education_type:'certificates-andor-diplomas-obtained'})">Add
+                               ng-click="append(data.educations, {education_type:'certificates-andor-diplomas-obtained'})">Add
                                 another Certificate and/or Diploma Obtained</a>
                         </div>
                         <div class="field">
@@ -213,8 +211,8 @@
                         </div>
                     </fieldset>
                     <div class="_submit">
-                        <div class="exit" ng-click="save(data.educations,true)">Save and Exit</div>
-                        <div class="cont" ng-click="save(data.educations, false, 5)">Save and Continue</div>
+                        <div class="exit" ng-click="save(4, data.educations, true)">Save and Exit</div>
+                        <div class="cont" ng-click="save(4, data.educations, false, 5)">Save and Continue</div>
                     </div>
                 </div>
                 <div class="section5" style="display: none;">
@@ -236,14 +234,13 @@
                         {% include "fields/input.html" with label="Postcode" name="postcode" input_class="it3" %}
                         {% include "fields/input.html" with label="Phone Number" name="phone_number" input_class="it2" %}
                         {% include "fields/input.html" with label="Email Address" name="email" input_class="it3" %}
-                        {% include "fields/select.html" with label="Are you willing for this referee to be approached prior to an interview?" name="is_for_interview" %}
+                        {% include "fields/select.html" with label="Are you willing for this referee to be approached prior to an interview?" name="is_for_interview" ch="5" %}
                         <div class="clear"></div>
                     </fieldset>
-                    <a class="add_cross" href="" ng-click="append(data.referees, '/api/v1/job_seeker_referee/')">Add
-                        Another Referee</a>
-
+                    <a class="add_cross" href="" ng-click="append(data.referees)">Add Another Referee</a>
+                    <div class="clear"></div>
                     <div class="_submit">
-                        <div class="exit" ng-click="save(data.referees,true)">Save and Exit</div>
+                        <div class="exit" ng-click="save(5, data.referees, true)">Save and Exit</div>
                     </div>
                 </div>
             </form>

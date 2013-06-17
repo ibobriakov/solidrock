@@ -49,7 +49,7 @@ aplInfoDir.changeSection = function ($location) {
                     });
                 }
                 var current_data = scope.get_current_data(scope.current);
-                scope.save(current_data, false, attrs.section);
+                scope.save(scope.current, current_data, false, attrs.section);
                 return false;
             });
         }
