@@ -2,14 +2,15 @@
  * User: jackdevil
  */
 
+var employerProfileCtrl = {};
 
-MainApp.controller('EmployerEditProfileData', function ($scope, employerEditProfileShare) {
+employerProfileCtrl.EmployerEditProfileData = function ($scope, employerEditProfileShare) {
     $scope.set_data = function (data) {
         employerEditProfileShare.personal_information = data.personal_information;
     };
-});
+};
 
-MainApp.controller('EmployerEditProfileCtrl', function ($scope, $http, $route, $routeParams, $location, employerEditProfileShare) {
+employerProfileCtrl.EmployerEditProfileCtrl = function ($scope, $http, $route, $routeParams, $location, employerEditProfileShare) {
     $scope.data = {};
     $scope.data.personal_information = employerEditProfileShare.personal_information;
 
@@ -47,4 +48,6 @@ MainApp.controller('EmployerEditProfileCtrl', function ($scope, $http, $route, $
                 .error(error_callback).success(success_callback);
         });
     }
-});
+};
+
+MainApp.controller(employerProfileCtrl);

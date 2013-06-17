@@ -2,7 +2,9 @@
  * User: jackdevil
  */
 
-MainApp.controller('ApplyJobCtrl',function($scope, $http) {
+var applyJobCtrl = {};
+
+applyJobCtrl.ApplyJobCtrl = function($scope, $http) {
     $scope.applyToJob = {};
     $scope.confirm = function() {
         $http.post('/api/v1/applytojob/', {
@@ -16,4 +18,6 @@ MainApp.controller('ApplyJobCtrl',function($scope, $http) {
                 $scope.error = data.applytojob;
             })
         };
-});
+};
+
+MainApp.controller(applyJobCtrl);

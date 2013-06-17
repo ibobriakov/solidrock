@@ -2,7 +2,9 @@
  * User: jackdevil
  */
 
-MainApp.factory('aplInfoShare', function () {
+var aplInfoFact = {};
+
+aplInfoFact.aplInfoShare = function () {
     var personal_information = [],
         current_employment = [],
         previous_employments = [],
@@ -16,5 +18,7 @@ MainApp.factory('aplInfoShare', function () {
         educations: educations,
         referees: referees
     };
-});
+};
+
+MainApp.factory(aplInfoFact);
 

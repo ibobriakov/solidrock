@@ -4,7 +4,9 @@
 
 // Job payment controller
 
-MainApp.controller('JobPaymentData', function ($scope, sharePayment) {
+var postJobCtrl = {};
+
+postJobCtrl.JobPaymentData = function ($scope, sharePayment) {
     $scope.set_data = function (data) {
         _.each(data, function (value, key) {
             $scope[key] = value;
@@ -17,9 +19,9 @@ MainApp.controller('JobPaymentData', function ($scope, sharePayment) {
 
         sharePayment.default_package = $scope.default_package;
     }
-});
+};
 
-MainApp.controller('JobPayment', function ($scope, sharePayment, share) {
+postJobCtrl.JobPayment = function ($scope, sharePayment, share) {
     $scope.subscriptions = sharePayment.subscriptions;
     $scope.packages = sharePayment.packages;
 
@@ -29,18 +31,18 @@ MainApp.controller('JobPayment', function ($scope, sharePayment, share) {
     $scope.default_package = sharePayment.default_package;
 
     $scope.job = share.job;
-});
+};
 
 // Main post job controller
 
-MainApp.controller('JobData', function ($scope, share) {
+postJobCtrl.JobData = function ($scope, share) {
     $scope.set_data = function (data) {
         $scope.job = data;
         share.job = $scope.job;
     };
-});
+};
 
-MainApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams, $location, share) {
+postJobCtrl.JobInfoCtrl = function ($scope, $http, $route, $routeParams, $location, share) {
     $scope.job = share.job;
 
     $scope.error = share.error;
@@ -103,6 +105,8 @@ MainApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams,
     $scope.upload_add_btn_hide = function (container) {
         if (container)
             return container.length > 5 ? true : false;
+        return false;
     };
+};
 
-});
+MainApp.controller(postJobCtrl);

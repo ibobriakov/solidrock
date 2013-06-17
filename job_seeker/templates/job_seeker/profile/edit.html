@@ -5,14 +5,10 @@
 
 {% block library-js %}
     {{ block.super }}
-    <script src="{% static 'main/js/src/angular/routing/job_seeker_profile_route.js' %}"
-            type="text/javascript"></script>
-    <script src="{% static 'main/js/src/angular/controllers/job_seeker_profile_edit_ctrl.js' %}"
-            type="text/javascript"></script>
-    <script src="{% static 'main/js/src/angular/directives/job_seeker_profile_edit_dir.js' %}"
-            type="text/javascript"></script>
-    <script src="{% static 'main/js/src/angular/factories/job_seeker_profile_edit_fact.js' %}"
-            type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/section_routing.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/controllers/job_seeker_profile_edit_ctrl.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/directives/job_seeker_profile_edit_dir.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/src/angular/factories/job_seeker_profile_edit_fact.js' %}" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}

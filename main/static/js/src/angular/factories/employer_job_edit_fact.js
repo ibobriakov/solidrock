@@ -2,16 +2,18 @@
  * User: jackdevil
  */
 
-MainApp.factory ('share',function() {
+var postJobFact = {};
+
+postJobFact.share = function() {
     var job = [],
         error = [];
     return {
         job: job ,
         error: error
     };
-});
+};
 
-MainApp.factory ('sharePayment', function(){
+postJobFact.sharePayment = function(){
     var subscriptions = [],
         packages = [],
         user_package = false,
@@ -31,4 +33,6 @@ MainApp.factory ('sharePayment', function(){
         service_cost:service_cost,
         advanced_total:advanced_total
     };
-});
+};
+
+MainApp.factory(postJobFact);

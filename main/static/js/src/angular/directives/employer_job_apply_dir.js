@@ -2,9 +2,9 @@
  * User: jackdevil
 **/
 
-var apply_job_directives = {};
+var applyJobDir = {};
 
-apply_job_directives.collapse = function() {
+applyJobDir.collapse = function() {
     var collapsed = function(element){
         element.fadeToggle();
     };
@@ -23,4 +23,4 @@ apply_job_directives.collapse = function() {
     }
 };
 
-MainApp.directive(apply_job_directives);
+MainApp.directive(applyJobDir);

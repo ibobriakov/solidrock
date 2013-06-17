@@ -33,34 +33,3 @@
         </form>
     </div>
 </div>
-
-{#{% for field in search_from.default_fields %}#}
-{#                    {% if field.name == "executive_positions" %}#}
-{#                        <div class="_field styled">#}
-{#                            <label>{{ field.label }}</label>#}
-{#                            {{ field }}#}
-{#                            <label for="id_executive_positions"><span></span>Yes</label>#}
-{#                        </div>#}
-{#                    {% else %}#}
-{#                        <div class="_field {% if field.name == "sub_categories" or  field.name == "area"%}_pod{% endif %}">#}
-{#                            <label>{{ field.label }}</label>#}
-{#                            {{ field }}#}
-                        {# bad html hack for inset sub_categories and area #}
-{##}
-{#                        {% if field.name != "categories" and field.name != "location" %}#}
-{#                            </div>#}
-{#                        {% endif %}#}
-{#                        {% if field.name == "sub_categories" or  field.name == "area" %}#}
-{#                            </div>#}
-{#                        {% endif %}#}
-{#                    {% endif %}#}
-{#                {% endfor %}#}
-{#            </fieldset>#}
-{#            {% if full_search_from %}#}
-{#            <fieldset>#}
-{#                {% for field in search_from.more_options_fields %}#}
-{#                    <div class="_field">#}
-{#                        <label>{{ field.label }}</label>#}
-{#                        {{ field }}#}
-{#                    </div>#}
-{#                {% endfor %}#}

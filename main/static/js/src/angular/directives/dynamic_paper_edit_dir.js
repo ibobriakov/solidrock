@@ -2,9 +2,9 @@
  * User: jackdevil
  */
 
-var dpd = {}; // Dynamic Paper directives Dict
+var dynamicPaperDir = {}; // Dynamic Paper directives Dict
 
-dpd.noteditable = function () {
+dynamicPaperDir.noteditable = function () {
     return {
         require: 'ngModel',
         link: function (scope, element, attrs, ctrl) {
@@ -16,7 +16,7 @@ dpd.noteditable = function () {
     }
 };
 
-dpd.contenteditable = function ($http) {
+dynamicPaperDir.contenteditable = function ($http) {
     return {
         require: 'ngModel',
         link: function (scope, element, attrs, ctrl) {
@@ -35,7 +35,7 @@ dpd.contenteditable = function ($http) {
     }
 };
 
-dpd.remove = function ($http) {
+dynamicPaperDir.remove = function ($http) {
     return {
         restrict: 'E',
         scope: {
@@ -55,7 +55,7 @@ dpd.remove = function ($http) {
     }
 };
 
-dpd.append = function ($http) {
+dynamicPaperDir.append = function ($http) {
     return {
         restrict: 'E',
         scope: {
@@ -80,7 +80,7 @@ dpd.append = function ($http) {
     }
 };
 
-dpd.tree = function () {
+dynamicPaperDir.tree = function () {
     return {
         restrict: 'E',
         scope: {
@@ -90,7 +90,7 @@ dpd.tree = function () {
     }
 };
 
-dpd.oneline = function () {
+dynamicPaperDir.oneline = function () {
     return {
         link: function (scope, element, attrs) {
             element.keypress(function (e) {
@@ -102,7 +102,7 @@ dpd.oneline = function () {
     }
 };
 
-dpd.paperName = function ($http) {
+dynamicPaperDir.paperName = function ($http) {
     return {
         transclude: true,
         restrict: 'E',
@@ -119,7 +119,7 @@ dpd.paperName = function ($http) {
     }
 };
 
-dpd.children = function ($compile) {
+dynamicPaperDir.children = function ($compile) {
     return {
         restrict: 'E',
         scope: {
@@ -157,4 +157,4 @@ dpd.children = function ($compile) {
     }
 };
 
-MainApp.directive(dpd);
+MainApp.directive(dynamicPaperDir);

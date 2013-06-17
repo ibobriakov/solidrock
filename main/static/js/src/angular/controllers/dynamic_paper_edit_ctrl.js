@@ -2,9 +2,9 @@
  * User: jackdevil
  */
 
-var dpc = {}; // Dynamic Paper Controllers Dict
+var dynamicPaperCtrl = {}; // Dynamic Paper Controllers Dict
 
-dpc.DynamicPaperCtrl = function ($scope) {
+dynamicPaperCtrl.DynamicPaperCtrl = function ($scope) {
     $scope.paper = {};
     $scope.set_data = function (data) {
         $scope.paper.data = data.data;
@@ -23,4 +23,4 @@ dpc.DynamicPaperCtrl = function ($scope) {
     });
 };
 
-MainApp.controller(dpc);
+MainApp.controller(dynamicPaperCtrl);

@@ -2,9 +2,9 @@
  * User: jackdevil
  **/
 
-var directives = {};
+var postJobDir = {};
 
-directives.changeSection = function () {
+postJobDir.changeSection = function () {
     return {
         link: function (scope, element, attrs) {
             element.on('click', function (event) {
@@ -22,7 +22,7 @@ directives.changeSection = function () {
     }
 };
 
-directives.supportdocument = function () {
+postJobDir.supportdocument = function () {
     return {
         restrict: "E",
         template: "" +
@@ -34,7 +34,7 @@ directives.supportdocument = function () {
 };
 
 
-directives.fullpositiondocument = function () {
+postJobDir.fullpositiondocument = function () {
     return {
         restrict: "E",
         template: "" +
@@ -45,7 +45,7 @@ directives.fullpositiondocument = function () {
     }
 };
 
-directives.upload = function () {
+postJobDir.upload = function () {
     return {
         restrict: "E",
         link: function ($scope, element, attrs) {
@@ -80,7 +80,7 @@ directives.upload = function () {
     }
 };
 
-directives.payment = function () {
+postJobDir.payment = function () {
     return {
         restrict: "E",
         controller: function ($scope, sharePayment, share, $http) {
@@ -138,7 +138,7 @@ directives.payment = function () {
     }
 };
 
-directives.advpayment = function () {
+postJobDir.advpayment = function () {
     return {
         restrict: "E",
         controller: function ($scope, share, sharePayment) {
@@ -175,7 +175,7 @@ directives.advpayment = function () {
     }
 };
 
-directives.total = function () {
+postJobDir.total = function () {
     return {
         restrict: "E",
         controller: function ($scope, sharePayment) {
@@ -192,7 +192,7 @@ directives.total = function () {
     }
 };
 
-directives.field = function () {
+postJobDir.field = function () {
     return {
         compile: function compile(temaplateElement, templateAttrs) {
             return {
@@ -220,4 +220,4 @@ directives.field = function () {
     }
 };
 
-MainApp.directive(directives);
+MainApp.directive(postJobDir);

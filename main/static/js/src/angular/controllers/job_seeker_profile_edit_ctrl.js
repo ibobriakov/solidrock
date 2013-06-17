@@ -2,9 +2,9 @@
  * User: jackdevil
  */
 
-var AplInfoCtrl = {};
+var aplInfoCtrl = {};
 
-AplInfoCtrl.AplInfoData = function ($scope, aplInfoShare) {
+aplInfoCtrl.AplInfoData = function ($scope, aplInfoShare) {
     $scope.set_data = function (data) {
         aplInfoShare.personal_information = data.personal_information;
         aplInfoShare.current_employment = data.current_employment;
@@ -14,7 +14,7 @@ AplInfoCtrl.AplInfoData = function ($scope, aplInfoShare) {
     };
 };
 
-AplInfoCtrl.AplInfoCtrl = function ($scope, $rootScope, $http, $location, aplInfoShare) {
+aplInfoCtrl.AplInfoCtrl = function ($scope, $rootScope, $http, $location, aplInfoShare) {
     $scope.data = {};
     $scope.data.personal_information = aplInfoShare.personal_information;
     $scope.data.current_employment = aplInfoShare.current_employment;
@@ -119,4 +119,4 @@ AplInfoCtrl.AplInfoCtrl = function ($scope, $rootScope, $http, $location, aplInf
     }
 };
 
-MainApp.controller(AplInfoCtrl);
+MainApp.controller(aplInfoCtrl);
