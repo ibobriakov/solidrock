@@ -2,7 +2,7 @@
  * User: jackdevil
  */
 
-ApplyJobApp.controller('ApplyJobCtrl',function($scope, $http) {
+MainApp.controller('ApplyJobCtrl',function($scope, $http) {
     $scope.applyToJob = {};
     $scope.confirm = function() {
         $http.post('/api/v1/applytojob/', {

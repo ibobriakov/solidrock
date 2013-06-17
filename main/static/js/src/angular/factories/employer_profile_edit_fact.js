@@ -2,7 +2,7 @@
  * User: jackdevil
  */
 
-EmployerEditProfileApp.factory('employerEditProfileShare', function () {
+MainApp.factory('employerEditProfileShare', function () {
     var personal_information = [];
 
     return {

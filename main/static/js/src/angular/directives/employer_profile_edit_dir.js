@@ -31,4 +31,4 @@ employerProfileDir.upload = function () {
     }
 };
 
-EmployerEditProfileApp.directive(employerProfileDir);
+MainApp.directive(employerProfileDir);

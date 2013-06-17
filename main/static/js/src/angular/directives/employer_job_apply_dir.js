@@ -21,6 +21,6 @@ apply_job_directives.collapse = function() {
             });
         }
     }
-}
+};
 
-ApplyJobApp.directive(apply_job_directives);
+MainApp.directive(apply_job_directives);

@@ -51,7 +51,9 @@ MainApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams,
 
         var success_callback = function (data, status, headers, config) {
             $('.preloader').hide();
+            $('.section'+section).addClass('checked');
             $location.path('/section/' + parseInt(next) + '/');
+            $scope.current = parseInt(next);
         };
 
         var success_exit_callback = function (data, status, headers, config) {
@@ -67,12 +69,19 @@ MainApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams,
 
         $('.preloader').show();
         $('.error').fadeOut();
+        _.each($scope.job, function(v,k) {
+            if (v === "") {
+                console.log(k, v);
+                $scope.job[k] = null;
+            }
+        });
         $http.put($scope.job.resource_uri, $scope.job)
             .success(exit ? success_exit_callback : success_callback)
             .error(error_callback);
     };
 
     $scope.append = function (container) {
+        if (!container) container=[];
         container.push({"job": $scope.job.resource_uri});
     };
 
@@ -92,7 +101,8 @@ MainApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams,
     };
 
     $scope.upload_add_btn_hide = function (container) {
-        return container.length > 5 ? true : false;
+        if (container)
+            return container.length > 5 ? true : false;
     };
 
 });

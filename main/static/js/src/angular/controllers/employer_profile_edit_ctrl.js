@@ -3,13 +3,13 @@
  */
 
 
-EmployerEditProfileApp.controller('EmployerEditProfileData', function ($scope, employerEditProfileShare) {
+MainApp.controller('EmployerEditProfileData', function ($scope, employerEditProfileShare) {
     $scope.set_data = function (data) {
         employerEditProfileShare.personal_information = data.personal_information;
     };
 });
 
-EmployerEditProfileApp.controller('EmployerEditProfileCtrl', function ($scope, $http, $route, $routeParams, $location, employerEditProfileShare) {
+MainApp.controller('EmployerEditProfileCtrl', function ($scope, $http, $route, $routeParams, $location, employerEditProfileShare) {
     $scope.data = {};
     $scope.data.personal_information = employerEditProfileShare.personal_information;
 
