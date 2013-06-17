@@ -29,6 +29,7 @@ MainApp.controller('EmployerEditProfileCtrl', function ($scope, $http, $route, $
             $('.preloader').show();
             var error_callback = function (data, status, headers, config) {
                 $('.preloader').hide();
+                $('.error').fadeIn();
                 _.each(data, function (value, key) {
                     item.error = value;
                 });
@@ -41,6 +42,7 @@ MainApp.controller('EmployerEditProfileCtrl', function ($scope, $http, $route, $
                     window.location.href = "/employer/";
                 }
             };
+            $('.error').fadeOut();
             $http.put(item.resource_uri, item)
                 .error(error_callback).success(success_callback);
         });

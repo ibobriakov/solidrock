@@ -6,8 +6,6 @@
 
 {% block library-js %}
     {{ block.super }}
-    <script src="{% static 'main/js/src/angular/applications/employer_profile_edit_app.js' %}"
-            type="text/javascript"></script>
     <script src="{% static 'main/js/src/angular/controllers/employer_profile_edit_ctrl.js' %}"
             type="text/javascript"></script>
     <script src="{% static 'main/js/src/angular/directives/employer_profile_edit_dir.js' %}"
@@ -17,12 +15,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="_content stages" ng-app="EmployerEditProfileApp">
+    <div class="_content stages">
 
         <div ng-controller="EmployerEditProfileData"
              ng-init='set_data({personal_information:{{ user.profile|as_json|safe }}})'></div>
 
-        <script type="text/ng-template" id="employer-profile-edit">
+        <div ng-controller="EmployerEditProfileCtrl">
             <h1>Your Business Information</h1>
 
             <div ng-repeat="item in data.personal_information">
@@ -87,7 +85,6 @@
                     </div>
                 </div>
             </div>
-        </script>
-        <ng-view></ng-view>
+        </div>
     </div>
 {% endblock %}
