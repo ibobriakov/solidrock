@@ -83,14 +83,19 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
     jobuploaddocument_set = fields.ToManyField('employer.api.JobUploadDocumentResource',
                                                'jobuploaddocument_set', readonly=True, full=True)
 
-
-
     def get_object_list(self, request):
         query_set = super(JobResource, self).get_object_list(request)
         return query_set.filter(owner=request.user)
 
     def hydrate(self, bundle):
         bundle.obj.owner = bundle.request.user
+        # filter(lambda u: u is '', bundle.data.iteritems())
+        to_del = []
+        for key, value in bundle.data.iteritems():
+            if value == '':
+                to_del.append(key)
+        for key in to_del:
+            del(bundle.data[key])
         return bundle
 
     class Meta:
