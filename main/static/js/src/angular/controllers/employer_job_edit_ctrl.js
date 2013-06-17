@@ -4,28 +4,28 @@
 
 // Job payment controller
 
-PostJobApp.controller ('JobPaymentData', function($scope, sharePayment) {
-    $scope.set_data = function(data){
-        _.each(data,function(value, key){
+MainApp.controller('JobPaymentData', function ($scope, sharePayment) {
+    $scope.set_data = function (data) {
+        _.each(data, function (value, key) {
             $scope[key] = value;
         });
         sharePayment.subscriptions = $scope.subscriptions;
         sharePayment.packages = $scope.packages;
-        
+
         sharePayment.user_subscription = $scope.user_subscription ? $scope.user_subscription : false;
         sharePayment.user_package = $scope.user_package ? $scope.user_package : false;
-        
+
         sharePayment.default_package = $scope.default_package;
     }
 });
 
-PostJobApp.controller('JobPayment',function($scope, sharePayment, share) {
+MainApp.controller('JobPayment', function ($scope, sharePayment, share) {
     $scope.subscriptions = sharePayment.subscriptions;
     $scope.packages = sharePayment.packages;
-    
+
     $scope.user_subscription = sharePayment.user_subscription;
     $scope.user_package = sharePayment.user_package;
-    
+
     $scope.default_package = sharePayment.default_package;
 
     $scope.job = share.job;
@@ -33,31 +33,40 @@ PostJobApp.controller('JobPayment',function($scope, sharePayment, share) {
 
 // Main post job controller
 
-PostJobApp.controller ('JobData', function($scope, share) {
-    $scope.set_data = function(data){
+MainApp.controller('JobData', function ($scope, share) {
+    $scope.set_data = function (data) {
         $scope.job = data;
         share.job = $scope.job;
     };
 });
 
-PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams, $location, share) {
+MainApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routeParams, $location, share) {
     $scope.job = share.job;
 
-    $scope.select2Options = {
-        allowClear:true,
-        width: 'off'
-    };
-
     $scope.error = share.error;
-    $scope.section = parseInt($routeParams.section);
 
-    $scope.checkActive = function(section) {
-        return parseInt(section) == parseInt($scope.section) ? true : false
-    };
-
-    $scope.save_exit = function (exit) {
+    $scope.save_exit = function (section, exit, next) {
         exit = typeof (exit) == 'boolean' ? exit : true;
+        next = parseInt(next) || parseInt(section)+1;
+
+        var success_callback = function (data, status, headers, config) {
+            $('.preloader').hide();
+            $location.path('/section/' + parseInt(next) + '/');
+        };
+
+        var success_exit_callback = function (data, status, headers, config) {
+            $('.preloader').hide();
+            document.location.href = "/employer/";
+        };
+
+        var error_callback = function (data, status, headers, config) {
+            $('.preloader').hide();
+            $('.error').fadeIn();
+            $scope.error = data.job;
+        };
+
         $('.preloader').show();
+        $('.error').fadeOut();
         $http.put($scope.job.resource_uri, $scope.job)
             .success(exit ? success_exit_callback : success_callback)
             .error(error_callback);
@@ -72,8 +81,8 @@ PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routePara
         container.splice(index, 1);
     };
 
-    $scope.document_remove = function(document){
-        _.each($scope.job.jobuploaddocument_set, function(item,index){
+    $scope.document_remove = function (document) {
+        _.each($scope.job.jobuploaddocument_set, function (item, index) {
             if (item.resource_uri == document.resource_uri) {
                 if ($scope.job.jobuploaddocument_set[index].resource_uri)
                     $http.delete($scope.job.jobuploaddocument_set[index].resource_uri);
@@ -82,27 +91,8 @@ PostJobApp.controller('JobInfoCtrl', function ($scope, $http, $route, $routePara
         });
     };
 
-    $scope.upload_add_btn_hide = function(container){
+    $scope.upload_add_btn_hide = function (container) {
         return container.length > 5 ? true : false;
     };
-
-    var success_callback = function (data, status, headers, config) {
-        $('.preloader').hide();
-        $location.path('/section/'+parseInt($scope.section+1)+'/');
-    };
-
-    var success_exit_callback = function (data, status, headers, config) {
-        $('.preloader').hide();
-        document.location.href="/employer/";
-    };
-
-    var error_callback = function (data, status, headers, config) {
-        $('.preloader').hide();
-        $scope.error = data.job;
-    };
-
-    angular.element(this).ready(function() {
-        //$('select').select2();
-    });
 
 });

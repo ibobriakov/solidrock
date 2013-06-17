@@ -26,8 +26,6 @@
             referees:{{ profile.referees_set.all|as_json }}
         })'></div>
 
-    {#    <script type="text/ng-template" id="application-information"></script>#}
-
     <div ui-view="page"></div>
 
     <div ng-controller="AplInfoCtrl">
@@ -36,19 +34,19 @@
     <div class="left">
         <ul class="sections">
             <li class="section1 {% if user|section1_complete %}checked {% endif %}">
-                <a change-section section="1" href="#/section/1/">Section 1: Personal Information</a>
+                <a change-section section="1">Section 1: Personal Information</a>
             </li>
             <li class="section2 {% if user|section2_complete %}checked {% endif %}">
-                <a change-section section="2"  href="#/section/2/">Section 2: Current Employment</a>
+                <a change-section section="2"  >Section 2: Current Employment</a>
             </li>
             <li class="section3 {% if user|section3_complete %}checked {% endif %}">
-                <a change-section section="3"  href="#/section/3/">Section 3: Previous Employment</a>
+                <a change-section section="3">Section 3: Previous Employment</a>
             </li>
             <li class="section4 {% if user|section4_complete %}checked {% endif %}">
-                <a change-section section="4"  href="#/section/4/">Section 4: Education</a>
+                <a change-section section="4">Section 4: Education</a>
             </li>
             <li class="section5 {% if user|section5_complete %}checked {% endif %}">
-                <a change-section section="5"  href="#/section/5/">Section 5: References</a>
+                <a change-section section="5">Section 5: References</a>
             </li>
         </ul>
     </div>

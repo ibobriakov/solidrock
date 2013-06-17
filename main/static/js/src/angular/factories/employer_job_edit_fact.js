@@ -2,7 +2,7 @@
  * User: jackdevil
  */
 
-PostJobApp.factory ('share',function() {
+MainApp.factory ('share',function() {
     var job = [],
         error = [];
     return {
@@ -11,7 +11,7 @@ PostJobApp.factory ('share',function() {
     };
 });
 
-PostJobApp.factory ('sharePayment', function(){
+MainApp.factory ('sharePayment', function(){
     var subscriptions = [],
         packages = [],
         user_package = false,
