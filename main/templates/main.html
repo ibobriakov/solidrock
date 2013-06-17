@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+
 {% block title %}
     <title>Home :: Solid Rock Recruitment</title>
 {% endblock %}
+
 {% block content %}
     <div class="search_block">
         <div class="_search_box _select_map">
@@ -72,9 +74,8 @@
     </div>
 {% endblock %}
 
-{% block initialize-js %}
-    {{ block.super }}
-    <script src="{% static 'main/js/src/extra/jcarousellite_1.0.1.min.js' %}"></script>
+{% block initial-js %}
     <script src="{% static 'main/js/src/extra/map.js' %}"></script>
-    <script src="{% static 'main/js/src/extra/js.js' %}"></script>
+    <script src="{% static 'main/js/src/extra/jcarousellite_1.0.1.min.js' %}"></script>
+    <script src="{% static 'main/js/src/extra/carousel.js' %}"></script>
 {% endblock %}
