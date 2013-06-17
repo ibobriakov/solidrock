@@ -89,13 +89,6 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
 
     def hydrate(self, bundle):
         bundle.obj.owner = bundle.request.user
-        # filter(lambda u: u is '', bundle.data.iteritems())
-        to_del = []
-        for key, value in bundle.data.iteritems():
-            if value == '':
-                to_del.append(key)
-        for key in to_del:
-            del(bundle.data[key])
         return bundle
 
     class Meta:
