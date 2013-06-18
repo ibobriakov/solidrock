@@ -257,8 +257,8 @@
                                 <label>School, College, or University Name</label>
                                 <fullpositiondocument></fullpositiondocument>
                                 <br/>
-
-                                <div ng-hide="job.jobuploaddocument_set | filter: {document_type_name:'Full Position Description'}">
+{#                                ng-hide="job.jobuploaddocument_set | filter: {document_type_name:'Full Position Description'}"#}
+                                <div>
                                     <upload url="{% url "upload" "job_full_position_document" object.pk %}">Upload the
                                         Full Position Description
                                     </upload>
