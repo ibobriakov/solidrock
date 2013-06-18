@@ -2609,6 +2609,7 @@ a.remove_cross {
     border: medium none;
     color: #000000;
     font-size: 14px;
+    float: none;
 }
 
 .builder .top .links {
