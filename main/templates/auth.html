@@ -12,7 +12,7 @@
                 <form id="login_form" {% if next %}data-next-url="{{ next }}"{% endif %}>
                     <div class="field">
                         <label>Email Address</label>
-                        <input tabindex="1" type="text" ng-model="login.username">
+                        <input name="username" id="id_username" tabindex="1" type="text" ng-model="login.username">
 
                         <div class="error">
                             <span ng-repeat="err in error.username">{[{err}]}<br></span>
@@ -20,13 +20,13 @@
                     </div>
                     <div class="field">
                         <label>Password<a href="{% url "auth_password_reset" %}">Forgot Your Password?</a></label>
-                        <input tabindex="2" type="password" ng-model="login.password">
+                        <input name="password" id="id_password" tabindex="2" type="password" ng-model="login.password">
 
                         <div class="error">
                             <span ng-repeat="err in error.password">{[{err}]}</span>
                         </div>
                     </div>
-                    <input type="submit" tabindex="31" value="Submit" ng-click="submit()">
+                    <input type="submit" tabindex="3" value="Submit" ng-click="submit()">
                 </form>
             </fieldset>
         </div>
@@ -42,7 +42,7 @@
                 <form id="register_job_seeker_form" ng-controller="RegisterJobSeekerCtrl">
                     <div class="field">
                         <label>First Name</label>
-                        <input type="text" ng-model="reg.first_name">
+                        <input autocomplete="off" type="text" ng-model="reg.first_name">
 
                         <div class="error">
                             <span ng-repeat="err in error.first_name">{[{err}]}<br></span>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="field">
                         <label>Last Name</label>
-                        <input type="text" ng-model="reg.last_name">
+                        <input autocomplete="off" type="text" ng-model="reg.last_name">
 
                         <div class="error">
                             <span ng-repeat="err in error.last_name">{[{err}]}<br></span>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="field">
                         <label>Email Address</label>
-                        <input type="text" ng-model="reg.email_address">
+                        <input autocomplete="off" type="text" ng-model="reg.email_address">
 
                         <div class="error">
                             <span ng-repeat="err in error.email_address">{[{err}]}<br></span>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="field password">
                         <label>Password</label>
-                        <input type="password" ng-model="reg.password">
+                        <input autocomplete="off" type="password" ng-model="reg.password">
 
                         <div class="error">
                             <span ng-repeat="err in error.password">{[{err}]}<br></span>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="field password">
                         <label>Re-type Password</label>
-                        <input type="password" ng-model="reg.re_password">
+                        <input autocomplete="off" type="password" ng-model="reg.re_password">
 
                         <div class="error">
                             <span ng-repeat="err in error.re_password">{[{err}]}<br></span>
@@ -88,7 +88,7 @@
                       data-next-url="{% url "employer.profile.edit" %}">
                     <div class="field">
                         <label>Company Name</label>
-                        <input type="text" ng-model="reg.company_name">
+                        <input autocomplete="off" type="text" ng-model="reg.company_name">
 
                         <div class="error">
                             <span ng-repeat="err in error.company_name">{[{err}]}<br></span>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="field">
                         <label>Email Address</label>
-                        <input type="text" ng-model="reg.email_address">
+                        <input autocomplete="off" type="text" ng-model="reg.email_address">
 
                         <div class="error">
                             <span ng-repeat="err in error.email_address">{[{err}]}<br></span>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="field">
                         <label>Phone Number</label>
-                        <input type="text" ng-model="reg.phone_number">
+                        <input autocomplete="off" type="text" ng-model="reg.phone_number">
 
                         <div class="error">
                             <span ng-repeat="err in error.password">{[{err}]}<br></span>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="field password">
                         <label>Password</label>
-                        <input type="password" ng-model="reg.password">
+                        <input autocomplete="off" type="password" ng-model="reg.password">
 
                         <div class="error">
                             <span ng-repeat="err in error.password">{[{err}]}<br></span>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="field password">
                         <label>Re-type Password</label>
-                        <input type="password" ng-model="reg.re_password">
+                        <input autocomplete="off" type="password" ng-model="reg.re_password">
 
                         <div class="error">
                             <span ng-repeat="err in error.re_password">{[{err}]}<br></span>

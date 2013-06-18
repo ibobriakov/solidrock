@@ -21,6 +21,8 @@ mainController.LoginCtrl = function ($scope, $http) {
     $scope.submit = function () {
         $('.preloader').show();
         $('.error').fadeOut();
+        $scope.login.username = $('#id_username').val();
+        $scope.login.password = $('#id_password').val();
         $http.post('/api/v1/login/', $scope.login)
             .error(error_callback)
             .success(success_callback)
