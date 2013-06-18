@@ -23,7 +23,8 @@ class EmployerRegistrationResource(RegistrationResource):
     def create_profile(self, new_user, bundle):
         return Employer.objects.create(user=new_user,
                                        company=bundle.obj['company_name'],
-                                       phone=bundle.obj['phone_number'])
+                                       phone=bundle.obj['phone_number'],
+                                       email=bundle.obj['email_address'])
 
     class Meta:
         resource_name = 'employer_registration'

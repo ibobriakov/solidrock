@@ -48,7 +48,7 @@ def create_job_view(request):
     new_job = Job.objects.create(owner=request.user,
                                  open_date=datetime.datetime.now().date(),
                                  contact_name=request.user.profile.name,
-                                 contact_phone=request.user.profile.business_phone,
+                                 contact_phone=request.user.profile.phone,
                                  contact_email=request.user.profile.email)
     return redirect('employer.job.edit', new_job.pk)
 
