@@ -134,16 +134,16 @@
 
         <div class="left">
             <ul class="sections">
-                <li class="section1 {% if user|section1_complete %}checked {% endif %}">
+                <li class="section1 {% if job|section1_complete %}checked {% endif %}">
                     <a change-section section="1">Section 1: Job Information</a>
                 </li>
-                <li class="section2">
+                <li class="section2 {% if job|section2_complete %}checked {% endif %}">
                     <a change-section section="2">Section 2: Upload Documents</a>
                 </li>
-                <li class="section3 {% if user|section3_complete %}checked {% endif %}">
+                <li class="section3 {% if job|section3_complete %}checked {% endif %}">
                     <a change-section section="3">Section 3: Select a Category</a>
                 </li>
-                <li class="section4">
+                <li class="section4 {% if job|section4_complete %}checked {% endif %}">
                     <a change-section section="4">Section 4: Payment Information</a>
                 </li>
             </ul>

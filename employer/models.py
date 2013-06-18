@@ -196,7 +196,7 @@ class JobUploadDocument(models.Model):
         max_count = self.document_type.max_count
         if max_count > 0:
             if JobUploadDocument.objects.filter(job=self.job, document_type=self.document_type).count() >= max_count:
-                raise  ValidationError("Too many Files for category {0}".format(self.document_type.__unicode__()))
+                raise ValidationError("Too many Files for category {0}".format(self.document_type.__unicode__()))
 
 
 def after_update(sender, **kwargs):
