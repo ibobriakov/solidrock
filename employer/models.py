@@ -104,7 +104,6 @@ class Job(models.Model):
                                             blank=True, null=True)
     approved = models.BooleanField(default=False)
 
-
     objects = JobManager()
 
     def __unicode__(self):
@@ -123,8 +122,6 @@ class Job(models.Model):
         if subcategories_cost > 0:
             cost += subcategories_cost
         return cost
-
-
 
     def get_salary(self):
         if self.salary_range_min > 0 and self.salary_range_max:
@@ -196,7 +193,7 @@ class JobUploadDocument(models.Model):
         max_count = self.document_type.max_count
         if max_count > 0:
             if JobUploadDocument.objects.filter(job=self.job, document_type=self.document_type).count() >= max_count:
-                raise  ValidationError("Too many Files for category {0}".format(self.document_type.__unicode__()))
+                raise ValidationError("Too many Files for category {0}".format(self.document_type.__unicode__()))
 
 
 def after_update(sender, **kwargs):

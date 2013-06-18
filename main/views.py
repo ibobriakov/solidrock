@@ -58,7 +58,7 @@ def upload(request, purpose, pk=None):
         job = get_object_or_404(Job, pk=pk, owner=request.user)
         document_type = get_document_type(purpose)
         if purpose == 'job_full_position_document':
-            if JobUploadDocument.objects.filter(document_type=document_type).count():
+            if JobUploadDocument.objects.filter(job=job, document_type=document_type).count():
                 return HttpResponseBadRequest(json.dumps({'errors': {'job_full_position_document': 'Already exists.'}}))
         upload_document = JobUploadDocument()
         upload_document.job = job

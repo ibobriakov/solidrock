@@ -21,10 +21,14 @@ def section1_complete(job):
 
 @register.filter()
 def section2_complete(job):
-    return any(map(lambda u: any_not_None(get_model_values(u)),
-                   job.jobuploaddocument_set.all()))
+    return job.jobuploaddocument_set.count()
 
 
 @register.filter()
 def section3_complete(job):
-    return False
+    return job.categories.count() and job.sub_categories.count()
+
+
+@register.filter()
+def section4_complete(job):
+    return job.approved
