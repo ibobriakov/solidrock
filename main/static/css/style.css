@@ -2621,7 +2621,6 @@ a.remove_cross {
 
 .width_clear {
     overflow: hidden;
-    width: 100%;
 }
 
 .stages .right .form .s1 input[type="text"] {
