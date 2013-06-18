@@ -104,7 +104,6 @@ class Job(models.Model):
                                             blank=True, null=True)
     approved = models.BooleanField(default=False)
 
-
     objects = JobManager()
 
     def __unicode__(self):
@@ -123,8 +122,6 @@ class Job(models.Model):
         if subcategories_cost > 0:
             cost += subcategories_cost
         return cost
-
-
 
     def get_salary(self):
         if self.salary_range_min > 0 and self.salary_range_max:
