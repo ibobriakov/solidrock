@@ -2354,14 +2354,16 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 
 .positioning {
-    bottom: 55px;
+    bottom: -8px;
     left: 50%;
     margin-left: -120px;
     position: absolute;
 }
 
 .spacing {
+    overflow: hidden;
     padding: 15px;
+    width: 100%;
 }
 
 *[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
@@ -2671,4 +2673,8 @@ a.remove_cross {
 
 .stages .right .form .field.no_bottom_margin {
     margin-bottom: 0;
+}
+
+.stages .right .form .field input[type="text"] {
+    width: 254px;
 }
