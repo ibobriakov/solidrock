@@ -124,6 +124,12 @@ class JobSelectedCategoryResource(ModelResource):
     job = fields.ToOneField('employer.api.JobResource', 'job')
     category = fields.ToOneField(JobCategoryResource, 'category')
 
+    def lookup_kwargs_with_identifiers(self, bundle, kwargs):
+        lookup_kwargs = super(JobSelectedCategoryResource, self).lookup_kwargs_with_identifiers(bundle,kwargs)
+        if lookup_kwargs == {}:
+            return {'pk': -1}
+        return lookup_kwargs
+
     class Meta:
         queryset = JobSelectedCategory.objects.all()
         authentication = SessionAuthentication()
@@ -133,6 +139,12 @@ class JobSelectedCategoryResource(ModelResource):
 class JobSelectedSubCategoryResource(ModelResource):
     job = fields.ToOneField('employer.api.JobResource', 'job')
     subcategory = fields.ToOneField(JobSubCategoryResource, 'sub_category')
+
+    def lookup_kwargs_with_identifiers(self, bundle, kwargs):
+        lookup_kwargs = super(JobSelectedSubCategoryResource, self).lookup_kwargs_with_identifiers(bundle,kwargs)
+        if lookup_kwargs == {}:
+            return {'pk': -1}
+        return lookup_kwargs
 
     class Meta:
         queryset = JobSelectedSubCategory.objects.all()
