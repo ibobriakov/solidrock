@@ -901,10 +901,6 @@ footer ._footer ._footer_nav ul li a {
     width:215px;
 }
 
-.stages .right .form input[type=text].it-pod2 {
-    width:590px;
-}
-
 .stages .right .form textarea {
     width:646px;
     height:130px;
@@ -1073,7 +1069,7 @@ footer ._footer ._footer_nav ul li a {
 }
 
 .stages .right .form input[type=text].it-pod2 {
-    width:590px;
+    width:560px;
 }
 
 .builder .top {
@@ -2621,7 +2617,6 @@ a.remove_cross {
 
 .width_clear {
     overflow: hidden;
-    width: 100%;
 }
 
 .stages .right .form .s1 input[type="text"] {
@@ -2677,4 +2672,12 @@ a.remove_cross {
 
 .stages .right .form .field input[type="text"] {
     width: 254px;
+}
+
+.stages .right .form .field a.link {
+    display: inline-block;
+}
+
+.field div.category {
+    margin-bottom: 5px;
 }
