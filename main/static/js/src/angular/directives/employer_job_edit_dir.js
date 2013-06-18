@@ -28,7 +28,7 @@ postJobDir.supportdocument = function () {
         template: "" +
             "<div class='document' ng-repeat='document in job.jobuploaddocument_set | filter:{document_type.id:2}'>" +
             "<a class='link' href='{[{ document.document }]}'>{[{ document.file_name }]}</a>" +
-            "<a class='remove' href='' ng-click='document_remove(document)'><img src='/static/main/img/icon_remove.png'></a>" +
+            "<a class='remove_cross' href='' ng-click='document_remove(document)'></a>" +
             "</div>"
     }
 };
@@ -40,7 +40,7 @@ postJobDir.fullpositiondocument = function () {
         template: "" +
             "<div class='document' ng-repeat='document in job.jobuploaddocument_set | filter:{document_type.id:1}'>" +
             "<a class='link' href='{[{ document.document }]}'>{[{ document.file_name }]}</a>" +
-            "<a class='remove' href='' ng-click='document_remove(document)'><img src='/static/main/img/icon_remove.png'></a></a>" +
+            "<a class='remove_cross' href='' ng-click='document_remove(document)'></a></a>" +
             "</div>"
     }
 };
