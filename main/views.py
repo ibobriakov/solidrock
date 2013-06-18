@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 from constance import config
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseBadRequest
 from django.shortcuts import redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView
@@ -16,9 +16,9 @@ class MainView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(MainView, self).get_context_data(**kwargs)
-        context['next'] = self.request.GET['next'] if 'next' in self.request.GET else None
+        context['next'] = self.request.GET['next'] if 'next' in self.request.GET else Nones
         context['search_form'] = SearchForm()
-        context['featured_jobs'] = Job.objects.filter(featured_job=True)
+        context['featured_jobs'] = Job.objects.filter(featured_job=True, approved=True)
         return context
 
 
@@ -56,9 +56,13 @@ def upload(request, purpose, pk=None):
         url = get_thumbnail(employer_profile.logo, '203x203', crop="center").url
     elif purpose in ('job_support_document', 'job_full_position_document'):
         job = get_object_or_404(Job, pk=pk, owner=request.user)
+        document_type = get_document_type(purpose)
+        if purpose == 'job_full_position_document':
+            if JobUploadDocument.objects.filter(document_type=document_type).count():
+                return HttpResponseBadRequest(json.dumps({'errors': {'job_full_position_document': 'Already exists.'}}))
         upload_document = JobUploadDocument()
         upload_document.job = job
-        upload_document.document_type = get_document_type(purpose)
+        upload_document.document_type = document_type
         upload_document.document = request.FILES['files[]']
         upload_document.save()
         return redirect('api_dispatch_detail', 'v1', 'job_upload_document', upload_document.pk)

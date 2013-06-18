@@ -22,6 +22,16 @@ class ApplyToJobResource(ModelResource):
                 del(bundle.data[item])
         return bundle
 
+    def obj_create(self, bundle, **kwargs):
+        result = super(ApplyToJobResource, self).obj_create(bundle, **kwargs)
+        session = result.request.session
+        job_application = result.obj
+        if 'autocreate_cover_letter' in session and int(session['autocreate_cover_letter']['job']) == job_application.job_id:
+            del(session['autocreate_cover_letter'])
+        if 'autocreate_resume' in session and int(session['autocreate_resume']['job']) == job_application.job_id:
+            del(session['autocreate_resume'])
+        return result
+
     class Meta:
         queryset = ApplyToJob.objects.all()
         authentication = SessionAuthentication()
