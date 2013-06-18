@@ -25,7 +25,7 @@ class RegisterValidation(Validation):
         try:
             validate_email(bundle.data['email_address'])
         except ValidationError as err:
-            errors['email_address'].append(err.messages)
+            errors['email_address'] = err.messages
 
         if User.objects.filter(email=bundle.data['email_address']).count():
             errors['email_address'].append("User with this email is already exists")
