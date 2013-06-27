@@ -5,7 +5,9 @@
 var contactUsCtrl = {}; // Dynamic Paper Controllers Dict
 
 contactUsCtrl.ContactUsCtrl = function ($scope, $http) {
-    $scope.item = {};
+    $scope.item = {
+        priority: 0
+    };
 
     var success_callback = function (data, status, headers, config) {
         $('.preloader').hide();

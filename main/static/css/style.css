@@ -2654,8 +2654,7 @@ a.remove_cross {
 }
 
 .stages.contact .right {
-    margin-right: 215px;
-    width: 495px;
+    width: 100%;
 }
 
 ._search_job ._center form fieldset ._field.no_bottom_margin {

@@ -1,0 +1,7 @@
+<div class="{{ class|default:"field" }}">
+    <label>{{ label }}</label>
+    <input class="{{ input_class }}" type="text" ng-model="item.{{ name }}"/>
+    <div class="error">
+        <span ng-repeat="err in item.error.{{ name }}">{[{err}]}</span>
+    </div>
+</div>
