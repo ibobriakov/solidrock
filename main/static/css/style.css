@@ -2211,12 +2211,15 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 /*PRICING*/
 .pricings {
     background: #9d4b23;
-    padding: 5px 5px  5px 5px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 5px 5px 0;
+    width: 650px;
 }
 .pricing {
     border: 10px solid white;
-    margin-bottom: 10px;
-    padding: 30px;
+    margin-bottom: 5px;
+    padding: 15px 20px;
     background: #e17129; /* Old browsers */
     background: -moz-linear-gradient(top,  #e17129 0%, #9d4b23 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e17129), color-stop(100%,#9d4b23)); /* Chrome,Safari4+ */
@@ -2225,21 +2228,20 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     background: -ms-linear-gradient(top,  #e17129 0%,#9d4b23 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #e17129 0%,#9d4b23 100%); /* W3C */
 }
+
 .gradient {
     filter: none;
 }
-.pricing:last-child {
-    margin-bottom: 0;
-}
+
 .pricing > p:first-child {
     color:white;
     text-transform: uppercase;
-    font-size: 40px;
+    font-size: 33px;
     font-weight: bold;
     line-height: 40px;
 }
 .pricing > span {
-    font-size: 30px;
+    font-size: 23px;
     color:white;
     margin-top: 10px;
     display: block;
@@ -2252,7 +2254,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 .pricing .pricing-block > p:first-child {
     color:white;
     text-transform: uppercase;
-    font-size: 40px;
+    font-size: 33px;
     font-weight: bold;
     line-height: 40px;
     margin-bottom: 10px;
@@ -2260,19 +2262,19 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 .pricing .pricing-block > p:last-child {
     color:white;
     text-transform: uppercase;
-    font-size: 30px;
+    font-size: 23px;
     line-height: 40px;
     margin-bottom: 10px;
 }
 .pricing .pricing-block > span {
     color:#f5bd68;
-    font-size: 40px;
+    font-size: 33px;
 }
 .pricing.subscriptions .pricing-block:first-of-type{
-    margin:0 250px 0 70px;
+    margin: 0 90px 0 65px;
 }
 .pricing.bulk .pricing-block{
-    margin:0 0px 0 80px;
+    margin: 0 0 0 50px;
 }
 /*Preloader*/
 .preloader {
