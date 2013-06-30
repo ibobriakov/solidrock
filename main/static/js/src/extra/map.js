@@ -35,10 +35,9 @@ window.onload = function () {
     for (var state in aus) {
         (function (st, state) {
             st[0].style.cursor = "pointer";
-            st.attr("fill", "#333");
-            st.animate({"fill-opacity": 0.5}, 500);
+            st.attr("fill", "#8B8B8B");
             st[0].onmouseover = function () {
-                st.animate({"fill": st.color, "fill-opacity": 1}, 500);
+                st.animate({"fill": st.color}, 500);
                 R.safari();
             };
             st[0].onmouseout = function () {
@@ -46,12 +45,12 @@ window.onload = function () {
                     st.animate({stroke: "#666"}, 500);
                 }
                 else{
-                    st.animate({"fill":"#333", "fill-opacity": 0.5}, 500);
+                    st.animate({"fill":"#8B8B8B"}, 500);
                 }
                 R.safari();
             };
             st.click(function(){
-                current && aus[current].animate({"fill":"#333", "fill-opacity":0.5}, 500);
+                current && aus[current].animate({"fill":"#8B8B8B"}, 500);
                 if(state != current){
                     current = state;
                     if(state=='act'){
