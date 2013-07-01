@@ -9,6 +9,6 @@
     <div class="view-featured">
         <span>{{ job.location }}<br /> Salary:{{ job.salary_range_min }}</span>
         <a href="{% url "employer.job.view" job.pk %}" ></a>
-        <span class="date_added">Job added 29 June 2013, at 08:54 PM</span>
+        <span class="date_added">Job added {{ job.open_date }}</span>
     </div>
 </div>
