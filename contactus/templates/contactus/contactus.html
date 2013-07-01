@@ -17,11 +17,18 @@
         <h1>Contact Us</h1>
         <div class="right" ng-app="ContactUsApp">
             <div class="form contact_us" id="contact-form" data-next-url="/contact_us/" ng-controller="ContactUsCtrl">
-                {% include "fields/input.html" with label="Name" name="name" input_class="it4" %}
-                {% include "fields/input.html" with label="Email" name="email" input_class="it4" %}
-                {% include "fields/input.html" with label="Subject" name="subject" input_class="it4" %}
-
-                {% include "fields/textarea.html" with label="Message" name="message" %}
+                {% include "contactus/fields/input.html" with label="Name" name="name" input_class="it4" %}
+                {% include "contactus/fields/input.html" with label="Email" name="email" input_class="it4" %}
+                {% include "contactus/fields/input.html" with label="Subject" name="subject" input_class="it4" %}
+                <div class="field">
+                    <label>Select Priority</label>
+                    <select ng-model="item.priority" ui-select2 data-placeholder="Select Priority">
+                        <option value=""></option>
+                        <option value="0">Cannot proceed without assistance</option>
+                        <option value="1">Can proceed and require assistance within 48 hours</option>
+                    </select> 
+                </div>
+                {% include "contactus/fields/textarea.html" with label="Message" name="message" %}
                 <div class="_submit">
                     <div class="exit" ng-click="save()">Continue</div>
                 </div>

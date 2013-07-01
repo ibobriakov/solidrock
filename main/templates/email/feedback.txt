@@ -1,0 +1,13 @@
+We have feedback from {{ feedback.name }}.
+
+Email: {{ feedback.email }}
+
+Subject: {{ feedback.subject }}
+
+Feedback message:
+{{ feedback.message }}
+
+Prioriry of this feedback is "{{ feedback.get_priority_display }}"
+
+ Regards,
+ Solid Rock Recruitment Support
