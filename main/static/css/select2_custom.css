@@ -10,6 +10,10 @@
     background: #fff;
     border-radius: 0;
     width: 260px;
+    color: #989898;
+    font: italic 16px 'Georgia';
+    padding: 4px 7px;
+    height: 18px;
 }
 
 .select2-dropdown-open .select2-choice {
@@ -23,6 +27,7 @@
 
 .select2-container .select2-choice div {
     border-radius: 0;
+    width: 29px;
 }
 
 .select2-drop {
@@ -58,4 +63,17 @@
 
 ._center .select2-container {
     float: none;
+}
+
+.select2-container .select2-choice div b {
+    background: url("../img/select.png") no-repeat
+}
+
+.select2-dropdown-open .select2-choice div b {
+    background: none;
+}
+
+.select2-container .select2-choice abbr {
+    right: 35px;
+    top: 7px;
 }
