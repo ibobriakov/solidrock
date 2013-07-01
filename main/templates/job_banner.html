@@ -3,16 +3,12 @@
     <div class="head-featured">
         <p>{{ job.name }}</p>
         {% if job.owner_id == user.id %}
-        <a style="background: none; color: white;" href="{% url 'employer.job.edit' job.pk %}">Edit</a>
+        <a class="edit" href="{% url 'employer.job.edit' job.pk %}">Edit</a>
         {% endif %}
-    </div>
-    <div class="logo-featured">
-         {% thumbnail job.owner.profile.avatar "81x81" crop="center" as im %}
-             <img src="{{ im.url }}" />
-         {% endthumbnail %}
     </div>
     <div class="view-featured">
         <span>{{ job.location }}<br /> Salary:{{ job.salary_range_min }}</span>
         <a href="{% url "employer.job.view" job.pk %}" ></a>
+        <span class="date_added">Job added 29 June 2013, at 08:54 PM</span>
     </div>
 </div>
