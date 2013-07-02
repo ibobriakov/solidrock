@@ -45,13 +45,12 @@
         </h1>
 
         <div class="search-result">
-            {% for job in profile.user.job_set.all %}
+            {% for job in object_list %}
                 {% include "job_banner.html" %}
             {% endfor %}
         </div>
-        <br>
-
-
+        <div class="clear"></div>
+        {% include "paginator.html" %}
         <div class="spacing">
             <a class="button_common positioning" href="{% url "employer.job.create" %}">Click here to post a job now</a>
         </div>

@@ -30,13 +30,22 @@ def profile_complete(view_func):
 
 @view_decorator(login_required(login_url='/#login'))
 @view_decorator(profile_complete)
-class EmployerView(DetailView):
+class EmployerView(DetailView, MultipleObjectMixin):
     model = Employer
     context_object_name = 'profile'
     template_name = "employer/main.html"
+    paginate_by = 9
 
     def get_object(self, queryset=None):
         return get_object_or_404(self.model, user=self.request.user)
+
+    def get_queryset(self):
+        return self.object.user.job_set.all()
+
+
+    def get_context_data(self, **kwargs):
+        kwargs['object_list'] = self.object.user.job_set.all()
+        return super(EmployerView, self).get_context_data(**kwargs)
 
 
 class EmployerEditView(TemplateView):
