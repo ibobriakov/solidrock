@@ -1,22 +1,33 @@
 {% if is_paginated %}
 {% load range %}
-<div class="pagination paginator">
-    <ul>
-        {% if page_obj.has_previous %}
-            <li class="first_pages">
-                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-            </li>
-        {% endif %}
-        {%  for index in page_obj.paginator.num_pages|get_range %}
-            <li {% if page_obj.number == forloop.counter %}class="current"{% endif %}>
-                <a href="?{{ query_dict }}&page={{ forloop.counter }}">{{ forloop.counter }}</a>
-            </li>
-        {% endfor %}
-        {% if page_obj.has_next %}
-            <li class="last_pages">
-                <a href="?{{ query_dict }}&page={{ page_obj.next_page_number }}">Next</a>
-            </li>
-        {% endif %}
-    </ul>
+
+<div class="pagination_border">
+    <div class="pagination paginator">
+        <ul>
+            {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page={{ page_obj.previous_page_number }}"></a>
+                </li>
+            {% else %}
+                <li class="inactive">
+                    <a></a>
+                </li>
+            {% endif %}
+            {%  for index in page_obj.paginator.num_pages|get_range %}
+                <li {% if page_obj.number == forloop.counter %}class="current"{% endif %}>
+                    <a href="?{{ query_dict }}&page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li>
+                    <a href="?{{ query_dict }}&page={{ page_obj.next_page_number }}"></a>
+                </li>
+            {% else %}
+                <li class="inactive">
+                    <a></a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 </div>
 {% endif %}
