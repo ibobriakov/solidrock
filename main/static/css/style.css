@@ -1691,12 +1691,22 @@ div.paper-block {
 }
 
 .head-featured a {
-    background:url(../img/add-featured.png);
-    width:43px;
-    height:25px;
-    display:block;
-    float:right;
-    margin-top:3px;
+    display: block;
+    float: right;
+    margin-right: -5px;
+    background: rgb(64,155,205); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(64,155,205,1) 0%, rgba(53,128,170,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(64,155,205,1)), color-stop(100%,rgba(53,128,170,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(64,155,205,1) 0%,rgba(53,128,170,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(64,155,205,1) 0%,rgba(53,128,170,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(64,155,205,1) 0%,rgba(53,128,170,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(64,155,205,1) 0%,rgba(53,128,170,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#409bcd', endColorstr='#3580aa',GradientType=0 ); /* IE6-9 */
+
+}
+
+.head-featured a:hover {
+    text-decoration: none;
 }
 
 .head-featured p {
@@ -2319,6 +2329,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     border-bottom: 1px solid #d8d8d8;
     margin: 0 105px 20px;
     padding-bottom: 15px;
+    overflow: hidden;
 }
 
 .pagination {
@@ -2354,6 +2365,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     line-height: 16px;
     text-align: center;
     width: 16px;
+    text-decoration: none;
 }
 
 .pagination ul li:first-child a {
@@ -2377,7 +2389,7 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     background: #409bcd;
 }
 
-.pagination ul li.current a:hover {
+.pagination ul li a:hover {
     text-decoration: none;
 }
 
@@ -2730,7 +2742,7 @@ a.remove_cross {
     margin-bottom: 5px;
 }
 
-.head-featured a.edit {
+.head-featured a.edit span {
     background: url("../img/edit_pencil.png") no-repeat scroll 7px 9px transparent;
     border-left: 1px solid #B7CBD5;
     color: #FFFFFF;
@@ -2740,6 +2752,7 @@ a.remove_cross {
     padding-top: 6px;
     text-align: right;
     width: 54px;
+    display: block;
 }
 
 .h1_margin_top ul {
@@ -2765,6 +2778,7 @@ a.remove_cross {
     font: 22px Helvetica;
     text-decoration: none;
     margin-top: 0;
+    height: 26px;
 }
 
 .h1_margin_top ul li div {
@@ -2775,7 +2789,7 @@ a.remove_cross {
     border-width: 8px 7px 0 7px;
     border-color: #fd7c1f transparent transparent transparent;
     position: relative;
-    bottom: -39px;
+    top: 32px;
     margin: 0 auto;
 }
 

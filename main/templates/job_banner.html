@@ -3,12 +3,13 @@
     <div class="head-featured">
         <p>{{ job.name }}</p>
         {% if job.owner_id == user.id %}
-        <a class="edit" href="{% url 'employer.job.edit' job.pk %}">Edit</a>
+        <a class="edit" href="{% url 'employer.job.edit' job.pk %}"><span>Edit</span></a>
         {% endif %}
     </div>
     <div class="view-featured">
         <span>{{ job.location }}<br /> Salary:{{ job.salary_range_min }}</span>
         <a href="{% url "employer.job.view" job.pk %}" ></a>
+        <div class="clear"></div>
         <span class="date_added">Job added {{ job.open_date }}</span>
     </div>
 </div>
