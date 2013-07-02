@@ -51,6 +51,9 @@ class SpecialCondition(models.Model):
 class JobManager(models.Manager):
     def approved(self):
         return self.filter(approved=True)
+    def archived(self):
+        return self.filter(archived=True)
+
 
 
 class Job(models.Model):
@@ -103,6 +106,7 @@ class Job(models.Model):
     sub_categories = models.ManyToManyField('employer.JobSubCategory', through='employer.JobSelectedSubCategory',
                                             blank=True, null=True)
     approved = models.BooleanField(default=False)
+    archived = models.BooleanField(default=False)
 
     objects = JobManager()
 
