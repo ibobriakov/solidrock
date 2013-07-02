@@ -1733,6 +1733,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#409bcd', end
     padding-left: 10px;
     padding-top: 5px;
     width: 129px;
+    height: 40px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .view-featured span.date_added {

@@ -7,7 +7,13 @@
         {% endif %}
     </div>
     <div class="view-featured">
-        <span>{{ job.location }}<br /> Salary:{{ job.salary_range_min }}</span>
+        <span>
+            {{ job.location }}
+            {% if job.salary_range_min %}            
+            <br /> 
+            Salary: ${{ job.salary_range_min }}
+            {% endif %}
+        </span>
         <a href="{% url "employer.job.view" job.pk %}" ></a>
         <div class="clear"></div>
         <span class="date_added">Job added {{ job.open_date }}</span>
