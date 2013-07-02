@@ -2314,6 +2314,13 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     margin-top: 40px;
 }
 
+
+.pagination_border {
+    border-bottom: 1px solid #d8d8d8;
+    margin: 0 105px 20px;
+    padding-bottom: 15px;
+}
+
 .pagination {
     position: relative;
     float: right;
@@ -2329,14 +2336,45 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     right: -50%;
 }
 
+.pagination ul li:first-child {
+    background: none;
+}
+
 .pagination ul li {
     float: left;
-    margin: 0 5px;
+    background: url("../img/pagination_dot.png") left no-repeat;
+    padding: 1px 4px 0 7px;
+}
+
+.pagination ul li a {
+    color: #494949;
+    display: block;
+    font-size: 10px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    width: 16px;
+}
+
+.pagination ul li:first-child a {
+    background: url("../img/arrow_left_blue.png") left no-repeat;
+}
+
+.pagination ul li.inactive:first-child a {
+    background: url("../img/arrow_left_grey.png") left no-repeat;
+}
+
+.pagination ul li:last-child a {
+    background: url("../img/arrow_right_blue.png") right no-repeat;
+}
+
+.pagination ul li.inactive:last-child a {
+    background: url("../img/arrow_right_grey.png") right no-repeat;
 }
 
 .pagination ul li.current a {
-    color: #E4732B;
-    font-size: 18px;
+    color: #fff;
+    background: #409bcd;
 }
 
 .pagination ul li.current a:hover {
@@ -2755,3 +2793,4 @@ a.remove_cross {
 .h1_margin_top ul li.active div {
     display: block;
 }
+
