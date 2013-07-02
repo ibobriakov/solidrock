@@ -2,6 +2,8 @@
 # Global settings for solidrock project.
 
 from os.path import abspath, dirname, basename, join, split
+from datetime import timedelta
+
 
 MAIN_APPS_PATH = abspath(dirname(__file__))
 MAIN_APPS_NAME = basename(MAIN_APPS_PATH)
@@ -172,6 +174,14 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 #celery url
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
+CELERYBEAT_SCHEDULE = {
+    'rotate-jobs': {
+        'task': 'employer.tasks.rotate_jobs',
+        'schedule': timedelta(hours=1),
+    },
+}
+
 
 FLATBLOCKS_AUTOCREATE_STATIC_BLOCKS = True
 
