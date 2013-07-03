@@ -2812,3 +2812,44 @@ a.remove_cross {
     display: block;
 }
 
+.info_half {
+    float: left;
+    width: 410px;
+    padding: 35px 20px;
+    background:#f2fbff;
+    border:1px solid #d5d5d5;
+}
+
+.float_left {
+    float: left;
+}
+
+.float_right {
+    float: right;
+}
+
+.info_half .title {
+    color: #409BCD;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 12px;
+}
+
+.info_half .field label:first-child {
+    color: #D86A2B;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.info_half .field label {
+    margin: 5px 0;
+    display: inline-block;
+}
+
+.info_half .positioning_3 {
+    margin-left: 40px;
+    margin-top: 93px;
+    position: absolute;
+    width: 335px;
+}
+
