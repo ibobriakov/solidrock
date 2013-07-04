@@ -1,4 +1,5 @@
 from django.forms.models import modelform_factory
+from django.core.urlresolvers import reverse
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
@@ -106,6 +107,41 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
                      'approved': ('exact',),
                      'archived': ('exact',)
                     }
+
+class JobBannerResource(ModelResource):
+    location = fields.CharField(readonly=True)
+    open_date = fields.CharField('open_date')
+    edit_url = fields.CharField(readonly=True)
+    view_url = fields.CharField(readonly=True)
+
+    def get_object_list(self, request):
+        query_set = super(JobBannerResource, self).get_object_list(request)
+        return query_set.filter(owner=request.user)
+
+    def dehydrate_location(self, bundle):
+        if bundle.obj.location_id:
+            return bundle.obj.location.location
+
+    def dehydrate_open_date(self,bundle):
+        return  bundle.obj.open_date.strftime("%d %b %Y")
+
+    def dehydrate_edit_url(self,bundle):
+        return reverse('employer.job.edit', args=[bundle.obj.id])
+
+    def dehydrate_view_url(self,bundle):
+        return reverse('employer.job.view', args=[bundle.obj.id])
+
+    class Meta:
+        queryset = Job.objects.all()
+        resource_name = 'jobbaner'
+        always_return_data = True
+        list_allowed_methods = ['get']
+        fields = ['name', 'salary_range_min', 'open_date', 'approved', 'archived']
+        filtering = {
+                     'approved': ('exact',),
+                     'archived': ('exact',)
+                    }
+
 
 
 class JobUploadDocumentResource(ModelResource):
