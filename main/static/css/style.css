@@ -15,6 +15,7 @@ body {
 a {
     text-decoration:none;
     color:#409bcd;
+    cursor: pointer;
 }
 
 .error input {
@@ -2413,6 +2414,18 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
     text-decoration: none;
 }
 
+.button_common_blue {
+    background:#409BCD;
+    color: #FFFFFF;
+    display: block;
+    font-size: 15px;
+    margin: 8px auto;
+    padding: 5px 0;
+    width: 240px;
+    text-align: center;
+    text-decoration: none;
+}
+
 .button_common:hover {
     text-decoration: none;
 }
@@ -2819,9 +2832,12 @@ a.remove_cross {
 .info_half {
     float: left;
     width: 410px;
-    padding: 35px 20px;
+}
+
+.form {
     background:#f2fbff;
     border:1px solid #d5d5d5;
+    padding: 35px 20px;
 }
 
 .float_left {

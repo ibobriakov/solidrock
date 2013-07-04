@@ -46,21 +46,24 @@
             </div>
         </div>
         <div class="info_half float_right">
-            <div class="title">Account Contact Person</div>
-            <div class="clear"></div>
-            <div class="field">
-                <label>Name:</label>
-                <label>{{ employer.name }}</label>
+            <div class="form">
+                <div class="title">Account Contact Person</div>
+                <div class="clear"></div>
+                <div class="field">
+                    <label>Name:</label>
+                    <label>{{ employer.name }}</label>
+                </div>
+                <div class="field">
+                    <label>Phone:</label>
+                    <label>{{ employer.phone }}</label>
+                </div>
+                <div class="field">
+                    <label>Email Address:</label>
+                    <label>{{ employer.email }}</label>
+                </div>
             </div>
-            <div class="field">
-                <label>Phone:</label>
-                <label>{{ employer.phone }}</label>
-            </div>
-            <div class="field">
-                <label>Email Address:</label>
-                <label>{{ employer.email }}</label>
-            </div>
-            <a class="button_common positioning_3" href="{% url "employer.profile.edit" %}">Edit Your Company Information</a>
+            <a class="button_common" href="{% url "employer.profile.edit" %}">Edit Your Company Information</a>
+            <a class="button_common_blue" href="{% url "employer.profile.public" employer.pk %}">View Your Company Information</a>
         </div>
     </div>
     {% endwith %}
