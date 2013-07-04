@@ -91,13 +91,13 @@
             <div class="pagination paginator">
                 <ul>
                     <li ng-class="{inactive: !data.meta.previous}">
-                        <a href="{[{data.meta.previous}]}"></a>
+                        <a paginate url="{[{data.meta.previous}]}"></a>
                     </li>
-                    <li class="current">
-                        <a href=""></a>
+                    <li ng-repeat="item in pages|makeRange" ng-class="{current:item==current}">
+                        <a paginate url="{[{ get_url(item) }]}">{[{ item+1 }]}</a>
                     </li>
                     <li ng-class="{inactive: !data.meta.next}" ng-show="data.meta.next">
-                        <a href="{[{ data.meta.next }]}"></a>
+                        <a paginate url="{[{ data.meta.next }]}"></a>
                     </li>
                 </ul>
             </div>
