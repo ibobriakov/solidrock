@@ -16,7 +16,7 @@ listJobCtrl.ListJobCtrl = function ($scope, $http, $location) {
     $('.preloader').show();
     $http.get(url+"?limit="+limit).success(function(data, status, headers, config) {
         $scope.data = data;
-        $scope.pages = data.meta.total_count/limit + 1;
+        $scope.pages = parseInt(data.meta.total_count/limit + 1);
         $('.preloader').hide();
     })
 };
