@@ -1673,8 +1673,7 @@ div.paper-block {
     margin: 0 54px 20px 0;
 }
 
-
-.Job:nth-child(3n) {
+.job_cont:nth-child(3n) .Job {
     margin-right: 0;
 }
 
