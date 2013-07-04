@@ -133,7 +133,7 @@ class JobBannerResource(ModelResource):
 
     class Meta:
         queryset = Job.objects.all()
-        resource_name = 'jobbaner'
+        resource_name = 'jobbanner'
         always_return_data = True
         list_allowed_methods = ['get']
         fields = ['name', 'salary_range_min', 'open_date', 'approved', 'archived']

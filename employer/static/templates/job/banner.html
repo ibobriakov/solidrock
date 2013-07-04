@@ -1,0 +1,13 @@
+<div class="Job">
+    <div class="head-featured">
+        <p>{[{ job.name }]}</p>
+        <a class="edit" href="{[{ job.edit_url }]}"><span>Edit</span></a>
+    </div>
+    <div class="view-featured">
+        <span>{[{ job.location }]}</span>
+        <span ng-show="job.salary_range_min"> Salary: ${[{ job.salary_range_min }]}</span>
+        <a href="{[{ job.view_url }]}"></a>
+        <div class="clear"></div>
+        <span class="date_added">Job added {[{ job.open_date }]}</span>
+    </div>
+</div>
