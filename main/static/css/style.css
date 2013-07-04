@@ -1725,18 +1725,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#409bcd', end
     padding-top:5px;
 }
 
+.view-featured div.span_cont {
+    float: left;
+    height: 50px;
+    width: 139px;
+}
+
 .view-featured span {
     color: #494949;
     display: block;
     float: left;
     font-size: 12px;
+    overflow: hidden;
     padding-left: 10px;
     padding-top: 5px;
-    width: 129px;
-    height: 40px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+    width: 125px;
 }
 
 .view-featured span.date_added {
