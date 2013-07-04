@@ -83,6 +83,10 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
     jobuploaddocument_set = fields.ToManyField('employer.api.JobUploadDocumentResource',
                                                'jobuploaddocument_set', readonly=True, full=True)
 
+    approved = fields.BooleanField('approved',readonly=True)
+    archived =  fields.BooleanField('archived',readonly=True)
+
+
     def get_object_list(self, request):
         query_set = super(JobResource, self).get_object_list(request)
         return query_set.filter(owner=request.user)
@@ -98,6 +102,10 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
         authentication = SessionAuthentication()
         authorization = AuthorizationWithObjectPermissions()
         validation = JobResourceValidation(form_class=modelform_factory(Job, exclude=('owner', )))
+        filtering = {
+                     'approved': ('exact',),
+                     'archived': ('exact',)
+                    }
 
 
 class JobUploadDocumentResource(ModelResource):
