@@ -1678,6 +1678,10 @@ div.paper-block {
     margin-right: 0;
 }
 
+.Job:nth-child(3n) {
+    margin-right: 0;
+}
+
 ._slider_block .VjCarouselLite ul li {
     border:1px #dbdddd solid;
     height:113px;
@@ -2320,9 +2324,10 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 
 .logo_right_floater {
-    float: right;
-    width: 225px;
     margin-top: 10px;
+    position: absolute;
+    right: 15px;
+    width: 225px;
 }
 
 ._search_box._search_job.more-options ._center form fieldset ._field.no_bottom_margin {
