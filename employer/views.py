@@ -144,7 +144,6 @@ class JobPublicView(DetailView):
         return context
 
 
-@view_decorator(profile_complete)
 class EmployerPublicView(DetailView, MultipleObjectMixin):
     template_name = "employer/profile/view.html"
     model = Employer
