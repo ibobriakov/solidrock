@@ -15,12 +15,12 @@
             </div>
         </div>
     {% endthumbnail %}
-    <div class="section1">
+    <div class="section1 view">
         <div class="title">General Business Information</div>
         <div class="clear"></div>
         <fieldset>
             <div class="left_info">
-                <div class="field fl_left">
+                <div class="field">
                     <label>Company Name</label>
                     <label>{{ employer.company }}</label>
                 </div>
@@ -42,7 +42,7 @@
                     <label>Business Phone</label>
                     <label>{{ employer.business_phone }}</label>
                 </div>
-                <div class="field">
+                <div class="field fl_left">
                     <label>Brief Description of Your Company</label>
                     <div>{{ employer.brief|linebreaksbr }}</div>
                 </div>
@@ -64,10 +64,12 @@
                 </div>
             </div>
         </fieldset>
+
+    </div>
+    <div class="clear"></div>
         {% if user.profile == employer %}
         <a class="button_common positioning_2" href="{% url "employer.profile.edit" %}">Edit Your Company Information</a>
         {% endif %}
-    </div>
     </div>
     </div>
     <div class="clear"></div>

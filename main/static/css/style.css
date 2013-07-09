@@ -920,11 +920,14 @@ footer ._footer ._footer_nav ul li a {
 }
 
 .stages .right .form .field label:first-child {
-    display:block;
     color:#d86a2b;
     font-weight:700;
     font-size:14px;
-    margin:0;
+    margin: 0 20px 0 0;
+}
+
+.stages .right .form .field.fl_left label:first-child {
+    display: block;
 }
 
 .stages .right .form .field label:first-child span {
@@ -1019,10 +1022,11 @@ footer ._footer ._footer_nav ul li a {
 }
 
 .stages .right .form .section1 .avatar {
-    float:right;
-    width:205px;
-    color:#d86a2b;
-    font-size:16px;
+    color: #D86A2B;
+    font-size: 16px;
+    position: absolute;
+    right: 10px;
+    width: 205px;
 }
 
 .stages .right .form .section1 .avatar .img {
@@ -2324,9 +2328,10 @@ footer ._footer ._footer_nav ul,._slider_block ._slider ._sl_block .VjCarouselLi
 }
 
 .logo_right_floater {
-    margin-top: 10px;
-    position: absolute;
-    right: 15px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 50px;
+    margin-top: 25px;
     width: 225px;
 }
 
@@ -2876,5 +2881,17 @@ a.remove_cross {
     margin-top: 93px;
     position: absolute;
     width: 335px;
+}
+
+.width_fix {
+    width: 660px;
+}
+
+.form .section1.view {
+    float: left;
+}
+
+.stages .right .form .section1.view .left_info {
+    width: 510px;
 }
 
