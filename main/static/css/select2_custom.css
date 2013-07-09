@@ -66,7 +66,7 @@
 }
 
 .select2-container .select2-choice div b {
-    background: url("../img/select.png") no-repeat
+    background: url("../img/select.png") no-repeat;
 }
 
 .select2-dropdown-open .select2-choice div b {
@@ -76,4 +76,15 @@
 .select2-container .select2-choice abbr {
     right: 35px;
     top: 7px;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)  {
+  .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice div b {
+      background-image: url("../img/select.png") !important;
+      background-repeat: no-repeat !important;
+      background-size: 28px 28px !important;
+  }
+  .select2-search input {
+      background-position: 0 0 !important;
+  }
 }
