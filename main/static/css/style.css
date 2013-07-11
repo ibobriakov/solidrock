@@ -1968,9 +1968,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#409bcd', end
 }
 
 .employer-logo {
-    width:170px;
-    height:170px;
-    float:left;
+    float: left;
+    height: 170px;
+    margin: 0 50px 25px 0;
+    width: 170px;
 }
 
 .employer-name p:first-child {
