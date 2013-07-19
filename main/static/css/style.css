@@ -115,6 +115,7 @@ footer ._footer ._footer_nav ul li a {
 }
 
 ._top_navigation {
+    height: 20px;
     list-style:none;
     font-size:12px;
     float:right;
