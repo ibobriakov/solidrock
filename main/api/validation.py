@@ -1,7 +1,4 @@
 from collections import defaultdict
-from socket import _fileobject
-from django.core.exceptions import ImproperlyConfigured
-from django.forms import ModelChoiceField
 from tastypie.validation import FormValidation
 
 
@@ -14,6 +11,8 @@ class RequiredFiledValidationMixin(object):
     It's made for preload feature
     """
     def is_valid(self, bundle, request=None):
+        if 'no_validate' in bundle.data:
+            return {}
         errors = defaultdict(list)
         errors.update(super(RequiredFiledValidationMixin, self).is_valid(bundle, request))
         for key, value in bundle.data.items():

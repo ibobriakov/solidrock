@@ -108,6 +108,7 @@ aplInfoCtrl.AplInfoCtrl = function ($scope, $rootScope, $http, $location, aplInf
                 }
             };
             $('.error, .error_top').fadeOut();
+            if(exit) item['no_validate']=true;
             if (item.resource_uri) {
                 $http.put(item.resource_uri, item)
                     .error(error_callback).success(exit ? success_exit_callback : success_callback);

@@ -77,6 +77,7 @@ postJobCtrl.JobInfoCtrl = function ($scope, $http, $route, $routeParams, $locati
                 $scope.job[k] = null;
             }
         });
+        if (exit) $scope.job['no_validate']=true
         $http.put($scope.job.resource_uri, $scope.job)
             .success(exit ? success_exit_callback : success_callback)
             .error(error_callback);
