@@ -6,9 +6,9 @@
     <div class="view-featured">
         <div class="span_cont">
             <span>{[{ job.location }]}</span>
-            <span class="applied_count" ng-show="job.salary_range_min"> Salary: ${[{ job.salary_range_min }]}</span>
+            <span class="applied_count">Applied: {[{ job.applied }]}</span>
         </div>
-        <span class="unpublished">Unpublished</span>
+        <span ng-hide="job.approved" class="unpublished">Unpublished</span>
         <div class="clear"></div>
         <a href="{[{ job.view_url }]}"></a>
         <span class="date_added">Job added {[{ job.open_date }]}</span>

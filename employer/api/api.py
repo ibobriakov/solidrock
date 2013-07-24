@@ -136,7 +136,7 @@ class JobBannerResource(ModelResource):
         if bundle.obj.approved:
             return bundle.obj.applytojob_set.count()
         else:
-            return False
+            return 0
 
     class Meta:
         queryset = Job.objects.all()
