@@ -1734,6 +1734,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#409bcd', end
     float:left;
     color:#FFF;
     line-height:32px;
+    padding-left: 5px;
 }
 
 .logo-featured {
@@ -2935,4 +2936,5 @@ a.remove_cross {
     margin-top: 10px;
     width: auto;
     padding-top: 2px;
+    padding-left: 12px;
 }
