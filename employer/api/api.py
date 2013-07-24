@@ -110,6 +110,7 @@ class JobResource(ResourceFieldsOrderSchemaMixin, ResourceLabelSchemaMixin,
 
 class JobBannerResource(ModelResource):
     location = fields.CharField(readonly=True)
+    applied = fields.CharField(readonly=True)
     open_date = fields.CharField('open_date')
     edit_url = fields.CharField(readonly=True)
     view_url = fields.CharField(readonly=True)
@@ -125,11 +126,17 @@ class JobBannerResource(ModelResource):
     def dehydrate_open_date(self,bundle):
         return  bundle.obj.open_date.strftime("%d %b %Y")
 
-    def dehydrate_edit_url(self,bundle):
+    def dehydrate_edit_url(self, bundle):
         return reverse('employer.job.edit', args=[bundle.obj.id])
 
     def dehydrate_view_url(self,bundle):
         return reverse('employer.job.view', args=[bundle.obj.id])
+
+    def dehydrate_applied(self, bundle):
+        if bundle.obj.approved:
+            return bundle.obj.applytojob_set.count()
+        else:
+            return False
 
     class Meta:
         queryset = Job.objects.all()
