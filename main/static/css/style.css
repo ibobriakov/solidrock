@@ -887,19 +887,23 @@ footer ._footer ._footer_nav ul li a {
     padding:4px 7px;
 }
 
-.stages .right .form input[type=text].it4 {
+.stages .right .form.contact_us .field input[type=text].it4 {
+    width: 260px;
+}
+
+.stages .right .form .field input[type=text].it4 {
     width:417px;
 }
 
-.stages .right .form input[type=text].it3 {
+.stages .right .form .field input[type=text].it3 {
     width:254px;
 }
 
-.stages .right .form input[type=text].it2 {
+.stages .right .form .field input[type=text].it2 {
     width:178px;
 }
 
-.stages .right .form input[type=text].it-pod {
+.stages .right .form .field input[type=text].it-pod {
     width:215px;
 }
 
@@ -926,6 +930,15 @@ footer ._footer ._footer_nav ul li a {
     font-weight:700;
     font-size:14px;
     margin: 0 20px 0 0;
+    display: block;
+}
+
+.stages .right.full_width .form .field label:first-child {
+    color:#d86a2b;
+    font-weight:700;
+    font-size:14px;
+    margin: 0 20px 0 0;
+    display: inline;
 }
 
 .stages .right .form .field.fl_left label:first-child {
@@ -1737,7 +1750,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#409bcd', end
 
 .view-featured div.span_cont {
     float: left;
-    height: 50px;
+    height: 41px;
+    padding-top: 6px;
     width: 139px;
 }
 
@@ -1746,6 +1760,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#409bcd', end
     display: block;
     float: left;
     font-size: 12px;
+    line-height: normal;
     overflow: hidden;
     padding-left: 10px;
     padding-top: 5px;
@@ -1765,7 +1780,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#409bcd', end
     display: block;
     float: right;
     height: 22px;
-    margin: 15px 10px 0;
+    margin: 0 10px;
     width: 116px;
 }
 
@@ -2744,7 +2759,7 @@ a.remove_cross {
 }
 
 .stages .right .form.contact_us textarea {
-    width: 418px;
+    width: 260px;
 }
 
 .stages.contact .right {
@@ -2898,3 +2913,28 @@ a.remove_cross {
     width: 510px;
 }
 
+.stages .right .form.contact_us .field label {
+    display: inline-block;
+    padding-top: 10px;
+    text-align: right;
+    vertical-align: top;
+    width: 120px;
+}
+
+
+.view-featured span.applied_count {
+    color: #409BCD;
+    font-size: 10px;
+}
+
+.view-featured span.unpublished {
+    background: url("../img/unpublished.png") left no-repeat;
+    color: #D86A2B;
+    display: block;
+    float: right;
+    font-size: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    width: auto;
+    padding-top: 2px;
+}
