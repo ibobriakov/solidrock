@@ -5,6 +5,7 @@ from django.http import HttpResponse, Http404, HttpResponseBadRequest
 from django.shortcuts import redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, ListView
+from django.contrib.flatpages.models import FlatPage
 from sorl.thumbnail.shortcuts import get_thumbnail
 from employer.models import JobUploadDocument, JobUploadDocumentType, Job
 from search.forms import SearchForm
@@ -29,6 +30,14 @@ class EmployerListView(ListView):
 
 class ExploreView(TemplateView):
     template_name = 'explore.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ExploreView, self).get_context_data(**kwargs)
+        flat_page = FlatPage.objects.get(url='/explore/')
+        context['title'] = flat_page.title
+        context['content'] = flat_page.content
+        return context
+
 
 
 def get_document_type(type_slug):
