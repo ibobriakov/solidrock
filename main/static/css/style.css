@@ -2940,3 +2940,130 @@ a.remove_cross {
     padding-top: 2px;
     padding-left: 12px;
 }
+
+/*explore*/
+
+.explore {
+    padding: 0 15px;
+}
+
+.explore_description {
+}
+
+.img_part {
+    float: left;
+    padding-top: 90px;
+    width: 305px;
+}
+
+.description_part {
+    float: left;
+    padding-left: 20px;
+    width: 585px;
+}
+
+.explore p, .explore h4 {
+    padding-bottom: 10px;
+}
+
+.explore p {
+    color: #666666;
+    font-size: 14px;
+}
+
+.for_employers {
+    padding-top: 20px;
+}
+
+.bonus_floater {
+    float: right;
+    position: relative;
+    right: 50%;
+}
+
+.bonuses {
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    right: -50%;
+}
+
+.bonuses div {
+    float: left;
+}
+
+.bonus {
+    width: 180px;
+    padding-top: 70px;
+}
+
+.bonus p {
+    font-size: 12px;
+    color: #b9b9b9;
+    text-align: center;
+}
+
+.bonus_1 {
+    background: url("../img/fe_1.png") top no-repeat;
+}
+
+.bonus_2 {
+    background: url("../img/fe_2.png") top no-repeat;
+}
+
+.bonus_3 {
+    background: url("../img/fe_3.png") top no-repeat;
+}
+
+.bonus_4 {
+    background: url("../img/fe_4.png") top no-repeat;
+}
+
+.bonus_5 {
+    background: url("../img/fe_5.png") top no-repeat;
+}
+
+.bonus_6 {
+    background: url("../img/fjs_1.png") top no-repeat;
+}
+
+.bonus_7 {
+    background: url("../img/fjs_2.png") top no-repeat;
+}
+
+.bonus_8 {
+    background: url("../img/fjs_3.png") top no-repeat;
+}
+
+.bonus_9 {
+    background: url("../img/fjs_4.png") top no-repeat;
+}
+
+.bonus_line {
+    background: url("../img/horizontal_line.png") center no-repeat;
+    height: 60px;
+    margin: 0 -39px;
+    width: 80px;
+}
+
+.for_job_seekers {
+    margin-bottom: 45px;
+    margin-top: 10px;
+    padding-top: 20px;
+}
+
+.for_employers h5 {
+    text-transform: uppercase;
+    color: #666666;
+    text-align: center;
+    font-size: 14px;
+    padding: 25px 0;
+}
+
+.for_job_seekers h5 {
+    text-transform: uppercase;
+    color: #666666;
+    text-align: center;
+    font-size: 14px;
+    padding: 25px 0;
+}

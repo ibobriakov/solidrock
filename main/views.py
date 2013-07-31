@@ -27,6 +27,10 @@ class EmployerListView(ListView):
     model = Employer
 
 
+class ExploreView(TemplateView):
+    template_name = 'explore.html'
+
+
 def get_document_type(type_slug):
     def get_support_document_type():
         try:
