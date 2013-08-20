@@ -3067,3 +3067,33 @@ a.remove_cross {
     font-size: 14px;
     padding: 25px 0;
 }
+
+.guest_page {
+    padding: 0 20px;
+}
+
+.guest_page .top_block {
+    background: url("../img/network.png") right top no-repeat;
+    padding-right: 505px;
+    margin-bottom: 90px;
+    padding-top: 45px;
+    height: 290px;
+}
+
+.guest_page .bottom_block {
+    background: url("../img/screenshot.png") left top no-repeat;
+    height: 360px;
+    padding-left: 505px;
+    padding-top: 47px;
+    margin-left: -20px;
+}
+
+.guest_page h5 {
+    font-size: 20px;
+    color: #e2671a;
+    margin-bottom: 24px;
+}
+
+.guest_page p {
+    font-size: 18px;
+}
