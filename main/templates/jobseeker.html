@@ -1,24 +1,27 @@
 {% extends "base.html" %}
+{% load flatblock_tags %}
 
 {% block content %}
     <h1>Job Seekers</h1>
     <div class="guest_page">
         <div class="top_block">
-            <h5>Find a job. Quick. Easy. Free.</h5>
-            <p>Solid Rock Recruitment makes finding and applying for jobs <b>quick</b> and <b>easy</b>.<br><br>
-               Once you have applied for a job, you will be notified via. email as soon
-               as the employer has posted a response.<br><br>
-               You can apply for as many jobs as you’d like and respond easily
-               when an employer attempts to contact you.</p>
+            {% flatblock "job_seekers.top" using "job_seeker_flat.html" %}
+            <!--<h5>Find a job. Quick. Easy. Free.</h5>-->
+            <!--<p>Solid Rock Recruitment makes finding and applying for jobs <b>quick</b> and <b>easy</b>.<br><br>-->
+               <!--Once you have applied for a job, you will be notified via. email as soon-->
+               <!--as the employer has posted a response.<br><br>-->
+               <!--You can apply for as many jobs as you’d like and respond easily-->
+               <!--when an employer attempts to contact you.</p>-->
         </div>
         <div class="bottom_block">
-            <h5>Resume Builder</h5>
-            <p>Show potential employers all of your experience and skill
-               with our custom-built resume builder!<br><br>
-               Our resume builder makes it easy for anyone to make a professional resume,
-               suitable for applying for jobs on Solid Rock Recruitment, or anywhere else!<br><br>
-               If you are considering applying for jobs elsewhere as well, we
-               offer the ability to download the resumes which you have made as PDF files! Once downloaded, you can either print them or save them for future use.</p>
+            {% flatblock "job_seekers.bottom" using "job_seeker_flat.html" %}
+            <!--<h5>Resume Builder</h5>-->
+            <!--<p>Show potential employers all of your experience and skill-->
+               <!--with our custom-built resume builder!<br><br>-->
+               <!--Our resume builder makes it easy for anyone to make a professional resume,-->
+               <!--suitable for applying for jobs on Solid Rock Recruitment, or anywhere else!<br><br>-->
+               <!--If you are considering applying for jobs elsewhere as well, we-->
+               <!--offer the ability to download the resumes which you have made as PDF files! Once downloaded, you can either print them or save them for future use.</p>-->
         </div>
     </div>
 {% endblock %}
