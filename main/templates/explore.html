@@ -1,25 +1,17 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load flatpages %}
 
 {% block content %}
-    <h1>hello.jpg</h1>
+    <h1>EXPLORE EXPLORE SOLID ROCK RECRUITMENT</h1>
     <div class="explore">
         <div class="explore_description">
             <div class="img_part">
                 <img src="{% static 'main/img/png.png' %}">
             </div>
             <div class="description_part">
-                <h4>Explore Solid Rock Recruitment</h4>
-                <p>Solid Rock Recruitment is a new online company with the aim of providing Aboriginal and Torres
-                    Strait Islander people with one place to search for employment opportunities.</p>
-                <p>We aim to match employers seeking Aboriginal and Torres Strait Islander employees with Ab
-                    original and Torres Strait Islander employees seeking employment. We also aim to provide Ab
-                    original andTorres Strait Islander organisations the opportunity to recruit people specifically seek
-                    ing employment in Aboriginal and Torres Strait Islander organisations.</p>
-                <p>With a niche market such as this, advertising is an expensive hit-and-miss chance with adver
-                    tising in markets with literally hundreds of thousands of other employers. We are seeking to the
-                    cost and the time of recruitment by offering a niche advertising market targeting only those with
-                    mutual genuine interest.</p>
+                <h4>{{ title }}</h4>
+                {{ content|safe }}
             </div>
             <div class="clear"></div>
         </div>
