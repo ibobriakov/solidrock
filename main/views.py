@@ -31,6 +31,10 @@ class ExploreView(TemplateView):
     template_name = 'explore.html'
 
 
+class JobSeekersView(TemplateView):
+    template_name = 'jobseeker.html'
+
+
 def get_document_type(type_slug):
     def get_support_document_type():
         try:

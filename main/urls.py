@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
-from main.views import MainView, EmployerListView, ExploreView
+from main.views import MainView, EmployerListView, ExploreView, JobSeekersView
 
 
 urlpatterns = patterns(
     '',
     url(r'^$', MainView.as_view(), name='search'),
+    url(r'^job_seekers$', JobSeekersView.as_view(), name='job_seekers'),
     url(r'^employers$', EmployerListView.as_view(), name='employers'),
     url(r'^explore/$', ExploreView.as_view(), name='explore'),
     url(r'^upload/(?P<purpose>\w+)/(?P<pk>\d+)?$', 'main.views.upload', name='upload'),
